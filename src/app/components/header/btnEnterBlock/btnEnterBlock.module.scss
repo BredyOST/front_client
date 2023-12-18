@@ -1,0 +1,66 @@
+@use "sass:math";
+@use "./src/app/styles/variable/common";
+@use "./src/app/styles/variable/globalIndex";
+@use "./src/app/styles/variable/global";
+@use "./src/app/styles/mixins";
+
+.coverProfile {
+  @media(min-width: mixins.em(global.$mobile)) {
+    position: relative;
+    display: flex;
+    align-content: center;
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.buttonLogin{
+  @extend .btn;
+
+  padding-bottom: mixins.rem(8);
+  padding-top: mixins.rem(8);
+  padding-left: mixins.rem(15);
+  padding-right: mixins.rem(15);
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+}
+
+.svgProfile{
+  fill: white;
+  width: mixins.rem(28);
+  height: mixins.rem(28);
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  flex-basis: mixins.rem(30);
+  align-items: center;
+  justify-content: center;
+
+  @include mixins.adaptiveValue("width",30,27,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("height",30,27,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("flex-basis",30,27,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+}
+
+.profileBlock{
+  @media(max-width: mixins.em(1000)) {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  @media(min-width: mixins.em(1000)) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(51 49 49 / 87%);
+    min-width: 170%;
+    min-height: mixins.rem(150);
+    z-index: 0;
+    padding-top: mixins.rem(60);
+    transform: translate(-5px, -5px);
+    border-radius: mixins.rem(7);
+  }
+}

@@ -1,0 +1,73 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use '../../../styles/mixins';
+@use "../../../styles/variable/common";
+
+.uploadFiles{
+
+}
+
+.section{
+  padding-top: mixins.rem(30);
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+}
+
+.mainTitle{
+  text-align: left;
+  font-size: mixins.rem(globalIndex.$Title_font_size);
+  line-height: globalIndex.$Title_font_line-height;
+  font-weight: globalIndex.$Title_font_weight;
+  color: globalIndex.$Title_color;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+  background-color: #e5d5c3;
+  display: flex;
+  padding-top: mixins.rem(20);
+  padding-left: mixins.rem(20);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.btn{
+  @extend .btn;
+
+  padding-left: mixins.rem(25);
+  padding-right: mixins.rem(25);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+}
+
+.input {
+  @extend .input;
+}
+
+.cover{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.image{
+  width: mixins.rem(200);
+  height: mixins.rem(200);
+}
+
+.coverImageMain{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.coverImage{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}

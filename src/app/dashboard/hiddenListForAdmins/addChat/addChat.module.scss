@@ -1,0 +1,113 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use '../../../styles/mixins';
+@use "../../../styles/variable/common";
+
+.section{
+  padding-top: mixins.rem(30);
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+}
+
+.mainTitle{
+  text-align: left;
+  font-size: mixins.rem(globalIndex.$Title_font_size);
+  line-height: globalIndex.$Title_font_line-height;
+  font-weight: globalIndex.$Title_font_weight;
+  color: globalIndex.$Title_color;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+  background-color: #e5d5c3;
+  display: flex;
+  padding-top: mixins.rem(20);
+  padding-left: mixins.rem(20);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.label{
+  display: flex;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+}
+
+
+.btdAdditional{
+  min-height: mixins.rem(35);
+  padding-left: mixins.rem(25);
+  padding-right: mixins.rem(25);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+}
+
+.btn{
+  @extend .btn;
+
+  padding-left: mixins.rem(25);
+  padding-right: mixins.rem(25);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+
+}
+
+.form{
+  display: flex;
+  column-gap: mixins.rem(10);
+  align-items: center;
+}
+
+.mainBlock{
+  padding-top: mixins.rem(20);
+
+}
+
+.titles{
+  display: grid;
+  grid-template-columns: minmax(50px, 50px) minmax(100px,160px) minmax(50px,100px)  minmax(150px, 250px)  minmax(150px, 250px) minmax(100px,200px) minmax(100px,200px);
+  grid-template-rows:auto;
+  text-align: center;
+  justify-content: space-between;
+  row-gap: mixins.rem(5);
+  column-gap: mixins.rem(5);
+  background-color: #ad9d6d;
+}
+
+.head{
+  text-align: center;
+}
+
+.list{
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 100%;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.cover{
+  border: mixins.rem(1) solid #000;
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+  max-height: mixins.rem(500);
+  overflow: auto;
+}
+
+.inputRelative{
+  min-width: mixins.rem(500);
+  row-gap: mixins.rem(5);
+  flex: 0 1 mixins.rem(500);
+  position: relative;
+  display: flex;
+  column-gap: mixins.rem(30);
+}
+
+.input {
+  @extend .input;
+}

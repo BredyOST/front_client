@@ -1,0 +1,62 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use "../../../styles/variable/common";
+
+
+.subTitle{
+  font-size:  mixins.rem(globalIndex.$SubTitle_font_size);
+  line-height: globalIndex.$SubTitle_font_line-height;
+  font-weight: globalIndex.$SubTitle_font_weight;
+  color: globalIndex.$SubTitle_color;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+  justify-content: center;
+}
+
+.btn {
+  @extend .btn;
+  @extend .widthAndPaddingBtn;
+  @media(min-width: mixins.em(global.$mobile)) {
+    padding-left: mixins.rem(15);
+    padding-right: mixins.rem(15);
+    padding-bottom: mixins.rem(5);
+    padding-top: mixins.rem(5);
+  }
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,1250,1050);
+}
+
+
+.mainBlock{
+  padding-top: mixins.rem(20);
+}
+
+.titles{
+  display: grid;
+  grid-template-columns: minmax(50px, 50px) minmax(100px,350px) minmax(50px,400px)  minmax(100px, 150px)  minmax(150px, 250px);
+  grid-template-rows:auto;
+  text-align: center;
+  justify-content: space-between;
+  row-gap: mixins.rem(5);
+  column-gap: mixins.rem(5);
+  background-color: #ad9d6d;
+}
+
+.mainCover {
+  max-height: mixins.rem(350);
+  overflow: auto;
+}
+
+.listTwo{
+    display: grid;
+    grid-template-columns: minmax(50px, 50px) minmax(100px,350px) minmax(50px,400px)  minmax(100px, 150px)  minmax(150px, 250px);
+    grid-template-rows:auto;
+    text-align: center;
+    justify-content: space-between;
+    row-gap: mixins.rem(5);
+    column-gap: mixins.rem(5);
+    border-bottom: mixins.rem(1) solid #000;
+  align-items: center;
+}

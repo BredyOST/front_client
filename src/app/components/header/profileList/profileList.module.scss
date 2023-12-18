@@ -1,0 +1,66 @@
+@use "sass:math";
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+@use "./src/app/styles/mixins";
+
+
+.profile{
+  display: flex;
+  flex-direction: column;
+}
+
+.list{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+}
+
+.logOutCover{
+}
+
+.link{
+  display: flex;
+  color: #fffbfd;
+  background-color: #2ba296;
+  flex: 1 1 auto;
+  min-width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding-top: mixins.rem(7);
+  padding-bottom: mixins.rem(7);
+  padding-left: mixins.rem(3);
+  padding-right: mixins.rem(3);
+
+  @media (any-hover: hover) {
+     &:hover {
+       background-color: #62d2c7;
+        transition: background-color ease 0.3s 0s;
+     }
+   }
+}
+
+.logOutBtn{
+  display: flex;
+  color: white;
+  background-color: #da7e5d;
+  justify-content: center;
+  align-items: center;
+  border-radius: mixins.rem(7);
+  text-align: center;
+  flex: 1 1 auto;
+  padding-top: mixins.rem(8);
+  padding-bottom: mixins.rem(8);
+  padding-left: mixins.rem(3);
+  padding-right: mixins.rem(3);
+  transition: background-color ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: #d95223;
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+}

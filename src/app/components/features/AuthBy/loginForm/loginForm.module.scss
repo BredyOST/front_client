@@ -1,0 +1,363 @@
+@use "sass:math";
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+@use "./src/app/styles/mixins";
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(20);
+  z-index: 3;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(25);
+}
+
+.title {
+  font-size: mixins.rem(24);
+  line-height: math.div(30,24);
+  font-weight: 600;
+  color: black;
+  position: relative;
+  text-align: center;
+
+  @include mixins.adaptiveValue("font-size",24,20,3,650,320);
+
+}
+
+.coverPassword{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(20);
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: 10px;
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(60);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: mixins.em(1);
+  position: relative;
+  background-color: transparent;
+
+  &::placeholder {
+    color: rgb(124 41 41 / 45%);
+    font-weight: 600;
+    font-size: mixins.rem(15);
+
+  }
+
+  &:focus {
+    border: 2px solid #20a7ad;
+    transition: border ease 0.3s 0s;
+  }
+}
+
+.inputRelative{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(5);
+}
+
+.inputsForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(25);
+  position: relative;
+}
+
+.btnCover {
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  line-height: globalIndex.$main_font_line-height;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: mixins.rem(20);
+
+  @include mixins.adaptiveValue("font-size",18,15,3,550,320);
+}
+
+.btnCoverTwo {
+  display: flex;
+  justify-content: space-between;
+  column-gap: mixins.rem(20);
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.blockAdditional {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  row-gap: mixins.rem(5);
+}
+
+.btnEnter {
+  line-height: globalIndex.$main_font_line-height;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  color: white;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  background-color: globalIndex.$Theme_main_header_background_button;
+  border-radius: mixins.rem(10);
+  padding-left: mixins.rem(65);
+  padding-right: mixins.rem(65);
+  flex: 1 1 auto;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: mixins.rem(8);
+  padding-top: mixins.rem(8);
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_Button_hover;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+    }
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.forgetPassword {
+  text-align: right;
+  color: #289ead;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(5);
+  font-weight: 700;
+  transition: color easy 0.3s 0s;
+
+  @media (any-hover:hover) {
+    &:hover {
+      color: #36c05c;
+      transition: color easy 0.3s 0s;
+    }
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+}
+
+.noMessage{
+  text-align: right;
+  color: #e81313;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(5);
+  transition: color easy 0.3s 0s;
+  font-weight: 700;
+
+  @media (any-hover:hover) {
+    &:hover {
+      color: #36c05c;
+      transition: color easy 0.3s 0s;
+    }
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+}
+
+.profileRegistration {
+  text-align: right;
+  color: #289ead;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(5);
+  font-weight: 700;
+  transition: color easy 0.3s 0s;
+
+  @media (any-hover:hover) {
+    &:hover {
+      color: #36c05c;
+      transition: color easy 0.3s 0s;
+    }
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+}
+
+
+.hideButton {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-15%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showSvg {
+  fill: black;
+  width: mixins.rem(30);
+  height: mixins.rem(30);
+}
+
+.hideSvg {
+  fill: black;
+  width: mixins.rem(30);
+  height: mixins.rem(30);
+}
+
+.error {
+  color: red;
+  font-size: mixins.rem(12);
+  line-height: math.div(18,12);
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  left: mixins.rem(0);
+  transform: translateY(100%);
+}
+
+.errorLogin {
+  position: absolute;
+  color: red;
+  font-size: mixins.rem(12);
+  line-height: math.div(18,12);
+  font-weight: 600;
+}
+
+.coverBtn{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  row-gap: mixins.rem(7);
+  flex-direction: column;
+}
+
+.titleForBtn{
+  font-size: mixins.rem(16);
+  text-align: left;
+
+}
+
+.coverPhoneAndMail{
+  display: flex;
+  column-gap: mixins.rem(5);
+
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+    row-gap: mixins.rem(7);
+  }
+}
+
+.choose{
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  flex: 1 1 50%;
+  background-color: #5b6060;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  border-radius: mixins.rem(7);
+  border: mixins.rem(2) solid rgb(0 0 0 / 36%);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: mixins.rem(20);
+  transition: background-color ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+     &:hover {
+        transition: background-color ease 0.3s 0s;
+       background-color: #79b93e;
+     }
+   }
+
+}
+
+.emailSvg {
+  max-width: mixins.rem(30);
+  max-height: mixins.rem(30);
+  flex: 0 0  mixins.rem(30);
+  fill: white;
+  text-align: center;
+}
+
+.phoneSvg{
+  max-width: mixins.rem(30);
+  max-height: mixins.rem(30);
+  flex: 0 0 mixins.rem(30);
+  fill: white;
+  text-align: center;
+}
+
+.dark{
+  background-color: black;
+  color: #ce681f;
+}
+
+.passwordCheck{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(8);
+}
+
+.textPassword{
+  font-size: mixins.rem(15);
+}
+
+.coverPasswordCheck{
+  column-gap: mixins.rem(5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(60px, 1fr));
+}
+
+.tabEasy{
+  display: flex;
+  background-color: #da2e2a;
+  width: 100%;
+  flex: 0 0 mixins.rem(60);
+  min-height: mixins.rem(5);
+  border-radius: mixins.rem(6);
+  box-shadow: 0 0 mixins.rem(5) rgb(0 0 0 / 66%);
+}
+
+.tabNormal{
+  background-color: #cad545;
+  width: 100%;
+  flex: 0 0 mixins.rem(60);
+  min-height: mixins.rem(5);
+  border-radius: mixins.rem(6);
+  box-shadow: 0 0 mixins.rem(5) rgb(0 0 0 / 66%);
+}
+
+.tabHard{
+  background-color: #56bb6e;
+  width: 100%;
+  flex: 0 0 mixins.rem(60);
+  min-height: mixins.rem(10);
+  border-radius: mixins.rem(6);
+  box-shadow: 0 0 mixins.rem(5) rgb(0 0 0 / 66%);
+}

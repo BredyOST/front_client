@@ -1,0 +1,206 @@
+@use "sass:math";
+@use './styles/variable/global.scss';
+@use './styles/variable/globalIndex.scss';
+@use "./styles/mixins.scss";
+@use './../app/components/shared/ui/Loader/Loader.scss';
+@use './styles/variable/common.scss';
+
+.page{
+  @extend .paddingPages;
+}
+
+.cover{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(20);
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+}
+
+.textCover {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainTitle{
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+  justify-content: center;
+
+  span {
+    color: #e11010;
+    font-weight: 600;
+    background-color: globalIndex.$home_highlight-color;
+    border-radius: 60% 30% 32% 8% / 24% 81% 39% 66% ;
+    padding-right: mixins.rem(15);
+    padding-left: mixins.rem(15);
+    padding-top: mixins.rem(5);
+    padding-bottom: mixins.rem(5);
+  }
+}
+
+.mainTitle,
+.blockEnd,
+.titleMainCategory{
+  font-size: mixins.rem(globalIndex.$Title_font_size);
+  line-height: globalIndex.$Title_font_line-height;
+  font-weight: globalIndex.$Title_font_weight;
+  color: globalIndex.$Title_color;
+  text-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.42);
+  text-align: center;
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,23,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+
+}
+
+.howWorks{
+  color: #ee500f;
+  font-size: mixins.rem(25);
+  line-height: math.div(29,25);
+  font-weight: 600;
+}
+
+.text span,
+.textFree span{
+  background-color: globalIndex.$home_highlight-bg;
+  color: globalIndex.$home_highlight-color;
+  font-weight: 600;
+  border-radius: 70% 30% 92% 8% / 24% 81% 19% 76% ;
+  padding-right: mixins.rem(15);
+  padding-left: mixins.rem(15);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+}
+
+.text,
+.textFree,
+.coverFor,
+.description{
+ @extend .mainFontSize;
+}
+
+.text{
+  line-height: globalIndex.$main_font_line-height;
+}
+
+.textFree{
+  column-gap: mixins.rem(5);
+  align-items: center;
+  line-height: globalIndex.$main_font_line-height;
+}
+
+.searchText{
+  display: flex;
+}
+
+.coverFor{
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #fffbfd;
+  row-gap: mixins.rem(5);
+
+  p {
+    display: flex;
+    background-color: globalIndex.$home_highlight-color_words;
+    border-radius: mixins.rem(5) mixins.rem(5) mixins.rem(5) mixins.rem(5);
+    padding-top: mixins.rem(5);
+    padding-bottom: mixins.rem(5);
+    padding-left: mixins.rem(10);
+    padding-right: mixins.rem(15);
+
+    @include mixins.adaptiveValue("padding-top",5,5,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+    @include mixins.adaptiveValue("padding-bottom",5,5,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+    @include mixins.adaptiveValue("padding-left",10,5,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+    @include mixins.adaptiveValue("padding-right",15,10,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  }
+}
+
+.coverLastBlock{
+  @media(max-width: mixins.em(global.$mobile)) {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.recommend{
+  @media(min-width: mixins.em(global.$mobile)) {
+    display: flex;
+    flex-direction: column;
+    background-color: #a9c78d;
+    border-radius: 0 mixins.rem(50) 0 mixins.rem(50);
+    padding-left: mixins.rem(10);
+    padding-right: mixins.rem(10);
+    padding-bottom: mixins.rem(35);
+    padding-top: mixins.rem(15);
+    row-gap: mixins.rem(30);
+    box-shadow: mixins.rem(0) mixins.rem(2) mixins.rem(10) #000;
+}
+
+  @include mixins.adaptiveValue("padding-top",15,5,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-bottom",35,5,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-left",10,0,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-right",10,0,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+.category{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.titleMainCategory{
+  background-color: #2ba296;
+  border-radius: mixins.rem(5) mixins.rem(5) mixins.rem(5) mixins.rem(5);
+}
+
+.coverCategory{
+  @media(min-width: mixins.em(global.$mobile)) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    row-gap: mixins.rem(10);
+    column-gap: mixins.rem(10);
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    display: flex;
+    flex-direction: column;
+    row-gap: mixins.rem(10);
+  }
+}
+
+.titleCategory{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: mixins.rem(5);
+}
+
+.description{
+  background-color: #dcc4c4;
+  min-width: 100%;
+  flex: 1 1 auto;
+  align-items: center;
+  padding-bottom: mixins.rem(5);
+  padding-top: mixins.rem(5);
+}
+
+.name{
+  font-size: mixins.rem(21);
+  font-weight: 600;
+  background-color: #2ba296;
+  min-width: 100%;
+  padding-bottom: mixins.rem(5);
+  padding-top: mixins.rem(5);
+  @include mixins.adaptiveValue("font-size",21,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+
+

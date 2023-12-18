@@ -1,0 +1,63 @@
+'use client';
+import React, {FC} from 'react';
+import cls from './homePageBtn.module.scss'
+import {Button} from "@/app/components/shared/ui/Button/Button";
+import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
+import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
+import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {useCodeForEmailMutation, useGetTutorsPostsMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {redirect} from "next/navigation";
+
+interface homePageBtnProps {
+    classname?: string;
+}
+
+const HomePageBtn:FC<homePageBtnProps> = (props) => {
+    const { classname } = props;
+    const dispatch = useAppDispatch();
+    //ACTIONS FROM REDUX
+
+    //STATES FROM REDUX
+
+    //USESTATE
+
+    //USEREF
+
+    //FUNCTIONS
+    //other
+
+    //STATES FROM REDUX
+    const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
+
+
+    // ACTIONS FROM REDUX
+    // для изменения состояния попапа loginForm
+    const { changeStateLoginFormPopup } = statePopupSliceActions;
+
+    // для открытия попапа
+    const openLoginFormPopup = React.useCallback(() => {
+        dispatch(changeStateLoginFormPopup(true));
+    }, []);
+
+    return (
+        <div className={classNames(cls.coverBtn, {},[classname] )} >
+            {stateAuth ?
+                <AppLink
+                    classname={cls.link}
+                    href='/dashboard/price'>
+                    Попробовать бесплатно
+                </AppLink>
+                :
+                <Button
+                    classname={cls.buttonLogin}
+                    onClick={openLoginFormPopup}
+                >
+                    <span className={cls.TextLogin}>Попробовать бесплатно</span>
+                </Button>
+            }
+        </div>
+    );
+};
+
+export default HomePageBtn;

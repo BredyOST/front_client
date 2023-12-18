@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "selector-class-pattern": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "scss/at-mixin-pattern": null,
+    "number-max-precision": 6,
+    "scss/dollar-variable-pattern": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "selector-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": null,
+    "keyframes-name-pattern": null
+  }
+}

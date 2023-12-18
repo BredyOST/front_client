@@ -1,0 +1,79 @@
+@use "sass:math";
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+@use "./src/app/styles/mixins";
+@use "./src/app/styles/variable/common";
+
+.postsForSearch{
+
+}
+
+.looking{
+  background-color: rgb(131 128 128 / 4%);
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.block{
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: minmax(40px,150px) minmax(100px,150px) minmax(250px,150px)  minmax(250px,1fr)  minmax(100px,200px);
+  grid-template-rows:auto;
+  font-family: globalIndex.$main_font_family;
+}
+
+.blockItem{
+  background-color: #5e5373;
+  border: 1px dashed #ece89d;
+  padding: 10px;
+  color: #fff;
+  font-size: mixins.rem(16);
+  font-weight: 700;
+  text-align: center;
+}
+
+
+.coverBlockNoAccess{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+
+.btn {
+  @extend .btn;
+
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  font-size: mixins.rem(22);
+  box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(20) rgb(0 0 0 / 50%);
+}
+
+.titleAboutNoAccess{
+  font-size: mixins.rem(22);
+  font-weight: 600;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  background-color: #C21F39;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  border-radius: mixins.rem(5);
+  color: #fffbfd;
+}
+
+.ifNotAith{
+  font-size: globalIndex.$main_font_size;
+  background-color: #d74b4b;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  align-items: center;
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+}

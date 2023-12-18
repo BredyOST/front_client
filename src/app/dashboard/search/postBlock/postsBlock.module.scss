@@ -1,0 +1,233 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use "../../../styles/variable/common";
+
+
+.bodyInfo{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  font-size: mixins.rem(16);
+
+}
+
+.rows {
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: minmax(40px,150px) minmax(100px,150px) minmax(250px,150px)  minmax(250px,1fr)  minmax(100px,200px);
+  grid-template-rows:auto;
+  font-size: mixins.rem(16);
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 16%);
+  padding-bottom: mixins.rem(0);
+  box-shadow: 0 0 mixins.rem(11) rgb(0 0 0 / 16%);
+  border-radius: mixins.rem(5);
+  min-height: mixins.rem(70);
+  transition: background-color ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: #ded9d9;
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+
+}
+
+.blockCategories{
+  justify-self: center;
+  text-align: center;
+  align-self: center;
+  font-weight: 600;
+}
+
+
+.blockDate{
+  justify-self: center;
+  text-align: center;
+  align-self: center;
+}
+
+.blockUser{
+  position: relative;
+  display: flex;
+  justify-self: center;
+  text-align: center;
+  align-self: center;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: mixins.rem(16);
+}
+
+
+.link{
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  min-width: 100%;
+  flex: 1 1 auto;
+  column-gap: mixins.rem(3);
+  transition: background-color ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: rgb(157 126 82 / 68%);
+      border-radius: mixins.rem(5);
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+}
+
+.linkCover{
+  display: flex;
+  column-gap: mixins.rem(5);
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageGroup{
+  width: mixins.rem(40);
+  height: mixins.rem(40);
+  border-radius: 50%;
+}
+
+
+.blockText{
+  display: flex;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+
+.linkText{
+  display: flex;
+  min-width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  flex: 1 1 auto;
+  transition: background-color ease 0.3s 0s;
+  flex-direction: column;
+  row-gap: mixins.rem(0);
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: rgb(157 126 82 / 68%);
+      border-radius: mixins.rem(5);
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+}
+
+
+.nameBlock{
+  display: flex;
+  column-gap: mixins.rem(5);
+}
+
+.nameGroup{
+  text-align: left;
+  justify-content: flex-start;
+  flex: 1 1 auto;
+}
+
+.rightLinkSvg{
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  column-gap: mixins.rem(3);
+}
+
+.linkTop{
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  min-width: 100%;
+  color: #070707;
+}
+
+.linkSvg{
+  width: mixins.rem(15);
+  height: mixins.rem(15);
+  fill: #d2cd72;
+}
+
+
+.blockCity{
+  justify-self: center;
+  text-align: center;
+  align-self: center;
+}
+
+.showTextBtn{
+  color: #2ba296;
+  font-weight: 600;
+  flex: 1 1 auto;
+  background-color: #c2cacc;
+  border-radius: mixins.rem(5);
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+
+  @media (any-hover: hover) {
+     &:hover {
+        transition: background-color ease 0.3s 0s;
+        background-color: #9a7a65;
+     }
+   }
+}
+
+.coverBtnShow{
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 100%;
+}
+
+.linkInsideGroup{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.image{
+  width: mixins.rem(40);
+  height: mixins.rem(40);
+  border-radius: 50%;
+}
+
+
+.coverPageBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  column-gap: mixins.rem(5);
+}
+
+.pageBtn{
+  box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(5) mixins.rem(0) rgb(0 0 0 / 65%);
+  color: #fffbfd;
+  flex: 0 0 mixins.rem(40);
+  height: mixins.rem(40);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  background-color: #c98148;
+  border-radius: mixins.rem(5);
+
+  &.active{
+    background-color: #79b93e;
+  }
+}

@@ -1,0 +1,234 @@
+@use "sass:math";
+@use './src/app/styles/mixins';
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+
+// паддинги для каждой страницы
+.paddingPages {
+  padding-top: mixins.rem(globalIndex.$padding_top_pages);
+  padding-bottom: mixins.rem(globalIndex.$padding_bottom_pages);
+  font-family: globalIndex.$main_font_family;
+  font-weight: globalIndex.$main_font_weight;
+  @include mixins.adaptiveValue("padding-bottom",globalIndex.$padding_bottom_pages_adaptive,30,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-top",globalIndex.$padding_top_pages_adaptive,90,3,globalIndex.$PageHome_adaptive_start,767.98);
+  @include mixins.adaptiveValue("padding-top",110,110,3,globalIndex.$Header_point_for_two_floors,320);
+}
+
+// стиль для текста fz rem(18)
+.mainFontSize {
+  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
+}
+
+.forMainTitle {
+  text-align: left;
+  font-size: mixins.rem(globalIndex.$Title_font_size);
+  line-height: globalIndex.$Title_font_line-height;
+  font-weight: globalIndex.$Title_font_weight;
+  color: globalIndex.$Title_color;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+  justify-content: center;
+}
+
+// добавь только padding и адаптив
+
+.btn{
+  font-family: globalIndex.$Link_fontFamily;
+  color: globalIndex.$Link_color;
+  font-size: mixins.rem(globalIndex.$Link_font_size);
+  line-height: globalIndex.$Logo_font_line-height;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  background-color: globalIndex.$Theme_main_header_background_button;
+  border-radius: mixins.rem(10);
+  z-index: 2;
+  text-align: center;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+  justify-content: center;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_Button_hover;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+    }
+  }
+}
+
+//паддинги для большинства кнопок и увеличение на всю ширину на мобилках
+.widthAndPaddingBtn {
+  padding-left: mixins.rem(15);
+  padding-right: mixins.rem(15);
+  padding-bottom: mixins.rem(10);
+  padding-top: mixins.rem(10);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+
+  @include mixins.adaptiveValue("font-size",22,16,3,767.98,320);
+}
+
+// кнопка для категорий
+.btnCategory{
+  font-family: globalIndex.$Link_fontFamily;
+  color: globalIndex.$Link_color;
+  font-size: mixins.rem(globalIndex.$Link_font_size);
+  line-height: globalIndex.$Logo_font_line-height;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  background-color: globalIndex.$Theme_main_header_background_button;
+  border-radius: mixins.rem(10);
+  z-index: 2;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_Button_hover;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+    }
+  }
+
+}
+
+// инпут в профиле
+.input{
+  font-size: mixins.rem(globalIndex.$Inputs_font_size);
+  flex: 1 1 100%;
+  min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: 10px;
+  padding-top: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-bottom: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-left: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-right: mixins.rem(globalIndex.$Inputs_profile_padding_right);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: em(1);
+  position: relative;
+  background-color: white;
+
+  &::placeholder {
+    color: globalIndex.$Inputs_placeholder;
+    font-weight: globalIndex.$Inputs_placeholder_font_weight;
+    font-size: mixins.rem(15);
+  }
+
+  &:focus {
+    border: 2px solid globalIndex.$Inputs_focus;
+    transition: border ease 0.3s 0s;
+  }
+}
+
+// без паддингов
+.inputNoPadding{
+  text-align: center;
+  font-size: mixins.rem(globalIndex.$Inputs_font_size);
+  flex: 1 1 100%;
+  min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: 10px;
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: mixins.em(1);
+  position: relative;
+  background-color: white;
+
+  &::placeholder {
+    color: globalIndex.$Inputs_placeholder;
+    font-weight: globalIndex.$Inputs_placeholder_font_weight;
+    font-size: mixins.rem(15);
+  }
+
+  &:focus {
+    border: 2px solid globalIndex.$Inputs_focus;
+    transition: border ease 0.3s 0s;
+  }
+}
+
+.inputRelativeCode{
+  max-width: mixins.rem(282);
+}
+
+.error{
+  font-weight: 600;
+  color: #dc2727;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(mixins.rem(2), 100%);
+}
+
+.coverAdditional{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(4);
+}
+
+.linkCoverCode{
+  display: flex;column-gap: mixins.rem(10);
+}
+
+
+
+// для профиля
+
+.blockMain {
+  border-top: mixins.rem(1) solid rgb(187 173 173 / 65%);
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+
+  @media(min-width: mixins.em(global.$tablet)) {
+    display: grid;
+    grid-template-columns: minmax(mixins.rem(130),mixins.rem(130)) 1fr;
+    column-gap: mixins.rem(20);
+  }
+
+  @media(max-width: mixins.em(global.$tablet)) {
+    display: flex;
+    flex-direction: column;
+    row-gap: mixins.rem(5);
+  }
+}
+
+.blockInfoMain {
+  display: flex;
+  flex-direction: column;
+  column-gap: mixins.rem(10);
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.linkCoverMain {
+  display: flex;
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    row-gap: mixins.rem(5);
+    justify-content: flex-start;
+    column-gap: mixins.rem(10);
+  }
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+    row-gap: mixins.rem(10);
+  }
+
+}
+
+.inputRelativeMain {
+  max-width: mixins.rem(500);
+  row-gap: mixins.rem(5);
+  position: relative;
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    flex: 0 1 mixins.rem(500);
+  }
+  @media(max-width: mixins.em(global.$mobile)) {
+      flex: 1 1 auto;
+      min-width: 100%;
+  }
+}

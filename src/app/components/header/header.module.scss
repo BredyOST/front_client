@@ -1,0 +1,136 @@
+@use "sass:math";
+@use "./src/app/styles/variable/common";
+@use './src/app/styles/variable/global';
+@use '/src/app/styles/variable/globalIndex';
+@use '/src/app/styles/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: globalIndex.$Theme_main_header_background;
+  transform: translateY(0%);
+  opacity: 1;
+  transition: transform ease 0.3s 0s, opacity ease 0.3s 0s;
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    padding-top: globalIndex.$Header_paddingTop;
+    padding-bottom: globalIndex.$Header_paddingBottom;
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    padding-top: mixins.rem(8);
+    padding-bottom: mixins.rem(8);
+  }
+
+  &.hideHeader {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform ease 0.3s 0s, opacity ease 0.3s 0s;
+  }
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 100%;
+}
+
+.section{
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  column-gap: mixins.rem(12);
+
+  @media(max-width: mixins.em(globalIndex.$Header_point_for_two_floors)) {
+    flex-direction: column;
+    row-gap: mixins.rem(5);
+  }
+}
+
+.leftSection{
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(70);
+
+  @include mixins.adaptiveValue("column-gap",70,12,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+}
+
+.rightSection{
+  display: flex;
+  align-items: center;
+
+  @media(max-width:mixins.em(global.$mobile)) {
+    justify-content: flex-end;
+    column-gap: mixins.rem(20);
+  }
+
+  @media(max-width: mixins.em(330)) {
+    justify-content: space-between;
+  }
+
+}
+
+.link {
+  @extend .btn;
+
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  padding-left: mixins.rem(15);
+  padding-right: mixins.rem(15);
+  background-color: #d74b4b;
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+}
+
+.coverButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: mixins.rem(15);
+}
+
+.TextLogin{
+  display: flex;
+  color: white;
+
+  @media(max-width: mixins.em(global.$mobile)) {
+  display: none;
+  }
+}
+
+.navBarFirst{
+  font-family: globalIndex.$NavBar_fontFamily;
+  font-size: globalIndex.$NavBar_fontSize;
+  color: globalIndex.$NavBar_Color;
+  line-height: globalIndex.$NavBar_fontLine;
+  font-weight: globalIndex.$NavBar_fontWeight;
+  letter-spacing: globalIndex.$NavBar_fontLetterSpacing;
+  padding-top: mixins.rem(25);
+  padding-bottom: mixins.rem(25);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  transition: color ease 0.3s 0s, background-color ease 2s 0s;
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media (any-hover: hover) {
+     &:hover {
+       background-color: globalIndex.$Theme_main_navBar_background_color_Hover;
+       color: globalIndex.$Theme_main_navBar_color_Hover;
+       transition: color ease 0.3s 0s, background-color ease 0.3s 0s;
+     }
+   }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+   display: none;
+  }
+}
+
+
+
+
+

@@ -1,0 +1,83 @@
+@use "sass:math";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/styles/variable/common';
+
+.footer{
+  background-color: globalIndex.$Theme_main_header_background;
+  padding-top: mixins.rem(50);
+  padding-bottom: mixins.rem(70);
+
+  @include mixins.adaptiveValue("padding-top",50,30,3,globalIndex.$PageHome_adaptive_start,991.98);
+  @include mixins.adaptiveValue("padding-bottom",70,30,3,globalIndex.$PageHome_adaptive_start,991.98);
+}
+
+.cover{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+}
+
+.vkSvg,
+.telegramSvg {
+  width: mixins.rem(40);
+  height: mixins.rem(40);
+  fill: white;
+  transition: fill ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+     &:hover {
+       fill: #79b93e;
+        transition: fill ease 0.3s 0s;
+     }
+   }
+}
+
+.coverLinks{
+  display: flex;
+  column-gap: mixins.rem(10);
+}
+
+.endLinks {
+  font-size: mixins.rem(15);
+  display: flex;
+
+  @media(min-width: mixins.rem(global.$mobile)) {
+    column-gap: mixins.rem(15);
+  }
+
+  @media(max-width: mixins.rem(global.$mobile)) {
+    flex-direction: column;
+  }
+
+}
+
+.link {
+  display: flex;
+  color: white;
+  transition: color ease 0.3s 0s;
+
+  @media(min-width: mixins.rem(global.$mobile)) {
+    padding-top: mixins.rem(5);
+    padding-bottom: mixins.rem(5);
+    padding-right: mixins.rem(5);
+  }
+
+  @media(max-width: mixins.rem(global.$mobile)) {
+    padding-top: mixins.rem(10);
+    padding-bottom: mixins.rem(10);
+    padding-left: mixins.rem(3);
+    padding-right: mixins.rem(3);
+    align-items: center;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: #79b93e;
+      transition: color ease 0.3s 0s;
+    }
+  }
+
+
+}

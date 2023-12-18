@@ -1,0 +1,145 @@
+@use "sass:math";
+@use '../../styles/variable/global';
+@use '../../styles/variable/globalIndex';
+@use "../../styles/mixins";
+@use "../../styles/variable/common";
+
+.ProfilePage {
+    @extend .paddingPages;
+}
+
+.cover{
+    display: flex;
+    flex-direction: column;
+}
+
+.section{
+    display: flex;
+    flex-direction: column;
+    row-gap: mixins.rem(15);
+    flex: 1 1 auto;
+}
+
+.coverLink{
+    display: flex;
+    column-gap: mixins.rem(25);
+    border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+    padding-bottom: mixins.rem(20);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    row-gap: mixins.rem(15);
+    flex: 1 1 auto;
+}
+
+.mainTitle{
+   @extend .forMainTitle;
+    border-bottom: none;
+    padding-bottom: mixins.rem(0);
+    align-self: center;
+}
+
+.linkCover{
+
+}
+
+.link{
+    @extend .btn;
+    padding-bottom: mixins.rem(12);
+    padding-top: mixins.rem(12);
+    padding-left: mixins.rem(15);
+    padding-right: mixins.rem(15);
+    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+    background-color: #d74b4b;
+    font-size: mixins.rem(22);
+}
+
+.body{
+
+}
+
+.inputCode{
+    font-size: mixins.rem(globalIndex.$Inputs_font_size);
+    border: mixins.rem(2) solid #9d9696;
+    border-radius: 10px;
+    padding-top: mixins.rem(globalIndex.$Inputs_profile_padding);
+    padding-bottom: mixins.rem(globalIndex.$Inputs_profile_padding);
+    padding-left: mixins.rem(globalIndex.$Inputs_profile_padding);
+    outline: 0 solid transparent;
+    transition: border ease 0.3s 0s;
+    letter-spacing: mixins.em(1);
+    position: relative;
+    background-color: white;
+
+    &::placeholder {
+        color: globalIndex.$Inputs_placeholder;
+        font-weight: globalIndex.$Inputs_placeholder_font_weight;
+        font-size: mixins.rem(15);
+    }
+
+    &:focus {
+        border: 2px solid globalIndex.$Inputs_focus;
+        transition: border ease 0.3s 0s;
+    }
+}
+
+.showSvg {
+    fill: black;
+    width: mixins.rem(30);
+    height: mixins.rem(30);
+}
+
+.hideSvg {
+    fill: black;
+    width: mixins.rem(30);
+    height: mixins.rem(30);
+}
+
+.infoUser{
+    display: flex;
+    flex-direction: column;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.numberPhone {
+    color: globalIndex.$Theme_attention;
+    font-weight: 800;
+}
+
+.registerText{
+    display: flex;
+    column-gap: mixins.rem(5);
+    align-items: center;
+}
+
+.dateText{
+    font-weight: 600;
+    font-size: mixins.rem(18);
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    min-height: 100%;
+}
+
+.subTitle{
+    font-size: mixins.rem(globalIndex.$SubTitle_font_size);
+    line-height: globalIndex.$SubTitle_font_line-height;
+    font-weight: globalIndex.$SubTitle_font_weight;
+    color: globalIndex.$SubTitle_color;
+    border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+    padding-bottom: mixins.rem(20);
+    justify-content: center;
+}
+
+.coverNumBtnBlock{
+    flex: 1 1 auto;
+    min-width: 100%;
+    display: flex;
+}
+

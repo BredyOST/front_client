@@ -1,0 +1,89 @@
+@use "sass:math";
+@use '../../styles/variable/global';
+@use '../../styles/variable/globalIndex';
+@use "../../styles/mixins";
+@use '../../styles/variable/common';
+
+.faq {
+  @extend .paddingPages;
+}
+
+.cover{
+  display: flex;
+  flex-direction: column;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+}
+
+.mainTitle {
+  @extend .forMainTitle;
+}
+
+.wrapper{
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+}
+
+.video{
+  display: flex;
+}
+
+.arrowSvg{
+  width: mixins.rem(30);
+  height: mixins.rem(30);
+  flex: 0 0 mixins.rem(30);
+  fill: #000;
+}
+
+.question{
+  display: flex;
+  flex-direction: column;
+  border-bottom: mixins.rem(2) solid #495667;
+}
+
+.questionText{
+  font-weight: 700;
+  font-size: mixins.rem(22);
+  line-height: math.div(28,22);
+  color: #ff0909;
+}
+
+.btnOpen{
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(15);
+  padding-bottom: mixins.rem(15);
+  padding-top: mixins.rem(15);
+  padding-right: mixins.rem(35);
+  padding-left: mixins.rem(35);
+  flex: 1 1 auto;
+  min-width: 100%;
+  transition: background-color ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+    background-color: #a8c491;
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+}
+
+.text{
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.coverBtn{
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+}

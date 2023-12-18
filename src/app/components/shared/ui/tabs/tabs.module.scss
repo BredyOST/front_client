@@ -1,0 +1,56 @@
+@use "sass:math";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+
+.selectTabs{
+
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.coverBtn{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.tabBtn{
+  background-color: white;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  line-height: globalIndex.$main_font_line-height;
+  font-weight: 600;
+
+  //background-color: #2ba296;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  transition: background-color ease 0.3s 0s;
+  border: mixins.rem(1) solid rgb(0 0 0 / 45%);
+
+
+  &.left{
+    border-radius: mixins.rem(5) mixins.rem(0) mixins.rem(0) mixins.rem(5);
+  }
+
+  &.right{
+    border-radius: mixins.rem(0) mixins.rem(5) mixins.rem(5) mixins.rem(0);
+  }
+
+
+  @media (any-hover: hover) {
+    &:hover {
+      //background-color: #1dc078;
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+
+  &.active  {
+    background-color: #1dc078;
+  }
+
+}

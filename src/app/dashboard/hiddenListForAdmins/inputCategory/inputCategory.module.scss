@@ -1,0 +1,33 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use '../../../styles/mixins';
+@use "../../../styles/variable/common";
+
+.inputCategory{
+  display: grid;
+  grid-template-columns: minmax(50px, 50px) minmax(60px,60px) minmax(200px,320px)  minmax(250px,1fr)  minmax(100px,200px)  minmax(100px,200px) minmax(100px,200px) minmax(100px,200px);
+  grid-template-rows:auto;
+  text-align: center;
+  row-gap: mixins.rem(5);
+  column-gap: mixins.rem(5);
+  border-bottom: mixins.rem(1) solid #000;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+}
+
+.btn{
+  @extend .btn;
+
+  padding-left: mixins.rem(25);
+  padding-right: mixins.rem(25);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+}
+
+
+.inputNoPadding{
+  @extend .inputNoPadding;
+}

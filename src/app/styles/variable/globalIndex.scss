@@ -1,0 +1,200 @@
+@use "sass:math";
+
+// переменные для тем
+// переменные для темной темы (основная)
+
+//background
+$Theme_main_background: rgb(248 246 246); // basic background
+$Theme_main_header_background: rgb(38 53 63); // header background
+$Theme_main_background_additional: #a9c78d; // дополнительный background
+
+//color
+$Theme_main_text_color: rgb(0 0 0); // basic color
+$Theme_main_text_color_Hover: rgb(255 255 255); // basic color hover
+$Theme_main_title_color: rgb(0 0 0); // title color
+$Theme_attention: red;
+$Theme_font_size_attention: 18;
+$Theme_line_height_attention: math.div(24,18);
+$Theme_attention_font_size_adaptive: 18; // размер адаптив
+$Theme_attention_font_weight: 600; // жирность
+
+//buttons or Links
+$Theme_main_header_background_button: rgb(38 118 154); // button in header
+$Theme_main_header_background_Button_hover: rgb(5 80 115); // button in header hover
+$Theme_main_header_color_text: rgb(253 254 255); // кнопка в header hover текст
+$Theme_main_header_background_button_category: rgb(62 140 175); // button in header
+//1
+$Link_fontFamily: "OpenSans"; // шрифт
+$Link_font_size: 18; // размер
+$Link_font_size_adaptive: 18; // размер адаптив
+$Link_font_line-height: math.div(24,18); // межстрочный интервал
+$Link_font_weight: 500; // жирность
+
+$Link_color: #fff; // шрифт
+$Link_font_line-height: math.div(24,18); // межстрочный интервал
+
+//Inputs
+$Inputs_fontFamily: "OpenSans"; // шрифт
+$Inputs_font_size: 18; // размер
+$Inputs_font_size_adaptive: 18; // размер адаптив
+$Inputs_font_line-height: math.div(24,18); // межстрочный интервал
+$Inputs_font_weight: 500; // жирность
+$Inputs_focus: #20a7ad;
+$Inputs_placeholder: rgb(124 41 41 / 45%);
+$Inputs_placeholder_font_weight: 600;
+
+//1 profileList
+$Inputs_profile_padding: 10;
+$Inputs_profile_padding_right: 50;
+
+//Основые отступы внутри страниц
+$padding_top_pages: 120; // отступ внутри страницы
+$padding_top_pages_adaptive: 120; // отступ внутри страницы
+$padding_bottom_pages: 60; // отступ внутри страницы
+$padding_bottom_pages_adaptive: 60; // отступ внутри страницы
+
+// для основного текста
+$main_font_family: "OpenSans"; // шрифт
+$main_font_size: 18; // размер
+$main_font_size_adaptive: 18; // размер адаптив
+$main_font_line-height: math.div(24,18); // межстрочный интервал
+$main_font_weight: 500; // жирность
+
+// для заголовков
+$Title_font_family: "EncodeSans"; // шрифт
+$Title_font_size: 35; // размер
+$Title_font_size_adaptive: 35;// размер адаптив
+$Title_font_line-height: math.div(35,30); // межстрочный интервал
+$Title_font_weight: 700; // жирность
+$Title_color: rgb(0, 0, 0); // цвет текста
+
+// для подзаголовков
+$SubTitle_font_family: "EncodeSans"; // шрифт
+$SubTitle_font_size: 28; // размер
+$SubTitle_font_size_adaptive: 28;// размер адаптив
+$SubTitle_font_line-height: math.div(34,28); // межстрочный интервал
+$SubTitle_font_weight: 700; // жирность
+$SubTitle_color: rgb(0 0 0); // цвет текста
+
+// logotype
+$Logo_font_family: "OpenSans"; // шрифт
+$Logo_font_size: 25; // размер
+$Logo_font_size_adaptive: 25; // размер адаптив
+$Logo_font_line-height: math.div(31,25); // межстрочный интервал
+$Logo_font_weight: 600; // жирность
+$Logo_color: rgb(91 189 182);  // цвет текста
+$Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
+
+
+// HEADER
+$Header_paddingTop: 2; // отступ внутри контентной части для страниц
+$Header_paddingTop_adaptive: 2; // отступ внутри кондентной части для страниц для адаптивного свойства
+$Header_paddingBottom: 2; // отступ внутри контентной части для страниц
+$Header_paddingBottom__adaptive: 2; // отступ внутри кондентной части для страниц для адаптивного свойства
+$Header_adaptive_start: 1000;
+$Header_adaptive_end: 767.98;
+$Header_point_for_two_floors: 540;
+
+// NavBar
+$NavBar_fontFamily: "OpenSans"; // шрифт
+$NavBar_Color: #fff; // шрифт
+$NavBar_fontSize: 18; // размер шрифта
+$NavBar_fontSize_AdaptiveStart: 18; // размер шрифта
+$NavBar_fontLine: math.div(24,18); // line-height
+$NavBar_fontWeight: 600; //  font-weight
+$NavBar_fontLetterSpacing: 0.5; //  Letter Spacing
+$Theme_main_navBar_color_Hover: rgb(176 66 66); // basic color hover
+$Theme_main_navBar_background_color_Hover: rgb(64 89 105 / 68%); // basic color hover
+
+// карточка тарифа
+$Card_border_color: #000;
+$Card_background_color: #e5dada;
+$Card_border_color: 25; // размер шрифта заголовка
+$Card_background_title_color: #495667;// background заголовка
+$Card_background_month_color: #c736bf;;// background заголовка
+
+
+//searchLine
+$searchLine_placeHolder: #c4bbbb;  // строка поиска в header
+$searchLine_Focus_Header: #20a7ad;  // строка поиска в header
+$searchLine_border_Header: #9d9696;  // цвет бордера
+
+
+// home
+$home_highlight-bg: #79b93e;
+$home_highlight-color: #000;
+$home_highlight-color_end: #a9c78d;
+$home_highlight-color_words: seagreen;
+$PageHome_adaptive_start: 991.98;
+$PageHome_adaptive_end: 320;
+
+// cards
+$Cards_adaptive_start: 1600;
+$Cards_adaptive_end: 767.98;
+
+
+
+// переменные для светлой темы
+//$Light_background: rgb(236, 236, 236); // фон темы
+//$Light_mainTextcolor: rgba(0, 0, 0, 0.78); // основной цве
+//$Light_mainTextcolor_Hover: rgb(231, 2, 2); // при hovт текстаer
+//$Light_background_sideBar: rgb(211, 208, 208); // цвет для sideBar
+//$Light_background_BottonsideBar: rgb(168, 215, 58); // цвет для sideBar
+//$Light_colorMainTitle: #000; // для заголовков
+//$Light_color_Logo: #994D4D;
+//$Light_background_Button: #994D4D; // фон
+//$Light_background_Button_hover: #723939; // фон
+//$Light_color_Text: rgb(253 254 255); // текст
+//$Light_background_BurgerMenu: #c4ac87; // фон для BurgerMenu
+//$Light_background_active_BurgerMenuLink: #379d70; // фон для BurgerMenu
+//$Light_colorActive_BurgerMenu: #000000; // для заголовков
+//$Light_colorMainTitle_BurgerMenu: #ffffff; // для заголовков
+
+
+// Profile
+//$profile_color_link:#006cd9;
+//$profile_paddingTop_Block: mixins.rem(10); // паддинг
+
+//searchLine
+//$searchLine_placeHolder: #c4bbbb;  // строка поиска в header
+//$searchLine_Focus_Header:#20a7ad;  // строка поиска в header
+//$searchLine_border_Header: #9d9696;  // цвет бордера
+
+// переменные для BurgerMenu
+//$Burger_fontSize: mixins.rem(45); // размер шрифта
+//$BurgerfontSize_adaptive: 45; // размер шрифта адаптив
+
+
+// FOOTER
+//$Footer_fill_svg:white;
+//$Footer_fill_svg_hover: #2cb083;
+
+
+
+
+
+
+// Настройки для ошибок в попаме входа регистрации
+//$fontFamily_PopupError: "Outfit"; // шрифт
+//$fontSize_PopupError: mixins.rem(11); // размер шрифта
+//$fontLine_PopupError: math.div(16,10); // line-height
+//$fontWeight_PopupError: math.div(16,10); // line-height
+//$color_PopupError: rgb(217, 6, 6); // line-height
+
+
+
+// переменные для всплывающего меню где профиль
+//$fontFamily_ListProfile: "Outfit"; // шрифт
+//$fontSize_ListProfile: mixins.rem(16); // размер основного текста
+//$fontLine_ListProfile: math.div(22,16); // line-height
+//$fontWeight_ListProfile: 600; //  font-weight
+//$background_Dark_ListProfile: rgb(217, 228, 234); // фон темы
+//$color_ListProfile: rgb(52, 45, 45);
+
+
+// Buttons
+//$NavBar_fontWeight_ButtonHeader: 800; //  font-weight
+//$NavBar_fontLetterSpacing_ButtonHeader: em(1.5); //  Letter Spacing
+//$NavBar_fontLine_ButtonHeader: math.div(28,22); // line-height
+//$NavBar_fontFamily_ButtonHeader: "Outfit"; // шрифт
+//$NavBar_fontSize_ButtonHeader: mixins.rem(22); // размер шрифта

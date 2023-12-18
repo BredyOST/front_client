@@ -1,95 +1,107 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import React, {FC} from 'react';
+import cls from './page.module.scss'
+import {classNames} from "@/app/components/shared/lib/classNames/className";
+import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+async function getData() {
+    let categories = [];
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+    try {
+        const categoriesRes = await fetch('http://localhost:7777/categories/getAll', { next: { revalidate: 120}})
+        categories = await categoriesRes.json();
+    } catch (err) {
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+    }
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    return { categories };
 }
+
+interface pageProps {
+    classname?: string;
+}
+
+const textSecond = [
+    {id:1, text:'Требуется репетитор'},
+    {id:2, text:'В поисках няни'},
+    {id:3, text:'Нужен электрик'},
+]
+
+const textFour = [
+    {id:1, text:'Попробуй бесплатный период!'},
+]
+
+export interface ICategory {
+    id: number
+    id_category: string
+    name: string
+    description: string
+    positiveWords: string[]
+    negativeWords: string[]
+    createdAt: Date
+    updateAt: Date
+}
+
+
+async function Home(props:pageProps) {
+    const { classname } = props;
+
+    const {
+        categories
+    } = await getData();
+
+    return (
+        <div className={classNames(cls.page, {},[classname] )} >
+            <div className='page__container'>
+                <div className={cls.cover}>
+                    <div className={cls.section}>
+                        <h1 className={cls.mainTitle}><span>Клиенты.com</span> - Сервис для поиска потенциальных клиентов</h1>
+                        <h3 className={cls.howWorks}>Как работает поиск?</h3>
+                        <div className={cls.text}>
+                            Миллионы пользователей ежедневно публикуют в интернет площадках посты, сообщения, которые содеражат ифнормацию:
+                        </div>
+                        <div className={cls.coverFor}>
+                            {textSecond?.length && textSecond.map((item) =>
+                                <div key={item.id} className={cls.searchText}>
+                                    <p>{item.text}</p>
+                                </div>
+                            )}
+                        </div>
+                        <div className={cls.textFree}>
+                            Сервис <span> Клиенты.com </span> имеет доступ к этим сообщениям и он сделает все за вас!
+                        </div>
+                        <ul className={cls.textCover}>
+                            <li className={cls.textFree}>
+                                Вам нужно только ввести данные для запроса, выбрать категорию и получить потенциальных клиентов с контактной информацией для связи с ними.
+                            </li>
+                        </ul>
+                        <div className={cls.recommend}>
+                            <div className={cls.coverLastBlock}>
+                                {textFour?.length && textFour.map((item) =>
+                                    <h3 key={item.id} className={cls.blockEnd}>
+                                        {item.text}
+                                    </h3>
+                                )}
+                            </div>
+                            <HomePageBtn/>
+                        </div>
+                    </div>
+                    <div className={cls.category}>
+                        <h3 className={cls.titleMainCategory}>Список доступных категорий</h3>
+                        <div className={cls.coverCategory}>
+                            {
+                                categories && categories.map((item:ICategory) =>
+                                <div className={cls.titleCategory}>
+                                    <div className={cls.name}>{item.name}</div>
+                                    <div className={cls.description}>{item.description}</div>
+                                </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export  default Home;

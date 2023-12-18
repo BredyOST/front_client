@@ -1,0 +1,80 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use "../../../styles/variable/common";
+
+.mainBlock {
+
+}
+
+.block {
+  @extend .blockMain;
+}
+
+.blockInfo{
+  @extend .blockInfoMain;
+}
+
+.text{
+  color: #b46145;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  font-weight: 600;
+  line-height: globalIndex.$main_font_line-height;
+}
+
+
+.textVerify{
+  display: flex;
+  align-items: flex-end;
+  font-size: mixins.rem(14);
+  line-height: math.div(20,14);
+  column-gap: mixins.rem(5);
+}
+
+.linkCover{
+  @extend .linkCoverMain;
+  position: relative;
+}
+
+
+.input{
+  @extend .input;
+}
+
+.inputRelative{
+  @extend .inputRelativeMain;
+}
+
+
+.coverBtn{
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  @extend .btn;
+  @extend .widthAndPaddingBtn;
+  @media(min-width: mixins.em(global.$mobile)) {
+    padding-left: mixins.rem(15);
+    padding-right: mixins.rem(15);
+    padding-bottom: mixins.rem(5);
+    padding-top: mixins.rem(5);
+  }
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,1250,1050);
+}
+
+
+.notVerifySvg{
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  border-radius: 50%;
+}
+
+.verifySvg{
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  fill: #79b93e;
+  border-radius: 50%;
+}

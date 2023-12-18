@@ -1,0 +1,30 @@
+@use "sass:math";
+@use '../styles/variable/global';
+@use '../styles/variable/globalIndex';
+@use "../styles/mixins";
+
+.NotFoundPage {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+    flex: 1 1 auto;
+    font-size: mixins.rem(30);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: mixins.rem(7);
+}
+
+.cover{
+    display: flex;
+    flex-direction: column;
+}
+
+.link{
+    background-color: #2ba296;
+    padding-top: mixins.rem(8);
+    padding-bottom: mixins.rem(8);
+    padding-left: mixins.rem(8);
+    padding-right: mixins.rem(8);
+    border-radius: mixins.rem(5);
+}

@@ -1,0 +1,96 @@
+@use "sass:math";
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+@use "./src/app/styles/mixins";
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(25);
+}
+
+.title {
+  font-size: mixins.rem(24);
+  line-height: math.div(30,24);
+  font-weight: 600;
+  color: black;
+  position: relative;
+  text-align: center;
+
+  @include mixins.adaptiveValue("font-size",24,20,3,650,320);
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: 10px;
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(60);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: em(1);
+  position: relative;
+  background-color: transparent;
+
+  &::placeholder {
+    color: rgb(124 41 41 / 45%);
+    font-weight: 600;
+    font-size: mixins.rem(15);
+
+  }
+
+  &:focus {
+    border: 2px solid #20a7ad;
+    transition: border ease 0.3s 0s;
+  }
+}
+
+
+
+.btnCoverTwo {
+  display: flex;
+  justify-content: space-between;
+  column-gap: mixins.rem(20);
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.inputsForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(25);
+  position: relative;
+}
+
+.btnEnter {
+  line-height: globalIndex.$main_font_line-height;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  color: white;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  background-color: globalIndex.$Theme_main_header_background_button;
+  border-radius: mixins.rem(10);
+  padding-left: mixins.rem(65);
+  padding-right: mixins.rem(65);
+  flex: 1 1 auto;
+  text-align: center;
+  justify-content: center;
+  padding-bottom: mixins.rem(8);
+  padding-top: mixins.rem(8);
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_Button_hover;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+    }
+  }
+
+
+}

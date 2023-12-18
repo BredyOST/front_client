@@ -1,0 +1,51 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use "../../../styles/variable/common";
+
+.block {
+  @extend .blockMain
+}
+
+.blockInfo{
+  @extend .blockInfoMain;
+}
+
+.text{
+  color: #b46145;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  font-weight: 600;
+  line-height: globalIndex.$main_font_line-height;
+}
+
+.linkCover{
+  @extend .linkCoverMain;
+}
+
+.input{
+  @extend .input;
+}
+
+.inputRelative{
+    @extend .inputRelativeMain;
+}
+
+.coverBtn{
+  display: flex;
+  align-items: center;
+}
+
+
+.btn {
+  @extend .btn;
+  @extend .widthAndPaddingBtn;
+  @media(min-width: mixins.em(global.$mobile)) {
+    padding-left: mixins.rem(15);
+    padding-right: mixins.rem(15);
+    padding-bottom: mixins.rem(5);
+    padding-top: mixins.rem(5);
+  }
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,1250,1050);
+}

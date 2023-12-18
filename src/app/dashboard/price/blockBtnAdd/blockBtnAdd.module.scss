@@ -1,0 +1,89 @@
+@use "sass:math";
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+@use "./src/app/styles/mixins";
+@use "./src/app/styles/variable/common";
+
+
+.coverButtonCategories{
+  display: flex;
+  justify-content: center;
+}
+
+.svgPlus {
+  fill: white;
+  flex: 0 0 mixins.rem(30);
+
+  @media(min-width: mixins.em(600)) {
+    width: mixins.rem(30);
+    height: mixins.rem(30);
+    }
+
+  @media(max-width: mixins.em(600)) {
+    width: mixins.rem(20);
+    height: mixins.rem(20);
+    }
+}
+
+.btn{
+  @extend .btn;
+  @extend .widthAndPaddingBtn;
+}
+
+.coverCategories{
+  background-color: #a9c78d;
+  padding-top: mixins.rem(15);
+  padding-bottom: mixins.rem(15);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  border-radius: mixins.rem(15) mixins.rem(0) mixins.rem(15) mixins.rem(0);
+  row-gap: mixins.rem(15);
+  display: flex;
+  flex-direction: column;
+}
+
+.blockCategories{
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  column-gap: mixins.rem(5);
+  flex-wrap: wrap;
+  row-gap: mixins.rem(5);
+  font-size: mixins.rem(16);
+  line-height: math.div(22,16);
+}
+
+
+.chosenRed {
+  background-color: #d95757;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  border-radius: mixins.rem(5);
+  font-weight: 600;
+  color: #fffbfd;
+}
+
+.chosen{
+  background-color: #2ba296;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  border-radius: mixins.rem(5);
+  font-weight: 600;
+  color: #fffbfd;
+}
+
+.titleCategories {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-family: globalIndex.$SubTitle_font_family;
+  font-size:  mixins.rem(globalIndex.$SubTitle_font_size);
+  line-height: globalIndex.$SubTitle_font_line-height;
+  font-weight: globalIndex.$SubTitle_font_weight;
+  color: globalIndex.$SubTitle_color;
+  @include mixins.adaptiveValue("font-size",globalIndex.$SubTitle_font_size,18,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}

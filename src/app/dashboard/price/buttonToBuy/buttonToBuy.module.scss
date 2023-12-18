@@ -1,0 +1,20 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use "../../../styles/variable/common";
+
+
+.buttonToBuy{
+  flex: 1 1 auto;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+
+  @extend .btnCategory;
+
+  &.active {
+    background-color: #79b93e;
+  }
+}
