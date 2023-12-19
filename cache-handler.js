@@ -12,7 +12,7 @@ const config = {
     socket: {
         tls: true,
         rejectUnauthorized: true,
-        ca: [fs.readFileSync(`D:/WEB/search-client/.redis/root.crt`).toString()],
+        ca: [fs.readFileSync(process.env['PATH_REDIS']).toString()],
     }
 };
 
