@@ -2,6 +2,7 @@ const fs = require('fs');
 const { reviveFromBase64Representation, replaceJsonWithBase64 } = require('@neshca/json-replacer-reviver');
 const { IncrementalCache } = require('@neshca/cache-handler');
 const { createClient } = require('redis');
+require('dotenv').config({ path: '.env.local' });
 
 const REVALIDATED_TAGS_KEY = 'sharedRevalidatedTags';
 
@@ -17,6 +18,7 @@ const config = {
 };
 
 const client = createClient(config);
+console.log('PATH_REDIS:', process.env['PATH_REDIS']);
 
 client.on('connect', () => {
     console.log('connection Redis'); // I see this in console
