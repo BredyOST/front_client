@@ -27,12 +27,7 @@ const loginText: any = [
 
 type loginForm = {
     mailOrNumberLoginIn: string | number,
-    // mailOrNumberRegistration: string | number,
     passwordLoginIn: string,
-    // passwordRegistration: string,
-    // passwordRegistrationCheck:string,
-    // activationRepeat:string,
-    // newPassword:string,
 }
 
 interface passwordHide {

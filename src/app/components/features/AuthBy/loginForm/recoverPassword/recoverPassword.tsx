@@ -6,7 +6,7 @@ import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {useChangePasswordMutation, useRepeatActivationMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {useChangePasswordMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 
 interface recoverPasswordProps {

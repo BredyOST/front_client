@@ -6,8 +6,6 @@ import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {useCodeForEmailMutation, useGetTutorsPostsMutation} from "@/app/redux/entities/requestApi/requestApi";
-import {redirect} from "next/navigation";
 
 interface homePageBtnProps {
     classname?: string;

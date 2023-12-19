@@ -1,7 +1,6 @@
 'use client';
 import React, { FC } from 'react';
 import cls from './loginForm.module.scss';
-import { useAppDispatch, useAppSelector } from "@/app/redux/hooks/redux";
 import { classNames } from "@/app/components/shared/lib/classNames/className";
 import LogiIn from "@/app/components/features/AuthBy/loginForm/loginIn/LogiIn";
 import Registration from "@/app/components/features/AuthBy/loginForm/registration/registration";
@@ -22,7 +21,7 @@ const LoginForm: FC<LoginFormProps> = React.memo((props) => {
 
     // states from redux
     // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
-    const { clickOnEnter } = useAppSelector((state) => state.statePopup);
+
     // информация о пользователе
 
     // RTK query

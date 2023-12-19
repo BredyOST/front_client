@@ -79,8 +79,8 @@ IncrementalCache.onCreation(async () => {
 
 
     return {
-        // useFileSystem: !useTtl,
-        useFileSystem: false,
+        useFileSystem: !useTtl,
+        // useFileSystem: false,
         cache: {
             async get(key) {
                 try {
