@@ -1,6 +1,6 @@
 'use client';
 import React, { FC, Suspense } from 'react';
-import cls from './LoginModal.module.scss';
+import cls from './loginModal.module.scss';
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import Modal from "@/app/components/shared/ui/Modal/Modal";

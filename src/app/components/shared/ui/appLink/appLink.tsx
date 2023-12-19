@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import cls from './AppLink.module.scss';
+import cls from './appLink.module.scss';
 import Link, {LinkProps} from "next/link";
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 
