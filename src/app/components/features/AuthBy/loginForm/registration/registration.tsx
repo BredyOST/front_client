@@ -86,7 +86,6 @@ const Registration:FC<RegistrationProps> = (props) => {
         const textError = {
             message: 'Не совпадают введенные пароли'
         }
-
         if(!comparePassword) dispatch(addInfoForCommonError(textError))
         // отправляем данные на регистрацию пользователя и создаем объект для передачи
         if(comparePassword) {
@@ -116,7 +115,7 @@ const Registration:FC<RegistrationProps> = (props) => {
 
     // для изменения индикатора который меняет type у input на text или password. Показать или скрыть пароль при вводе
     const showAndHideTextPassword = (name:any) => {
-    setPasswordHideButton({ ...passwordHideButton, registerShowHide: !passwordHideButton.registerShowHide });
+        setPasswordHideButton({ ...passwordHideButton, registerShowHide: !passwordHideButton.registerShowHide });
     };
     const showAndHideTextTwoPassword = (name:any) => {
         setPasswordHideButton({ ...passwordHideButton, registerCheckShowHide: !passwordHideButton.registerCheckShowHide });
@@ -193,6 +192,7 @@ const Registration:FC<RegistrationProps> = (props) => {
                         ...register('mailOrNumberRegistration', {
                             required: 'Пожалуйста введите корректный email или номер телефона',
                             pattern: {
+                                // eslint-disable-next-line max-len
                                 value: /^(?:[a-zA-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/,
                                 message: 'Введите корректный email',
                             },
@@ -243,7 +243,7 @@ const Registration:FC<RegistrationProps> = (props) => {
                                     type="button"
                                     classname={cls.hideButton}
                                     name='textRegistrationPasswordMain'
-                                    addNameToFunction={true}
+                                    addNametoFunction={true}
                                     onClick={showAndHideTextPassword}
                                 >
                                     {!passwordHideButton.registerShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
@@ -272,7 +272,7 @@ const Registration:FC<RegistrationProps> = (props) => {
                                 <Button
                                     type="button"
                                     name='textRegistrationPassword'
-                                    addNameToFunction={true}
+                                    addNametoFunction={true}
                                     classname={cls.hideButton}
                                     onClick={showAndHideTextTwoPassword}
                                 >

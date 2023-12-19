@@ -11,10 +11,10 @@ const notifications = createSlice({
     name: 'notifications',
     initialState,
     reducers: {
-        addInfoForCommonRequest:(state, action:PayloadAction<boolean>) => {
+        addInfoForCommonRequest:(state, action:PayloadAction<{text: string} | string >) => {
             state.commonForRequest = action.payload;
         },
-        addInfoForCommonError:(state, action:PayloadAction<boolean>) => {
+        addInfoForCommonError:(state, action:PayloadAction<{message: string} | string>) => {
             state.commonForError = action.payload;
         },
     },

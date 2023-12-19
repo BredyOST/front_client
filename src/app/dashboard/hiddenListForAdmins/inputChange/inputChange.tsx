@@ -12,7 +12,7 @@ import {
 interface inputChangeProps {
     classname?: string;
     value?:string;
-    index?: string
+    index?: string | number
     item?:any
 }
 
@@ -66,13 +66,13 @@ export const InputChange:FC<inputChangeProps> = (props) => {
 
     return (
         <div className={classNames(cls.inputChange, mod,[classname] )} >
-            <div>{index + 1}</div>
-             <input
-                 value={idGroup ? idGroup : ''}
-                 onChange={(e) => changeValue(e)}
-                 className={cls.input}
+            <div>{index ? +index + 1 : ''}</div>
+            <input
+                value={idGroup ? idGroup : ''}
+                onChange={(e) => changeValue(e)}
+                className={cls.input}
 
-             />
+            />
             <div>{item.identification}</div>
             <div>{new Date(item.createdAt).toDateString()}</div>
             <div>{new Date(item.updateAt).toDateString()}</div>

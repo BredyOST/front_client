@@ -97,7 +97,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
                                     }
 
                                     {item.name}
-                                 </ButtonToBuy>
+                                </ButtonToBuy>
                             </div>
                         ))}
                     </div>

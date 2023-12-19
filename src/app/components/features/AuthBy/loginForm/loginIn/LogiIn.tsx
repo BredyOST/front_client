@@ -17,7 +17,6 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {redirect} from "next/navigation";
 
 interface LogiInProps {
-    classname?: string;
 }
 
 const loginText: any = [
@@ -41,7 +40,6 @@ interface ForTextForms {
 }
 const LogiIn:FC<LogiInProps> = (props) => {
     const {
-        classname,
     } = props;
     const dispatch = useAppDispatch();
 

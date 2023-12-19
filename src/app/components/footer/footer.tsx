@@ -17,41 +17,41 @@ const Footer:FC<footerProps> = React.memo((props) => {
     return (
         <div className={classNames(cls.footer, {},[classname] )} >
             <div className='page__container'>
-            <div className={cls.cover}>
-                <div className={cls.section}>
-                    <Logotype/>
-                </div>
-                <div className={cls.coverLinks}>
-                    <AppLink href=''>
-                        <VkSvg
-                            className={cls.vkSvg}
-                        />
-                    </AppLink>
-                    <AppLink href=''>
-                        <TelegrammSvg
-                            className={cls.telegramSvg}
-                        />
-                    </AppLink>
-                </div>
-                <div className = {cls.endLinks}>
-                    <AppLink
-                        classname={cls.link}
-                        href=''>
-                        Контакты
-                    </AppLink>
-                    <AppLink
-                        classname={cls.link}
-                        href=''>
-                        Пользовательское соглашение
-                    </AppLink>
-                    <AppLink
-                        classname={cls.link}
-                        href=''>
-                        Политика конфиденциальности
-                    </AppLink>
+                <div className={cls.cover}>
+                    <div className={cls.section}>
+                        <Logotype/>
+                    </div>
+                    <div className={cls.coverLinks}>
+                        <AppLink href=''>
+                            <VkSvg
+                                className={cls.vkSvg}
+                            />
+                        </AppLink>
+                        <AppLink href=''>
+                            <TelegrammSvg
+                                className={cls.telegramSvg}
+                            />
+                        </AppLink>
+                    </div>
+                    <div className = {cls.endLinks}>
+                        <AppLink
+                            classname={cls.link}
+                            href=''>
+                            Контакты
+                        </AppLink>
+                        <AppLink
+                            classname={cls.link}
+                            href=''>
+                            Пользовательское соглашение
+                        </AppLink>
+                        <AppLink
+                            classname={cls.link}
+                            href=''>
+                            Политика конфиденциальности
+                        </AppLink>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 });

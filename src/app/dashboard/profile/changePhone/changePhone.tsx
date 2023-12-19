@@ -141,74 +141,74 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     return (
         <>
             <div className={cls.block}>
-            <div className={cls.blockInfo}>
-                <div className={cls.text}>Телефон</div>
-                {infoUser != null && infoUser != undefined && infoUser && infoUser.isActivatedPhone
-                    ? <div className={cls.textVerify}> подтвержден<VerifySvg className={cls.verifySvg}/></div>
-                    : <div className={cls.textVerify}>не подтвержден<NotVerifySvg className={cls.notVerifySvg}/></div>
+                <div className={cls.blockInfo}>
+                    <div className={cls.text}>Телефон</div>
+                    {infoUser != null && infoUser != undefined && infoUser && infoUser.isActivatedPhone
+                        ? <div className={cls.textVerify}> подтвержден<VerifySvg className={cls.verifySvg}/></div>
+                        : <div className={cls.textVerify}>не подтвержден<NotVerifySvg className={cls.notVerifySvg}/></div>
+                    }
+                </div>
+                <div className={cls.linkCover}>
+                    <Input
+                        classForInput={cls.input}
+                        classname={cls.inputRelative}
+                        placeholder={selectedCountry?.value}
+                        value={ inputPhone}
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        onChange={(e:ChangeEvent<HTMLInputElement>) => addPhone(e)}
+                    />
+                    <div className={cls.coverBtn}>
+                        <SelectCountry
+                            setSelectedCountry={setSelectedCountry}
+                            options={countryOptions}
+                            setInputPhone={setInputPhone}
+                        />
+                        <Button
+                            classname={cls.btn}
+                            onClick={sendNewPhone}
+                        >
+                            Изменить номер</Button>
+                    </div>
+                    {error && <div className={cls.error}>введите номер телефона</div>}
+                </div>
+            </div>
+            {infoUser != null && infoUser != undefined && infoUser && !infoUser.isActivatedPhone && showBtnNumber &&
+            <div className={cls.coverNumBtn}>
+                <Button
+                    classname={cls.btn}
+                    onClick = {showInputCode}
+                >
+                    {!codeVerify ? `Подтвердить телефон` : `Скрыть поле` }
+                </Button>
+                {codeVerify &&
+                <div className={cls.linkCoverCode}>
+                    <Input
+                        classForInput={cls.input}
+                        classname={cls.inputRelativeCode}
+                        value={ inputCode}
+                        placeholder='Введите 4 последние цифры номера'
+                        onChange={(e:ChangeEvent<HTMLInputElement>) => addCode(e)}
+                    />
+                    <div className={cls.coverBtn}>
+                        <Button
+                            classname={cls.btn}
+                            onClick = {checkPhone}
+                        >
+                            Запрос вызова
+                        </Button>
+                    </div>
+                    <div className={cls.coverBtn}>
+                        <Button
+                            classname={cls.btn}
+                            onClick={sendCodeVerify}
+                        >
+                            Отправить код
+                        </Button>
+                    </div>
+                </div>
                 }
             </div>
-            <div className={cls.linkCover}>
-                <Input
-                    classForInput={cls.input}
-                    classname={cls.inputRelative}
-                    placeholder={selectedCountry?.value}
-                    value={ inputPhone}
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    onChange={(e:ChangeEvent<HTMLInputElement>) => addPhone(e)}
-                />
-                <div className={cls.coverBtn}>
-                    <SelectCountry
-                        setSelectedCountry={setSelectedCountry}
-                        options={countryOptions}
-                        setInputPhone={setInputPhone}
-                    />
-                    <Button
-                        classname={cls.btn}
-                        onClick={sendNewPhone}
-                    >
-                        Изменить номер</Button>
-                </div>
-                {error && <div className={cls.error}>введите номер телефона</div>}
-            </div>
-        </div>
-              {infoUser != null && infoUser != undefined && infoUser && !infoUser.isActivatedPhone && showBtnNumber &&
-             <div className={cls.coverNumBtn}>
-                     <Button
-                         classname={cls.btn}
-                         onClick = {showInputCode}
-                     >
-                         {!codeVerify ? `Подтвердить телефон` : `Скрыть поле` }
-                     </Button>
-        {codeVerify &&
-            <div className={cls.linkCoverCode}>
-                <Input
-                    classForInput={cls.input}
-                    classname={cls.inputRelativeCode}
-                    value={ inputCode}
-                    placeholder='Введите 4 последние цифры номера'
-                    onChange={(e:ChangeEvent<HTMLInputElement>) => addCode(e)}
-                />
-                <div className={cls.coverBtn}>
-                    <Button
-                        classname={cls.btn}
-                        onClick = {checkPhone}
-                    >
-                        Запрос вызова
-                    </Button>
-                </div>
-                <div className={cls.coverBtn}>
-                    <Button
-                        classname={cls.btn}
-                        onClick={sendCodeVerify}
-                    >
-                        Отправить код
-                    </Button>
-                </div>
-            </div>
-                 }
-             </div>
             }
             { loadingPhone
                 && (

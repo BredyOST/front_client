@@ -127,19 +127,19 @@ const AddGroup:FC<addGroupProps> = (props) => {
                                     />
                                 )}
                             <div className={cls.cover}>
-                               {requestGroups != undefined && requestGroups && requestGroups.length && requestGroups.map((item:any, index) => (
-                                   <div
-                                       className={cls.list}
-                                       key={item.id}
+                                {requestGroups != undefined && requestGroups && requestGroups.length && requestGroups.map((item:any, index: string | number) => (
+                                    <div
+                                        className={cls.list}
+                                        key={item.id}
 
-                                   >
-                                       <InputChange
-                                           index={index}
-                                           item={item}
-                                       />
-                                   </div>
-                               ))
-                               }
+                                    >
+                                        <InputChange
+                                            index={index}
+                                            item={item}
+                                        />
+                                    </div>
+                                ))
+                                }
                             </div>
                         </div>
                     }

@@ -52,47 +52,47 @@ const Authorizations:FC<authorizationsProps> = (props) => {
 
     
     return (
-           <>
-               <h3 className={cls.subTitle}>История входа в учетную запись</h3>
-               <div>
-                   <Button
-                       classname={cls.btn}
-                       onClick = {ChangeStateShowHistory}
-                   >
-                       {showHistory ? `Скрыть историю` : `Показать историю`}
-                   </Button>
-               </div>
-               {showHistory &&
-                   <div className={cls.mainBlock}>
-                       <div className={cls.titles}>
-                           <div className={cls.head}>№</div>
-                           <div className={cls.head}>дата</div>
-                           <div className={cls.head}>email</div>
-                           <div className={cls.head}>status</div>
-                           <div className={cls.head}>ip</div>
-                       </div>
-                       <div className={cls.mainCover}>
-                           {isLoadingAuthorizations
+        <>
+            <h3 className={cls.subTitle}>История входа в учетную запись</h3>
+            <div>
+                <Button
+                    classname={cls.btn}
+                    onClick = {ChangeStateShowHistory}
+                >
+                    {showHistory ? `Скрыть историю` : `Показать историю`}
+                </Button>
+            </div>
+            {showHistory &&
+            <div className={cls.mainBlock}>
+                <div className={cls.titles}>
+                    <div className={cls.head}>№</div>
+                    <div className={cls.head}>дата</div>
+                    <div className={cls.head}>email</div>
+                    <div className={cls.head}>status</div>
+                    <div className={cls.head}>ip</div>
+                </div>
+                <div className={cls.mainCover}>
+                    {isLoadingAuthorizations
                                && (
                                    <Loader
                                        classname="color-dark"
                                    />
                                )}
-                           {requestAuthorizations?.length  && requestAuthorizations.map((item:any, index:any) => (
-                               <div key = {index} className={cls.listTwo}>
-                                   <div className={cls.item}>{index}</div>
-                                   <div className={cls.item}>{`${new Date(item.loginAt)}`}</div>
-                                   <div className={cls.item}>{item.userMail}</div>
-                                   <div className={cls.item}>{item.status ? 'вход' : 'выход'}</div>
-                                   <div className={cls.item}>{item.clientIp}</div>
-                               </div>
-                           ))
-                           }
-                       </div>
-                   </div>
-               }
+                    {requestAuthorizations?.length  && requestAuthorizations.map((item:any, index:any) => (
+                        <div key = {index} className={cls.listTwo}>
+                            <div className={cls.item}>{index}</div>
+                            <div className={cls.item}>{`${new Date(item.loginAt)}`}</div>
+                            <div className={cls.item}>{item.userMail}</div>
+                            <div className={cls.item}>{item.status ? 'вход' : 'выход'}</div>
+                            <div className={cls.item}>{item.clientIp}</div>
+                        </div>
+                    ))
+                    }
+                </div>
+            </div>
+            }
 
-           </>
+        </>
     );
 };
 

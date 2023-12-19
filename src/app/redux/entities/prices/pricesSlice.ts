@@ -3,7 +3,7 @@ import {IPriceSchema} from "@/app/redux/entities/prices/pricesSchema";
 
 
 const initialState:IPriceSchema = {
-  prices:[]
+    prices:[]
 };
 
 export const PricesSLice = createSlice({

@@ -12,6 +12,23 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 interface changeEmailProps {
     classname?: string;
 }
+
+interface SuccessResponse {
+    data: {
+        text: string;
+    };
+}
+
+interface ErrorResponse {
+    error: {
+        data: {
+            message: string;
+        };
+    };
+}
+
+type ResultType = SuccessResponse | ErrorResponse;
+
 export type codeType = { code: string };
 const ChangeEmail:FC<changeEmailProps> = (props) => {
     const { classname } = props;
@@ -57,9 +74,11 @@ const ChangeEmail:FC<changeEmailProps> = (props) => {
         changeRequestCodeEmail({
             email: inputEmail,
             indicator: text
-        }).then((result) => {
-            if (result?.data?.text === `Код подтверждения направен на указанную почту` || result?.error?.data?.message === `Email уже добавлен во временное хранилище, проверьте ваш Email`) {
-                setShoInputForCode(true)
+        }).then((result: any) => {
+            if ('data' in result && result.data.text === `Код подтверждения направен на указанную почту`) {
+                setShoInputForCode(true);
+            } else if ('error' in result && 'data' in result.error && 'message' in result.error.data && result.error.data.message === `Email уже добавлен во временное хранилище, проверьте ваш Email`) {
+                setShoInputForCode(true);
             }
         })
     }
@@ -124,12 +143,12 @@ const ChangeEmail:FC<changeEmailProps> = (props) => {
             {showInputCode &&
                 <div className={cls.linkCoverCode}>
                     <div className={cls.coverBtn}>
-                    <Button
-                        classname={cls.btn}
-                        onClick={changeStateShowVerifyEmail}
-                    >
-                        Скрыть поле
-                    </Button>
+                        <Button
+                            classname={cls.btn}
+                            onClick={changeStateShowVerifyEmail}
+                        >
+                            Скрыть поле
+                        </Button>
                     </div>
                     <Input
                         classForInput={cls.input}
@@ -161,7 +180,7 @@ const ChangeEmail:FC<changeEmailProps> = (props) => {
                     <Loader
                         classname="color-dark"
                     />
-            )}
+                )}
             { loadingEmail
                 && (
                     <Loader

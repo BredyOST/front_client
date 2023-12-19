@@ -49,7 +49,7 @@ const PostsAll:FC<postsAllProps> = (props) => {
             createAllPosts(cookies)
         }
     }
-   const getAllThisPosts = () => {
+    const getAllThisPosts = () => {
         if(cookies  && cookies._z) {
             getAllPosts(cookies)
         }
@@ -84,49 +84,49 @@ const PostsAll:FC<postsAllProps> = (props) => {
         <div className={classNames(cls.postsAll, {},[classname] )} >
             <Button>получить логи</Button>
             <h2 className={cls.mainTitle}>Информация о репозитории где хранятся все посты с VK</h2>
-                <div>
-                    <div>id</div>
-                    <div>email</div>
-                    <div>Номер телефона</div>
-                    <div>админ</div>
-                    <div>Главный админ</div>
-                    <div>тел. акт.</div>
-                    <div>почт. акт.</div>
-                    <div>создан</div>
-                    <div>обновлен</div>
-                    <div>категории</div>
+            <div>
+                <div>id</div>
+                <div>email</div>
+                <div>Номер телефона</div>
+                <div>админ</div>
+                <div>Главный админ</div>
+                <div>тел. акт.</div>
+                <div>почт. акт.</div>
+                <div>создан</div>
+                <div>обновлен</div>
+                <div>категории</div>
+            </div>
+            <div className={cls.section}>
+                <h3 className={cls.title}>Главный репозиторий</h3>
+                <div className={cls.cover}>
+                    <div>Всего постов</div>
+                    <div>128 215</div>
                 </div>
-                <div className={cls.section}>
-                    <h3 className={cls.title}>Главный репозиторий</h3>
-                    <div className={cls.cover}>
-                        <div>Всего постов</div>
-                        <div>128 215</div>
-                    </div>
-                    <div className={cls.cover}>
-                        <div>Последняя дата процедуры начала опроса групп</div>
-                        <div>128 215</div>
-                    </div>
-                    <div className={cls.cover}>
-                        <div>Последняя дата процедуры окончания опроса групп</div>
-                        <div>128 215</div>
-                    </div>
-                    <div className={cls.block}>
-                            <Button
-                                onClick = {startCreateAndCheckAllPosts}
-                                classname={cls.btn}
-                            >запустить обновление и проверку репозитория всех постов</Button>
-                            <Button
-                                onClick = {deleteAllPostsFromMainRepository}
-                                classname={cls.btn}
-                            >очистить репозиторий
-                            </Button>
-                        <Button
-                            onClick = {deleteOneGroupFromMainRepository}
-                            classname={cls.btn}
-                        >Удаллить одну группу
-                        </Button>
-                    </div>
+                <div className={cls.cover}>
+                    <div>Последняя дата процедуры начала опроса групп</div>
+                    <div>128 215</div>
                 </div>
+                <div className={cls.cover}>
+                    <div>Последняя дата процедуры окончания опроса групп</div>
+                    <div>128 215</div>
+                </div>
+                <div className={cls.block}>
+                    <Button
+                        onClick = {startCreateAndCheckAllPosts}
+                        classname={cls.btn}
+                    >запустить обновление и проверку репозитория всех постов</Button>
+                    <Button
+                        onClick = {deleteAllPostsFromMainRepository}
+                        classname={cls.btn}
+                    >очистить репозиторий
+                    </Button>
+                    <Button
+                        onClick = {deleteOneGroupFromMainRepository}
+                        classname={cls.btn}
+                    >Удаллить одну группу
+                    </Button>
+                </div>
+            </div>
             <div className={cls.section}>
                 <h3 className={cls.title}>Репозиторий категории для репетиторов</h3>
                 <div className={cls.cover}>
@@ -142,8 +142,8 @@ const PostsAll:FC<postsAllProps> = (props) => {
                     <div>128 215</div>
                 </div>
                 <div className={cls.block}>
-                        <Button>запустить обновление и проверку репозитория всех постов</Button>
-                        <Button>очистить репозиторий</Button>
+                    <Button>запустить обновление и проверку репозитория всех постов</Button>
+                    <Button>очистить репозиторий</Button>
                 </div>
             </div>
             {isLoadingAllPosts

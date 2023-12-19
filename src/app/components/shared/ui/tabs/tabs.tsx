@@ -11,7 +11,12 @@ interface tsbsProps {
     title?:string;
 }
 
-const forСounter = [
+interface ForCounterItem {
+    id: number;
+    text: string;
+}
+
+const forCounter:ForCounterItem[] = [
     {id:1, text:'10'},
     {id:2, text:'30'},
     {id:3, text:'50'},
@@ -51,6 +56,7 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
         },[]
     )
 
+    // @ts-ignore
     return (
         <div className={classNames(cls.selectTabs, {},[classname] )} >
             {title &&
@@ -58,23 +64,23 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
                     {title}
                 </h3>
             }
-                <div className={cls.coverBtn}>
-                    {forСounter && forСounter && forСounter?.length && forСounter.map((item:any)=> (
-                        <Button
-                            key={item.id}
-                            onClick={() => changeActiveTabs(item.text)}
-                            indicatorActiveTab={item.text == postsCount}
-                            classname={
-                                item.id === 1 ? `${cls.tabBtn} ${cls.left}`
-                                    : forСounter?.length && item.id > 1 && item.id < forСounter.at(-1) ? `${cls.tabBtn}`
-                                        : forСounter?.length && item.id === forСounter.at(-1).id ? `${cls.tabBtn} ${cls.right}`
-                                            :`${cls.tabBtn}`
-                            }
-                        >
-                            {item.text}
-                        </Button>
-                    ) )}
-                </div>
+            <div className={cls.coverBtn}>
+                {forCounter?.length && forCounter.map((item:ForCounterItem)=> (
+                    <Button
+                        key={item.id}
+                        onClick={() => changeActiveTabs(item.text)}
+                        indicatorActiveTab={+item.text == postsCount}
+                        classname={
+                            item.id === 1 ? `${cls.tabBtn} ${cls.left}`
+                                : forCounter?.length && item.id > 1 && forCounter.length > 0 && item.id < forCounter[forCounter.length - 1].id ? `${cls.tabBtn}`
+                                    : forCounter?.length && item.id == forCounter?.at(-1)?.id ? `${cls.tabBtn} ${cls.right}`
+                                        :`${cls.tabBtn}`
+                        }
+                    >
+                        {item.text}
+                    </Button>
+                ) )}
+            </div>
         </div>
     );
 });

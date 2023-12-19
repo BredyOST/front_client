@@ -39,17 +39,17 @@ const Profile:FC<qProps> = React.memo((props) => {
                 <Link
                     className={cls.link}
                     href='/dashboard/profile'>
-                        Профиль
+                    Профиль
                 </Link>
                 <Link
                     className={cls.link}
                     href='/'>
-                        Cсылка
+                    Cсылка
                 </Link>
                 <Link
                     className={cls.link}
                     href='/'>
-                        Cсылка
+                    Cсылка
                 </Link>
             </ul>
             <Button

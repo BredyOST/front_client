@@ -25,7 +25,10 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
 
     //RTK
     // восстановление пароля
-    let[sendNewPassword, {data:messageNewPassword, error:errorNewPassword, isError: isNewPassword, isLoading: loadingNewPassword}] = useChangePasswordMutation();
+    let[
+        sendNewPassword,
+        {data:messageNewPassword, error:errorNewPassword, isError: isNewPassword, isLoading: loadingNewPassword}
+    ] = useChangePasswordMutation();
 
     //ACTIONS FROM REDUX
 

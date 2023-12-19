@@ -2,13 +2,14 @@ import React, {FC} from 'react';
 import cls from './navBar.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {NavBarr} from "@/app/components/header/header";
+import {NavBar} from "@/app/components/header/header";
+
 
 
 interface navBarProps {
     classname?: string;
     classnameForLink?: string;
-    arrayText: NavBarr[];
+    arrayText: NavBar[];
 }
 
 const navBar:FC<navBarProps> = React.memo((props) => {

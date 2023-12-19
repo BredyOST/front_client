@@ -1,15 +1,11 @@
 import {IdentificatorsWindowSchema} from "@/app/redux/entities/indentidicatorsWindow/identificatorsWindowSchema";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {date} from "zod";
-
 
 const initialState:IdentificatorsWindowSchema = {
     windowWidth: undefined,
     scrollUp: false,
     scrollDown: false,
     scrolledHeight: 0,
-    timeForRes: null,
-    timeForResBeforeChangeBeforeChange: null,
 }
 
 
@@ -29,12 +25,6 @@ const indicatorsSlice = createSlice({
         setScrolledHeight: (state, action:PayloadAction<number>) => {
             state.scrolledHeight = action.payload;
         },
-        setTimeForRes: (state, action:PayloadAction<number>) => {
-            state.timeForRes = action.payload;
-        },
-        setTimeForResBeforeChange: (state, action:PayloadAction<number>) => {
-            state.timeForResBeforeChange = action.payload;
-        }
     },
 });
 

@@ -93,7 +93,7 @@ const Header:FC<headerProps> = React.memo((props) => {
     React.useEffect(() => {
         if (cookies && cookies._z) {
             getInfoUser(cookies).then((result) => {
-                if (result.data) {
+                if (result && 'data' in result && result.data) {
                     dispatch(addInfoUser(result.data));
                     dispatch(addMainAdminRole(result.data.isMainAdmin));
                     dispatch(addAdminRole(result.data.isAdmin));

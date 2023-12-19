@@ -9,7 +9,7 @@ import {useDeleteCategoryMutation, useUpdateCategoryMutation} from "@/app/redux/
 interface inputCategoryProps {
     classname?: string;
     value?:string;
-    index?: string
+    index?: string | number
     item?:any
 }
 
@@ -63,15 +63,9 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
         })
     }
 
-    React.useEffect(
-        () => {
-            console.log(idCategory)
-        }, []
-    )
-
     return (
         <div className={classNames(cls.inputCategory, {},[classname] )} >
-            <div>{index + 1}</div>
+            <div>{index ? +index + 1 : ''}</div>
             <input
                 value={idCategory ? idCategory : ''}
                 onChange={(e) => changeId(e)}
@@ -89,18 +83,18 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
             />
             <div>{new Date(item.createdAt).toDateString()}</div>
             <div>{new Date(item.updateAt).toDateString()}</div>
-                <Button
-                    classname={cls.btn}
-                    onClick = {updateThisCategory}
-                >
-                    сохранить
-                </Button>
-                <Button
-                    onClick={deleteThisCategory}
-                    classname={cls.btn}
-                >
-                    удалить
-                </Button>
+            <Button
+                classname={cls.btn}
+                onClick = {updateThisCategory}
+            >
+                сохранить
+            </Button>
+            <Button
+                onClick={deleteThisCategory}
+                classname={cls.btn}
+            >
+                удалить
+            </Button>
         </div>
     );
 };

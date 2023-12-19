@@ -1,12 +1,6 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {FC} from 'react';
 import cls from './ProfilePage.module.scss'
-import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {
-    useGetCategoriesMutation,
-    useGetMeMutation,
-} from "@/app/redux/entities/requestApi/requestApi";
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {parseCookies} from "nookies";
+import {classNames} from "@/app/components/shared/lib/classNames/className";
 import ChangeName from "@/app/dashboard/profile/changeName/changeName";
 import ChangeEmail from "@/app/dashboard/profile/changeEmail/changeEmail";
 import ChangePhone from "@/app/dashboard/profile/changePhone/changePhone";
@@ -16,7 +10,6 @@ import BlockCategory from "@/app/dashboard/profile/blockCategory/blockCategory";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 
 interface pageProps {
-    classname?: string;
 }
 export interface HidePassword {
     current: boolean,
@@ -25,47 +18,10 @@ export interface HidePassword {
 }
 
 const ProfilePage:FC<pageProps> = (props) => {
-    const { classname } = props;
-    // const dispatch = useAppDispatch()
-    // const cookies = parseCookies();
-    //проверяем cookie - авторизован user или нет
-
-    //ACTIONS FROM REDUX
-
-    // STATES FROM REDUX
-    // const {stateAuth, isAdmin, isMainAdmin, data:infoUser} = useAppSelector(state => state.auth)
-
-    // RTk
-    // запрос данных на пользователя
-    // const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
-    // верификаци номера запрос звонка
-    // const [getCategories, {data: requestCategories, error:errorCategories, isLoading: isLoadingCategories, isError:isErrorCategories}] = useGetCategoriesMutation()
-
-    //USE STATE
-
-
-    //для проверки введенных паролей
-
-    //USEREF
-
-    //FUNCTIONS
-
-    //
-    // React.useEffect(
-    //     () => {
-    //         if(cookies  && cookies._z) {
-    //             getCategories(cookies)
-    //         }
-    //     },[]
-    // )
-
-    //
-    // if (!stateAuth) {
-    //     return  null
-    // }
+    const { } = props;
 
     return (
-        <div className={classNames(cls.ProfilePage, {},[classname] )} >
+        <div className={classNames(cls.ProfilePage, {},[] )} >
             <div className={'page__container'}>
                 <div className={cls.cover}>
                     <div className={cls.section}>

@@ -4,13 +4,19 @@ import cls from './postsBlock.module.scss'
 import Link from "next/link";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import LinkSvg from '../../../components/svgs/link.svg';
-import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
+import {useAppSelector} from "@/app/redux/hooks/redux";
 import {useGetNanniesPostsMutation, useGetTutorsPostsMutation} from "@/app/redux/entities/requestApi/requestApi";
-import {indicatorsWindowActions} from "@/app/redux/entities/indentidicatorsWindow/identificatorsWindowSlice";
+
 interface postsBlockProps {
     classname?: string;
     posts:any;
     date:Date,
+}
+
+interface CategoryToRequestFunction {
+    [key: string]: any;
+    // Здесь 'MutationTrigger<...>' - это тип значения, которое вы ожидаете в объекте.
+    // Вам нужно заменить его на фактический тип, который соответствует вашему объекту.
 }
 
 const PostsBlock:FC<postsBlockProps> = (props) => {
@@ -20,9 +26,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         date,
     } = props;
 
-    const dispatch = useAppDispatch()
     //ACTIONS FROM REDUX
-    const {setTimeForRes, setTimeForResBeforeChange} = indicatorsWindowActions;
 
     // Запрос на регистрацию пользователя
     let [turorsGet, {
@@ -32,21 +36,19 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         data: nanniesPostsRes, error: nanniesError, isError: isErrorNannies,  isLoading: loadingNannies,
     }] =   useGetNanniesPostsMutation()
 
-    let categoryToRequestFunction = {
+    let categoryToRequestFunction:CategoryToRequestFunction = {
         'Для репетиторов': turorsGet,
         'Поиск домашнего персонала': nanniesGet,
     }
 
     //STATES FROM REDUX
     const {chosenCategory, keyWords, keyCityWords, postsCount, social} = useAppSelector(state => state.searchParams)
-    const {timeForRes,timeForResBeforeChange} = useAppSelector(state => state.indicatorWindow)
     //USESTATE
     const [expandedPosts, setExpandedPosts] = React.useState<number[]>([]);
     const [page, setPage] = React.useState<number>(1); // номер страницы
-    const [filteredPosts, setFilteredPosts] = React.useState<any[]>([]); // Добавили состояние для отфильтрованных постов
+    const [filteredPosts, setFilteredPosts] = React.useState<any>([]); // Добавили состояние для отфильтрованных постов
     const [postsFromDataBase, setPostsFromDataBase] = React.useState<any[] | null>(null)
     // const [prevCategory, setPrevCategory] = React.useState<string | undefined>(undefined) // для отслеживания смены категории и отправки запроса
-    const [indicatorChange, setIndicatorChange] = React.useState<number>(0)
 
     const [lastRequestTimesCategory, setLastRequestTimesCategory] = React.useState([
         { id: 1, name:'Для репетиторов', lastRequestTime: date, filterLastDate:date },
@@ -58,11 +60,12 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     //FUNCTIONS
 
     React.useEffect(() =>  {
-        console.log(lastRequestTimesCategory)
+
         const currentDate = new Date();
         let thisCategoryDateStart = lastRequestTimesCategory.find((item) => item.id == chosenCategory?.id)
 
         if(thisCategoryDateStart && !thisCategoryDateStart?.lastRequestTime) {
+            setPostsFromDataBase(posts);
             const updatedLastRequestTimesCategory = lastRequestTimesCategory.map(item =>
                 item.id === chosenCategory?.id ? { ...item, lastRequestTime: currentDate } : item
             );
@@ -70,25 +73,37 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         } else {
 
             const startDate = thisCategoryDateStart?.lastRequestTime;
-            const differenceInMilliseconds = currentDate.getTime() - startDate?.getTime();
-            const minutesDifference = Math.round(differenceInMilliseconds / (1000 * 60));
 
-            if(minutesDifference > 0) {
+            if (startDate) {
 
-                const updatedLastRequestTimesCategory = lastRequestTimesCategory.map(item =>
-                    item.id === chosenCategory?.id ? { ...item, lastRequestTime: currentDate } : item
-                );
+                const differenceInMilliseconds = currentDate.getTime() - startDate?.getTime();
+                const minutesDifference = Math.round(differenceInMilliseconds / (1000 * 60));
 
-                const requestFunction = categoryToRequestFunction[chosenCategory?.name];
-                    if (requestFunction) {
-                        requestFunction('').then((results:any) => {
-                            if (results) {
-                                setPostsFromDataBase('data' in results && results?.data);
-                                setLastRequestTimesCategory(updatedLastRequestTimesCategory);
-                                console.log(results);
-                            }
-                        });
+                if(minutesDifference > 0) {
+
+                    const updatedLastRequestTimesCategory = lastRequestTimesCategory.map(item =>
+                        item.id === chosenCategory?.id ? { ...item, lastRequestTime: currentDate } : item
+                    );
+
+                    const categoryName = chosenCategory?.name;
+
+                    if (categoryName) {
+                        const requestFunction = categoryToRequestFunction[categoryName];
+
+                        if (requestFunction) {
+                            requestFunction('').then((results:any) => {
+                                if (results) {
+                                    setPostsFromDataBase('data' in results && results?.data);
+                                    setLastRequestTimesCategory(updatedLastRequestTimesCategory);
+                                    console.log(results);
+                                }
+                            });
+                        }
                     }
+
+                } else {
+                    setPostsFromDataBase(posts);
+                }
             } else {
                 setPostsFromDataBase(posts);
             }
@@ -96,7 +111,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     },[chosenCategory])
 
     React.useEffect(() =>  {
-        console.log(lastRequestTimesCategory)
+
         const currentDate = new Date();
         let thisCategoryDateStart = lastRequestTimesCategory.find((item) => item.id == chosenCategory?.id)
 
@@ -108,24 +123,33 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         } else {
 
             const startDate = thisCategoryDateStart?.filterLastDate;
-            const differenceInMilliseconds = currentDate.getTime() - startDate?.getTime();
-            const minutesDifference = Math.round(differenceInMilliseconds / (1000 * 60));
 
-            if(minutesDifference > 0) {
+            if (startDate) {
 
-                const updatedLastRequestTimesCategory = lastRequestTimesCategory.map(item =>
-                    item.id === chosenCategory?.id ? { ...item, filterLastDate: currentDate } : item
-                );
+                const differenceInMilliseconds = currentDate.getTime() - startDate?.getTime();
+                const minutesDifference = Math.round(differenceInMilliseconds / (1000 * 60));
 
-                const requestFunction = categoryToRequestFunction[chosenCategory?.name];
-                if (requestFunction) {
-                    requestFunction('').then((results:any) => {
-                        if (results) {
-                            setPostsFromDataBase('data' in results && results?.data);
-                            setLastRequestTimesCategory(updatedLastRequestTimesCategory);
-                            console.log(results);
+                if (minutesDifference > 0) {
+
+                    const updatedLastRequestTimesCategory = lastRequestTimesCategory.map(item =>
+                        item.id === chosenCategory?.id ? {...item, filterLastDate: currentDate} : item
+                    );
+                    const categoryName = chosenCategory?.name;
+
+                    if (categoryName) {
+
+                        const requestFunction = categoryToRequestFunction[categoryName];
+
+                        if (requestFunction) {
+                            requestFunction('').then((results: any) => {
+                                if (results) {
+                                    setPostsFromDataBase('data' in results && results?.data);
+                                    setLastRequestTimesCategory(updatedLastRequestTimesCategory);
+                                    console.log(results);
+                                }
+                            });
                         }
-                    });
+                    }
                 }
             }
         }
@@ -180,7 +204,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         }
     };
 
-    function getFormattedDate(dateString) {
+    function getFormattedDate(dateString:any) {
         const date = new Date(dateString * 1000);
         const today = new Date();
         const yesterday = new Date(today);
@@ -205,10 +229,10 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             return "Вчера";
         }
 
-        return `${day} ${months[month - 1]} ${year} г.`;
+        return `${day} ${months[+month - 1]} ${year} г.`;
     }
 
-    function getFormattedTime(dateString) {
+    function getFormattedTime(dateString:any) {
         const date = new Date(dateString * 1000);
         const hours = date.getHours().toString().padStart(2, '0');
         const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -246,8 +270,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         <div className={cls.blockUser}>
                             {!item.signer_id
                                 ? <Link className={cls.link}
-                                        href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
-                                        target="_blank">
+                                    href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                    target="_blank">
                                     <div className={cls.linkTop}>
                                         ссылка
                                         <LinkSvg
@@ -255,7 +279,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                         />
                                     </div>
                                     <div className={cls.rightLinkSvg}>
-                                        {item.photo_100_group && <img className={cls.imageGroup} src={...item.photo_100_group} alt=""/>}
+                                        {item.photo_100_group && <img className={cls.imageGroup} src={item.photo_100_group} alt=""/>}
                                         <div className={cls.nameGroup}>
                                             {item.name_group}
                                         </div>
@@ -263,8 +287,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                     {item.identification_post == 'vk' && <div>vk</div>}
                                 </Link>
                                 : <Link className={cls.link}
-                                        href={`https://vk.com/id${item.signer_id}`}
-                                        target="_blank">
+                                    href={`https://vk.com/id${item.signer_id}`}
+                                    target="_blank">
                                     <div className={cls.linkTop}>
                                         ссылка
                                         <LinkSvg
@@ -272,7 +296,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                         />
                                     </div>
                                     <div className={cls.rightLinkSvg}>
-                                        {item.photo_100_user && <img className={cls.image} src= {...item.photo_100_user} alt=""/>}
+                                        {item.photo_100_user && <img className={cls.image} src= {item.photo_100_user} alt=""/>}
                                         <div className={cls.nameGroup}>
                                             {item.first_name_user || item.last_name_user &&
                                                 <div className={cls.nameBlock}>

@@ -7,7 +7,6 @@ import Link from "next/link";
 import BlockBtnAdd from "@/app/dashboard/price/blockBtnAdd/blockBtnAdd";
 
 interface pageProps {
-    classname?: string;
 }
 export const metadata = {
     title: 'Price',
@@ -36,7 +35,7 @@ async function getData() {
 }
 
 async function PricePage(props:pageProps) {
-    const { classname } = props;
+    const {} = props;
 
     const {
         prices,
@@ -44,7 +43,7 @@ async function PricePage(props:pageProps) {
     } = await getData();
 
     return (
-        <div className={classNames(cls.pricePage, {},[classname] )} >
+        <div className={classNames(cls.pricePage, {},[] )} >
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>

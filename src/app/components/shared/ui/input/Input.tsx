@@ -11,7 +11,7 @@ type HTMLINputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onC
 // и наследуем ниже HTMLINputProps
 interface InputProps extends HTMLINputProps {
     classname?: string;
-    value?:string;
+    value?:string | string[];
     onChange?:any;
     classForInput?:string;
     classForLabel?:string,
@@ -28,7 +28,7 @@ interface InputProps extends HTMLINputProps {
     textlabel?:string,
     valueForIdGroup?:string,
     setValueState?:any,
-    inputMode?:string;
+    inputMode?: "url" | "search" | "text" | "none" | "tel" | "email" | "numeric" | "decimal";
     pattern?:any;
 }
 

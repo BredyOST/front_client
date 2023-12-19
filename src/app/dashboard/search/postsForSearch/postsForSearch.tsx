@@ -4,10 +4,8 @@ import cls from './postsForSearch.module.scss'
 import Link from "next/link";
 import {navbarFirst} from "@/app/components/header/header";
 import PostsBlock from "@/app/dashboard/search/postBlock/postsBlock";
-import {Button} from "@/app/components/shared/ui/Button/Button";
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {useAppSelector} from "@/app/redux/hooks/redux";
-import {useGetTutorsPostsMutation} from "@/app/redux/entities/requestApi/requestApi";
 
 interface postsForSearchProps {
     classname?: string;
@@ -64,11 +62,14 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
         // return <div className={cls.ifNotAith}>Необходимо авторизоваться</div>
     }
 
-    if (!infoUser?.categoriesHasBought?.length && new Date().getTime() > new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime()) {
-        return null
+    if (!infoUser?.categoriesHasBought?.length && infoUser?.categoriesFreePeriod[0]?.purchaseEndDate) {
+        if ( new Date().getTime() > new Date(infoUser.categoriesFreePeriod[0].purchaseEndDate).getTime()) {
+            return null
+        }
     }
 
-     return (
+
+    return (
         <div className={classNames(cls.postsForSearch, {},[classname] )} >
             <div className={cls.looking}>
                 <div className={cls.block}>
@@ -96,7 +97,6 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
                 {/*))}*/}
                 {infoUser && stateAuth && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (infoUser?.categoriesHasBought?.length)) ?
                     <PostsBlock
-                        category={chosenCategory?.name}
                         posts={categoryPosts}
                         date = {date}
                     />

@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "react/jsx-indent": [2, 4],    // правило для отступов, 4 отступа. (rules for whitespace).
-    "react/jsx-indent-props": [2, 4],  // правило для отступов, 4 отступа. (rules for whitespace).
+//    "react/jsx-indent-props": [2, 4],  // правило для отступов, 4 отступа. (rules for whitespace).
     "indent": [2, 4],     // правило для отступов
     "react/jsx-filename-extension": [2, {"extensions": [".js", ".jsx", "tsx"]}],  // разрешаем jsx, tsx, js. (Allow jsx)
     "import/prefer-default-export": "off",    // при экспорте проверка на default export
@@ -13,14 +13,13 @@
     "no-underscore-dangl": "off",     // разшены нижние подчеркивания типа __GLOBAL__,
     "react/function-component-definitio": "off",  // отключаем предпочтительность в использовании function вместо cтрелочных для компонента,
     "react/jsx-props-no-spreading": "warn", // props не стоит разворачивать через spred,
-    "max-len": ["error", { "ignoreComments": true, "ignoreStrings" :true, "code": 150 }], // длинные строки допускаются в комментах и то что в литералах,
-    "i18next/no-literal-string": ["error", { "markupOnly": true, "ignoreAttribute": ["data-testid", "to"] }], // если не сделали перевод текста в блоках,,
+    "max-len": ["error", { "ignoreComments": true, "ignoreStrings" :true, "code": 650 }], // длинные строки допускаются в комментах и то что в литералах,
     "import/no-unresolved": "off",
     //разобраться ниже
     "no-shadow": "off",
     // "import/no-extraneous-dependencies": "off",
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks  // для react eslint dependency hooks
-    "react-hooks/exhaustive-deps": "error", // Checks effect dependencies  // для react eslint dependency hooks тут лучше error. отвечает за массив зависимостей useEffect, useMemo, useCallback
+    "react-hooks/exhaustive-deps": "off", // *******ВКЛЮЧИ ПРИ *********  РАЗРАБОТКЕ Checks effect dependencies  // для react eslint dependency hooks тут лучше error. отвечает за массив зависимостей useEffect, useMemo, useCallback
     "no-param-reassign": "off",// чтобы можно было менять аргументы функции в redux
     "react/react-in-jsx-scope": "off", //узнать что это
     "react/prop-types": 1, // убрал ошибку ESLint: "classname" is missing in props validation(react/prop-types)

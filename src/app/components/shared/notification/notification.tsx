@@ -2,7 +2,6 @@ import React, {FC} from 'react';
 import cls from './notification.module.scss'
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import AttentionSvg from "@/app/components/svgs/attantion.svg";
-import {forNotification} from "@/app/components/header/header";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import Portal from "@/app/components/shared/Portal/Portal";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
@@ -59,13 +58,13 @@ const Notification:FC<notificationProps> = React.memo((props) => {
                     setIndicator(true)
                     returnIndicatorFalse()
                 } else if (indicator) {
-                        // console.log('2')
+                    // console.log('2')
                     if (timerRef && timerRef.current) {
                         clearTimeout(timerRef.current)
                     }
-                        setIndicator(false)
-                        setTimeout(() => setIndicator(true),20)
-                        returnIndicatorFalse()
+                    setIndicator(false)
+                    setTimeout(() => setIndicator(true),20)
+                    returnIndicatorFalse()
                 }
             }
         }, [commonForError,]

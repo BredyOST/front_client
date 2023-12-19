@@ -1,6 +1,6 @@
 import {setCookie, parseCookies, destroyCookie} from 'nookies';
 
-export function setThisCookie(name, value) {
+export function setThisCookie(name:string, value:string) {
 
     setCookie(null, name, value, {
         path: '/',
@@ -13,6 +13,6 @@ export function getThisCookie() {
     return cookies || null;
 }
 
-export function destroyThisCookie(ctx, name, path) {
+export function destroyThisCookie(ctx:null, name:string, path:string) {
     destroyCookie(null, name, path);
 }

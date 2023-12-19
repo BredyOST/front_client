@@ -24,8 +24,6 @@ const AddChat:FC<addChatProps> = (props) => {
     //RTK
     const [getChats, {data: requestChats, error:errorChats, isLoading: isLoadingChats, isError:isErrorChats}] = useGetChatMutation()
     const [createAddChat, {data: requestAddChat, error:errorAddChat, isLoading: isLoadingAddChat, isError:isErrorAddChat}] = useAddChatMutation()
-       //  useDeleteChatMutation,
-       //  useUpdateChatMutation,
 
     //ACTIONS FROM REDUX
 
@@ -134,7 +132,7 @@ const AddChat:FC<addChatProps> = (props) => {
                                     />
                                 )}
                             <div className={cls.cover}>
-                                {requestChats != undefined && requestChats && requestChats.length && requestChats.map((item:any, index) => (
+                                {requestChats != undefined && requestChats && requestChats.length && requestChats.map((item:any, index: string | number) => (
                                     <div
                                         className={cls.list}
                                         key={item.id}

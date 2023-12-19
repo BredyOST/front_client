@@ -24,7 +24,7 @@ export const metadata: Metadata = {
         title: 'Acme',
         url:'https/sss',
         description: 'Acme is a...',
-        image:'sss',
+        images:'sss',
         siteName:'Клиенты.com'
 
     },

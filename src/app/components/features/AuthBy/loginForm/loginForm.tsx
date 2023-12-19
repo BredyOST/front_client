@@ -35,19 +35,19 @@ const LoginForm: FC<LoginFormProps> = React.memo((props) => {
         <div className={classNames(cls.LoginForm, {}, [classname])}>
             <LogiIn
                 // activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                // setActiveTab={setActiveTab}
             />
             <Registration
                 // activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                // setActiveTab={setActiveTab}
             />
             <RecoverPassword
                 // activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                // setActiveTab={setActiveTab}
             />
             <SendActivationRepeat
                 // activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                // setActiveTab={setActiveTab}
             />
         </div>
     );

@@ -17,7 +17,6 @@ async function getData() {
 }
 
 interface pageProps {
-    classname?: string;
 }
 
 const textSecond = [
@@ -43,14 +42,14 @@ export interface ICategory {
 
 
 async function Home(props:pageProps) {
-    const { classname } = props;
+    const {} = props;
 
     const {
         categories
     } = await getData();
 
     return (
-        <div className={classNames(cls.page, {},[classname] )} >
+        <div className={classNames(cls.page, {},[] )} >
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>
@@ -90,10 +89,13 @@ async function Home(props:pageProps) {
                         <div className={cls.coverCategory}>
                             {
                                 categories && categories.map((item:ICategory) =>
-                                <div className={cls.titleCategory}>
-                                    <div className={cls.name}>{item.name}</div>
-                                    <div className={cls.description}>{item.description}</div>
-                                </div>
+                                    <div
+                                        className={cls.titleCategory}
+                                        key={item.id}
+                                    >
+                                        <div className={cls.name}>{item.name}</div>
+                                        <div className={cls.description}>{item.description}</div>
+                                    </div>
                                 )
                             }
                         </div>

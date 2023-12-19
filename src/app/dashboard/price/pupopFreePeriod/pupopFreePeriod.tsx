@@ -12,7 +12,7 @@ interface pupopFreePeriodProps {
     classname?: string;
 }
 
-export const pupopFreePeriod:FC<pupopFreePeriodProps> = (props) => {
+export const PupopFreePeriod:FC<pupopFreePeriodProps> = (props) => {
 
     const { classname } = props;
     const dispatch = useAppDispatch();

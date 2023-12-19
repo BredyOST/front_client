@@ -10,7 +10,6 @@ import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopu
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
-import {redirect, useRouter} from "next/navigation";
 
 interface cardsProps {
     classname?: string;
@@ -43,7 +42,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
 
     //USESTATE
-    const [price, setPrice] = React.useState<string>('');
+    const [price, setPrice] = React.useState<string | number>('');
     const [period, setPeriod] = React.useState<string>('1');
     const [textMonthSliceTwo, setTextMonthSliceTwo] = React.useState<string>('Месяц'); // месяц во втором слайсе
     // const [showAttention, setShowAttention] = React.useState<boolean>(false);
@@ -52,7 +51,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     }
     React.useEffect(
         () => {
-            setPrice(item.price * period * `${chosenCategory.length ? chosenCategory.length : '1'}`)
+            setPrice(item.price * +period * chosenCategory.length ? chosenCategory.length : 1)
             if(item.title == 'Бесплатный') setPeriod(`2`)
         },[item, period,chosenCategory]
     )

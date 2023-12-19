@@ -5,7 +5,6 @@ import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
-import {CategoriesInputs} from "@/app/dashboard/hiddenListForAdmins/page";
 import {
     useCreateCategoryMutation,
     useGetCategoriesMutation,
@@ -125,7 +124,7 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                         <div className={cls.label}>позитивные слова</div>
                         <Input
                             onChange={(e:ChangeEvent<HTMLInputElement>) => addPositiveWords(e)}
-                            value={inputsCategory.positive}
+                            value={inputsCategory.positiveWords}
                             classForInput={cls.input}
                             classname={cls.inputRelative}
                             placeholder='введите позитивные слова'
@@ -136,7 +135,7 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                         <div className={cls.label}>негативные слова</div>
                         <Input
                             onChange={(e:ChangeEvent<HTMLInputElement>) => addNegativeWords(e)}
-                            value={inputsCategory.negative}
+                            value={inputsCategory.negativeWords}
                             classForInput={cls.input}
                             classname={cls.inputRelative}
                             placeholder='введите негативные слова'
@@ -178,8 +177,11 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                                         classname="color-dark"
                                     />
                                 )}
-                            {requestCategories != undefined && requestCategories && requestCategories.length && requestCategories.map((item:any, index) => (
-                                <div className={cls.listTwo}>
+                            {requestCategories != undefined && requestCategories && requestCategories.length && requestCategories.map((item:any, index: string | number) => (
+                                <div
+                                    className={cls.listTwo}
+                                    key={item.id}
+                                >
                                     <InputCategory
                                         item = {item}
                                         index={index}

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './searchPage.module.scss'
 import { classNames, Mods } from "@/app/components/shared/lib/classNames/className";
 import {Select} from "@/app/components/shared/ui/Select/Select";
@@ -7,10 +7,9 @@ import SearchBlock from "@/app/dashboard/search/searchBlock/searchBlock";
 import Social from "@/app/dashboard/search/social/social";
 import CityBlock from "@/app/dashboard/search/cityBlock/cityBlock";
 import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch";
-import {useAppSelector} from "@/app/redux/hooks/redux";
+
 
 interface pageProps {
-    classname?: string;
 }
 
 const forTypes = [
@@ -65,12 +64,12 @@ async function getData() {
 
 async function SearchPage(props:pageProps) {
 
-    const { classname } = props;
+    const {} = props;
     const { categories, nannies, tutors, allPosts} = await getData();
     const date = new Date();
 
     return (
-        <div className={classNames(cls.searchPage, {}, [classname])} >
+        <div className={classNames(cls.searchPage, {}, [])} >
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>

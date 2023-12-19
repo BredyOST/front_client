@@ -13,19 +13,18 @@ import Price from "@/app/dashboard/hiddenListForAdmins/price/price";
 import AddChat from "@/app/dashboard/hiddenListForAdmins/addChat/addChat";
 
 interface pageProps {
-    classname?: string;
+
 }
 
 const Admin:FC<pageProps> = (props) => {
-    const { classname } = props;
-    const router = useRouter();
+    const {} = props;
 
     //проверяем cookie - авторизован user или нет
 
     //ACTIONS FROM REDUX
 
     //STATES FROM REDUX
-    const {stateAuth, loadingGetInfoUser, data:infoUser, roleUser} = useAppSelector(state => state.auth)
+    const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
 
     //USESTATE
 
@@ -35,9 +34,9 @@ const Admin:FC<pageProps> = (props) => {
 
 
     return (
-        <div className={classNames(cls.AdminPage, {},[classname] )} >
-             <div className={'page__container'}>
-                 { infoUser && infoUser.isAdmin &&
+        <div className={classNames(cls.AdminPage, {},[] )} >
+            <div className={'page__container'}>
+                { infoUser && infoUser.isAdmin &&
                 <div className={cls.cover}>
                     <AddGroup/>
                     <AddChat/>
@@ -47,8 +46,8 @@ const Admin:FC<pageProps> = (props) => {
                     <UploadFiles/>
                     <Users/>
                 </div>
-                 }
-              </div>
+                }
+            </div>
         </div>
     );
 };

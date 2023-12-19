@@ -29,7 +29,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
 
     const {addAdminRole, addMainAdminRole, addAuthStatus, addInfoUser,} = authSliceActions;
     // STATES FROM REDUX
-    const {stateAuth, isAdmin, isMainAdmin, data:infoUser} = useAppSelector(state => state.auth)
+    const {data:infoUser} = useAppSelector(state => state.auth)
 
     //USESTATE
 
@@ -39,7 +39,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
 
 
 
-    function formatDateToRussian(dateString) {
+    function formatDateToRussian(dateString:string | Date) {
         const date = new Date(dateString);
         const day = date.getDate().toString().padStart(2, '0');
         const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -59,7 +59,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
             "ср", "чт", "пт", "сб"
         ];
 
-        return `${weekdays[weekday]}, ${day} ${months[month - 1]} ${year} г. ${hours}:${minutes}`;
+        return `${weekdays[weekday]}, ${day} ${months[+month - 1]} ${year} г. ${hours}:${minutes}`;
     }
     const activateNotification = (item:any) => {
         const obj = {
@@ -72,11 +72,10 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
         }
 
         addFreeNotification(obj).then((result) => {
-            if(result?.data?.text == `Бесплатный период активирован`) {
+            if(result && 'data' in result && result?.data?.text == `Бесплатный период активирован`) {
                 if (cookies && cookies._z) {
                     getInfoUser(cookies).then((result) => {
-                        console.log(result)
-                        if (result.data) {
+                        if ('data' in result && result.data) {
                             dispatch(addInfoUser(result.data));
                             dispatch(addMainAdminRole(result.data.isMainAdmin));
                             dispatch(addAdminRole(result.data.isAdmin));
@@ -94,48 +93,48 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
         <div className={cls.categories}>
             {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && <h3 className={cls.titleFree}>Подписки пробного периода</h3>}
             <div className={cls.grid}>
-            {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser.categoriesFreePeriod.map((item) => (
-                <div key={item.id} className={cls.blockCategory}>
-                    <div className={cls.blockInfo}>
-                        <div className={cls.categoryName}>{item.name}</div>
-                        <div className={cls.dates}>
-                            <div className={cls.coverForDatesBuy}>
-                                <h3 className={cls.dateBuy}>Дата активации:</h3>
-                                <div className = {cls.time}>
-                                    <div>{formatDateToRussian(item.purchaseBuyDate)}</div>
-                                </div>
-                            </div>
-                            <div className={cls.coverForDatesBuy}>
-                                <h3 className={cls.dateBuy}>Действует до:</h3>
-                                <div className = {cls.time}>
-                                    <div>{formatDateToRussian(item.purchaseEndDate)}</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className={cls.top}>
-                                    <h2 className={cls.title}>Уведомления в телеграмме</h2>
-                                    {infoUser && infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id)
-                                        ? <div className={cls.textVerify}>Подключен<VerifySvg className={cls.verifySvg}/></div>
-                                        : <div className={cls.textVerify}>Не подключен<NotVerifySvg className={cls.notVerifySvg}/></div>
-                                    }
-                                    <div>
-                                        <div>Доступный период: до окончания пробного периода</div>
+                {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser.categoriesFreePeriod.map((item) => (
+                    <div key={item.id} className={cls.blockCategory}>
+                        <div className={cls.blockInfo}>
+                            <div className={cls.categoryName}>{item?.name}</div>
+                            <div className={cls.dates}>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Дата активации:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseBuyDate)}</div>
                                     </div>
                                 </div>
-                                {infoUser && !infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id) &&
-                                <div className={cls.btnCover}>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Действует до:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseEndDate)}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className={cls.top}>
+                                        <h2 className={cls.title}>Уведомления в телеграмме</h2>
+                                        {infoUser && infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id)
+                                            ? <div className={cls.textVerify}>Подключен<VerifySvg className={cls.verifySvg}/></div>
+                                            : <div className={cls.textVerify}>Не подключен<NotVerifySvg className={cls.notVerifySvg}/></div>
+                                        }
+                                        <div>
+                                            <div>Доступный период: до окончания пробного периода</div>
+                                        </div>
+                                    </div>
+                                    {infoUser && !infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id) &&
+                                    <div className={cls.btnCover}>
                                         <Button
                                             classname={cls.btn}
                                             onClick={() => activateNotification(item)}
                                         >
                                             Подключить
                                         </Button>
+                                    </div>
+                                    }
                                 </div>
-                                }
                             </div>
                         </div>
                     </div>
-                </div>
                 ))}
             </div>
             { loadingFreeNotification

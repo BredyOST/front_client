@@ -34,11 +34,11 @@ const ButtonToBuy:FC<buttonToBuyProps> = (props) => {
     }
 
     return (
-            <button className={classNames(cls.buttonToBuy, mod,[classname] )}
-               onClick={() => onClick(itemCategoryToBuy)}
-            >
-                {children}
-            </button>
+        <button className={classNames(cls.buttonToBuy, mod,[classname] )}
+            onClick={() => onClick(itemCategoryToBuy)}
+        >
+            {children}
+        </button>
     );
 };
 

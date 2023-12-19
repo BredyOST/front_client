@@ -25,4 +25,4 @@ const NotFound:FC<NotFoundPageProps> = ({ classname }) => {
     );
 };
 
-export default NotFoundPage;
+export default NotFound;

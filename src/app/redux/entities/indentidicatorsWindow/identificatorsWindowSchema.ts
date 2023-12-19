@@ -4,6 +4,4 @@ export interface  IdentificatorsWindowSchema {
     scrollUp: boolean;
     scrollDown: boolean;
     scrolledHeight: number;
-    timeForRes: number | null;
-    timeForResBeforeChange: number | null;
 }

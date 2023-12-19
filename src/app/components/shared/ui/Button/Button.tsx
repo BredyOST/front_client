@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     classActive?:string;
     indicatorActiveTab?:boolean;
     tabIndex?:number;
-    addNameToFunction?:boolean;
+    addNametoFunction?:boolean;
     itemCategoryToBuy?:number;
 }
 
@@ -27,7 +27,7 @@ export const Button:FC<ButtonProps> = React.memo((props) => {
         classActive,
         indicatorActiveTab,
         tabIndex,
-        addNameToFunction,
+        addNametoFunction,
     } = props;
 
     const mod:Mods = {
@@ -39,7 +39,7 @@ export const Button:FC<ButtonProps> = React.memo((props) => {
             tabIndex={tabIndex}
             type={type}
             className={classNames(cls.Button, mod, [classname])}
-            onClick={addNameToFunction ? () => onClick(name) : onClick}
+            onClick={addNametoFunction ? () => onClick(name) : onClick}
             onPointerEnter={onPointerEnter}
             name={name}
         >

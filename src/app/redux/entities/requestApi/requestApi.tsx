@@ -3,12 +3,18 @@ import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} 
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 
+interface RefreshResultData {
+    sessionToken:string
+    refreshToken: string;
+    accessToken: string;
+
+}
 
 const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
 
 
 const baseQueryWithAuth = fetchBaseQuery({
-    baseUrl: process.env['API_URL'],
+    baseUrl: 'http://localhost:7777',
     prepareHeaders: async (headers:any) => {
         const cookies = parseCookies()
 
@@ -25,7 +31,7 @@ const baseQueryWithAuth = fetchBaseQuery({
     }
 })
 
-const {LogOutFromProfile, addRole, addAuthStatus} =  authSliceActions;
+const {LogOutFromProfile, addMainAdminRole, addAdminRole, addAuthStatus} =  authSliceActions;
 
 const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
     args,
@@ -33,19 +39,22 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     extraOptions
 ) => {
     let result = await baseQueryWithAuth(args, api, extraOptions)
+
     // если приходит ответ, что истекла сессия, значит кто-то вошел в браузер или токен сессии истек и все очищаем (куки, хранилище и уведомляем об этом)
-    if (result && result.data && 'text' in result.data && result.data.text=== 'Ваша сессия истекла, выполните повторный вход') {
-        api.dispatch(addInfoForCommonRequest(result.data))
+    if (result && result.data && typeof result.data === 'object' && 'text' in result.data && result.data.text=== 'Ваша сессия истекла, выполните повторный вход') {
+        api.dispatch(addInfoForCommonRequest({text: result.data.text}))
         destroyCookie(null, "_z", {path:'/'});
         destroyCookie(null, "_d", {path:'/'});
         destroyCookie(null, "_a", {path:'/'});
         api.dispatch(LogOutFromProfile(null));
-        api.dispatch(addRole(' '));
+        api.dispatch(addMainAdminRole(false));
+        api.dispatch(addAdminRole(false));
         api.dispatch(addAuthStatus(false));
-        location.reload()
+        // location.reload()
     }
     //если при запросе приходит Unauthorized значит токен доступа не действителей и надо его обновить
-    if (result.error && result.error.data && result.error.data.message === 'Unauthorized') {
+    // if (result && result.error && result.error.data && result?.error?.data?.message === 'Unauthorized') {
+    if (result.error && result.error.data && typeof result.error.data === 'object' && 'message' in result.error.data && typeof result.error.data.message === 'string' && result.error.data.message === 'Unauthorized') {
         // проверяем куки
         const cookies = parseCookies()
         // делаем запрос на получение новых токенов (доступа и сессии) и передаем рефреш токен для этого
@@ -53,7 +62,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             { url: `/auth/login/access-token`, method: 'POST', body:{refreshToken:cookies._d} },
             api,
             extraOptions
-        )
+        ) as {data: RefreshResultData}
         // и записываем в куки новые токены если пришли новые
         if (refreshResult && refreshResult.data && refreshResult.data.refreshToken && refreshResult.data.accessToken) {
             const refeshTokenResult = refreshResult as any
@@ -75,19 +84,22 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             destroyCookie(null, "_d", {path:'/'});
             destroyCookie(null, "_a", {path:'/'});
             api.dispatch(LogOutFromProfile(null));
-            api.dispatch(addRole(' '));
+            api.dispatch(addMainAdminRole(false));
+            api.dispatch(addAdminRole(false));
             api.dispatch(addAuthStatus(false));
             location.reload()
 
         }
     }
+
     // если есть ошибка то прокидываем его для уведомления
-    if (result && result.error && result.error.data && 'message' in result.error.data &&  result.error.data.message !== 'Unauthorized') {
-        api.dispatch(addInfoForCommonError(result.error.data))
+    if (result && result.error && typeof result.error?.data === 'object' && result.error.data && 'message' in result.error.data && result.error.data.message !== 'Unauthorized') {
+
+        api.dispatch(addInfoForCommonError({message: `${result.error.data.message}`}))
     }
     // если есть сообщение то прокидываем его для уведомления
-    if (result && result.data && 'text' in result.data && result.data.text ) {
-        api.dispatch(addInfoForCommonRequest(result.data))
+    if (result && result.data && typeof result.data === 'object' && 'text' in result.data && result.data.text ) {
+        api.dispatch(addInfoForCommonRequest({text: `${result.data.text}`}))
     }
 
     return result
@@ -153,7 +165,7 @@ export const requestApi = createApi({
         getMe:builder.mutation({
             query:(token) => ({
                 url: '/users/profile',
-	        	method:'GET'
+                method:'GET'
             }),
         }),
         changeNameAndCard: builder.mutation<any, any>({

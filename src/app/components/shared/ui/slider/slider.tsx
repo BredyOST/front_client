@@ -29,14 +29,14 @@ export const Slider:FC<sliderProps> = React.memo((props) => {
 
     return (
         <div className={classNames(cls.slider, {},[classname] )} >
-             <input
-                   className={classnameInput}
-                   type="range"
-                   min={min}
-                   max={max}
-                   value={value}
-                   onInput={(e:any) => onInput(e.target.value)}
-             />
+            <input
+                className={classnameInput}
+                type="range"
+                min={min}
+                max={max}
+                value={value}
+                onInput={(e:any) => onInput(e.target.value)}
+            />
         </div>
     );
 });

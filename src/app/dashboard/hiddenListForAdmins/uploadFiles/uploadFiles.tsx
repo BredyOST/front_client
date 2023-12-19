@@ -37,19 +37,8 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
     
     //FUNCTIONS
 
-    // const onUploadSuccess = (e:any) => {
-    //     console.log(e.target)
-    //     e.preventDefault()
-    //     createFile(e)
-    //     // try {
-    //     //     const file = await files.uploadFile(option)
-    //     //
-    //     // } catch (err) {
-    //     //
-    //     // }
-    // }
 
-    const handleFileChange = (e) => {
+    const handleFileChange = (e:any) => {
         const file = e.target.files[0];
         setFileList(file);
     };
@@ -75,14 +64,7 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
         },[]
     )
 
-    React.useEffect(
-        () => {
-        console.log(requestAddFiles)
-
-        },[requestAddFiles]
-    )
-
-
+    
     return (
         <div className={classNames(cls.uploadFiles, {},[classname] )} >
             <h2 className={cls.mainTitle}>Загрузить файлы</h2>
@@ -95,20 +77,20 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
                             onClick={handleSubmit}>Загрузить
                         </button>
                     </div>
-                  <div className={cls.coverImageMain}>
-                      {requestAddFiles != undefined && requestAddFiles && requestAddFiles.map((item:any) => (
-                          <div
+                    <div className={cls.coverImageMain}>
+                        {requestAddFiles != undefined && requestAddFiles && requestAddFiles.map((item:any) => (
+                            <div
                                 key={item.id}
                                 className={cls.coverImage}>
-                              <img className={cls.image} src={`http://localhost:7777/uploads/${item.filename}`} alt=""/>
-                              <div>{item.filename}</div>
-                              <Button
-                                  onClick = {() => deleteThisFile(item)}
-                                classname={cls.btn}
-                              >удалить</Button>
-                          </div>
-                      ))}
-                  </div>
+                                <img className={cls.image} src={`http://localhost:7777/uploads/${item.filename}`} alt=""/>
+                                <div>{item.filename}</div>
+                                <Button
+                                    onClick = {() => deleteThisFile(item)}
+                                    classname={cls.btn}
+                                >удалить</Button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div>
                     <h3>Файлы</h3>
