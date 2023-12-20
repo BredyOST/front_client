@@ -7,7 +7,7 @@ async function getData() {
     let categories = [];
 
     try {
-        const categoriesRes = await fetch('http://localhost:7777/categories/getAll', { next: { revalidate: 120}})
+        const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 120}})
         categories = await categoriesRes.json();
     } catch (err) {
 

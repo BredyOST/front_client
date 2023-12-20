@@ -18,14 +18,14 @@ async function getData() {
     let categories = [];
 
     try {
-        const pricesRes = await fetch('http://localhost:7777/prices/getAll', { next: { revalidate: 60 }})
+        const pricesRes = await fetch(`${process.env['API_URL']}/prices/getAll`, { next: { revalidate: 60 }})
         prices = await pricesRes.json();
     } catch (err) {
         console.error('save error Redis:', err);
     }
         
     try {
-        const categoriesRes = await fetch('http://localhost:7777/categories/getAll', { next: { revalidate: 120}})
+        const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 120}})
         categories = await categoriesRes.json();
     } catch (err) {
         console.error('save error Redis:', err);

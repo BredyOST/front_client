@@ -35,14 +35,14 @@ async function getData() {
 
 
     try {
-        const categoriesRes = await fetch('http://localhost:7777/categories/getAll', { next: { revalidate: 120}})
+        const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 120}})
         categories = await categoriesRes.json();
     } catch (err) {
         console.error('save error Redis:', err);
     }
 
     try {
-        const tutorsReq = await fetch('http://localhost:7777/tutors/getPostForStatic', {next: {revalidate: 420}})
+        const tutorsReq = await fetch(`${process.env['API_URL']}/tutors/getPostForStatic`, {next: {revalidate: 420}})
         // if (!tutorsReq.ok) {
         //     throw new Error('Failed to fetch data')
         // }
@@ -52,7 +52,7 @@ async function getData() {
     }
 
     try {
-        const nanniesReq  = await fetch('http://localhost:7777/nannies/getPostForStatic',{next:{revalidate:420}})
+        const nanniesReq  = await fetch(`${process.env['API_URL']}/nannies/getPostForStatic`,{next:{revalidate:420}})
         nannies = await nanniesReq.json();
     } catch (err) {
         console.error('Error fetching categories:', err);
