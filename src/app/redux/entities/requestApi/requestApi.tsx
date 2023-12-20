@@ -14,7 +14,7 @@ const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications
 
 
 const baseQueryWithAuth = fetchBaseQuery({
-    baseUrl: 'http://localhost:7777',
+    baseUrl: process.env["API_URL"],
     prepareHeaders: async (headers:any) => {
         const cookies = parseCookies()
 
