@@ -56,7 +56,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     ]);
 
     //USEREF
-    console.log(posts.length)
+
     //FUNCTIONS
 
     React.useEffect(() =>  {

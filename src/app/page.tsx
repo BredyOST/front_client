@@ -48,6 +48,7 @@ async function Home(props:pageProps) {
         categories
     } = await getData();
 
+
     return (
         <div className={classNames(cls.page, {},[] )} >
             <div className='page__container'>
