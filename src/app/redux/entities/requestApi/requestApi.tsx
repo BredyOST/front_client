@@ -2,6 +2,7 @@ import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
+import 'dotenv/config';
 
 interface RefreshResultData {
     sessionToken:string
