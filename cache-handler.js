@@ -42,25 +42,18 @@ IncrementalCache.onCreation(async () => {
     const l  = await client.keys('*', (err, keys) => {
         if (err) throw err;
         keys.forEach((key) => {
-            console.log(key);
+
         });
     });
     console.log(l)
 
-    // await client.del('181ef98f48868b9d0c31a45bb187a52cc0c50ed3b21bb98815bee3ede7abdef8', (err, reply) => {
-    //     if (err) {
-    //         console.error(err);
-    //     } else {
-    //         console.log(`Ключ удален: ${reply}`);
-    //     }
-    // });
-    // await client.del('f04b0fc3d66350350f6791a936fbc3edb6f1e8b1091658f9e29dd39466da39d4', (err, reply) => {
-    //     if (err) {
-    //         console.error(err);
-    //     } else {
-    //         console.log(`Ключ удален: ${reply}`);
-    //     }
-    // });
+    await client.del('/dashboard/price', (err, reply) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(`Ключ удален: ${reply}`);
+        }
+    });
 
     // Получение значения по ключу
     // const aa  = await  client.get('f04b0fc3d66350350f6791a936fbc3edb6f1e8b1091658f9e29dd39466da39d4', (err, value) => {
@@ -100,8 +93,6 @@ IncrementalCache.onCreation(async () => {
                 }
             },
             async set(key, value, ttl) {
-                // console.log(value.value.kind)
-                console.log(key)
                 try {
                     await client.set(
                         key,

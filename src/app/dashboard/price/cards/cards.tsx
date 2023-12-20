@@ -51,7 +51,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     }
     React.useEffect(
         () => {
-            setPrice(item.price * +period * chosenCategory.length ? chosenCategory.length : 1)
+            setPrice(item.price * +period * chosenCategory.length)
             if(item.title == 'Бесплатный') setPeriod(`2`)
         },[item, period,chosenCategory]
     )

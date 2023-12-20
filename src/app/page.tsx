@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './page.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
