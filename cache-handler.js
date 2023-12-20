@@ -31,7 +31,7 @@ client.connect().catch(console.error);
 
 IncrementalCache.onCreation(async () => {
 
-    // const useTtl = false;
+    const useTtl = true;
     // await client.connect();
 
     if (!client.isOpen) {
@@ -74,8 +74,8 @@ IncrementalCache.onCreation(async () => {
 
 
     return {
-        // useFileSystem: !useTtl,
-        useFileSystem: false,
+        useFileSystem: !useTtl,
+
         cache: {
             async get(key) {
                 try {
