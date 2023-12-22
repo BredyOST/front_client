@@ -98,7 +98,7 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
                                 name="words"
                                 value={inputKeyWords}
                                 classForInput={cls.input}
-                                placeholder='Введите город'
+                                placeholder='Введите слова'
                                 forRef={inputRef}
                                 classname={cls.inputDiv}
                             />
