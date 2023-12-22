@@ -15,12 +15,12 @@ const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications
 
 
 const baseQueryWithAuth = fetchBaseQuery({
-    baseUrl: `http://5.35.12.33:7777`,
+    baseUrl: `http://localhost:7777`,
     prepareHeaders: async (headers:any) => {
         const cookies = parseCookies()
 
         if (cookies) headers.set('authorization', `Bearer ${cookies._z}`);
-        console.log(process.env["API_URL"])
+
         const sessionToken = cookies._a;
         if (sessionToken) headers.set('session-token', cookies._a);
 
@@ -447,6 +447,20 @@ export const requestApi = createApi({
             }),
         }),
 
+        getAllKeysRedis:builder.mutation({
+            query: (params) => ({
+                url: '/posts/redisKeys',
+                method: 'POST',
+                body: params,
+            }),
+        }),
+        getPostsRedis:builder.mutation({
+            query: (params) => ({
+                url: '/posts/getPostsRedis',
+                method: 'POST',
+                body: params,
+            }),
+        }),
 
     }),
 });
@@ -494,5 +508,7 @@ export const {
     useUpdateChatMutation,
     useGetSortedPostsFromSearchPageMutation,
     useActivateFreeNotificationMutation,
-    useGetNanniesPostsMutation
+    useGetNanniesPostsMutation,
+    useGetAllKeysRedisMutation,
+    useGetPostsRedisMutation
 } = requestApi;

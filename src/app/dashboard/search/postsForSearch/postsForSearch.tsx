@@ -28,7 +28,6 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
         classname,
         tutorsPosts,
         naniesPosts,
-        test,
         date,
     } = props;
     
@@ -43,7 +42,6 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
     const postsRepository:PostsDictionary = {
         '1': tutorsPosts,
         '2': naniesPosts,
-        '4': test,
     };
     // Теперь, используя ID выбранной категории, получаем посты для этой категории
     const categoryPosts = chosenCategoryID ? postsRepository[String(chosenCategoryID)] : null;

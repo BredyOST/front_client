@@ -47,13 +47,13 @@ IncrementalCache.onCreation(async () => {
     });
     console.log(l)
 
-    await client.del('/dashboard/price', (err, reply) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(`Ключ удален: ${reply}`);
-        }
-    });
+    // await client.del('id:1 - 1200 / 300', (err, reply) => {
+    //     if (err) {
+    //         console.error(err);
+    //     } else {
+    //         console.log(`Ключ удален: ${reply}`);
+    //     }
+    // });
 
     // Получение значения по ключу
     // const aa  = await  client.get('f04b0fc3d66350350f6791a936fbc3edb6f1e8b1091658f9e29dd39466da39d4', (err, value) => {
@@ -92,9 +92,25 @@ IncrementalCache.onCreation(async () => {
                     return null;
                 }
             },
+            async getAllKeys(pattern) {
+                let cursor = 0
+                let keys = []
+                do {
+                    const reply = await this.client.scan(cursor, {
+                        MATCH: pattern,
+                        COUNT: 100
+                    });
+                    cursor = reply.cursor // Прямое присваивание, так как cursor уже является числом
+                    console.log(cursor)
+                    keys.push(...reply.keys)
+                } while (cursor !== 0)
+
+                return keys
+            },
+
             async set(key, value, ttl) {
-                console.log(key)
-                console.log(value)
+                // console.log(key)
+                // console.log(value)
                 try {
                     await client.set(
                         key,

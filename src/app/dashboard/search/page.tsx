@@ -12,27 +12,12 @@ import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch
 interface pageProps {
 }
 
-const forTypes = [
-    {id:1, text:'все'},
-    {id:2, text:'пост'},
-    {id:3, text:'комментарий'},
-]
-
 async function getData() {
 
     let categories;
     let tutors;
     let nannies;
     let allPosts;
-
-
-    // try {
-    //     const allPostsReq = await fetch('http://localhost:7777/posts/getAll', { next: { revalidate: 120}})
-    //     allPosts = await allPostsReq.json();
-    // } catch (err) {
-    //     console.error('Error fetching categories:', err);
-    // }
-
 
     try {
         const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 120}})
@@ -102,7 +87,6 @@ async function SearchPage(props:pageProps) {
                         <PostsForSearch
                             tutorsPosts = {tutors}
                             naniesPosts= {nannies}
-                            test = {allPosts}
                             date = {date}
                         />
                     </div>
