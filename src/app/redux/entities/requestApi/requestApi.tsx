@@ -15,7 +15,7 @@ const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications
 
 
 const baseQueryWithAuth = fetchBaseQuery({
-    baseUrl: `http://localhost:7777`,
+    baseUrl: `http://5.35.12.33:7777`,
     prepareHeaders: async (headers:any) => {
         const cookies = parseCookies()
 
