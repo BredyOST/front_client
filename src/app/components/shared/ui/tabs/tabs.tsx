@@ -44,6 +44,8 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
             locaCounter = localStorage.getItem('_tabs_count');
             if(locaCounter) {
                 dispatch(addPostsCount(+locaCounter))
+            } else {
+                dispatch(addPostsCount(10))
             }
         },[]
     )
