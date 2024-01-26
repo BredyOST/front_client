@@ -3,15 +3,13 @@ import {classNames} from "@/app/components/shared/lib/classNames/className";
 import ArraySvg from '../../components/svgs/arrow.svg'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {FC} from "react";
+
 interface faqProps {
-    // classname?: string;
 }
 
 
 const Faq:FC<faqProps> = (props) => {
-    const {
-        // classname
-    } = props;
+    const {} = props;
 
     return (
         <div className={classNames(cls.faq, {},[] )} >

@@ -22,7 +22,7 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
     } = props;
 
     //RTK
-    const [ updateCategory, {data: requestupdateCategory, error:errorupdateCategory, isLoading: isLoadingupdateCategory, isError:isErrorupdateCategory}] = useUpdateCategoryMutation()
+    const [updateCategory, {data: requestupdateCategory, error:errorupdateCategory, isLoading: isLoadingupdateCategory, isError:isErrorupdateCategory}] = useUpdateCategoryMutation()
     const [deleteCategory, {data: requesteleteCategoryCategory, error:erroreleteCategoryCategory, isLoading: isLoadingeleteCategoryCategory, isError:isErroreleteCategoryCategory}] = useDeleteCategoryMutation()
 
 
@@ -34,7 +34,8 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
     const [idCategory, setIdCategory] = React.useState<string>(item.id_category ? item.id_category : '')
     const [nameCategory, setNameIdCategory] = React.useState<string>(item.name ? item.name : '')
     const [descriptionCategory, setDescriptionIdCategory] = React.useState<string>(item.description ? item.description : '')
-
+    const [positiveCategory, setPositive] = React.useState<string[]>(item.positiveWords ? item.positiveWords : '')
+    const [negativeCategory, setNegative] = React.useState<string[]>(item.negativeWords ? item.negativeWords : '')
     //USEREF
 
     //FUNCTIONS
@@ -48,6 +49,12 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
     const changeDescription = (e:ChangeEvent<HTMLInputElement>) => {
         setDescriptionIdCategory(e.target.value)
     }
+    const changePositive = (e:ChangeEvent<HTMLInputElement>) => {
+        setPositive(e.target.value.split(',').map(word => word.trim()));
+    }
+    const changNegative = (e:ChangeEvent<HTMLInputElement>) => {
+        setNegative(e.target.value.split(',').map(word => word.trim()));
+    }
 
     const updateThisCategory = (id:number) => {
         updateCategory({
@@ -55,6 +62,8 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
             id_category: idCategory ? idCategory : item.id_category,
             name: nameCategory ? nameCategory : item.name,
             description: descriptionCategory ? descriptionCategory : item.description,
+            positiveWords: positiveCategory ? positiveCategory : item.positiveWords,
+            negativeWords: negativeCategory ? negativeCategory : item.negativeWords,
         })
     }
     const deleteThisCategory = (id:number) => {
@@ -65,7 +74,7 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
 
     return (
         <div className={classNames(cls.inputCategory, {},[classname] )} >
-            <div>{index ? +index + 1 : ''}</div>
+            <div>{index ? +index+ 1 : ''}</div>
             <input
                 value={idCategory ? idCategory : ''}
                 onChange={(e) => changeId(e)}
@@ -81,8 +90,16 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
                 className={cls.inputNoPadding}
                 onChange={(e) => changeDescription(e)}
             />
-            <div>{new Date(item.createdAt).toDateString()}</div>
-            <div>{new Date(item.updateAt).toDateString()}</div>
+            <input
+                value={positiveCategory ? positiveCategory : ''}
+                className={cls.inputNoPadding}
+                onChange={(e) => changePositive(e)}
+            />
+            <input
+                value={negativeCategory ? negativeCategory : ''}
+                className={cls.inputNoPadding}
+                onChange={(e) => changNegative(e)}
+            />
             <Button
                 classname={cls.btn}
                 onClick = {updateThisCategory}

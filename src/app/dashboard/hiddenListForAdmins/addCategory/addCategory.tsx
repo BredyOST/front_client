@@ -81,6 +81,8 @@ const AddCategory:FC<addCategoryProps> = (props) => {
         }
     }
 
+
+
     return (
         <div className={classNames(cls.addCategory, {},[classname] )} >
             <div className={cls.section}>
@@ -165,8 +167,8 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                             <div className={cls.head}>id группы</div>
                             <div className={cls.head}>название</div>
                             <div className={cls.head}>описание</div>
-                            <div className={cls.head}>дата добавления</div>
-                            <div className={cls.head}>дата обнвовления</div>
+                            <div className={cls.head}>позитив</div>
+                            <div className={cls.head}>негатив</div>
                             <div className={cls.head}>изменить</div>
                             <div className={cls.head}>добавить</div>
                         </div>

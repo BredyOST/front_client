@@ -3,7 +3,6 @@ import cls from './pricePage.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import ListsCategory from "@/app/dashboard/price/listsCategory/listsCategory";
 import Cards from "@/app/dashboard/price/cards/cards";
-import Link from "next/link";
 import BlockBtnAdd from "@/app/dashboard/price/blockBtnAdd/blockBtnAdd";
 
 interface pageProps {
@@ -18,14 +17,14 @@ async function getData() {
     let categories = [];
 
     try {
-        const pricesRes = await fetch(`${process.env['API_URL']}/prices/getAll`, { next: { revalidate: 420 }})
+        const pricesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/prices/getAll`, { next: { revalidate: 420 }})
         prices = await pricesRes.json();
     } catch (err) {
         console.error('save error Redis:', err);
     }
         
     try {
-        const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 420}})
+        const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 420}})
         categories = await categoriesRes.json();
     } catch (err) {
         console.error('save error Redis:', err);

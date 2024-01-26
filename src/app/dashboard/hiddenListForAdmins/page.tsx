@@ -2,11 +2,10 @@
 import React, {ChangeEvent, FC} from 'react';
 import cls from './adminPage.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
-import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
+import {useAppSelector} from "@/app/redux/hooks/redux";
 import AddGroup from "@/app/dashboard/hiddenListForAdmins/addGroup/addGroup";
 import AddCategory from "@/app/dashboard/hiddenListForAdmins/addCategory/addCategory";
 import PostsAll from "@/app/dashboard/hiddenListForAdmins/postsAll/postsAll";
-import {useRouter} from "next/navigation";
 import UploadFiles from "@/app/dashboard/hiddenListForAdmins/uploadFiles/uploadFiles";
 import Users from "@/app/dashboard/hiddenListForAdmins/users/users";
 import Price from "@/app/dashboard/hiddenListForAdmins/price/price";

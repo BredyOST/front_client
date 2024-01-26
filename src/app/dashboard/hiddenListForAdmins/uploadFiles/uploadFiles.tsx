@@ -82,7 +82,7 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
                             <div
                                 key={item.id}
                                 className={cls.coverImage}>
-                                <img className={cls.image} src={`http://localhost:7777/uploads/${item.filename}`} alt=""/>
+                                <img className={cls.image} src={`${process.env['NEXT_PUBLIC_API_URL']}/uploads/${item.filename}`} alt=""/>
                                 <div>{item.filename}</div>
                                 <Button
                                     onClick = {() => deleteThisFile(item)}

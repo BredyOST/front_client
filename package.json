@@ -10,6 +10,8 @@
 	},
 	"dependencies": {
 		"@neshca/cache-handler": "^0.6.1",
+		"@next/bundle-analyzer": "^14.1.0",
+		"@next/env": "^14.1.0",
 		"@reduxjs/toolkit": "^1.9.5",
 		"dotenv": "^16.3.1",
 		"next": "^14.0.4",

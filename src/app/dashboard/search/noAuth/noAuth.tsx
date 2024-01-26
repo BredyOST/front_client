@@ -3,6 +3,7 @@ import cls from './noAuth.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import Link from "next/link";
 
+
 interface noAuthProps {
     classname?: string;
 }

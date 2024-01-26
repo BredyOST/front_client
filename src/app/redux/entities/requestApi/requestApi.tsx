@@ -2,20 +2,18 @@ import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
-import 'dotenv/config';
+// import 'dotenv/config';
 
 interface RefreshResultData {
     sessionToken:string
     refreshToken: string;
     accessToken: string;
-
 }
 
 const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
 
-
 const baseQueryWithAuth = fetchBaseQuery({
-    baseUrl: `http://5.35.12.33:7777`,
+    baseUrl: `${process.env['NEXT_PUBLIC_API_URL']}`,
     prepareHeaders: async (headers:any) => {
         const cookies = parseCookies()
 
@@ -39,6 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
     api,
     extraOptions
 ) => {
+
     let result = await baseQueryWithAuth(args, api, extraOptions)
 
     // если приходит ответ, что истекла сессия, значит кто-то вошел в браузер или токен сессии истек и все очищаем (куки, хранилище и уведомляем об этом)
@@ -89,7 +88,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             api.dispatch(addAdminRole(false));
             api.dispatch(addAuthStatus(false));
             location.reload()
-
         }
     }
 
@@ -419,8 +417,13 @@ export const requestApi = createApi({
                 method:'GET',
             }),
         }),
-
-
+        updatePrice: builder.mutation({
+            query: (params) => ({
+                url: `/prices/update`,
+                method: 'PATCH',
+                body: params,
+            }),
+        }),
         //TEST
         getALLTest:builder.mutation({
             query:(params) => ({
@@ -437,26 +440,23 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
-
-        activateFreeNotification: builder.mutation<any, any>({
+        activateFreeNotification: builder.mutation({
             query: (params) => ({
                 url: '/notifications/create',
                 method: 'POST',
                 body: params,
             }),
         }),
-
         getAllKeysRedis:builder.mutation({
             query: (params) => ({
-                url: '/posts/redisKeys',
+                url: '/posts-from-redis/redisKeys',
                 method: 'POST',
                 body: params,
             }),
         }),
         getPostsRedis:builder.mutation({
             query: (params) => ({
-                url: '/posts/getPostsRedis',
+                url: '/posts-from-redis/getPostsRedis',
                 method: 'POST',
                 body: params,
             }),
@@ -510,5 +510,6 @@ export const {
     useActivateFreeNotificationMutation,
     useGetNanniesPostsMutation,
     useGetAllKeysRedisMutation,
-    useGetPostsRedisMutation
+    useGetPostsRedisMutation,
+    useUpdatePriceMutation,
 } = requestApi;

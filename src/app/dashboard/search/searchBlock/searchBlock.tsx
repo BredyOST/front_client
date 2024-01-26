@@ -38,8 +38,6 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
         [cls.inputActive]: inputKeyWords.length
     }
 
-    // console.log(inputKeyWords)
-
     React.useEffect(
         () => {
             const localWords = localStorage.getItem('key_words');

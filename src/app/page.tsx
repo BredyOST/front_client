@@ -7,7 +7,7 @@ async function getData() {
     let categories = [];
 
     try {
-        const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 120}})
+        const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 120}})
         categories = await categoriesRes.json();
     } catch (err) {
 
@@ -44,10 +44,7 @@ export interface ICategory {
 async function Home(props:pageProps) {
     const {} = props;
 
-    const {
-        categories
-    } = await getData();
-
+    const {categories} = await getData();
 
     return (
         <div className={classNames(cls.page, {},[] )} >

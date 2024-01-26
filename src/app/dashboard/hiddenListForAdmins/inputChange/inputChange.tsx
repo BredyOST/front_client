@@ -63,7 +63,6 @@ export const InputChange:FC<inputChangeProps> = (props) => {
         setDeleted(true)
     }
 
-
     return (
         <div className={classNames(cls.inputChange, mod,[classname] )} >
             <div>{index ? +index + 1 : ''}</div>
@@ -71,11 +70,10 @@ export const InputChange:FC<inputChangeProps> = (props) => {
                 value={idGroup ? idGroup : ''}
                 onChange={(e) => changeValue(e)}
                 className={cls.input}
-
             />
-            <div>{item.identification}</div>
-            <div>{new Date(item.createdAt).toDateString()}</div>
-            <div>{new Date(item.updateAt).toDateString()}</div>
+            <div>{`${new Date(item.postsLastDate).toTimeString()} ${new Date(item.postsLastDate).toDateString()}`}</div>
+            <div>{`${new Date(item.postsDateWhenUpdate).toTimeString()} ${new Date(item.postsDateWhenUpdate).toDateString()}`}</div>
+            <div>{item.isClosed ? 'закрыта' : '-'}</div>
             <Button
                 classname={cls.btn}
                 onClick={changeNewId}

@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from './searchPage.module.scss'
 import { classNames, Mods } from "@/app/components/shared/lib/classNames/className";
-import {Select} from "@/app/components/shared/ui/Select/Select";
+import { Select } from "@/app/components/shared/ui/Select/Select";
 import Tabs from "@/app/components/shared/ui/tabs/tabs";
 import SearchBlock from "@/app/dashboard/search/searchBlock/searchBlock";
 import Social from "@/app/dashboard/search/social/social";
@@ -15,43 +15,22 @@ interface pageProps {
 async function getData() {
 
     let categories;
-    let tutors;
-    let nannies;
-    let allPosts;
 
     try {
-        const categoriesRes = await fetch(`${process.env['API_URL']}/categories/getAll`, { next: { revalidate: 120}})
+        const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 500 } })
         categories = await categoriesRes.json();
     } catch (err) {
         console.error('save error Redis:', err);
     }
 
-    try {
-        const tutorsReq = await fetch(`${process.env['API_URL']}/tutors/getPostForStatic`, {next: {revalidate: 420}})
-        // if (!tutorsReq.ok) {
-        //     throw new Error('Failed to fetch data')
-        // }
-        tutors = await tutorsReq.json();
-    } catch (err) {
-        console.error('Error fetching prices:', err);
-    }
-
-    try {
-        const nanniesReq  = await fetch(`${process.env['API_URL']}/nannies/getPostForStatic`,{next:{revalidate:420}})
-        nannies = await nanniesReq.json();
-    } catch (err) {
-        console.error('Error fetching categories:', err);
-    }
-
-    return { tutors, nannies, categories, allPosts };
+    return {categories};
 
 }
 
-async function SearchPage(props:pageProps) {
+async function SearchPage(props: pageProps) {
 
-    const {} = props;
-    const { categories, nannies, tutors, allPosts} = await getData();
-    const date = new Date();
+    const { } = props;
+    const { categories} = await getData();
 
     return (
         <div className={classNames(cls.searchPage, {}, [])} >
@@ -66,7 +45,7 @@ async function SearchPage(props:pageProps) {
                                 <Select
                                     classname={cls.select}
                                     title={'Выбранная категория для поиска'}
-                                    categories = {categories}
+                                    categories={categories}
                                 />
                             </div>
                             <Social
@@ -79,16 +58,12 @@ async function SearchPage(props:pageProps) {
                             />
                         </div>
                         <div className={cls.chooseFilter}>
-                            <CityBlock/>
+                            <CityBlock />
                         </div>
                         <div className={cls.chooseFilter}>
-                            <SearchBlock/>
+                            <SearchBlock />
                         </div>
-                        <PostsForSearch
-                            tutorsPosts = {tutors}
-                            naniesPosts= {nannies}
-                            date = {date}
-                        />
+                        <PostsForSearch/>
                     </div>
                 </div>
             </div>

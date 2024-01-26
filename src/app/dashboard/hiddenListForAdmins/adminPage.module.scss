@@ -2,7 +2,7 @@
 @use '../../styles/variable/global';
 @use '../../styles/variable/globalIndex';
 @use "../../styles/mixins";
-
+@use "../../styles/variable/common";
 
 .AdminPage {
   padding-top: globalIndex.$padding_top_pages;
@@ -10,6 +10,7 @@
   font-family: globalIndex.$main_font_family;
   font-weight: globalIndex.$main_font_weight;
   line-height: globalIndex.$main_font_line-height;
+  @extend .paddingPages;
 }
 
 .cover{

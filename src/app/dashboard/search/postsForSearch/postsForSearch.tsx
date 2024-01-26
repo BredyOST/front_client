@@ -9,42 +9,19 @@ import {useAppSelector} from "@/app/redux/hooks/redux";
 
 interface postsForSearchProps {
     classname?: string;
-    tutorsPosts?:any
-    naniesPosts?:any
-    test?: any
-    date: Date,
 }
 const counterSkeleton = [
     1,2,3,4,5
 ]
 
-interface PostsDictionary {
-    [key: string]: any; // Здесь вы можете уточнить тип данных, если он у вас есть, вместо `any`
-}
-
-
 const PostsForSearch:FC<postsForSearchProps> = (props) => {
-    const {
-        classname,
-        tutorsPosts,
-        naniesPosts,
-        date,
-    } = props;
+    const {classname} = props;
     
     //ACTIONS FROM REDUX
 
     //STATES FROM REDUX
     // states from redux
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
-    const {chosenCategory, keyWords} = useAppSelector(state => state.searchParams)
-
-    const chosenCategoryID = chosenCategory?.id;
-    const postsRepository:PostsDictionary = {
-        '1': tutorsPosts,
-        '2': naniesPosts,
-    };
-    // Теперь, используя ID выбранной категории, получаем посты для этой категории
-    const categoryPosts = chosenCategoryID ? postsRepository[String(chosenCategoryID)] : null;
 
     //USESTATE
 
@@ -56,16 +33,11 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
         return <div className={cls.ifNotAith}>Необходимо авторизоваться</div>
     }
 
-    if (categoryPosts == null) {
-        // return <div className={cls.ifNotAith}>Необходимо авторизоваться</div>
-    }
-
     if (!infoUser?.categoriesHasBought?.length && infoUser?.categoriesFreePeriod[0]?.purchaseEndDate) {
         if ( new Date().getTime() > new Date(infoUser.categoriesFreePeriod[0].purchaseEndDate).getTime()) {
             return null
         }
     }
-
 
     return (
         <div className={classNames(cls.postsForSearch, {},[classname] )} >
@@ -94,11 +66,7 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
                 {/*    />*/}
                 {/*))}*/}
                 {infoUser && stateAuth && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (infoUser?.categoriesHasBought?.length)) ?
-                    <PostsBlock
-                        posts={categoryPosts}
-                        date = {date}
-                    />
-                    :''
+                    <PostsBlock/> :''
                 }
             </div>
         </div>

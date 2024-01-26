@@ -63,7 +63,6 @@ const AddGroup:FC<addGroupProps> = (props) => {
         }
     }
 
-
     return (
         <div className={classNames(cls.addGroup, {},[classname] )} >
             <h2 className={cls.mainTitle}>Добавить группы с вк</h2>
@@ -114,9 +113,9 @@ const AddGroup:FC<addGroupProps> = (props) => {
                             <div className={cls.titles}>
                                 <div className={cls.head}>№</div>
                                 <div className={cls.head}>id группы</div>
-                                <div className={cls.head}>индикатор</div>
+                                <div className={cls.head}>дата последн.</div>
                                 <div className={cls.head}>дата добавления</div>
-                                <div className={cls.head}>дата обнвовления</div>
+                                <div className={cls.head}>открыта</div>
                                 <div className={cls.head}>изменить</div>
                                 <div className={cls.head}>добавить</div>
                             </div>

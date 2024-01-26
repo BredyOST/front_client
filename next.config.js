@@ -8,10 +8,6 @@ const nextConfig = {
         });
         return config;
     },
-    experimental: {
-        incrementalCacheHandlerPath: require.resolve('./cache-handler'),
-        // isrMemoryCacheSize: 0,
-    },
     poweredByHeader:false,
     optimizeFonts:false,
 }

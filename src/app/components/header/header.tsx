@@ -44,28 +44,17 @@ const Header:FC<headerProps> = React.memo((props) => {
     // // запрос данных на получение информации пользователя пользователя
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
     // //получаем имеющиеся категории в базе данных, доступные к подписке
-    // const [getCategories, {data: requestCategories, error:errorCategories, isLoading: isLoadingCategoriess, isError:isErrorCategories}] = useGetCategoriesMutation()
-    // // получаем тарифы
-    // const [getPrices, {data: requestPrices, error:errorPrices, isLoading: isLoadingReqGetPrices, isError:isErrorPrices}] =  useGetAllPricesMutation();
 
     // STATES FROM REDUX
     // данные по авторизации
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
-    // имеющиеся категории в базе данных, доступные к подписке
-    // const {categories} = useAppSelector(state => state.categories)
-    // тарифы
-    // const {prices} = useAppSelector(state => state.prices)
-    // информация о window для того чтобы прятать header
-    // const {scrollDown, scrolledHeight} = useAppSelector((state) => state.indicatorWindow);
 
     // Actions
     // для сохранения данных о пользователе
     const {addAdminRole, addMainAdminRole, addAuthStatus, addInfoUser,} = authSliceActions;
     // добавить категории в стейт
-    // const {addCategories} = categoriesActions;
+
     // ACTIONS FROM REDUX
-    // // для изменения состояния попапа loginForm
-    // const { changeStateLoginFormPopup } = statePopupSliceActions;
     // для добавления параметров по Window
     const {setWindowWidth, setScrollUp, setScrollDown, setScrolledHeight} = indicatorsWindowActions;
     // для добавления тарифов в хранилище
@@ -73,9 +62,6 @@ const Header:FC<headerProps> = React.memo((props) => {
 
     //STATE
     // для отображения и скрытия подменю профиля
-    // const[pointerOnProfile, setPointerOnProfile] = React.useState<boolean>(false)
-    // состояние бургер меню
-    // const {stateMenuBurgerHeader} = useAppSelector(state => state.stateBurgerMenu)
     const [showHeader, setShowHeader] = React.useState(true);
     let lastScrollY = React.useRef(0);
     //REF
@@ -101,16 +87,6 @@ const Header:FC<headerProps> = React.memo((props) => {
                 }
             });
         }
-        // if(!categories) {
-        //     getCategories('').then((results) => {
-        //         dispatch(addCategories(results.data))
-        //     })
-        // }
-        // if (!prices.length) {
-        //     getPrices('').then((result) => {
-        //         dispatch(addPrices(result.data))
-        //     })
-        // }
     }, []);
 
     React.useEffect(() => {

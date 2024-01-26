@@ -1,0 +1,109 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use '../../../styles/mixins';
+@use "../../../styles/variable/common";
+
+
+.section{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  padding-bottom: mixins.rem(20);
+}
+
+
+.mainTitle{
+  text-align: left;
+  font-size: mixins.rem(globalIndex.$Title_font_size);
+  line-height: globalIndex.$Title_font_line-height;
+  font-weight: globalIndex.$Title_font_weight;
+  color: globalIndex.$Title_color;
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+  background-color: #e5d5c3;
+  padding-bottom: mixins.rem(20);
+  padding-top: mixins.rem(20);
+  padding-left: mixins.rem(20);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.form{
+  display: flex;
+  column-gap: mixins.rem(10);
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+}
+
+.head{
+  background-color: #ad9d6d;
+  text-align: center;
+}
+
+.coverInput{
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(10);
+}
+
+.label{
+  display: flex;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+}
+
+.list{
+  display: flex;
+}
+
+.titles{
+  display: grid;
+  grid-template-columns: minmax(40px, 40px) minmax(100px,130px) minmax(100px,300px)  minmax(100px, 100px)  minmax(50px, 120px) minmax(100px,1fr) minmax(100px,170px) minmax(100px,170px) minmax(100px,120px) minmax(100px,120px);
+  grid-template-rows:auto;
+  text-align: center;
+}
+
+.mainBlock{
+  max-height: mixins.rem(500);
+  overflow: auto;
+  border: mixins.rem(1) solid #000;
+}
+
+
+.inputRelative{
+  min-width: mixins.rem(500);
+  row-gap: mixins.rem(5);
+  flex: 0 1 mixins.rem(500);
+  position: relative;
+  display: flex;
+  column-gap: mixins.rem(30);
+}
+
+
+.coverInputTwo{
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(10);
+}
+
+.input{
+  @extend .input;
+}
+
+.coverBtn{
+  display: flex;
+  column-gap: mixins.rem(15)
+}
+
+
+.btn{
+  @extend .btn;
+
+  padding-left: mixins.rem(25);
+  padding-right: mixins.rem(25);
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+}

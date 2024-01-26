@@ -112,7 +112,6 @@ const SendActivationRepeat:FC<sendActivationRepeatProps> = (props) => {
                         classname="color-dark"
                     />
                 )}
-
         </form>
     );
 };

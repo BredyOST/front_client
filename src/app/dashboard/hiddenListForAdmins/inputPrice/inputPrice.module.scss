@@ -4,17 +4,24 @@
 @use '../../../styles/mixins';
 @use "../../../styles/variable/common";
 
-.inputCategory{
+.inputChange{
   display: grid;
-  grid-template-columns: minmax(40px, 40px) minmax(50px,50px) minmax(200px,270px)  minmax(250px,300px)  minmax(100px,300px)  minmax(100px,300px) minmax(100px,150px) minmax(100px,15px);
+  grid-template-columns: minmax(40px, 40px) minmax(100px,130px) minmax(100px,300px)  minmax(100px, 100px)  minmax(50px, 120px) minmax(100px,1fr) minmax(100px,170px) minmax(100px,170px) minmax(100px,120px) minmax(100px,120px);
   grid-template-rows:auto;
   text-align: center;
+  justify-content: space-between;
   row-gap: mixins.rem(5);
   column-gap: mixins.rem(5);
   border-bottom: mixins.rem(1) solid #000;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
+
+  &.deleted {
+    background-color: #e11010;
+  }
 }
+
+
 
 .btn{
   @extend .btn;
@@ -28,6 +35,6 @@
 }
 
 
-.inputNoPadding{
-  @extend .inputNoPadding;
+.input{
+  @extend .input;
 }

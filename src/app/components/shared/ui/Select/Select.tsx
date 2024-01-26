@@ -89,7 +89,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
                         </option>
                     ))
                     }
-                    {infoUser &&  infoUser?.activatedFreePeriod  && new Date().getTime() < new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime()&& !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.map((item:any) => (
+                    {infoUser && infoUser?.activatedFreePeriod && new Date().getTime() < new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime() && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.map((item:any) => (
                         <option
                             className={cls.option}
                             key={item.id_category}
