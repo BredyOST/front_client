@@ -65,9 +65,22 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         } else {
             if (infoUser && infoUser?.activatedFreePeriod && new Date().getTime() < new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime() &&
                 !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.[0]) {
+                const obj = {
+                    id: infoUser?.categoriesFreePeriod?.[0].id,
+                    name: infoUser?.categoriesFreePeriod?.[0].name,
+                    positive: infoUser?.categoriesFreePeriod?.[0].positiveWords,
+                    negative: infoUser?.categoriesFreePeriod?.[0].negativeWords,
+                };
+
                 addCategoryChosen(infoUser?.categoriesFreePeriod?.[0])
             }
             if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
+                const obj = {
+                    id: infoUser?.categoriesHasBought?.[0].id,
+                    name: infoUser?.categoriesHasBought?.[0].name,
+                    positive: infoUser?.categoriesHasBought?.[0].positiveWords,
+                    negative: infoUser?.categoriesHasBought?.[0].negativeWords,
+                };
                 addCategoryChosen(infoUser?.categoriesHasBought?.[0])
             }
         }
