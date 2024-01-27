@@ -67,7 +67,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
                 !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.[0]) {
                 addCategoryChosen(infoUser?.categoriesFreePeriod?.[0])
             }
-            if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]) {
+            if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
                 addCategoryChosen(infoUser?.categoriesHasBought?.[0])
             }
         }
