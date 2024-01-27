@@ -33,7 +33,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     const [expandedPosts, setExpandedPosts] = React.useState<number[]>([]);
     const [page, setPage] = React.useState<number>(1); // номер страницы
     const [filteredPosts, setFilteredPosts] = React.useState<any>([]); // Добавили состояние для отфильтрованных постов
-
+    console.log(chosenCategory)
     //USEREF
 
     //FUNCTIONS
@@ -140,7 +140,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             let i = 0;
 
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
-
+            console.log(chosenCategory)
+            console.log(keys)
             while (allLoadedPosts.length < postsToLoad) {
                 const newPosts = await loadPostsFromRedis(i, keys); // функция для загрузки постов из Redis
                 if (!newPosts.length) {
