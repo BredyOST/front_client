@@ -58,9 +58,17 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         if (local) {
             try {
                 const savedCategory = JSON.parse(local);
-                dispatch(addCategoryChosen(savedCategory || ''));
+                dispatch(addCategoryChosen(savedCategory));
             } catch (error) {
                 // console.error('Ошибка при чтении данных из localStorage:', error);
+            }
+        } else {
+            if (infoUser && infoUser?.activatedFreePeriod && new Date().getTime() < new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime() &&
+                !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.[0]) {
+                addCategoryChosen(infoUser?.categoriesFreePeriod?.[0])
+            }
+            if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]) {
+                addCategoryChosen(infoUser?.categoriesHasBought?.[0])
             }
         }
     }, [categories]);
