@@ -110,7 +110,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const changeStateShowEmail = () => {
         copyToClipboard(emailAdress);
     };
-    const copyToClipboard = (text) => {
+    const copyToClipboard = (text:string) => {
         if(copiedNotification) return
         const tempInput = document.createElement('input');
         tempInput.value = text;

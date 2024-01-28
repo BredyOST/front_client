@@ -48,11 +48,11 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
 
     const addThisToBuy = (item:any) => {
 
-        const isItemInChosen = chosenCategory.find((element) => element.id === item.id);
+        const isItemInChosen = chosenCategory.find((element:any) => element.id === item.id);
 
         if (isItemInChosen) {
             // Если элемент уже есть, уберите его из состояния
-            const updatedChosen = chosenCategory.filter((element) => element.id !== item.id);
+            const updatedChosen = chosenCategory.filter((element:any) => element.id !== item.id);
             dispatch(addChosenCategories(updatedChosen));
         } else {
             // Если элемент отсутствует, добавьте его в состояние
