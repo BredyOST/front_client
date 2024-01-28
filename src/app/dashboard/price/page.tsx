@@ -18,14 +18,22 @@ async function getData() {
 
     try {
         const pricesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/prices/getAll`, { next: { revalidate: 420 }})
-        prices = await pricesRes.json();
+        if (pricesRes.ok) {
+            prices = await pricesRes.json();
+        } else {
+            console.error('Categories API request failed with status:', pricesRes.status);
+        }
     } catch (err) {
         console.error('save error Redis:', err);
     }
         
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 420}})
-        categories = await categoriesRes.json();
+        if (categoriesRes.ok) {
+            categories = await categoriesRes.json();
+        } else {
+            console.error('Categories API request failed with status:', categoriesRes.status);
+        }
     } catch (err) {
         console.error('save error Redis:', err);
     }

@@ -10,6 +10,7 @@ interface AppLinkProps extends LinkProps {
     onPointerEnter?:any;
     onPointerLeave?:any
     children?:any
+    href:any
 }
 
 export const AppLink:FC<AppLinkProps> = React.memo((props) => {

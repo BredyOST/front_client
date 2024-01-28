@@ -211,7 +211,7 @@
 
 .btn{
   @extend .btn;
-
+  cursor: pointer;
   padding-left: mixins.rem(15);
   padding-right: mixins.rem(15);
   padding-bottom: mixins.rem(10);

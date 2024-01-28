@@ -96,7 +96,6 @@ const Registration:FC<RegistrationProps> = (props) => {
             }
             registerIn(infoForRegistration).then((results) => {
                 if(results) {
-                    console.log(results)
                     dispatch(closeAllPopups(true))
                 }
             })

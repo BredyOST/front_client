@@ -16,9 +16,10 @@ interface cardsProps {
     item:any;
 }
 
+const emailAdress= 'клиенты.com';
+
 const Cards:FC<cardsProps> = React.memo((props) => {
     const {
-        classname,
         item,
     } = props;
 
@@ -45,6 +46,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const [price, setPrice] = React.useState<string | number>('');
     const [period, setPeriod] = React.useState<string>('1');
     const [textMonthSliceTwo, setTextMonthSliceTwo] = React.useState<string>('Месяц'); // месяц во втором слайсе
+    const [copiedNotification, setCopiedNotification] = React.useState<boolean>(false);
     // const [showAttention, setShowAttention] = React.useState<boolean>(false);
     const changePeriod = (value:string) => {
         setPeriod(value)
@@ -105,6 +107,26 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         dispatch(changeStateLoginFormPopup(true));
     }, []);
 
+    const changeStateShowEmail = () => {
+        copyToClipboard(emailAdress);
+    };
+    const copyToClipboard = (text) => {
+        if(copiedNotification) return
+        const tempInput = document.createElement('input');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        setCopiedNotification(true);
+        const id = setTimeout(() => {
+            setCopiedNotification(false);
+            clearTimeout(id)
+        }, 3000); // Уведомление будет скрыто через 2 секунды
+
+    };
+
     return (
         <div className={cls.card} >
             <div className={cls.coverSubtitle}>
@@ -151,12 +173,12 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                 </ul>
             </div>
             {item.title == 'Командный'
-                ?    <Button
-                    classname={cls.btn}
-                    disabled={isLoadingFreePeriod}
+                ?   <span
+                    className={cls.btn}
+                    onClick={changeStateShowEmail}
                 >
-                    Написать
-                </Button>
+                    {copiedNotification ? `Email скопирован` : emailAdress}
+                </span>
                 :    <Button
                     onClick={!stateAuth ?  openLoginFormPopup :  () => payOrTryFreePeriod(item.title)  }
                     classname={cls.btn}

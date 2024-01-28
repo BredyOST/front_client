@@ -55,8 +55,13 @@
   display: flex;
   align-items: center;
   column-gap: mixins.rem(70);
-
   @include mixins.adaptiveValue("column-gap",70,12,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+}
+
+.coverLogo{
+  display: flex;
+  //min-height: 100%;
+  min-height: 100%;
 }
 
 .rightSection{

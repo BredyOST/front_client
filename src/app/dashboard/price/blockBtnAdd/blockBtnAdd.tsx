@@ -51,7 +51,7 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
                 </Button>
             </div>
             <div className={cls.blockCategories}>
-                {chosenCategory.length > 0 && chosenCategory.map((item) => (
+                {chosenCategory.length > 0 && chosenCategory.map((item:any) => (
                     <div
                         className={cls.chosen}
                         key={item.text}

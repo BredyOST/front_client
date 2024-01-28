@@ -61,10 +61,6 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
         }
     }
 
-    if (!categoriesPopup) {
-        return null
-    }
-
     return (
         <Modal
             classname={classNames(cls.LoginModal, {}, [classname])}

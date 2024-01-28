@@ -27,7 +27,6 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
         onClose,
         classForContent,
         lazy,
-        indicatorForNotCloseWhenStateAuthTrue
     } = props;
 
     // states from redux

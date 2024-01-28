@@ -7,11 +7,7 @@ import Logotype from "@/app/components/header/logotype/logotype";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import LoginModal from "@/app/components/features/AuthBy/loginModal/loginModal";
-import {
-    useGetAllPricesMutation,
-    useGetCategoriesMutation,
-    useGetMeMutation
-} from "@/app/redux/entities/requestApi/requestApi";
+import {useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
 import Notification from "@/app/components/shared/notification/notification";
@@ -109,7 +105,9 @@ const Header:FC<headerProps> = React.memo((props) => {
                 <div className={cls.cover}>
                     <div className={cls.section}>
                         <div className={cls.leftSection}>
-                            <Logotype/>
+                            <div className={cls.coverLogo}>
+                                <Logotype/>
+                            </div>
                             <NavBar
                                 classnameForLink={cls.navBarFirst}
                                 arrayText={navbarFirst}

@@ -27,28 +27,13 @@ const LoginForm: FC<LoginFormProps> = React.memo((props) => {
     // RTK query
 
     // useStates
-    // что выбрано - email или phone при авторизации
-    const [activeTab, setActiveTab] = React.useState<number>(1);
-
 
     return (
         <div className={classNames(cls.LoginForm, {}, [classname])}>
-            <LogiIn
-                // activeTab={activeTab}
-                // setActiveTab={setActiveTab}
-            />
-            <Registration
-                // activeTab={activeTab}
-                // setActiveTab={setActiveTab}
-            />
-            <RecoverPassword
-                // activeTab={activeTab}
-                // setActiveTab={setActiveTab}
-            />
-            <SendActivationRepeat
-                // activeTab={activeTab}
-                // setActiveTab={setActiveTab}
-            />
+            <LogiIn/>
+            <Registration/>
+            <RecoverPassword/>
+            <SendActivationRepeat/>
         </div>
     );
 });
