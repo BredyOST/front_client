@@ -2,6 +2,7 @@ import React from 'react';
 import cls from './page.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
+import {Button} from "@/app/components/shared/ui/Button/Button";
 
 async function getData() {
     let categories = [];
@@ -55,52 +56,35 @@ async function Home(props:pageProps) {
         <div className={classNames(cls.page, {},[] )} >
             <div className='page__container'>
                 <div className={cls.cover}>
-                    <div className={cls.section}>
-                        <h1 className={cls.mainTitle}><span>Клиенты.com</span> - Сервис для поиска потенциальных клиентов</h1>
-                        <h3 className={cls.howWorks}>Как работает поиск?</h3>
-                        <div className={cls.text}>
-                            Миллионы пользователей ежедневно публикуют в интернет площадках посты, сообщения, которые содеражат ифнормацию:
-                        </div>
-                        <div className={cls.coverFor}>
-                            {textSecond?.length && textSecond.map((item) =>
-                                <div key={item.id} className={cls.searchText}>
-                                    <p>{item.text}</p>
-                                </div>
-                            )}
-                        </div>
-                        <div className={cls.textFree}>
-                            Сервис <span> Клиенты.com </span> имеет доступ к этим сообщениям и он сделает все за вас!
-                        </div>
-                        <ul className={cls.textCover}>
-                            <li className={cls.textFree}>
-                                Вам нужно только ввести данные для запроса, выбрать категорию и получить потенциальных клиентов с контактной информацией для связи с ними.
-                            </li>
-                        </ul>
-                        <div className={cls.recommend}>
-                            <div className={cls.coverLastBlock}>
-                                {textFour?.length && textFour.map((item) =>
-                                    <h3 key={item.id} className={cls.blockEnd}>
-                                        {item.text}
-                                    </h3>
-                                )}
+                    <h1 className={cls.mainTitle}><span>Клиенты.com</span> - cервис для поиска потенциальных клиентов</h1>
+                    <div className={cls.coverMain}>
+                        <div className={cls.category}>
+                            <h3 className={cls.titleMainCategory}>Категории</h3>
+                            <div className={cls.coverCategory}>
+                                {
+                                    categories && categories.map((item:ICategory) =>
+                                        <Button
+                                            className={cls.titleCategory}
+                                            key={item.id}
+                                        >
+                                            <div className={cls.name}>{item.name}</div>
+                                        </Button>
+                                    )
+                                }
                             </div>
-                            <HomePageBtn/>
                         </div>
-                    </div>
-                    <div className={cls.category}>
-                        <h3 className={cls.titleMainCategory}>Список доступных категорий</h3>
-                        <div className={cls.coverCategory}>
-                            {
-                                categories && categories.map((item:ICategory) =>
-                                    <div
-                                        className={cls.titleCategory}
-                                        key={item.id}
-                                    >
-                                        <div className={cls.name}>{item.name}</div>
-                                        <div className={cls.description}>{item.description}</div>
+                        <div className={cls.section}>
+                            <HomePageBtn/>
+                            <div className={cls.coverVideo}>
+                                <h3 className={cls.howWorks}>Как пользоваться сайтом</h3>
+                                <div className={cls.videoWrapper}>
+                                    <div className={cls.item_video}>
+                                        <video src="">
+                                            <source type="video/mp4" src="http://95.213.208.27:7777/uploads/5dbf15e2cebac3bd8c.mp4"/>
+                                        </video>
                                     </div>
-                                )
-                            }
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

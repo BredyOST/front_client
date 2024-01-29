@@ -80,14 +80,11 @@
 }
 
 .link {
-  @extend .btn;
-
+  @extend .btnTwo;
   padding-bottom: mixins.rem(11);
   padding-top: mixins.rem(11);
   padding-left: mixins.rem(15);
   padding-right: mixins.rem(15);
-  background-color: #d74b4b;
-
   @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
 }
 

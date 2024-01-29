@@ -27,8 +27,8 @@ export type NavBar = {
 
 export const navbarFirst:NavBar[] = [
     {text: 'Тарифы', href:'/dashboard/price'},
-    {text: 'FAQ', href:'/dashboard/faq'},
-    {text: 'О проекте', href:'/'},
+    {text: 'Ответы на вопросы', href:'/dashboard/faq'},
+    {text: 'Отзывы', href:'/'},
 ]
 
 const Header:FC<headerProps> = React.memo((props) => {
@@ -43,18 +43,12 @@ const Header:FC<headerProps> = React.memo((props) => {
 
     // STATES FROM REDUX
     // данные по авторизации
-    const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
-
     // Actions
     // для сохранения данных о пользователе
     const {addAdminRole, addMainAdminRole, addAuthStatus, addInfoUser,} = authSliceActions;
     // добавить категории в стейт
 
     // ACTIONS FROM REDUX
-    // для добавления параметров по Window
-    const {setWindowWidth, setScrollUp, setScrollDown, setScrolledHeight} = indicatorsWindowActions;
-    // для добавления тарифов в хранилище
-    const {addPrices} = PricesSLiceActions;
 
     //STATE
     // для отображения и скрытия подменю профиля

@@ -45,34 +45,6 @@ const BtnEnterBlock:FC<btnEnterBlockProps> = React.memo((props) => {
         dispatch(changeStateLoginFormPopup(true));
     }, []);
 
-
-    // слушатели событий
-    // слушатели загрузки страницы
-    // добавляем ширину, нужно чтобы понять отображать кнопку бургера или нет
-    // window.addEventListener('load', () => {
-    //     dispatch(setWindowWidth(document.documentElement.clientWidth));
-    // })
-    // // при мзменении ширины экрана фикрисуем ее
-    // window.addEventListener('resize', () => {
-    //     dispatch(setWindowWidth(window.innerWidth));
-    // })
-    // // контроль скролла для скрытия header
-    // window.addEventListener('scroll', (e) => {
-    //     dispatch(setScrolledHeight(window.scrollY));
-    // });
-    // // запрещаем скролить когда открыто бургер меню
-    // window.addEventListener('wheel', (e) => {
-    //     if (burgerMenuOpenRef.current) return;
-    //     if (e.deltaY > 0 && scrolledHeight >= 85) {
-    //         dispatch(setScrollDown(true));
-    //         dispatch(setScrollUp(false));
-    //     }
-    //     if (e.deltaY < 0) {
-    //         dispatch(setScrollDown(false));
-    //         dispatch(setScrollUp(true));
-    //     }
-    // });
-
     return (
         <div
             className={cls.coverProfile}

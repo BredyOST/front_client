@@ -7,12 +7,14 @@
 .coverBtn{
   display: flex;
   justify-content: center;
+  min-width: 100%;
 }
 
 .buttonLogin,
 .link{
-  @extend .btn;
+  @extend .btnTwo;
   @extend .widthAndPaddingBtn;
   background-color: #d74b4b;
+  font-size: mixins.rem(30);
   }
 

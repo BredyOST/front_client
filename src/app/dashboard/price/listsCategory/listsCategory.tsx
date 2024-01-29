@@ -11,6 +11,8 @@ import AddSvg from '../../../components/svgs/add.svg';
 import ChosenSvg from '../../../components/svgs/chosen.svg';
 import ButtonToBuy from "@/app/dashboard/price/buttonToBuy/buttonToBuy";
 import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
+import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
+import {Button} from "@/app/components/shared/ui/Button/Button";
 
 interface listsCategoryProps {
     classname?: string;
@@ -96,6 +98,9 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
                                 </ButtonToBuy>
                             </div>
                         ))}
+                    </div>
+                    <div>
+                        <Button classname={cls.btns}>сохранить</Button>
                     </div>
                 </div>
             </Suspense>

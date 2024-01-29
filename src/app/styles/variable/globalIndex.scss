@@ -19,10 +19,13 @@ $Theme_attention_font_size_adaptive: 18; // размер адаптив
 $Theme_attention_font_weight: 600; // жирность
 
 //buttons or Links
-$Theme_main_header_background_button: rgb(38 118 154); // button in header
-$Theme_main_header_background_Button_hover: rgb(5 80 115); // button in header hover
+$Theme_main_header_background_button: #2ba296;; // button in header
+$Theme_main_header_background_Button_hover: #1f7970; // button in header hover
 $Theme_main_header_color_text: rgb(253 254 255); // кнопка в header hover текст
 $Theme_main_header_background_button_category: rgb(62 140 175); // button in header
+$Theme_main_header_background_button_Two:#d74b4b;
+$Theme_main_header_background_button_hover_Two: #ab3d3d;
+
 //1
 $Link_fontFamily: "OpenSans"; // шрифт
 $Link_font_size: 18; // размер
@@ -131,70 +134,3 @@ $PageHome_adaptive_end: 320;
 // cards
 $Cards_adaptive_start: 1600;
 $Cards_adaptive_end: 767.98;
-
-
-
-// переменные для светлой темы
-//$Light_background: rgb(236, 236, 236); // фон темы
-//$Light_mainTextcolor: rgba(0, 0, 0, 0.78); // основной цве
-//$Light_mainTextcolor_Hover: rgb(231, 2, 2); // при hovт текстаer
-//$Light_background_sideBar: rgb(211, 208, 208); // цвет для sideBar
-//$Light_background_BottonsideBar: rgb(168, 215, 58); // цвет для sideBar
-//$Light_colorMainTitle: #000; // для заголовков
-//$Light_color_Logo: #994D4D;
-//$Light_background_Button: #994D4D; // фон
-//$Light_background_Button_hover: #723939; // фон
-//$Light_color_Text: rgb(253 254 255); // текст
-//$Light_background_BurgerMenu: #c4ac87; // фон для BurgerMenu
-//$Light_background_active_BurgerMenuLink: #379d70; // фон для BurgerMenu
-//$Light_colorActive_BurgerMenu: #000000; // для заголовков
-//$Light_colorMainTitle_BurgerMenu: #ffffff; // для заголовков
-
-
-// Profile
-//$profile_color_link:#006cd9;
-//$profile_paddingTop_Block: mixins.rem(10); // паддинг
-
-//searchLine
-//$searchLine_placeHolder: #c4bbbb;  // строка поиска в header
-//$searchLine_Focus_Header:#20a7ad;  // строка поиска в header
-//$searchLine_border_Header: #9d9696;  // цвет бордера
-
-// переменные для BurgerMenu
-//$Burger_fontSize: mixins.rem(45); // размер шрифта
-//$BurgerfontSize_adaptive: 45; // размер шрифта адаптив
-
-
-// FOOTER
-//$Footer_fill_svg:white;
-//$Footer_fill_svg_hover: #2cb083;
-
-
-
-
-
-
-// Настройки для ошибок в попаме входа регистрации
-//$fontFamily_PopupError: "Outfit"; // шрифт
-//$fontSize_PopupError: mixins.rem(11); // размер шрифта
-//$fontLine_PopupError: math.div(16,10); // line-height
-//$fontWeight_PopupError: math.div(16,10); // line-height
-//$color_PopupError: rgb(217, 6, 6); // line-height
-
-
-
-// переменные для всплывающего меню где профиль
-//$fontFamily_ListProfile: "Outfit"; // шрифт
-//$fontSize_ListProfile: mixins.rem(16); // размер основного текста
-//$fontLine_ListProfile: math.div(22,16); // line-height
-//$fontWeight_ListProfile: 600; //  font-weight
-//$background_Dark_ListProfile: rgb(217, 228, 234); // фон темы
-//$color_ListProfile: rgb(52, 45, 45);
-
-
-// Buttons
-//$NavBar_fontWeight_ButtonHeader: 800; //  font-weight
-//$NavBar_fontLetterSpacing_ButtonHeader: em(1.5); //  Letter Spacing
-//$NavBar_fontLine_ButtonHeader: math.div(28,22); // line-height
-//$NavBar_fontFamily_ButtonHeader: "Outfit"; // шрифт
-//$NavBar_fontSize_ButtonHeader: mixins.rem(22); // размер шрифта

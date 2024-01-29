@@ -20,12 +20,11 @@
 
 .buttonLogin{
   @extend .btn;
-
   padding-bottom: mixins.rem(8);
   padding-top: mixins.rem(8);
   padding-left: mixins.rem(15);
   padding-right: mixins.rem(15);
-
+  background-color: globalIndex.$Theme_main_header_background_button;
   @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
 }
 

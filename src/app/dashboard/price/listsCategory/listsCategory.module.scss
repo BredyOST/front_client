@@ -59,3 +59,7 @@
 .content{
   min-width: 80%;
 }
+
+.btns{
+  @extend .btn
+}
