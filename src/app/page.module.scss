@@ -27,6 +27,7 @@
 .item_video{
   position: relative;
   aspect-ratio: 16/9;
+  max-height: mixins.rem(350);
 }
 
 .item_video video{
