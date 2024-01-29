@@ -246,8 +246,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             <div className={cls.blockUser}>
                                 {!item.signer_id
                                     ? <Link className={cls.link}
-                                            href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
-                                            target="_blank">
+                                        href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                        target="_blank">
                                         {/*<div className={cls.linkTop}>*/}
                                         {/*    ссылка*/}
                                         {/*    <LinkSvg*/}
@@ -263,8 +263,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                         {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
                                     </Link>
                                     : <Link className={cls.link}
-                                            href={`https://vk.com/id${item.signer_id}`}
-                                            target="_blank">
+                                        href={`https://vk.com/id${item.signer_id}`}
+                                        target="_blank">
                                         {/*<div className={cls.linkTop}>*/}
                                         {/*    ссылка*/}
                                         {/*    <LinkSvg*/}
@@ -290,8 +290,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             </div>
                             <div className={cls.blockText}>
                                 <Link className={cls.linkText}
-                                      href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
-                                      target="_blank"
+                                    href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                    target="_blank"
                                 >
                                     {/*<div className={cls.linkTop}>*/}
                                     {/*    ссылка*/}
@@ -307,7 +307,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                 {item?.post_text?.length > 350 &&
                                     <div className={cls.coverBtnShow}>
                                         <Button classname={cls.showTextBtn}
-                                                onClick={() => toggleText(item.id)}
+                                            onClick={() => toggleText(item.id)}
                                         >
                                             {expandedPosts.includes(item.id) ? "Скрыть текст" : "Показать скрытый текст"}
                                         </Button>
