@@ -8,8 +8,8 @@ async function getData() {
     let categories = [];
 
     try {
-        const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 120}})
-        console.log(process.env['NEXT_PUBLIC_API_URL'])
+        const categoriesRes = await fetch(`http://95.213.208.27/categories/getAll`, { next: { revalidate: 120}})
+        console.log(categoriesRes)
         if (categoriesRes.ok) {
             const responseData = await categoriesRes.json();
             if( responseData.length) categories = responseData
