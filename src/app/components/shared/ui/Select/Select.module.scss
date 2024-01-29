@@ -4,17 +4,19 @@
 @use "./src/app/styles/mixins.scss";
 
 .Select {
-
 }
 
 .coverSelect{
   display: flex;
-  min-width: 100%;
   position: relative;
+  @media(min-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+  }
 }
 
 .coverCurrent{
   flex: 1 1 auto;
+  min-width: 100%;
   display: flex;
   cursor: pointer;
   min-height: mixins.rem(35);
@@ -26,20 +28,18 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
+  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .arrow{
   width: mixins.rem(25);
   height: mixins.rem(25);
   position: absolute;
-
-  //top: 18%;
   top: 50%;
   right: 0%;
   transform: translateY(-50%);
   transform-origin:center;
   transition: transform ease 0.3s 0s;
-
   .active & {
     transform: rotate(90deg) translate(-50%,0%);
     transition: transform ease 0.3s 0s;
@@ -50,7 +50,6 @@
   display: flex;
   font-size: mixins.rem(18);
   opacity: 0.5;
+  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
-
-
 

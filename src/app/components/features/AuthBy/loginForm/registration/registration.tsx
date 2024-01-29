@@ -12,6 +12,7 @@ import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowS
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
+import {redirect} from "next/navigation";
 
 interface RegistrationProps {
     classname?: string;
@@ -47,6 +48,7 @@ const Registration:FC<RegistrationProps> = (props) => {
         classname,
     } = props;
     const dispatch = useAppDispatch();
+
     //RTK
     // Запрос на регистрацию пользователя
     let [registerIn, {
@@ -58,7 +60,7 @@ const Registration:FC<RegistrationProps> = (props) => {
     const { changeStateClickOnEnter } = stateAuthWindowSliceActions;
     const { closeAllPopups } = statePopupSliceActions;
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
-
+    const { changeStateLoginFormPopup } = statePopupSliceActions;
     //STATES FROM REDUX
     // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
     const { clickOnEnter } = useAppSelector((state) => state.statePopup);
@@ -95,12 +97,23 @@ const Registration:FC<RegistrationProps> = (props) => {
                 passwordCheck:data.passwordRegistrationCheck,
             }
             registerIn(infoForRegistration).then((results) => {
-                if(results) {
-                    dispatch(closeAllPopups(true))
-                }
+                // if(results && results?.data?.text == `Регистрация завершена. На Ваш Email направлено сообщение для активации аккаунта`){
+                //     dispatch(closeAllPopups(true))
+                // }
             })
         }
     };
+
+
+    React.useEffect(() => {
+        if (requestRegister?.text ==`Регистрация завершена. На Ваш Email направлено сообщение для активации аккаунта` ) {
+            dispatch(changeStateLoginFormPopup(false));
+            dispatch(changeStateClickOnEnter(0))
+            redirect('/dashboard/price')
+            dispatch(closeAllPopups(true));
+        }
+    },[requestRegister])
+
 
     //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
     const {

@@ -39,7 +39,6 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
     //USEREF
 
     //FUNCTIONS
-
     // функция для изменения состояния попапа loginForm
     const closeCategoryPopup = React.useCallback(() => {
         dispatch(changeStateCategoriesPopup(false));
@@ -66,7 +65,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
             classname={classNames(cls.LoginModal, {}, [classname])}
             isOpen={categoriesPopup}
             onClose={closeCategoryPopup}
-            classForContent={cls.contentLogin}
+            classForContent={cls.content}
             lazy
         >
             <Suspense fallback={
@@ -74,6 +73,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
             }
             >
                 <div className={classNames(cls.listsCategory, {},[classname] )} >
+                    <div className={cls.title}>Нажмите на категорию чтобы добавить или убрать</div>
                     <div className={cls.cover}>
                         {categories && categories.map((item:any) => (
                             <div

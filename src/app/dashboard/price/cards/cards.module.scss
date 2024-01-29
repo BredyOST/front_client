@@ -218,6 +218,51 @@
   padding-top: mixins.rem(10);
 }
 
+.btnSpanMain{
+  @extend .btn;
+  cursor: pointer;
+  padding-left: mixins.rem(15);
+  padding-right: mixins.rem(15);
+  padding-bottom: mixins.rem(10);
+  padding-top: mixins.rem(10);
+  position: relative;
+  z-index: 2;
+
+  &.copied{
+    font-weight: 600;
+  }
+}
+
+.btnSpan {
+  z-index: -1;
+  width: 0;
+  min-height: 100%;
+  background-color: #e05151;
+  position: absolute;
+  top: 0;
+  border-radius: mixins.rem(10);
+  opacity: 0;
+    animation-name: rise;
+    animation-duration: 3s;
+    @keyframes rise {
+      0% {
+        background-color: #ee5d5d;
+        width: 0;
+        opacity: 0;
+      }
+      60% {
+        background-color: #ee5d5d;
+        width: 100%;
+        opacity: 0.9;
+      }
+      90% {
+        background-color: #ee5d5d;
+        width: 0%;
+        opacity: 0;
+      }
+    }
+  }
+
 .error {
   @extend .error;
 }

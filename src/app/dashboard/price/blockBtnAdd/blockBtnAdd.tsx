@@ -20,6 +20,7 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
 
     //ACTIONS FROM REDUX
     const {changeStateCategoriesPopup} = statePopupSliceActions;
+    const { closeAllPopups } = statePopupSliceActions;
     //STATES FROM REDUX
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
     const {chosenCategory} = useAppSelector(state => state.categories)
@@ -30,11 +31,14 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
     const targetRef = React.useRef(null);
 
     //FUNCTIONS
-
     const changeStateShowMenuCategory = () => {
-        dispatch(changeStateCategoriesPopup(!categoriesPopup))
-    }
 
+        if(categoriesPopup) {
+            dispatch(closeAllPopups(true))
+        } else {
+            dispatch(changeStateCategoriesPopup(true))
+        }
+    }
 
     return (
         <div className={cls.coverCategories}>

@@ -15,6 +15,7 @@ import {setThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {redirect} from "next/navigation";
+import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 
 interface LogiInProps {
 }
@@ -56,7 +57,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
     const {
         addMainAdminRole, addAdminRole, addAuthStatus, addInfoUser, LogOutFromProfile,
     } = authSliceActions;
-
+    const { changeStateLoginFormPopup, closeAllPopups } = statePopupSliceActions;
     //STATES FROM REDUX
     // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
     const { clickOnEnter } = useAppSelector((state) => state.statePopup);
@@ -145,10 +146,13 @@ const LogiIn:FC<LogiInProps> = (props) => {
             setThisCookie('_d', requestLogin.refreshToken)
             setThisCookie('_z', requestLogin.accessToken)
             setThisCookie('_a', requestLogin.sessionToken)
-            if((requestLogin?.activatedFreePeriod && requestLogin?.categoriesFreePeriod?.length) || (requestLogin?.categoriesHasBought?.length)) {
-                redirect('/dashboard/search', )
+            dispatch(changeStateLoginFormPopup(false));
+            if ((requestLogin?.activatedFreePeriod && requestLogin?.categoriesFreePeriod?.length) || (requestLogin?.categoriesHasBought?.length)) {
+                redirect('/dashboard/search')
+                dispatch(closeAllPopups(true));
             } else {
-                redirect('/dashboard/price',)
+                redirect('/dashboard/price')
+                dispatch(closeAllPopups(true));
             }
         }
     },[requestLogin])

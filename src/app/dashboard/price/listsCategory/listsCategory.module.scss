@@ -7,14 +7,25 @@
 .LoginModal {
   display: flex;
 }
-.cover{
+
+.listsCategory{
   display: flex;
   flex-direction: column;
+  row-gap: mixins.rem(10);
+  min-height: 100%;
+  flex: 1 1 auto;
+}
+
+.title{
+  font-size: mixins.rem(14);
+  font-weight: 600;
+  color: #000000;
 }
 
 .coveBtn{
   display: flex;
   flex-direction: column;
+  white-space: nowrap;
 }
 
 .iconAdd{
@@ -22,12 +33,29 @@
   fill-rule: evenodd;
   width: mixins.rem(20);
   height: mixins.rem(20);
+  flex: 0 0 mixins.rem(20);
 }
 
 .cover{
-  display:grid;
-  grid-template-columns: repeat(auto-fill,minmax(250px, 1fr) minmax(250px, 1fr) minmax(250px, 1fr));
-  grid-template-rows: auto;
-  column-gap: mixins.rem(10);
+  overflow: auto;
+  max-height: mixins.rem(400);
   row-gap: mixins.rem(10);
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px, 1fr));
+    grid-template-rows: auto;
+    column-gap: mixins.rem(10);
+    row-gap: mixins.rem(10);
+    flex: 1 1 auto;
+  }
+  @media(max-width: mixins.em(global.$mobile)) {
+    display: flex;
+    flex-direction: column;
+
+  }
+}
+
+.content{
+  min-width: 80%;
 }

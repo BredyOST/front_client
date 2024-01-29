@@ -10,6 +10,7 @@ import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopu
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
+import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 
 interface cardsProps {
     classname?: string;
@@ -47,7 +48,8 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const [period, setPeriod] = React.useState<string>('1');
     const [textMonthSliceTwo, setTextMonthSliceTwo] = React.useState<string>('Месяц'); // месяц во втором слайсе
     const [copiedNotification, setCopiedNotification] = React.useState<boolean>(false);
-    // const [showAttention, setShowAttention] = React.useState<boolean>(false);
+    const [indicatorCopied, setIndicatorCopied] = React.useState<boolean>(false)
+
     const changePeriod = (value:string) => {
         setPeriod(value)
     }
@@ -76,14 +78,11 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     //USEREF
 
     //FUNCTIONS
-    const changeStateShowMenuCategory = () => {
-        dispatch(changeStateCategoriesPopup(!categoriesPopup))
-    }
 
     const payOrTryFreePeriod = (title:string) => {
         if(!chosenCategory.length) {
+            dispatch(changeStateCategoriesPopup(!categoriesPopup))
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
-            changeStateShowMenuCategory()
         }
 
         if (title === `Бесплатный` && chosenCategory.length) {
@@ -111,6 +110,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         copyToClipboard(emailAdress);
     };
     const copyToClipboard = (text:string) => {
+        setIndicatorCopied(true)
         if(copiedNotification) return
         const tempInput = document.createElement('input');
         tempInput.value = text;
@@ -123,6 +123,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         const id = setTimeout(() => {
             setCopiedNotification(false);
             clearTimeout(id)
+            setIndicatorCopied(false)
         }, 3000); // Уведомление будет скрыто через 2 секунды
 
     };
@@ -174,10 +175,11 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             </div>
             {item.title == 'Командный'
                 ?   <span
-                    className={cls.btn}
+                    className={indicatorCopied ? `${cls.btnSpanMain} ${cls.copied}`: cls.btnSpanMain}
                     onClick={changeStateShowEmail}
                 >
                     {copiedNotification ? `Email скопирован` : emailAdress}
+                    {indicatorCopied && <span className={cls.btnSpan}></span>}
                 </span>
                 :    <Button
                     onClick={!stateAuth ?  openLoginFormPopup :  () => payOrTryFreePeriod(item.title)  }

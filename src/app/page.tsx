@@ -9,7 +9,8 @@ async function getData() {
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 120}})
         if (categoriesRes.ok) {
-            categories = await categoriesRes.json();
+            const responseData = await categoriesRes.json();
+            if( responseData.length) categories = responseData
         } else {
             console.error('Categories API request failed with status:', categoriesRes.status);
         }

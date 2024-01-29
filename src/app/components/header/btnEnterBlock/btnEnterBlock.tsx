@@ -7,7 +7,6 @@ import ProfileSvg from "@/app/components/svgs/profile.svg";
 import Profile from "@/app/components/header/profileList/profileList";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import Header from "@/app/components/header/header";
 
 interface btnEnterBlockProps {
     classname?: string;

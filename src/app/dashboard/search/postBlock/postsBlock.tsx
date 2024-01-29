@@ -2,13 +2,13 @@
 import React, {FC} from 'react';
 import cls from './postsBlock.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
-import LinkSvg from '../../../components/svgs/link.svg';
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useGetAllKeysRedisMutation, useGetPostsRedisMutation,
 } from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import Link from "next/link";
+import VkSvg from "./../../../components/svgs/vk.svg"
 
 interface postsBlockProps {
 
@@ -140,8 +140,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             let i = 0;
 
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
-            console.log(chosenCategory)
-            console.log(keys)
             while (allLoadedPosts.length < postsToLoad) {
                 const newPosts = await loadPostsFromRedis(i, keys); // функция для загрузки постов из Redis
                 if (!newPosts.length) {
@@ -159,12 +157,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                 postsToLoad += 300; // увеличиваем количество постов для следующей загрузки
                 i++;
             }
-
-
         };
-
         loadAndFilterPosts()
-
     }, [keyWords, keyCityWords, social, postsCount, chosenCategory])
 
     // Пагинация
@@ -241,89 +235,95 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                     <div
                         key={item.id}
                         className={cls.rows}>
-                        <div className={cls.blockCategories}>{chosenCategory?.name}</div>
-                        <div className={cls.blockDate}>
-                            <div>{getFormattedDate(item.post_date_publish)}</div>
-                            <div>{getFormattedTime(item.post_date_publish)}</div>
+                        <div className={cls.mainBlock}>
+                            <div className={cls.blockCategories}>{chosenCategory?.name}</div>
+                            <div className={cls.blockDate}>
+                                <div>{getFormattedDate(item.post_date_publish)}</div>
+                                <div>{getFormattedTime(item.post_date_publish)}</div>
+                            </div>
                         </div>
-                        <div className={cls.blockUser}>
-                            {!item.signer_id
-                                ? <Link className={cls.link}
-                                    href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
-                                    target="_blank">
-                                    <div className={cls.linkTop}>
-                                        ссылка
-                                        <LinkSvg
-                                            className={cls.linkSvg}
-                                        />
-                                    </div>
-                                    <div className={cls.rightLinkSvg}>
-                                        {item.photo_100_group && <img className={cls.imageGroup} src={item.photo_100_group} alt=""/>}
-                                        <div className={cls.nameGroup}>
-                                            {item.name_group}
+                        <div className={cls.secondBlock}>
+                            <div className={cls.blockUser}>
+                                {!item.signer_id
+                                    ? <Link className={cls.link}
+                                            href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                            target="_blank">
+                                        {/*<div className={cls.linkTop}>*/}
+                                        {/*    ссылка*/}
+                                        {/*    <LinkSvg*/}
+                                        {/*        className={cls.linkSvg}*/}
+                                        {/*    />*/}
+                                        {/*</div>*/}
+                                        <div className={cls.rightLinkSvg}>
+                                            {item.photo_100_group && <img className={cls.imageGroup} src={item.photo_100_group} alt=""/>}
+                                            <div className={cls.nameGroup}>
+                                                {item.name_group}
+                                            </div>
                                         </div>
-                                    </div>
-                                    {item.identification_post == 'vk' && <div>vk</div>}
-                                </Link>
-                                : <Link className={cls.link}
-                                    href={`https://vk.com/id${item.signer_id}`}
-                                    target="_blank">
-                                    <div className={cls.linkTop}>
-                                        ссылка
-                                        <LinkSvg
-                                            className={cls.linkSvg}
-                                        />
-                                    </div>
-                                    <div className={cls.rightLinkSvg}>
-                                        {item.photo_100_user && <img className={cls.image} src= {item.photo_100_user} alt=""/>}
-                                        <div className={cls.nameGroup}>
-                                            {item.first_name_user || item.last_name_user &&
-                                                <div className={cls.nameBlock}>
-                                                    <div>
-                                                        {item.first_name_user}
-                                                    </div>
-                                                    <div>
-                                                        {item.last_name_user}
-                                                    </div>
-                                                </div>}
+                                        {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
+                                    </Link>
+                                    : <Link className={cls.link}
+                                            href={`https://vk.com/id${item.signer_id}`}
+                                            target="_blank">
+                                        {/*<div className={cls.linkTop}>*/}
+                                        {/*    ссылка*/}
+                                        {/*    <LinkSvg*/}
+                                        {/*        className={cls.linkSvg}*/}
+                                        {/*    />*/}
+                                        {/*</div>*/}
+                                        <div className={cls.rightLinkSvg}>
+                                            {item.photo_100_user && <img className={cls.image} src= {item.photo_100_user} alt=""/>}
+                                            <div className={cls.nameGroup}>
+                                                {item.first_name_user || item.last_name_user &&
+                                                    <div className={cls.nameBlock}>
+                                                        <div>
+                                                            {item.first_name_user}
+                                                        </div>
+                                                        <div>
+                                                            {item.last_name_user}
+                                                        </div>
+                                                    </div>}
+                                            </div>
                                         </div>
-                                    </div>
-                                </Link>
-                            }
-                        </div>
-                        <div className={cls.blockText}>
-                            <Link className={cls.linkText}
-                                href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
-                                target="_blank"
-                            >
-                                <div className={cls.linkTop}>
-                                    ссылка
-                                    <LinkSvg
-                                        className={cls.linkSvg}
-                                    />
-                                </div>
-                                {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
-                                    ? item?.post_text
-                                    : `${item.post_text?.slice(0, 350)}...`
+                                    </Link>
                                 }
-                            </Link>
-                            {item?.post_text?.length > 350 &&
-                                <div className={cls.coverBtnShow}>
-                                    <Button classname={cls.showTextBtn}
-                                        onClick={() => toggleText(item.id)}
-                                    >
-                                        {expandedPosts.includes(item.id) ? "Скрыть текст" : "Показать скрытый текст"}
-                                    </Button>
-                                </div>
-                            }
+                            </div>
+                            <div className={cls.blockText}>
+                                <Link className={cls.linkText}
+                                      href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                      target="_blank"
+                                >
+                                    {/*<div className={cls.linkTop}>*/}
+                                    {/*    ссылка*/}
+                                    {/*    <LinkSvg*/}
+                                    {/*        className={cls.linkSvg}*/}
+                                    {/*    />*/}
+                                    {/*</div>*/}
+                                    {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
+                                        ? item?.post_text
+                                        : `${item.post_text?.slice(0, 350)}...`
+                                    }
+                                </Link>
+                                {item?.post_text?.length > 350 &&
+                                    <div className={cls.coverBtnShow}>
+                                        <Button classname={cls.showTextBtn}
+                                                onClick={() => toggleText(item.id)}
+                                        >
+                                            {expandedPosts.includes(item.id) ? "Скрыть текст" : "Показать скрытый текст"}
+                                        </Button>
+                                    </div>
+                                }
+                            </div>
                         </div>
                         <div className={cls.blockCity}>
-                            {!item.city_group && !item.country_group &&
-                                <div>информация отсутствует</div>
-                            }
-                            {item.city_group && <div>{item.city_group}</div>}
-                            {item.country_group && <div>{item.country_group}</div>}
-                            <div>
+                            <div className={cls.cityBlockOne}>
+                                {!item.city_group && !item.country_group &&
+                                    <div>информация отсутствует</div>
+                                }
+                                {item.city_group && <div>{item.city_group}</div>}
+                                {item.country_group && <div>{item.country_group}</div>}
+                            </div>
+                            <div className={cls.cityBlockTwo}>
                                 {item.city_user && <div>{item.city_user}</div>}
                                 {item.country_user && <div>{item.country_user}</div>}
                             </div>
