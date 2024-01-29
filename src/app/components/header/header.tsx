@@ -12,8 +12,6 @@ import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
 import Notification from "@/app/components/shared/notification/notification";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
-import {PricesSLiceActions} from "@/app/redux/entities/prices/pricesSlice";
-import {indicatorsWindowActions} from "@/app/redux/entities/indentidicatorsWindow/identificatorsWindowSlice";
 import BtnEnterBlock from "@/app/components/header/btnEnterBlock/btnEnterBlock";
 interface headerProps {
     classname?: string;
@@ -27,7 +25,7 @@ export type NavBar = {
 
 export const navbarFirst:NavBar[] = [
     {text: 'Тарифы', href:'/dashboard/price'},
-    {text: 'Ответы на вопросы', href:'/dashboard/faq'},
+    {text: 'Вопросы', href:'/dashboard/faq'},
     {text: 'Отзывы', href:'/'},
 ]
 

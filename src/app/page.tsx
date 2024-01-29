@@ -79,8 +79,10 @@ async function Home(props:pageProps) {
                                 <h3 className={cls.howWorks}>Как пользоваться сайтом</h3>
                                 <div className={cls.videoWrapper}>
                                     <div className={cls.item_video}>
-                                        <video src="">
-                                            <source type="video/mp4" src="http://95.213.208.27:7777/uploads/5dbf15e2cebac3bd8c.mp4"/>
+                                        <video poster='http://95.213.208.27:7777/uploads/e8fb9f338255bb72d4.png' controls preload="metadata">
+                                            <source type="video/webm" src="http://95.213.208.27:7777/uploads/768abc98d7a19a6a93.webm"/>
+                                            <source type="video/mp4" src="http://95.213.208.27:7777/uploads/768abc98d7a19a6a93.mp4"/>
+                                            Your browser does not support the video tag.
                                         </video>
                                     </div>
                                 </div>
