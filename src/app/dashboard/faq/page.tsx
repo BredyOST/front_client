@@ -1,15 +1,16 @@
 import cls from './faq.module.scss';
+import {classNames} from "@/app/components/shared/lib/classNames/className";
 import React, {FC} from "react";
-import Question from "@/app/dashboard/faq/question/question";
 import Link from "next/link";
+import Question from "@/app/dashboard/faq/question/question";
 
 interface faqProps {
-
+    items:any
 }
 
 
-async function Faq (props:faqProps){
-    const {} = props;
+async function Faq (props:faqProps) {
+    const {items} = props;
 
     const arrayQuestions = [
         {id:1, question: 'Как пользоваться сайтом', answer: `с инструкцией по сайту можете ознакомится на ${<Link href={'/'}>на главной странице</Link>}`}
@@ -17,16 +18,18 @@ async function Faq (props:faqProps){
 
     return (
         <div className={cls.faq}>
-            <div className={cls.cover}>
-                <div className={cls.section}>
-                    <h1 className={cls.mainTitle}>Ответы на вопросы</h1>
+            <div className='page__container'>
+                <div className={cls.cover}>
+                    <div className={cls.section}>
+                        <h1 className={cls.mainTitle}>Ответы на вопросы</h1>
+                    </div>
+                    {arrayQuestions?.length && arrayQuestions.map((item:any) => (
+                        <Question
+                            key={item.id}
+                            items = {item}
+                        />
+                    ))}
                 </div>
-                {arrayQuestions?.length && arrayQuestions.map((item:any) => (
-                    <Question
-                        key={item.id}
-                        items = {item}
-                    />
-                ))}
             </div>
         </div>
     );
