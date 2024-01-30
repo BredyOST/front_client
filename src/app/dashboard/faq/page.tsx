@@ -1,52 +1,32 @@
 import cls from './faq.module.scss';
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import ArraySvg from '../../components/svgs/arrow.svg'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {FC} from "react";
+import React, {FC} from "react";
+import Question from "@/app/dashboard/faq/question/question";
+import Link from "next/link";
 
 interface faqProps {
+
 }
 
 
-const Faq:FC<faqProps> = (props) => {
+async function Faq (props:faqProps){
     const {} = props;
 
+    const arrayQuestions = [
+        {id:1, question: 'Как пользоваться сайтом', answer: `с инструкцией по сайту можете ознакомится на ${<Link href={'/'}>на главной странице</Link>}`}
+    ]
+
     return (
-        <div className={classNames(cls.faq, {},[] )} >
-            <div className='page__container'>
-                <div className={cls.cover}>
-                    <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>FAQ</h1>
-                    </div>
-                    <div className={cls.body}>
-                        <div className={cls.question}>
-                            <div className={cls.coverBtn}>
-                                <Button
-                                    classname={cls.btnOpen}
-                                >
-                                    <div className={cls.questionText}>Вопрос №1</div>
-                                    <div className={cls.text}>Как воспользоваться бесплатным пробным периодом?</div>
-                                    <ArraySvg className={cls.arrowSvg}/>
-                                </Button>
-                            </div>
-                            <div className={cls.wrapper}>
-                            </div>
-                        </div>
-                        <div className={cls.question}>
-                            <div className={cls.coverBtn}>
-                                <Button
-                                    classname={cls.btnOpen}
-                                >
-                                    <div className={cls.questionText}>Вопрос №1</div>
-                                    <div className={cls.text}>Как воспользоваться бесплатным пробным периодом?</div>
-                                    <ArraySvg className={cls.arrowSvg}/>
-                                </Button>
-                            </div>
-                            <div className={cls.wrapper}>
-                            </div>
-                        </div>
-                    </div>
+        <div className={cls.faq}>
+            <div className={cls.cover}>
+                <div className={cls.section}>
+                    <h1 className={cls.mainTitle}>Ответы на вопросы</h1>
                 </div>
+                {arrayQuestions?.length && arrayQuestions.map((item:any) => (
+                    <Question
+                        key={item.id}
+                        items = {item}
+                    />
+                ))}
             </div>
         </div>
     );

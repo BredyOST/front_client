@@ -4,7 +4,7 @@
 // переменные для темной темы (основная)
 
 //background
-$Theme_main_background: rgb(248 246 246); // basic background
+$Theme_main_background: rgb(255, 255, 255); // basic background
 $Theme_main_header_background: rgb(38 53 63); // header background
 $Theme_main_background_additional: #a9c78d; // дополнительный background
 
@@ -87,6 +87,10 @@ $Logo_font_line-height: math.div(31,25); // межстрочный интерв�
 $Logo_font_weight: 600; // жирность
 $Logo_color: rgb(91 189 182);  // цвет текста
 $Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
+
+//второй тект
+$Second_font_family:"Roboto";
+
 
 
 // HEADER

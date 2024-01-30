@@ -13,6 +13,7 @@ import ButtonToBuy from "@/app/dashboard/price/buttonToBuy/buttonToBuy";
 import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
 import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
 import {Button} from "@/app/components/shared/ui/Button/Button";
+import {redirect} from "next/navigation";
 
 interface listsCategoryProps {
     classname?: string;
@@ -30,6 +31,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
     // для изменения состояния попапа loginForm
     const { changeStateLoginFormPopup, changeStateCategoriesPopup } = statePopupSliceActions;
     const {addCategories, addChosenCategories} = categoriesActions;
+    const { closeAllPopups } = statePopupSliceActions;
 
     //STATES FROM REDUX
     // все выбранные категории
@@ -48,9 +50,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
 
 
     const addThisToBuy = (item:any) => {
-
         const isItemInChosen = chosenCategory.find((element:any) => element.id === item.id);
-
         if (isItemInChosen) {
             // Если элемент уже есть, уберите его из состояния
             const updatedChosen = chosenCategory.filter((element:any) => element.id !== item.id);
@@ -62,6 +62,11 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
         }
     }
 
+    const closePopup = () => {
+        dispatch(closeAllPopups(true));
+        // dispatch(changeStateCategoriesPopup(false));
+    }
+    
     return (
         <Modal
             classname={classNames(cls.LoginModal, {}, [classname])}
@@ -99,8 +104,13 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
                             </div>
                         ))}
                     </div>
-                    <div>
-                        <Button classname={cls.btns}>сохранить</Button>
+                    <div className={cls.saveBtn}>
+                        <Button
+                            classname={cls.btns}
+                            onClick={closePopup}
+                        >
+                            сохранить
+                        </Button>
                     </div>
                 </div>
             </Suspense>

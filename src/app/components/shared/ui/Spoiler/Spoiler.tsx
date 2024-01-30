@@ -2,7 +2,7 @@
 // import { classNames } from 'shared/lib/classNames/classNames';
 // import { useTranslation } from 'react-i18next';
 // import cls from './Spoiler.module.scss';
-// import { Button } from '../../../widgets/Button/ui/Button';
+// import { ButtonHome } from '../../../widgets/ButtonHome/ui/ButtonHome';
 // import { useAppSelector } from '../../hooks/redux';
 // import ArrowSvg from '../../assets/icons/arrow.svg';
 //
@@ -60,13 +60,13 @@
 //                 className={cls.item}
 //                 onClick={() => changeActiveSpoiler(element.id)}
 //             >
-//                 <Button
+//                 <ButtonHome
 //                     type="button"
 //                     className={cls.btn}
 //                 >
 //                     {title}
 //                     {windowWidth < MOBILE_WIDTH && indicator === 1 && <ArrowSvg className={cls.arrowSvg} /> }
-//                 </Button>
+//                 </ButtonHome>
 //                 <div className={cls.body}>{children}</div>
 //             </div>
 //         </div>

@@ -2,9 +2,9 @@
 @use '../../styles/variable/global';
 @use '../../styles/variable/globalIndex';
 @use "../../styles/mixins";
-@use '../../styles/variable/common';
+@use "../../styles/variable/common";
 
-.faq {
+.feedback {
   @extend .paddingPages;
 }
 
@@ -20,6 +20,6 @@
   flex: 1 1 auto;
 }
 
-.mainTitle {
+.mainTitle{
   @extend .forMainTitle;
 }

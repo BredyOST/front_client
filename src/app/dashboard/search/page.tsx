@@ -18,7 +18,6 @@ async function getData() {
 
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 500 } })
-        console.log(categoriesRes)
         if (categoriesRes.ok) {
             categories = await categoriesRes.json();
         } else {

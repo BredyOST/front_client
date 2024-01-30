@@ -1,7 +1,10 @@
+'use client'
 import React, { FC } from 'react';
 import cls from './appLink.module.scss';
 import Link, {LinkProps} from "next/link";
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
+import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
+import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 
 interface AppLinkProps extends LinkProps {
     classname?: string;
@@ -11,6 +14,8 @@ interface AppLinkProps extends LinkProps {
     onPointerLeave?:any
     children?:any
     href:any
+    onClick?:any
+    infroForOnclick?:any
 }
 
 export const AppLink:FC<AppLinkProps> = React.memo((props) => {
@@ -22,6 +27,8 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
         indicatorBurger, // индикатор для burger menu
         onPointerEnter,
         onPointerLeave,
+        onClick,
+        infroForOnclick
     } = props;
 
     const mods: Mods = {
@@ -29,12 +36,28 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
         [cls.activeBurger]: indicatorBurger,
     };
 
+
+    const {addChosenCategories} = categoriesActions;
+    const dispatch = useAppDispatch();
+
+    //STATES FROM REDUX
+    // все выбранные категории
+    const {chosenCategory} = useAppSelector(state => state.categories)
+
+    const goToPrice = (infroForOnclick:any) => {
+
+        if (infroForOnclick && infroForOnclick?.id)
+            dispatch(addChosenCategories([ { id: infroForOnclick?.id, text: infroForOnclick?.name }]));
+    }
+
+
     return (
         <Link
             href={href}
             className={classNames(cls.appLink, mods, [classname])}
             onPointerEnter={onPointerEnter}
             onPointerLeave={onPointerLeave}
+            onClick={() => goToPrice(infroForOnclick)}
         >
             {children}
         </Link>

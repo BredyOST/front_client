@@ -2,14 +2,13 @@ import React from 'react';
 import cls from './page.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 
 async function getData() {
     let categories = [];
 
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 120}})
-        console.log(categoriesRes)
         if (categoriesRes.ok) {
             const responseData = await categoriesRes.json();
             if( responseData.length) categories = responseData
@@ -26,16 +25,6 @@ async function getData() {
 interface pageProps {
 }
 
-const textSecond = [
-    {id:1, text:'Требуется репетитор'},
-    {id:2, text:'В поисках няни'},
-    {id:3, text:'Нужен электрик'},
-]
-
-const textFour = [
-    {id:1, text:'Попробуй бесплатный период!'},
-]
-
 export interface ICategory {
     id: number
     id_category: string
@@ -50,7 +39,6 @@ export interface ICategory {
 
 async function Home(props:pageProps) {
     const {} = props;
-
     const {categories} = await getData();
 
     return (
@@ -64,18 +52,25 @@ async function Home(props:pageProps) {
                             <div className={cls.coverCategory}>
                                 {
                                     categories && categories.map((item:ICategory) =>
-                                        <Button
-                                            className={cls.titleCategory}
+                                        <AppLink
+                                            classname={cls.titleCategory}
                                             key={item.id}
+                                            infroForOnclick = {item}
+                                            href={'/dashboard/price'}
                                         >
                                             <div className={cls.name}>{item.name}</div>
-                                        </Button>
+                                        </AppLink>
                                     )
                                 }
                             </div>
                         </div>
                         <div className={cls.section}>
                             <HomePageBtn/>
+                            <div className={cls.coverAction}>
+                                <div className={cls.action}>
+                                    <img className={cls.image} src="https://timgotow.ru/uploads/1fa5fb49336e392618.jpg" alt="картинка"/>
+                                </div>
+                            </div>
                             <div className={cls.coverVideo}>
                                 <h3 className={cls.howWorks}>Как пользоваться сайтом</h3>
                                 <div className={cls.videoWrapper}>

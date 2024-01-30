@@ -46,7 +46,6 @@ const Notification:FC<notificationProps> = React.memo((props) => {
             if (commonForError) dispatch(addInfoForCommonError(''))
             setIndicator(false)
         }, 5000)
-        // console.log(timerRef)
     }
 
     React.useEffect(

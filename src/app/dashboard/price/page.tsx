@@ -30,7 +30,6 @@ async function getData() {
         
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 500 } })
-        console.log(process.env['NEXT_PUBLIC_API_URL'])
         if (categoriesRes.ok) {
             const responseData = await categoriesRes.json();
             if( responseData.length) categories = responseData
@@ -52,6 +51,7 @@ async function PricePage(props:pageProps) {
         categories
     } = await getData();
 
+
     return (
         <div className={classNames(cls.pricePage, {},[] )} >
             <div className='page__container'>
@@ -68,7 +68,9 @@ async function PricePage(props:pageProps) {
                             {/*    <Link className={cls.btn} href='/dashboard/notification'>Настроить уведомления</Link>*/}
                             {/*</div>*/}
                         </div>
-                        <BlockBtnAdd/>
+                        <BlockBtnAdd
+                            categories={categories}
+                        />
                     </div>
                     <div className={cls.prices}>
                         {prices && prices.map((item:any) => (

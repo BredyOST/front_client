@@ -96,11 +96,7 @@ const Registration:FC<RegistrationProps> = (props) => {
                 password:data.passwordRegistration,
                 passwordCheck:data.passwordRegistrationCheck,
             }
-            registerIn(infoForRegistration).then((results) => {
-                // if(results && results?.data?.text == `Регистрация завершена. На Ваш Email направлено сообщение для активации аккаунта`){
-                //     dispatch(closeAllPopups(true))
-                // }
-            })
+            registerIn(infoForRegistration)
         }
     };
 

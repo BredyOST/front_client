@@ -11,6 +11,7 @@ import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
+import {redirect} from "next/navigation";
 
 interface cardsProps {
     classname?: string;
@@ -75,6 +76,12 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         }
     },[period])
 
+    React.useEffect(() => {
+        if (requestFreePeriod?.text ==`Бесплатный период активирован` ) {
+            redirect('/dashboard/search')
+        }
+    },[requestFreePeriod])
+
     //USEREF
 
     //FUNCTIONS
@@ -85,7 +92,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
 
-        if (title === `Бесплатный` && chosenCategory.length) {
+        if (title === `Бесплатный` && chosenCategory.length == 1) {
             getFreePeriod(chosenCategory).then((result) => {
                 if('data' in result && result?.data?.text == `Бесплатный период активирован` && cookies && cookies._z) {
                     getInfoUser(cookies).then((result) => {
@@ -98,6 +105,8 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     });
                 }
             })
+        } else if (title === `Бесплатный` && chosenCategory.length > 1){
+            dispatch(addInfoForCommonError({ message:'Выберите одну категорию для бесплатного периода'} ))
         }
     }
 

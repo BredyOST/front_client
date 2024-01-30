@@ -26,7 +26,7 @@ export type NavBar = {
 export const navbarFirst:NavBar[] = [
     {text: 'Тарифы', href:'/dashboard/price'},
     {text: 'Вопросы', href:'/dashboard/faq'},
-    {text: 'Отзывы', href:'/'},
+    {text: 'Отзывы', href:'/dashboard/feedback'},
 ]
 
 const Header:FC<headerProps> = React.memo((props) => {
@@ -109,7 +109,8 @@ const Header:FC<headerProps> = React.memo((props) => {
                             <div className={cls.coverButton}>
                                 <AppLink
                                     classname={cls.link}
-                                    href='/dashboard/search'>
+                                    href='/dashboard/search'
+                                >
                                     Перейти к заявкам
                                 </AppLink>
                                 <BtnEnterBlock/>

@@ -1,0 +1,69 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use "../../../styles/variable/common";
+
+
+.body{
+  display: flex;
+  flex-direction: column;
+
+  &.active{
+    background-color: #f7f8f9;
+  }
+}
+
+.coverBtn{
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.arrowSvg{
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  flex: 0 0 mixins.rem(20);
+  fill: #000;
+}
+
+.btnOpen{
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(15);
+  padding-bottom: mixins.rem(5);
+  padding-top: mixins.rem(5);
+  padding-right: mixins.rem(10);
+  padding-left: mixins.rem(10);
+  flex: 1 1 auto;
+  min-width: 100%;
+  transition: background-color ease 0.3s 0s;
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: #bbbdba;
+      transition: background-color ease 0.3s 0s;
+    }
+  }
+}
+
+.text{
+  color: #000;
+  font-weight: 600;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+
+.bodyHide{
+    opacity: 0;
+    height: 0;
+    padding-bottom: mixins.rem(5);
+    padding-top: mixins.rem(5);
+    padding-right: mixins.rem(10);
+    padding-left: mixins.rem(10);
+
+  .active &{
+    opacity: 1;
+    height: 100%;
+  }
+}

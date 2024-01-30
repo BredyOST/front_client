@@ -76,6 +76,14 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
             setTimeout(() => {
                 setIndicatorOpen(true);
             }, 100);
+        } else if (!isOpen && indicatorOpen) {
+            setIsClosing(true);
+            timerRef.current = setTimeout(() => {
+                onClose && onClose();
+                setIsClosing(false);
+                setIndicatorOpen(false);
+                setIsMounted(false);
+            }, ANIMATION_DELAY);
         }
     }, [isOpen]);
 

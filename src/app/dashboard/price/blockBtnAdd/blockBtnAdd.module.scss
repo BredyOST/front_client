@@ -30,6 +30,44 @@
   @extend .widthAndPaddingBtn;
 }
 
+.close{
+  align-items: center;
+  display: flex;
+  fill-rule: evenodd;
+  fill: rgb(0 0 0 / 67%);
+  width: mixins.rem(27);
+  height: mixins.rem(27);
+  cursor: pointer;
+  padding-top: mixins.rem(2);
+  padding-bottom: mixins.rem(2);
+  padding-left: mixins.rem(2);
+  padding-right: mixins.rem(2);
+  transition: fill ease 0.3s 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      transition: fill ease 0.3s 0s;
+      fill: rgb(224 10 10 / 67%);
+    }
+  }
+}
+.coverChosen{
+  background-color: #2ba296;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+  border-radius: mixins.rem(5);
+  font-weight: 600;
+  color: #fffbfd;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+}
+
+.chosen{
+}
+
 .coverCategories{
   background-color: #a9c78d;
   padding-top: mixins.rem(15);
@@ -60,17 +98,6 @@
   padding-bottom: mixins.rem(5);
   padding-left: mixins.rem(10);
   padding-right: mixins.rem(10);
-  border-radius: mixins.rem(5);
-  font-weight: 600;
-  color: #fffbfd;
-}
-
-.chosen{
-  background-color: #2ba296;
-  padding-top: mixins.rem(3);
-  padding-bottom: mixins.rem(3);
-  padding-left: mixins.rem(5);
-  padding-right: mixins.rem(5);
   border-radius: mixins.rem(5);
   font-weight: 600;
   color: #fffbfd;
