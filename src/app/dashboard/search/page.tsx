@@ -18,6 +18,7 @@ async function getData() {
 
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 500 } })
+        console.log(categoriesRes)
         if (categoriesRes.ok) {
             categories = await categoriesRes.json();
         } else {
@@ -44,28 +45,30 @@ async function SearchPage(props: pageProps) {
                         <h1 className={cls.mainTitle}>Поиск клиентов</h1>
                     </div>
                     <div className={cls.filters}>
-                        <div className={cls.header}>
-                            <div className={cls.selectCategory}>
+                        <div className={cls.coverSearchBlock}>
+                        {/*<div className={cls.header}>*/}
+                            {/*<div className={cls.selectCategory}>*/}
                                 <Select
                                     classname={cls.select}
                                     title={'Выбранная категория для поиска'}
                                     categories={categories}
                                 />
-                            </div>
+                            {/*</div>*/}
                             <Social
                                 classname={cls.social}
                                 title="Источник данных"
                             />
-                            <Tabs
-                                classname={cls.tabs}
-                                title="Количество постов"
-                            />
-                        </div>
-                        <div className={cls.chooseFilter}>
-                            <CityBlock />
-                        </div>
-                        <div className={cls.chooseFilter}>
-                            <SearchBlock />
+                        {/*</div>*/}
+                        {/*<div className={cls.chooseFilter}>*/}
+                        {/*    <CityBlock />*/}
+                        {/*</div>*/}
+                        {/*<div className={cls.chooseFilter}>*/}
+                        {/*    <SearchBlock />*/}
+                        {/*</div>*/}
+                        {/*<Tabs*/}
+                        {/*    classname={cls.tabs}*/}
+                        {/*    title="Количество постов"*/}
+                        {/*/>*/}
                         </div>
                         <PostsForSearch/>
                     </div>

@@ -138,14 +138,14 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     };
 
     return (
-        <div className={cls.card} >
+        <div className={item.title == 'Погрузись в работу' ? `${cls.card} ${cls.active}` : cls.card} >
             <div className={cls.coverSubtitle}>
                 <h2 className={cls.subtitle}>{item.title}</h2>
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
                     {item.title == 'Командный'
-                        ? <div className={cls.price}><span>Индивидуально</span></div>
+                        ? <div className={cls.price}>Индивидуально</div>
                         : <div className={cls.price}><span>{price}</span>р </div>
                     }
                 </div>

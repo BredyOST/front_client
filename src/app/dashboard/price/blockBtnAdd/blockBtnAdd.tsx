@@ -33,7 +33,6 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
     //USESTATE
 
     //USEREF
-    const targetRef = React.useRef(null);
 
     //FUNCTIONS
     const changeStateShowMenuCategory = () => {
@@ -56,16 +55,12 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
     
     return (
         <div className={cls.coverCategories}>
-            <h2 ref={targetRef} className={cls.titleCategories}>Выберите категории</h2>
             <div className={classNames(cls.coverButtonCategories, {},[classname] )} >
                 <Button
                     classname={cls.btn}
                     onClick = {changeStateShowMenuCategory}
                 >
-                    <PlusSvg
-                        className={cls.svgPlus}
-                    />
-                    {chosenCategory.length ? `Добавить / Удалить категории` : 'Добавить категории'}
+                    Добавить категории
                 </Button>
             </div>
             <div className={cls.blockCategories}>

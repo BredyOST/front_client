@@ -47,7 +47,12 @@
   display: flex;
   flex-direction: column;
   row-gap: mixins.rem(5);
-  background-color: #a9c78d;
+  background-color: #f5f5f5;
+}
+
+.coverSearchBlock{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .subTitle{
@@ -75,7 +80,7 @@
   display: flex;
   flex-direction: column;
   row-gap: mixins.rem(10);
-  font-weight: 600;
+  font-weight: 500;
   column-gap: mixins.rem(50);
 }
 

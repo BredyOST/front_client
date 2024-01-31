@@ -4,9 +4,7 @@
 @use "./src/app/styles/mixins";
 @use "./src/app/styles/variable/common";
 
-.postsForSearch{
-
-}
+.postsForSearch{}
 
 .looking{
   background-color: rgb(131 128 128 / 4%);
@@ -43,7 +41,6 @@
 
 .btn {
   @extend .btn;
-
   padding-top: mixins.rem(3);
   padding-bottom: mixins.rem(3);
   padding-left: mixins.rem(10);

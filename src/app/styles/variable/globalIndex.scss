@@ -5,7 +5,8 @@
 
 //background
 $Theme_main_background: rgb(255, 255, 255); // basic background
-$Theme_main_header_background: rgb(38 53 63); // header background
+//$Theme_main_background: #f6f7f7; // basic background
+$Theme_main_header_background: #21213a; // header background
 $Theme_main_background_additional: #a9c78d; // дополнительный background
 
 //color
@@ -51,8 +52,8 @@ $Inputs_profile_padding: 10;
 $Inputs_profile_padding_right: 30;
 
 //Основые отступы внутри страниц
-$padding_top_pages: 120; // отступ внутри страницы
-$padding_top_pages_adaptive: 120; // отступ внутри страницы
+$padding_top_pages: 80; // отступ внутри страницы
+$padding_top_pages_adaptive: 80; // отступ внутри страницы
 $padding_bottom_pages: 60; // отступ внутри страницы
 $padding_bottom_pages_adaptive: 60; // отступ внутри страницы
 
@@ -64,10 +65,10 @@ $main_font_line-height: math.div(24,18); // межстрочный интерв�
 $main_font_weight: 500; // жирность
 
 // для заголовков
-$Title_font_family: "EncodeSans"; // шрифт
-$Title_font_size: 35; // размер
-$Title_font_size_adaptive: 35;// размер адаптив
-$Title_font_line-height: math.div(35,30); // межстрочный интервал
+$Title_font_family: "GraphikLCG"; // шрифт
+$Title_font_size: 28; // размер
+$Title_font_size_adaptive: 28;// размер адаптив
+$Title_font_line-height: math.div(40,28); // межстрочный интервал
 $Title_font_weight: 700; // жирность
 $Title_color: rgb(0, 0, 0); // цвет текста
 
@@ -79,19 +80,32 @@ $SubTitle_font_line-height: math.div(34,28); // межстрочный инте�
 $SubTitle_font_weight: 700; // жирность
 $SubTitle_color: rgb(0 0 0); // цвет текста
 
+// Для BurgerMenu
+$BurgerMenu_font_family: "OpenSans"; // шрифт
+$BurgerMenu_font_size: 18; // размер
+$BurgerMenu_font_size_adaptive: 18; // размер адаптив
+$BurgerMenu_font_line-height: math.div(24,18); // межстрочный интервал
+$BurgerMenu_font_weight: 400; // жирность
+
+// Для блока категории
+$Categories_font_family: "Roboto"; // шрифт
+$Categories_font_size: 16; // размер
+$Categories_font_size_adaptive: 16; // размер адаптив
+$Categories_font_line-height: math.div(20,16); // межстрочный интервал
+$Categories_font_weight: 400; // жирность
+
 // logotype
 $Logo_font_family: "OpenSans"; // шрифт
-$Logo_font_size: 25; // размер
-$Logo_font_size_adaptive: 25; // размер адаптив
-$Logo_font_line-height: math.div(31,25); // межстрочный интервал
+$Logo_font_size: 22; // размер
+$Logo_font_size_adaptive: 20; // размер адаптив
+$Logo_font_line-height: math.div(25,20); // межстрочный интервал
 $Logo_font_weight: 600; // жирность
-$Logo_color: rgb(91 189 182);  // цвет текста
+//$Logo_color: rgb(91 189 182);  // цвет текста
+$Logo_color: rgb(255, 255, 255);  // цвет текста
 $Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
 
 //второй тект
 $Second_font_family:"Roboto";
-
-
 
 // HEADER
 $Header_paddingTop: 2; // отступ внутри контентной части для страниц
@@ -101,6 +115,10 @@ $Header_paddingBottom__adaptive: 2; // отступ внутри кондент�
 $Header_adaptive_start: 1000;
 $Header_adaptive_end: 767.98;
 $Header_point_for_two_floors: 540;
+$Header_btn_fontSize:18;
+$NavBar_btn_fontSize_AdaptiveStart: 18;
+$NavBar_btn_fontLine:math.div(24,18);
+$NavBar_btn_fontWeight:400;
 
 // NavBar
 $NavBar_fontFamily: "OpenSans"; // шрифт
@@ -108,7 +126,7 @@ $NavBar_Color: #fff; // шрифт
 $NavBar_fontSize: 18; // размер шрифта
 $NavBar_fontSize_AdaptiveStart: 18; // размер шрифта
 $NavBar_fontLine: math.div(24,18); // line-height
-$NavBar_fontWeight: 600; //  font-weight
+$NavBar_fontWeight: 400; //  font-weight
 $NavBar_fontLetterSpacing: 0.5; //  Letter Spacing
 $Theme_main_navBar_color_Hover: rgb(176 66 66); // basic color hover
 $Theme_main_navBar_background_color_Hover: rgb(64 89 105 / 68%); // basic color hover
@@ -120,12 +138,10 @@ $Card_border_color: 25; // размер шрифта заголовка
 $Card_background_title_color: #495667;// background заголовка
 $Card_background_month_color: #c736bf;;// background заголовка
 
-
 //searchLine
 $searchLine_placeHolder: #c4bbbb;  // строка поиска в header
 $searchLine_Focus_Header: #20a7ad;  // строка поиска в header
 $searchLine_border_Header: #9d9696;  // цвет бордера
-
 
 // home
 $home_highlight-bg: #79b93e;

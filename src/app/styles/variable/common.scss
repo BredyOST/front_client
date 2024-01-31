@@ -2,6 +2,7 @@
 @use './src/app/styles/mixins';
 @use './src/app/styles/variable/global';
 @use './src/app/styles/variable/globalIndex';
+@use './src/app/styles/variable/fonts';
 
 // паддинги для каждой страницы
 .paddingPages {
@@ -10,8 +11,7 @@
   font-family: globalIndex.$main_font_family;
   font-weight: globalIndex.$main_font_weight;
   @include mixins.adaptiveValue("padding-bottom",globalIndex.$padding_bottom_pages_adaptive,30,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
-  @include mixins.adaptiveValue("padding-top",globalIndex.$padding_top_pages_adaptive,90,3,globalIndex.$PageHome_adaptive_start,767.98);
-  @include mixins.adaptiveValue("padding-top",110,110,3,globalIndex.$Header_point_for_two_floors,320);
+  @include mixins.adaptiveValue("padding-top",globalIndex.$padding_top_pages_adaptive,70,3,globalIndex.$PageHome_adaptive_start,767.98);
 }
 
 // стиль для текста fz rem(18)
@@ -20,23 +20,22 @@
 }
 
 .forMainTitle {
+  font-family: globalIndex.$Title_font_family;
   text-align: left;
   font-size: mixins.rem(globalIndex.$Title_font_size);
   line-height: globalIndex.$Title_font_line-height;
   font-weight: globalIndex.$Title_font_weight;
   color: globalIndex.$Title_color;
   border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
-  padding-bottom: mixins.rem(20);
+  padding-bottom: mixins.rem(10);
   justify-content: center;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,20,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 // добавь только padding и адаптив
 
 .btn{
-  font-family: globalIndex.$Link_fontFamily;
   color: globalIndex.$Link_color;
-  font-size: mixins.rem(globalIndex.$Link_font_size);
-  line-height: globalIndex.$Logo_font_line-height;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(5);
@@ -57,10 +56,7 @@
 }
 //вторая кнопка другой цвет
 .btnTwo{
-  font-family: globalIndex.$Link_fontFamily;
   color: globalIndex.$Link_color;
-  font-size: mixins.rem(globalIndex.$Link_font_size);
-  line-height: globalIndex.$Logo_font_line-height;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(5);

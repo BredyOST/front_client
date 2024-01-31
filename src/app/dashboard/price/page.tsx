@@ -61,12 +61,6 @@ async function PricePage(props:pageProps) {
                     </div>
                     <div className={cls.categories}>
                         <div className={cls.notification}>
-                            <div className={cls.notificationText}>
-                                Настрой уведомления на телефон в профиле после оформления подписки и получай все самое актуальное по выбранным категориям, без необходимости посещения сайта
-                            </div>
-                            {/*<div className={cls.coverGo}>*/}
-                            {/*    <Link className={cls.btn} href='/dashboard/notification'>Настроить уведомления</Link>*/}
-                            {/*</div>*/}
                         </div>
                         <BlockBtnAdd
                             categories={categories}

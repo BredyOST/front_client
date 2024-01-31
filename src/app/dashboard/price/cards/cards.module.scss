@@ -4,7 +4,6 @@
 @use "../../../styles/mixins";
 @use "../../../styles/variable/common";
 
-
 .card{
   display: flex;
   flex-direction: column;
@@ -13,11 +12,16 @@
   padding-bottom: mixins.rem(15);
   padding-left: mixins.rem(20);
   padding-right: mixins.rem(20);
-  background-color: #e5dada;
+  background-color: #eae4e4;
+  //color: white;
   border-radius: 10px;
-  box-shadow: 0 0 mixins.rem(8) mixins.rem(2) rgb(0 0 0 / 68%);
+  //box-shadow: 0 0 mixins.rem(8) mixins.rem(2) rgb(0 0 0 / 68%);
   row-gap: mixins.rem(15);
   min-height: 100%;
+
+  &.active {
+    //background-color: #f3f1d2;
+  }
 }
 
 .coverSubtitle {
@@ -25,12 +29,11 @@
 }
 
 .subtitle{
+  font-family: 'GraphikLCGR';
   text-align: center;
-  color: #fffdfd;
+  color: #000000;
   font-size: mixins.rem(25);
   font-weight: 600;
-  background-color: globalIndex.$Card_background_title_color;
-  border-radius: 70% 30% 92% 8% / 24% 81% 19% 76% ;
   padding-right: mixins.rem(15);
   padding-left: mixins.rem(15);
   padding-top: mixins.rem(5);
@@ -53,25 +56,17 @@
 }
 
 .price{
-  font-size: mixins.rem(30);
-  color: #000;
+  font-size: mixins.rem(40);
+  letter-spacing: mixins.em(0.5);
   font-weight: 600;
   justify-content: center;
   text-align: center;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(3);
+  color: #9d3fc5;
   @include mixins.adaptiveValue("font-size",30,22,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
   @include mixins.adaptiveValue("font-size",30,22,3,globalIndex.$Cards_adaptive_end,320);
-  span {
-    background-color: globalIndex.$Card_background_month_color;
-    border-radius: 70% 30% 92% 8% / 24% 81% 19% 76% ;
-    padding-right: mixins.rem(15);
-    padding-left: mixins.rem(15);
-    padding-top: mixins.rem(5);
-    padding-bottom: mixins.rem(5);
-  }
-
 }
 
 .textLi,
@@ -111,23 +106,21 @@
 }
 
 .month{
-  text-align: center;
-  font-size: mixins.rem(18);
+  //font-size: mixins.rem(16);
+  //text-align: center;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  //column-gap: mixins.rem(3);
+  //font-weight: 500;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: mixins.rem(3);
-  font-weight: 600;
-
-  span {
-    background-color: globalIndex.$Card_background_month_color;
-    border-radius: 70% 30% 92% 8% / 24% 81% 19% 76% ;
-    padding-right: mixins.rem(15);
-    padding-left: mixins.rem(15);
-    padding-top: mixins.rem(5);
-    padding-bottom: mixins.rem(5);
+  &.span {
+    background-color: #2ba296;
+    //font-size: mixins.rem(20);
+    //letter-spacing: mixins.em(0.5);
   }
 }
+
 
 .sliderInput{
   border-radius: mixins.rem(8);

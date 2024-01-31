@@ -30,7 +30,7 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
     //FUNCTIONS
 
     if (!stateAuth) {
-        return <div className={cls.ifNotAith}>Необходимо авторизоваться</div>
+        return null
     }
 
     if (!infoUser?.categoriesHasBought?.length && infoUser?.categoriesFreePeriod[0]?.purchaseEndDate) {
@@ -61,14 +61,6 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
                         </div>
                     </div>
                 }
-                {/*{stateAuth && infoUser && (!keyWords || !keyWords?.length) && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (!infoUser?.categoriesHasBought?.length)) &&*/}
-                {/*    <div className={cls.titleAboutNoAccess}>Для осуществления поиска, выберите фильтры и введите ключевые слова </div>*/}
-                {/*}*/}
-                {/*{isLoadingTutors && counterSkeleton.map((item) => (*/}
-                {/*    <SkeletonSearchPage*/}
-                {/*        key={item}*/}
-                {/*    />*/}
-                {/*))}*/}
                 {infoUser && stateAuth && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (infoUser?.categoriesHasBought?.length)) ?
                     <PostsBlock/> :''
                 }

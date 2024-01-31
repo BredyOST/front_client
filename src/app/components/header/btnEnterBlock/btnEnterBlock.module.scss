@@ -5,27 +5,51 @@
 @use "./src/app/styles/mixins";
 
 .coverProfile {
-  @media(min-width: mixins.em(global.$mobile)) {
-    position: relative;
-    display: flex;
-    align-content: center;
-  }
-
-  @media(max-width: mixins.em(global.$mobile)) {
-    display: none;
-    opacity: 0;
-    visibility: hidden;
-  }
+  position: relative;
+  display: flex;
+  align-content: center;
 }
 
 .buttonLogin{
   @extend .btn;
-  padding-bottom: mixins.rem(8);
-  padding-top: mixins.rem(8);
-  padding-left: mixins.rem(15);
-  padding-right: mixins.rem(15);
-  background-color: globalIndex.$Theme_main_header_background_button;
-  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+    font-family: globalIndex.$NavBar_fontFamily;
+    font-size: globalIndex.$NavBar_fontSize;
+    line-height: globalIndex.$NavBar_fontLine;
+    font-weight: globalIndex.$NavBar_fontWeight;
+    padding-bottom: mixins.rem(8);
+    padding-top: mixins.rem(8);
+
+    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+    @media(min-width: mixins.em(505)) {
+      padding-left: mixins.rem(15);
+      padding-right: mixins.rem(15);
+    }
+
+    @media(max-width: mixins.em(504)) {
+      padding-left: mixins.rem(8);
+      padding-right: mixins.rem(8);
+    }
+
+}
+.buttonLoginMin{
+  @extend .btn;
+
+  @media(min-width: mixins.em(505)) {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+  @media(max-width: mixins.em(504)) {
+    font-family: globalIndex.$NavBar_fontFamily;
+    font-size: globalIndex.$NavBar_fontSize;
+    line-height: globalIndex.$NavBar_fontLine;
+    font-weight: globalIndex.$NavBar_fontWeight;
+    padding-bottom: mixins.rem(8);
+    padding-top: mixins.rem(8);
+    padding-left: mixins.rem(10);
+    padding-right: mixins.rem(10);
+    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  }
 }
 
 .svgProfile{

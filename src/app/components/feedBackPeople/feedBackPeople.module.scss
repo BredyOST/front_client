@@ -1,0 +1,35 @@
+@use "sass:math";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
+
+.feedBack {
+  display: flex;
+  padding-top: mixins.rem(25);
+}
+
+.cover{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+}
+
+.mainTitle{
+  font-family: globalIndex.$Title_font_family;
+  text-align: center;
+  font-size: mixins.rem(globalIndex.$Title_font_size);
+  line-height: globalIndex.$Title_font_line-height;
+  font-weight: globalIndex.$Title_font_weight;
+  color: globalIndex.$Title_color;
+  justify-content: center;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,20,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}

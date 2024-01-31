@@ -64,23 +64,6 @@
   row-gap: mixins.rem(10);
 }
 
-.notificationText{
-  font-weight: 600;
-  line-height: globalIndex.$main_font_line-height;
-  background-color: #d95757;
-  padding-top: mixins.rem(5);
-  padding-bottom: mixins.rem(5);
-  padding-left: mixins.rem(3);
-  padding-right: mixins.rem(3);
-  border-radius: mixins.rem(5);
-  color: #fffbfd;
-  text-align: center;
-
-}
-
-.notificationText {
-  @extend .mainFontSize;
-}
 
 .coverGo{
   display: flex;

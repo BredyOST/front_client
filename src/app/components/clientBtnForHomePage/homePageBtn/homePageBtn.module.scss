@@ -13,8 +13,10 @@
 .buttonLogin,
 .link{
   @extend .btnTwo;
-  @extend .widthAndPaddingBtn;
-  background-color: #d74b4b;
-  font-size: mixins.rem(30);
+  padding-top: mixins.rem(15);
+  padding-bottom: mixins.rem(15);
+  padding-left: mixins.rem(40);
+  padding-right: mixins.rem(40);
+  font-size: mixins.rem(20);
   }
 

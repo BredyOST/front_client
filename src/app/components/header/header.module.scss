@@ -44,23 +44,20 @@
   justify-content: space-between;
   flex: 1 1 auto;
   column-gap: mixins.rem(12);
-
-  @media(max-width: mixins.em(globalIndex.$Header_point_for_two_floors)) {
-    flex-direction: column;
-    row-gap: mixins.rem(5);
-  }
 }
 
 .leftSection{
   display: flex;
   align-items: center;
-  column-gap: mixins.rem(70);
-  @include mixins.adaptiveValue("column-gap",70,12,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("column-gap",30,12,3,1220,global.$tablet);
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    column-gap: mixins.rem(30);
+  }
 }
 
 .coverLogo{
   display: flex;
-  //min-height: 100%;
   min-height: 100%;
 }
 
@@ -81,11 +78,25 @@
 
 .link {
   @extend .btnTwo;
-  padding-bottom: mixins.rem(11);
-  padding-top: mixins.rem(11);
-  padding-left: mixins.rem(15);
-  padding-right: mixins.rem(15);
-  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(min-width: mixins.em(505)) {
+    font-family: globalIndex.$NavBar_fontFamily;
+    font-size: globalIndex.$NavBar_fontSize;
+    line-height: globalIndex.$NavBar_fontLine;
+    font-weight: globalIndex.$NavBar_fontWeight;
+    padding-bottom: mixins.rem(11);
+    padding-top: mixins.rem(11);
+    padding-left: mixins.rem(15);
+    padding-right: mixins.rem(15);
+    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  }
+
+  @media(max-width: mixins.em(504)) {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+
 }
 
 .coverButton{
@@ -111,8 +122,8 @@
   line-height: globalIndex.$NavBar_fontLine;
   font-weight: globalIndex.$NavBar_fontWeight;
   letter-spacing: globalIndex.$NavBar_fontLetterSpacing;
-  padding-top: mixins.rem(25);
-  padding-bottom: mixins.rem(25);
+  padding-top: mixins.rem(20);
+  padding-bottom: mixins.rem(20);
   padding-left: mixins.rem(10);
   padding-right: mixins.rem(10);
   transition: color ease 0.3s 0s, background-color ease 2s 0s;
