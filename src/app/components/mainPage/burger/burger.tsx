@@ -57,8 +57,10 @@ export const Burger:FC<burgerProps> = (props) => {
             <div className={cls.coverCategory}>
                 {
                     categ && categ.map((item:ICategory) =>
-                        <div className={cls.coverLink}>
-                            {/*<Link href={'/'}>{item.name}</Link>*/}
+                        <div
+                            className={cls.coverLink}
+                            key={item.id}
+                        >
                             <AppLink
                                 classname={cls.titleCategory}
                                 key={item.id}

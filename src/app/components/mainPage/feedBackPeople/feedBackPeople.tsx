@@ -76,12 +76,12 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                 </div>
             </div>
             <div className={cls.coverBtn}>
-                    <AppLink
-                        classname={cls.link}
-                        href={'/dashboard/feedback'}
-                    >
-                        Больше отзывов
-                    </AppLink>
+                <AppLink
+                    classname={cls.link}
+                    href={'/dashboard/feedback'}
+                >
+                    Больше отзывов
+                </AppLink>
             </div>
         </div>
     );

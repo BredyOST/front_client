@@ -1,16 +1,15 @@
 import cls from './faq.module.scss';
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import React, {FC} from "react";
+import React from "react";
 import Link from "next/link";
 import Question from "@/app/dashboard/faq/question/question";
 
 interface faqProps {
-    items:any
+
 }
 
 
 async function Faq (props:faqProps) {
-    const {items} = props;
+    const {} = props;
 
     const arrayQuestions = [
         {id:1, question: 'Как пользоваться сайтом', answer: `с инструкцией по сайту можете ознакомится на ${<Link href={'/'}>на главной странице</Link>}`}
