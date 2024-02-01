@@ -5,6 +5,7 @@
 @use "../../../styles/variable/common";
 
 .card{
+  font-family: 'Montserrat';
   display: flex;
   flex-direction: column;
   border: mixins.rem(1) solid globalIndex.$Card_border_color;
@@ -12,15 +13,16 @@
   padding-bottom: mixins.rem(15);
   padding-left: mixins.rem(20);
   padding-right: mixins.rem(20);
-  background-color: #eae4e4;
-  //color: white;
+  background-color: #f3f4f5;
   border-radius: 10px;
-  //box-shadow: 0 0 mixins.rem(8) mixins.rem(2) rgb(0 0 0 / 68%);
+  box-shadow: 0 0 mixins.rem(8) mixins.rem(2) rgba(100, 97, 97, 0.68);
   row-gap: mixins.rem(15);
   min-height: 100%;
+  max-width: mixins.rem(350);
 
-  &.active {
-    //background-color: #f3f1d2;
+  @media(max-width: mixins.em(global.$mobile)) {
+   flex: 1 1 auto;
+    min-width: 100%;
   }
 }
 
@@ -29,17 +31,16 @@
 }
 
 .subtitle{
-  font-family: 'GraphikLCGR';
+  font-family: 'Montserrat';
   text-align: center;
   color: #000000;
-  font-size: mixins.rem(25);
+  font-size: mixins.rem(22);
   font-weight: 600;
   padding-right: mixins.rem(15);
   padding-left: mixins.rem(15);
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
-  @include mixins.adaptiveValue("font-size",25,18,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
-  @include mixins.adaptiveValue("font-size",25,22,3,globalIndex.$Cards_adaptive_end,320);
+  @include mixins.adaptiveValue("font-size",22,20,3,global.$mobile,320);
 }
 
 .body{
@@ -65,17 +66,16 @@
   align-items: center;
   column-gap: mixins.rem(3);
   color: #9d3fc5;
-  @include mixins.adaptiveValue("font-size",30,22,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
-  @include mixins.adaptiveValue("font-size",30,22,3,globalIndex.$Cards_adaptive_end,320);
+  @include mixins.adaptiveValue("font-size",40,22,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
-.textLi,
-.additionalTitle,
-.coverSubtitle{
-  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size_adaptive,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
-  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$Cards_adaptive_end,320);
+.textPrice{
+
 }
 
+.textRubble{
+
+}
 
 .slider{
   width: 100%;
@@ -95,10 +95,12 @@
   row-gap: mixins.rem(15);
 }
 
-.period{
+.coverPeriodMain{
   text-align: center;
-  font-size: mixins.rem(22);
+  font-size: mixins.rem(20);
   font-weight: 600;
+
+  @include mixins.adaptiveValue("font-size",20,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .coverSlider{
@@ -106,21 +108,31 @@
 }
 
 .month{
-  //font-size: mixins.rem(16);
-  //text-align: center;
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
-  //column-gap: mixins.rem(3);
-  //font-weight: 500;
   display: flex;
-  &.span {
-    background-color: #2ba296;
-    //font-size: mixins.rem(20);
-    //letter-spacing: mixins.em(0.5);
-  }
+  justify-content: center;
+  column-gap: mixins.rem(15);
+  font-size: mixins.rem(20);
+  flex-direction: column;
 }
 
+.period{
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(3);
+  font-weight: 600;
+  color: #9d3fc5;
+  font-size: mixins.rem(40);
+  @include mixins.adaptiveValue("font-size",40,22,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+}
+
+.periodText{
+  justify-content: center;
+  text-align: center;
+  font-size: mixins.rem(22);
+  @include mixins.adaptiveValue("font-size",22,18,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+}
 
 .sliderInput{
   border-radius: mixins.rem(8);
@@ -170,8 +182,10 @@
   }
 }
 .textLi{
-  //font-size: mixins.rem(globalIndex.$main_font_size);
+  font-size: mixins.rem(16);
   line-height: globalIndex.$main_font_line-height;
+  font-weight: 500;
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .additional{
@@ -184,7 +198,9 @@
 }
 
 .additionalTitle{
+  font-size: mixins.rem(18);
   font-weight: 600;
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .forSliderCover{

@@ -83,12 +83,12 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
         <div className={classNames(cls.secondCover, mod,[classname] )} >
             <div className={cls.header}>
                 <div className={cls.first}>
-                    <label
-                        htmlFor='words'
-                        className={cls.title}
-                    >
-                        Ключевые слова
-                    </label>
+                    {/*<label*/}
+                    {/*    htmlFor='words'*/}
+                    {/*    className={cls.title}*/}
+                    {/*>*/}
+                    {/*    Ключевые слова*/}
+                    {/*</label>*/}
                     <div className={cls.coverInput}>
                         <div className={cls.inputZone}>
                             <Input
@@ -96,7 +96,7 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
                                 name="words"
                                 value={inputKeyWords}
                                 classForInput={cls.input}
-                                placeholder='Введите слова'
+                                placeholder='Введите слово'
                                 forRef={inputRef}
                                 classname={cls.inputDiv}
                             />

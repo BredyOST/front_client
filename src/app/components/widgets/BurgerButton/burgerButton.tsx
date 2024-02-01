@@ -56,7 +56,6 @@ export const BurgerButton:FC<BurgerButtonProps> = React.memo((props) => {
         }
     }
 
-
     return (
         <div>
             <Button

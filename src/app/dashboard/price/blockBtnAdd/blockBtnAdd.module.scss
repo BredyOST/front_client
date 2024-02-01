@@ -26,14 +26,12 @@
 }
 
 .btn{
-  //@extend .btn;
+  padding-top: mixins.rem(15);
+  padding-bottom: mixins.rem(15);
+  padding-left: mixins.rem(40);
+  padding-right: mixins.rem(40);
   box-shadow: mixins.rem(0) mixins.rem(10) mixins.rem(20) #000000;
-  padding-top: mixins.rem(20);
-  padding-bottom: mixins.rem(20);
-  padding-left: mixins.rem(50);
-  padding-right: mixins.rem(50);
-
-  font-size: mixins.rem(22);
+  font-size: mixins.rem(20);
   color: globalIndex.$Link_color;
   display: flex;
   align-items: center;
@@ -97,7 +95,6 @@
 
 .coverCategories{
   padding-top: mixins.rem(15);
-  padding-bottom: mixins.rem(15);
   padding-left: mixins.rem(5);
   padding-right: mixins.rem(5);
   border-radius: mixins.rem(15) mixins.rem(0) mixins.rem(15) mixins.rem(0);

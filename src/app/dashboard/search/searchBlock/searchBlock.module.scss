@@ -4,12 +4,12 @@
 @use "../../../styles/mixins";
 
 
-.secondCover{
+
+.cityBlock{
   display: flex;
   column-gap: mixins.rem(20);
   row-gap: mixins.rem(20);
   align-items: flex-start;
-
 }
 
 .title{
@@ -41,7 +41,7 @@
 
 .first{
   display: flex;
-  column-gap: mixins.rem(10);
+  column-gap: mixins.rem(15);
   @media(max-width: mixins.em(global.$tablet)) {
     flex-direction: column;
     flex: 1 1 auto;
@@ -56,6 +56,7 @@
   border: none;
   border-radius: mixins.rem(5);
   column-gap: mixins.rem(10);
+
   @media(min-width: mixins.em(global.$tablet)) {
     width: mixins.rem(350);
   }
@@ -67,10 +68,11 @@
 }
 
 .inputZone{
-  flex: 1 1 auto;
+  flex: 0 1 mixins.rem(250);
   position: relative;
   align-items: center;
 }
+
 
 .inputDiv{
   display: flex;
@@ -91,7 +93,7 @@
   transition: outline ease 0.3s 0s;
 
   &::placeholder {
-    color: #79b93e;
+    color: #d77f7f;
   }
 
   &:focus {
@@ -115,7 +117,7 @@
   position: absolute;
   width: mixins.rem(25);
   height: mixins.rem(25);
-  stroke-width : mixins.rem(3);
+  stroke-width: mixins.rem(3);
   stroke:#000;
   stroke-linecap:round;
   transition: stroke-widthease 0.3s 0s;
@@ -123,13 +125,8 @@
   @media (any-hover: hover) {
     &:hover {
       transition: stroke-widthease ease .3s 0s;
+
     }
-  }
-  @media(min-width: mixins.em(global.$tablet)) {
-
-  }
-  @media(max-width: mixins.em(global.$tablet)) {
-
   }
 }
 
@@ -151,7 +148,7 @@
   flex: 1 1 auto;
   min-width: 100%;
   min-height: 100%;
-  background-color: #f1c70f;
+  background-color: #64b97c;
   transition: background-color ease 0.3s 0s;
   border-radius: mixins.rem(5);
   outline: mixins.rem(2) solid #000;
@@ -159,23 +156,26 @@
   @media (any-hover: hover) {
     &:hover {
       transition: background-color ease 0.3s 0s;
-      background-color: #ef5e17;
+      background-color: #569b6b;
     }
   }
 }
 
 
 .areaKey{
-  display: flex;
-  font-weight: 600;
+  display: inline-flex;
   background-color: #20a7ad;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
   padding-right: mixins.rem(10);
   padding-left: mixins.rem(10);
   border-radius: mixins.rem(10);
-  column-gap : mixins.rem(10);
+  column-gap: mixins.rem(10);
   align-items: center;
+  font-family: globalIndex.$Title_font_family;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .deleteKey{
@@ -186,13 +186,17 @@
 
 .keyWords{
   display: inline-flex;
-  font-weight: 600;
+  color: white;
   background-color: #20a7ad;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
   padding-right: mixins.rem(10);
   padding-left: mixins.rem(10);
   border-radius: mixins.rem(10);
+  font-family: globalIndex.$Title_font_family;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .coverKeyWords{

@@ -3,7 +3,9 @@ import cls from './page.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {FeedBackPeople} from "@/app/components/feedBackPeople/feedBackPeople";
+import {FeedBackPeople} from "@/app/components/mainPage/feedBackPeople/feedBackPeople";
+import {Button} from "@/app/components/shared/ui/Button/Button";
+import Burger from "@/app/components/mainPage/burger/burger";
 
 async function getData() {
     let categories = [];
@@ -48,26 +50,11 @@ async function Home(props:pageProps) {
                 <div className={cls.cover}>
                     <h1 className={cls.mainTitle}><span>Клиенты.com</span> - cервис для поиска клиентов</h1>
                     <div className={cls.coverMain}>
-                        <div className={cls.category}>
-                            <h3 className={cls.titleMainCategory}>Категории</h3>
-                            <div className={cls.coverCategory}>
-                                {
-                                    categories && categories.map((item:ICategory) =>
-                                        <AppLink
-                                            classname={cls.titleCategory}
-                                            key={item.id}
-                                            infroForOnclick = {item}
-                                            href={'/dashboard/price'}
-                                        >
-                                            {item.name}
-                                        </AppLink>
-                                    )
-                                }
-                            </div>
-                        </div>
+                        <Burger
+                            categ = {categories}
+                        />
                         <div className={cls.section}>
                             <div className={cls.coverVideo}>
-                                {/*<h3 className={cls.howWorks}>Как пользоваться сайтом</h3>*/}
                                 <div className={cls.videoWrapper}>
                                     <div className={cls.item_video}>
                                         <video poster='https://timgotow.ru/uploads/e8fb9f338255bb72d4.png' controls preload="metadata">
@@ -82,7 +69,11 @@ async function Home(props:pageProps) {
                         </div>
                     </div>
                 </div>
-                <FeedBackPeople/>
+            </div>
+            <div className={cls.coverFeedBack}>
+                <div className='page__container'>
+                    <FeedBackPeople/>
+                </div>
             </div>
         </div>
     );

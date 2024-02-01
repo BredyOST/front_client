@@ -13,25 +13,6 @@
   row-gap: mixins.rem(10);
 }
 
-.block{
-  background-color: #eee;
-  display: grid;
-  grid-template-columns: minmax(40px,150px) minmax(100px,150px) minmax(250px,150px)  minmax(250px,1fr)  minmax(100px,200px);
-  grid-template-rows:auto;
-  font-family: globalIndex.$main_font_family;
-}
-
-.blockItem{
-  background-color: #5e5373;
-  border: 1px dashed #ece89d;
-  padding: 10px;
-  color: #fff;
-  font-size: mixins.rem(16);
-  font-weight: 700;
-  text-align: center;
-}
-
-
 .coverBlockNoAccess{
   display: flex;
   flex-direction: column;

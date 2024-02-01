@@ -4,27 +4,28 @@
 @use "./src/app/styles/mixins.scss";
 
 .selectTabs{
-
+  display: flex;
 }
 
 .title {
   display: flex;
   align-items: center;
-  font-weight: 600;
+  font-family: globalIndex.$Title_font_family;
+  font-size: globalIndex.$Search_font_size;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
 }
 
 .coverBtn{
   display: flex;
-  flex-wrap: nowrap;
 }
 
 .tabBtn{
   background-color: white;
-  font-size: mixins.rem(globalIndex.$main_font_size);
-  line-height: globalIndex.$main_font_line-height;
-  font-weight: 600;
-
-  //background-color: #2ba296;
+  font-family: globalIndex.$Title_font_family;
+  font-size: globalIndex.$Search_font_size;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
   padding-left: mixins.rem(10);

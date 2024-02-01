@@ -42,17 +42,6 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
     return (
         <div className={classNames(cls.postsForSearch, {},[classname] )} >
             <div className={cls.looking}>
-                <div className={cls.block}>
-                    <div>
-                        <div className={cls.blockItem}>Категория</div>
-                        <div className={cls.blockItem}>Дата</div>
-                    </div>
-                    <div>
-                        <div className={cls.blockItem}>Ссылка на пользователя</div>
-                        <div className={cls.blockItem}>Сообщение / ссылка на пост</div>
-                    </div>
-                    <div className={cls.blockItem}>Город</div>
-                </div>
                 {infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.length)) &&
                     <div className={cls.coverBlockNoAccess}>
                         <div className={cls.titleAboutNoAccess}>Для осуществления поиска, необходимо наличие активной подписки или бесплатного тестового периода </div>

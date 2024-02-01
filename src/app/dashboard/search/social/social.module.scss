@@ -36,10 +36,11 @@ position: relative;
   min-height: mixins.rem(35);
   border-radius: mixins.rem(5);
   align-items: center;
-  font-size: mixins.rem(globalIndex.$main_font_size);
-  line-height: globalIndex.$main_font_line-height;
-  font-weight: 600;
   position: relative;
+  font-family: globalIndex.$Title_font_family;
+  font-size: globalIndex.$Search_font_size;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
 }
 
 .btn {

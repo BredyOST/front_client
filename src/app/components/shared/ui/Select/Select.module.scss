@@ -3,7 +3,13 @@
 @use './src/app/styles/variable/globalIndex.scss';
 @use "./src/app/styles/mixins.scss";
 
-.Select {
+.Select{
+}
+.label{
+  font-family: globalIndex.$Title_font_family;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+
 }
 
 .coverSelect{
@@ -20,15 +26,16 @@
   display: flex;
   cursor: pointer;
   min-height: mixins.rem(35);
-  font-size: mixins.rem(globalIndex.$main_font_size);
-  line-height: globalIndex.$main_font_line-height;
-  font-weight: 500;
   border-radius: mixins.rem(5);
   padding-left: mixins.rem(10);
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
-  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  font-family: globalIndex.$Title_font_family;
+  font-size: mixins.rem(18);
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .arrow{
@@ -50,6 +57,9 @@
   display: flex;
   font-size: mixins.rem(18);
   opacity: 0.5;
-  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  font-family: globalIndex.$Title_font_family;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 

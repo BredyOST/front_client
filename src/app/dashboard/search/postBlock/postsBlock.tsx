@@ -236,11 +236,9 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         key={item.id}
                         className={cls.rows}>
                         <div className={cls.mainBlock}>
-                            <div className={cls.blockCategories}>{chosenCategory?.name}</div>
-                            <div className={cls.blockDate}>
-                                <div>{getFormattedDate(item.post_date_publish)}</div>
-                                <div>{getFormattedTime(item.post_date_publish)}</div>
-                            </div>
+                            <div>{getFormattedDate(item.post_date_publish)}</div>
+                            <div>{getFormattedTime(item.post_date_publish)}</div>
+                            {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
@@ -248,29 +246,16 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                     ? <Link className={cls.link}
                                         href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
                                         target="_blank">
-                                        {/*<div className={cls.linkTop}>*/}
-                                        {/*    ссылка*/}
-                                        {/*    <LinkSvg*/}
-                                        {/*        className={cls.linkSvg}*/}
-                                        {/*    />*/}
-                                        {/*</div>*/}
                                         <div className={cls.rightLinkSvg}>
                                             {item.photo_100_group && <img className={cls.imageGroup} src={item.photo_100_group} alt=""/>}
                                             <div className={cls.nameGroup}>
                                                 {item.name_group}
                                             </div>
                                         </div>
-                                        {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
                                     </Link>
                                     : <Link className={cls.link}
                                         href={`https://vk.com/id${item.signer_id}`}
                                         target="_blank">
-                                        {/*<div className={cls.linkTop}>*/}
-                                        {/*    ссылка*/}
-                                        {/*    <LinkSvg*/}
-                                        {/*        className={cls.linkSvg}*/}
-                                        {/*    />*/}
-                                        {/*</div>*/}
                                         <div className={cls.rightLinkSvg}>
                                             {item.photo_100_user && <img className={cls.image} src= {item.photo_100_user} alt=""/>}
                                             <div className={cls.nameGroup}>
@@ -318,14 +303,14 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         <div className={cls.blockCity}>
                             <div className={cls.cityBlockOne}>
                                 {!item.city_group && !item.country_group &&
-                                    <div>информация отсутствует</div>
+                                    <div className={cls.noInfo}>информация отсутствует</div>
                                 }
-                                {item.city_group && <div>{item.city_group}</div>}
-                                {item.country_group && <div>{item.country_group}</div>}
+                                {item.city_group && <div className={cls.noInfo}>{item.city_group}</div>}
+                                {item.country_group && <div className={cls.noInfo}>{item.country_group}</div>}
                             </div>
                             <div className={cls.cityBlockTwo}>
-                                {item.city_user && <div>{item.city_user}</div>}
-                                {item.country_user && <div>{item.country_user}</div>}
+                                {item.city_user && <div className={cls.noInfo}>{item.city_user}</div>}
+                                {item.country_user && <div className={cls.noInfo}>{item.country_user}</div>}
                             </div>
                         </div>
                     </div>

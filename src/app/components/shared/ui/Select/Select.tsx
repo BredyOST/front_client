@@ -93,7 +93,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
 
         <div className={classNames(cls.Select, {}, [classname])}>
             { title &&
-                <label>
+                <label className={cls.label}>
                     {title}
                 </label>
             }

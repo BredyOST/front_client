@@ -83,12 +83,12 @@ const CityBlock:FC<cityBlockProps> = (props) => {
         <div className={classNames(cls.cityBlock, {},[classname] )} >
             <div className={cls.header}>
                 <div className={cls.first}>
-                    <label
-                        htmlFor='words'
-                        className={cls.title}
-                    >
-                        Введите города
-                    </label>
+                    {/*<label*/}
+                    {/*    htmlFor='words'*/}
+                    {/*    className={cls.title}*/}
+                    {/*>*/}
+                    {/*    Введите города*/}
+                    {/*</label>*/}
                     <div className={cls.coverInput}>
                         <div className={cls.inputZone}>
                             <Input
@@ -96,7 +96,7 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                                 name="words"
                                 value={inputKeyWords}
                                 classForInput={cls.input}
-                                placeholder='Введите слово'
+                                placeholder='Введите город'
                                 forRef={inputRef}
                                 classname={cls.inputDiv}
                             />
@@ -107,7 +107,6 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                             >
                                 <CancelSvg/>
                             </Button>
-
                             }
                         </div>
                         <div className={cls.coverAddBtn}>

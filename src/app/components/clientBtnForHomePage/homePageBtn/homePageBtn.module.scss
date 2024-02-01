@@ -18,5 +18,14 @@
   padding-left: mixins.rem(40);
   padding-right: mixins.rem(40);
   font-size: mixins.rem(20);
+  @include mixins.adaptiveValue("font-size",20,16,3,1200,global.$mobile);
+
+  @media(min-width: mixins.em(global.$tablet)) {
+
+  }
+  @media(max-width: mixins.em(global.$tablet)) {
+
+  }
+
   }
 

@@ -60,8 +60,6 @@ async function PricePage(props:pageProps) {
                         <h1 className={cls.mainTitle}>Тарифы</h1>
                     </div>
                     <div className={cls.categories}>
-                        <div className={cls.notification}>
-                        </div>
                         <BlockBtnAdd
                             categories={categories}
                         />

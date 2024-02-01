@@ -25,19 +25,19 @@
   @extend .forMainTitle
 }
 
-.header{
-
-  @media(min-width: mixins.em(global.$tablet)) {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: mixins.rem(15);
-    row-gap: mixins.rem(10);
-  }
-  @media(max-width: mixins.em(global.$tablet)) {
-    flex-direction: column;
-    row-gap: mixins.rem(10);
-  }
-}
+//.header{
+//
+//  @media(min-width: mixins.em(global.$tablet)) {
+//    display: flex;
+//    flex-wrap: wrap;
+//    column-gap: mixins.rem(15);
+//    row-gap: mixins.rem(10);
+//  }
+//  @media(max-width: mixins.em(global.$tablet)) {
+//    flex-direction: column;
+//    row-gap: mixins.rem(10);
+//  }
+//}
 
 .filters{
   padding-top: mixins.rem(10);
@@ -46,13 +46,21 @@
   padding-right: mixins.rem(10);
   display: flex;
   flex-direction: column;
-  row-gap: mixins.rem(5);
   background-color: #f5f5f5;
+  row-gap: mixins.rem(10);
+}
+
+.searchWords{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+  justify-content: flex-start;
 }
 
 .coverSearchBlock{
   display: flex;
   flex-wrap: wrap;
+  column-gap: mixins.rem(20);
 }
 
 .subTitle{
@@ -64,34 +72,23 @@
   display: flex;
   flex-direction: column;
   column-gap: mixins.rem(15);
-  row-gap: mixins.rem(25);
-  border-top: mixins.rem(2) solid rgb(0 0 0 / 50%);
-  padding-top: mixins.rem(15);
-}
-
-.selectCategory{
-  display: flex;
-  flex-direction: column;
-  column-gap: mixins.rem(10);
-  flex: 1 1 mixins.rem(450);
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .select{
   display: flex;
   flex-direction: column;
   row-gap: mixins.rem(10);
-  font-weight: 500;
+  min-width: mixins.rem(300);
   column-gap: mixins.rem(50);
 }
 
 .tabs {
   display: flex;
-  flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 1;
   position: relative;
   row-gap: mixins.rem(10);
-  font-weight: 600;
+  column-gap: mixins.rem(10);
 }
 
 .social{
@@ -99,9 +96,8 @@
   flex-direction: column;
   position: relative;
   row-gap: mixins.rem(10);
-  font-weight: 600;
   text-align: left;
-  flex: 1 1 mixins.rem(354);
+  flex: 0 1 mixins.rem(354);
 }
 
 .buttonMain{
@@ -196,7 +192,6 @@
 
 .btn {
   @extend .btn;
-
   padding-top: mixins.rem(3);
   padding-bottom: mixins.rem(3);
   padding-left: mixins.rem(10);

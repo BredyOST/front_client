@@ -7,6 +7,7 @@ import SearchBlock from "@/app/dashboard/search/searchBlock/searchBlock";
 import Social from "@/app/dashboard/search/social/social";
 import CityBlock from "@/app/dashboard/search/cityBlock/cityBlock";
 import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch";
+import {useAppSelector} from "@/app/redux/hooks/redux";
 
 
 interface pageProps {
@@ -46,29 +47,27 @@ async function SearchPage(props: pageProps) {
                     </div>
                     <div className={cls.filters}>
                         <div className={cls.coverSearchBlock}>
-                        {/*<div className={cls.header}>*/}
-                            {/*<div className={cls.selectCategory}>*/}
-                                <Select
-                                    classname={cls.select}
-                                    title={'Выбранная категория для поиска'}
-                                    categories={categories}
-                                />
-                            {/*</div>*/}
+                            <Select
+                                classname={cls.select}
+                                // title={'Выбранная категория для поиска'}
+                                categories={categories}
+                            />
                             <Social
                                 classname={cls.social}
-                                title="Источник данных"
+                                // title="Источник данных"
                             />
-                        {/*</div>*/}
-                        {/*<div className={cls.chooseFilter}>*/}
-                        {/*    <CityBlock />*/}
-                        {/*</div>*/}
-                        {/*<div className={cls.chooseFilter}>*/}
-                        {/*    <SearchBlock />*/}
-                        {/*</div>*/}
-                        {/*<Tabs*/}
-                        {/*    classname={cls.tabs}*/}
-                        {/*    title="Количество постов"*/}
-                        {/*/>*/}
+                            <Tabs
+                                classname={cls.tabs}
+                                title="Количество постов"
+                            />
+                        </div>
+                        <div className={cls.searchWords}>
+                            <div className={cls.chooseFilter}>
+                                <CityBlock />
+                            </div>
+                            <div className={cls.chooseFilter}>
+                                <SearchBlock />
+                            </div>
                         </div>
                         <PostsForSearch/>
                     </div>

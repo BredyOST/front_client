@@ -5,8 +5,8 @@
 
 //background
 $Theme_main_background: rgb(255, 255, 255); // basic background
-//$Theme_main_background: #f6f7f7; // basic background
-$Theme_main_header_background: #21213a; // header background
+//$Theme_main_header_background: #21213a; // header background
+$Theme_main_header_background: #42424f; // header background
 $Theme_main_background_additional: #a9c78d; // дополнительный background
 
 //color
@@ -33,7 +33,6 @@ $Link_font_size: 18; // размер
 $Link_font_size_adaptive: 18; // размер адаптив
 $Link_font_line-height: math.div(24,18); // межстрочный интервал
 $Link_font_weight: 500; // жирность
-
 $Link_color: #fff; // шрифт
 $Link_font_line-height: math.div(24,18); // межстрочный интервал
 
@@ -65,12 +64,19 @@ $main_font_line-height: math.div(24,18); // межстрочный интерв�
 $main_font_weight: 500; // жирность
 
 // для заголовков
-$Title_font_family: "GraphikLCG"; // шрифт
+$Title_font_family: "Montserrat"; // шрифт
 $Title_font_size: 28; // размер
 $Title_font_size_adaptive: 28;// размер адаптив
-$Title_font_line-height: math.div(40,28); // межстрочный интервал
+$Title_font_line-height: math.div(35,28); // межстрочный интервал
 $Title_font_weight: 700; // жирность
 $Title_color: rgb(0, 0, 0); // цвет текста
+
+//Для поисковой страницы
+
+$Search_font_family: "Montserrat"; // шрифт
+$Search_font_size: 16; // размер
+$Search_font_line-height: math.div(22,16); // межстрочный интервал
+$Search_font_weight: 500; // жирность
 
 // для подзаголовков
 $SubTitle_font_family: "EncodeSans"; // шрифт
@@ -91,7 +97,7 @@ $BurgerMenu_font_weight: 400; // жирность
 $Categories_font_family: "Roboto"; // шрифт
 $Categories_font_size: 16; // размер
 $Categories_font_size_adaptive: 16; // размер адаптив
-$Categories_font_line-height: math.div(20,16); // межстрочный интервал
+$Categories_font_line-height: math.div(22,16); // межстрочный интервал
 $Categories_font_weight: 400; // жирность
 
 // logotype
@@ -100,7 +106,6 @@ $Logo_font_size: 22; // размер
 $Logo_font_size_adaptive: 20; // размер адаптив
 $Logo_font_line-height: math.div(25,20); // межстрочный интервал
 $Logo_font_weight: 600; // жирность
-//$Logo_color: rgb(91 189 182);  // цвет текста
 $Logo_color: rgb(255, 255, 255);  // цвет текста
 $Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
 
@@ -123,6 +128,7 @@ $NavBar_btn_fontWeight:400;
 // NavBar
 $NavBar_fontFamily: "OpenSans"; // шрифт
 $NavBar_Color: #fff; // шрифт
+//$NavBar_Color: #000000; // шрифт
 $NavBar_fontSize: 18; // размер шрифта
 $NavBar_fontSize_AdaptiveStart: 18; // размер шрифта
 $NavBar_fontLine: math.div(24,18); // line-height
