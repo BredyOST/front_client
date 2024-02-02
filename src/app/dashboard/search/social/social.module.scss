@@ -1,10 +1,14 @@
 @use "sass:math";
-@use '../../../styles/variable/global';
-@use '../../../styles/variable/globalIndex';
-@use "../../../styles/mixins";
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
 
 .social {
-
+  @media(max-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+  }
 }
 
 .title {
@@ -28,19 +32,21 @@ position: relative;
 }
 
 .indicator{
-  background-color: #fffbfd;
+  background-color: #ffffff;
+  box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
   display: flex;
   text-align: center;
   justify-content: center;
   z-index: 2;
-  min-height: mixins.rem(35);
+  min-height: mixins.rem(30);
   border-radius: mixins.rem(5);
   align-items: center;
   position: relative;
   font-family: globalIndex.$Title_font_family;
-  font-size: globalIndex.$Search_font_size;
+  font-size: mixins.rem(16);
   line-height: globalIndex.$Search_font_line-height;
   font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .btn {
@@ -54,9 +60,9 @@ position: relative;
   justify-content: center;
   align-items: center;
   border-radius: mixins.rem(5);
-
+  font-size: 16px;
   &.active{
-    font-weight: 700;
+    font-weight: 600;
     transition: background-color ease 0.3s 0s;
 
     @media (any-hover: hover) {
@@ -75,10 +81,12 @@ position: relative;
   padding-left: mixins.rem(3);
   padding-right: mixins.rem(3);
   border-radius: mixins.rem(5);
-
+  font-size: mixins.rem(16);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,global.$mobile);
   .all & {
     background-color: #1f8055;
     border-radius: mixins.rem(5);
+    color: white;
   }
 
 }
@@ -116,8 +124,6 @@ position: relative;
   width: mixins.rem(25);
   height: mixins.rem(25);
   position: absolute;
-
-  //top: 18%;
   top: 50%;
   right: 0%;
   transform: translateY(-50%);

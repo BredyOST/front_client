@@ -10,7 +10,8 @@
   }
 
   &.activeTab {
-    background-color: #1dc078;
+    background-color: globalIndex.$Theme_main_header_background_button;
+    color: white;
   }
 
 }

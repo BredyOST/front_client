@@ -30,6 +30,7 @@ interface InputProps extends HTMLINputProps {
     setValueState?:any,
     inputMode?: "url" | "search" | "text" | "none" | "tel" | "email" | "numeric" | "decimal";
     pattern?:any;
+    onKeyDown?:any;
 }
 
 export const Input:FC<InputProps> =React.memo(React.forwardRef((props, ref) => {
@@ -53,7 +54,8 @@ export const Input:FC<InputProps> =React.memo(React.forwardRef((props, ref) => {
         valueForIdGroup,
         setValueState,
         inputMode,
-        pattern
+        pattern,
+        onKeyDown,
     } = props;
 
     return (
@@ -61,6 +63,7 @@ export const Input:FC<InputProps> =React.memo(React.forwardRef((props, ref) => {
             {textlabel && <label className={classForLabel}>{textlabel}</label>}
             <input
                 type={type}
+                onKeyDown={onKeyDown}
                 className={classForInput}
                 placeholder={placeholder}
                 onInput={onInput}

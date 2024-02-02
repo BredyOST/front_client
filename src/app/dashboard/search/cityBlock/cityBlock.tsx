@@ -68,7 +68,6 @@ const CityBlock:FC<cityBlockProps> = (props) => {
 
     const deleteKeyWord = (word: string) => {
         const updatedWords = keyCityWords.filter((item: string) => item !== word);
-        console.log(updatedWords)
         dispatch(addKeyCityWords(updatedWords));
         localStorage.setItem('key_city', JSON.stringify(updatedWords)); // Обн
     }
@@ -78,6 +77,15 @@ const CityBlock:FC<cityBlockProps> = (props) => {
         }
         setInputKeyWords(''); // Очищаем состояние, чтобы React перерендерил компонент
     }
+
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        console.log(2)
+        if (e.key === 'Enter' || e.currentTarget.classList.contains(cls.addBtn)) {
+            addKeyWords();
+        }
+    }
+
+
 
     return (
         <div className={classNames(cls.cityBlock, {},[classname] )} >
@@ -93,6 +101,7 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                         <div className={cls.inputZone}>
                             <Input
                                 onInput={(e:ChangeEvent<HTMLInputElement>) => addInputText(e)}
+                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyPress(e)}
                                 name="words"
                                 value={inputKeyWords}
                                 classForInput={cls.input}
@@ -109,15 +118,15 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                             </Button>
                             }
                         </div>
-                        <div className={cls.coverAddBtn}>
-                            <Button
-                                onClick={addKeyWords}
-                                classname={cls.addBtn}
-                            >
-                                +
-                            </Button>
-                        </div>
                     </div>
+                </div>
+                <div className={cls.coverAddBtn}>
+                    <Button
+                        onClick={addKeyWords}
+                        classname={cls.addBtn}
+                    >
+                        +
+                    </Button>
                 </div>
                 {keyCityWords && keyCityWords?.length> 0 && keyCityWords?.map((item: any) => (
                     <div

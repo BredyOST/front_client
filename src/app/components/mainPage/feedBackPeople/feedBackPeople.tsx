@@ -9,11 +9,11 @@ interface feedBackProps {
 }
 
 const links = [
-    {id:1, link: "https://timgotow.ru/uploads/c438849fbc4100a8e81.jpg"},
-    {id:2, link: "https://timgotow.ru/uploads/8c0100aca9ae16107acb.jpg"},
-    {id:3, link: "https://timgotow.ru/uploads/104e49c479103c6e2e3b.jpg"},
-    // {id:4, link: "https://timgotow.ru/uploads/8851489b2e96581e29.jpg"},
-    // {id:5, link: "https://timgotow.ru/uploads/706f86b1dcdc3361098.jpg"},
+    {id:1, link: "https://timgotow.ru/uploads/2.1.jpg"},
+    {id:2, link: "https://timgotow.ru/uploads/2.2.jpg"},
+    {id:3, link: "https://timgotow.ru/uploads/2.3.jpg"},
+    {id:4, link: "https://timgotow.ru/uploads/2.4.jpg"},
+    {id:5, link: "https://timgotow.ru/uploads/2.5.jpg"},
 ]
 
 export const FeedBackPeople:FC<feedBackProps> = (props) => {
@@ -38,29 +38,41 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                 <div className={cls.video}>
                     <div className={cls.videoWrapper}>
                         <div className={cls.item_video}>
-                            <video poster='https://timgotow.ru/uploads/e8fb9f338255bb72d4.png' controls preload="metadata">
-                                <source type="video/webm" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.webm"/>
-                                <source type="video/mp4" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.mp4"/>
-                                Your browser does not support the video tag.
-                            </video>
+                            <iframe
+                                className={cls.frame}
+                                width="560"
+                                height="315"
+                                src="https://www.youtube.com/embed/nyoWsqG5QgQ"
+                                frameBorder="0"
+                                allowFullScreen
+                                title="YouTube Video"
+                            ></iframe>
                         </div>
                     </div>
                     <div className={cls.videoWrapper}>
                         <div className={cls.item_video}>
-                            <video poster='https://timgotow.ru/uploads/e8fb9f338255bb72d4.png' controls preload="metadata">
-                                <source type="video/webm" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.webm"/>
-                                <source type="video/mp4" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.mp4"/>
-                                Your browser does not support the video tag.
-                            </video>
+                            <iframe
+                                className={cls.frame}
+                                width="560"
+                                height="315"
+                                src="https://www.youtube.com/embed/nyoWsqG5QgQ"
+                                frameBorder="0"
+                                allowFullScreen
+                                title="YouTube Video"
+                            ></iframe>
                         </div>
                     </div>
                     <div className={cls.videoWrapper}>
                         <div className={cls.item_video}>
-                            <video poster='https://timgotow.ru/uploads/e8fb9f338255bb72d4.png' controls preload="metadata">
-                                <source type="video/webm" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.webm"/>
-                                <source type="video/mp4" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.mp4"/>
-                                Your browser does not support the video tag.
-                            </video>
+                            <iframe
+                                className={cls.frame}
+                                width="560"
+                                height="315"
+                                src="https://www.youtube.com/embed/nyoWsqG5QgQ"
+                                frameBorder="0"
+                                allowFullScreen
+                                title="YouTube Video"
+                            ></iframe>
                         </div>
                     </div>
                 </div>

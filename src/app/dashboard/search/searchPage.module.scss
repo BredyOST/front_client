@@ -1,8 +1,9 @@
 @use "sass:math";
-@use '../../styles/variable/global';
-@use '../../styles/variable/globalIndex';
-@use "../../styles/mixins";
-@use "../../styles/variable/common";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
 
 
 .searchPage{
@@ -24,20 +25,6 @@
 .mainTitle{
   @extend .forMainTitle
 }
-
-//.header{
-//
-//  @media(min-width: mixins.em(global.$tablet)) {
-//    display: flex;
-//    flex-wrap: wrap;
-//    column-gap: mixins.rem(15);
-//    row-gap: mixins.rem(10);
-//  }
-//  @media(max-width: mixins.em(global.$tablet)) {
-//    flex-direction: column;
-//    row-gap: mixins.rem(10);
-//  }
-//}
 
 .filters{
   padding-top: mixins.rem(10);
@@ -61,6 +48,11 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: mixins.rem(20);
+  row-gap: mixins.rem(10);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+  }
 }
 
 .subTitle{
@@ -80,8 +72,11 @@
   display: flex;
   flex-direction: column;
   row-gap: mixins.rem(10);
-  min-width: mixins.rem(300);
   column-gap: mixins.rem(50);
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    min-width: mixins.rem(280);
+  }
 }
 
 .tabs {
@@ -97,11 +92,11 @@
   position: relative;
   row-gap: mixins.rem(10);
   text-align: left;
-  flex: 0 1 mixins.rem(354);
-}
 
-.buttonMain{
-  background-color: #79b93e;
+  @media(min-width: mixins.em(global.$mobile)) {
+    max-width: mixins.rem(280);
+    flex: 1 1  mixins.rem(280);
+  }
 }
 
 .left{
@@ -112,21 +107,14 @@
   border-radius: mixins.rem(0) mixins.rem(8) mixins.rem(8) mixins.rem(0);
 }
 
-
 .post{
   border: 2px solid #000;
-}
-
-.textSearch{
-  background-color: #e11010;
 }
 
 .inputDiv{
   display: flex;
   flex: 1 1 auto;
 }
-
-
 
 .link{
   display: flex;
@@ -156,30 +144,6 @@
   height: mixins.rem(40);
 }
 
-.inputCity{
-  display: flex;
-  height: 100%;
-  min-width: 100%;
-  border-radius: mixins.rem(5);
-  padding-left: mixins.rem(5);
-  padding-right: mixins.rem(5);
-  padding-top: mixins.rem(5);
-  padding-bottom: mixins.rem(5);
-  outline: 2px solid rgb(0 0 0 / 30%);
-  flex: 1 1 auto;
-  transition: outline ease 0.3s 0s;
-
-  &::placeholder {
-    color: #79b93e;
-  }
-
-  &:focus {
-    outline: 2px solid #000;
-    transition: outline ease 0.3s 0s;
-  }
-}
-
-
 .size{
   font-size: mixins.rem(15);
 }
@@ -188,7 +152,6 @@
   display: flex;
   justify-content: center;
 }
-
 
 .btn {
   @extend .btn;

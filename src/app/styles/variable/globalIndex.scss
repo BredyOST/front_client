@@ -5,6 +5,7 @@
 
 //background
 $Theme_main_background: rgb(255, 255, 255); // basic background
+//$Theme_main_background: #6E6C78; // basic background
 //$Theme_main_header_background: #21213a; // header background
 $Theme_main_header_background: #42424f; // header background
 $Theme_main_background_additional: #a9c78d; // дополнительный background
@@ -72,7 +73,6 @@ $Title_font_weight: 700; // жирность
 $Title_color: rgb(0, 0, 0); // цвет текста
 
 //Для поисковой страницы
-
 $Search_font_family: "Montserrat"; // шрифт
 $Search_font_size: 16; // размер
 $Search_font_line-height: math.div(22,16); // межстрочный интервал

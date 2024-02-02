@@ -49,12 +49,10 @@ async function SearchPage(props: pageProps) {
                         <div className={cls.coverSearchBlock}>
                             <Select
                                 classname={cls.select}
-                                // title={'Выбранная категория для поиска'}
                                 categories={categories}
                             />
                             <Social
                                 classname={cls.social}
-                                // title="Источник данных"
                             />
                             <Tabs
                                 classname={cls.tabs}

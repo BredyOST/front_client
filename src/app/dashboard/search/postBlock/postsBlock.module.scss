@@ -4,7 +4,6 @@
 @use "../../../styles/mixins";
 @use "../../../styles/variable/common";
 
-
 .bodyInfo{
   display: flex;
   flex-direction: column;
@@ -63,7 +62,10 @@
   font-size: mixins.rem(14);
   line-height: math.div(16,13);
   border-bottom: mixins.rem(2) solid rgb(0 0 0 / 16%);
-  padding-bottom: mixins.rem(0);
+  padding-top: mixins.rem(7);
+  padding-bottom: mixins.rem(7);
+  padding-left: mixins.rem(7);
+  padding-right: mixins.rem(7);
   box-shadow: 0 0 mixins.rem(11) rgb(0 0 0 / 16%);
   border-radius: mixins.rem(5);
   min-height: mixins.rem(70);
@@ -76,6 +78,7 @@
       transition: background-color ease 0.3s 0s;
     }
   }
+
   @media(min-width: mixins.em(global.$tablet)) {
     display: grid;
     grid-template-columns: minmax(110px,120px) minmax(650px, 1fr)  minmax(100px,200px);
@@ -85,6 +88,7 @@
   @media(max-width: mixins.em(global.$tablet)) {
     display: flex;
     flex-direction: column;
+    row-gap: mixins.rem(5);
   }
 
 }
@@ -93,7 +97,7 @@
   justify-self: center;
   text-align: center;
   align-self: center;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .blockUser{
@@ -246,7 +250,7 @@
   text-align: right;
   min-width: 100%;
   color: #C21F39;
-  font-weight: 600;
+  font-weight: 500;
   fill: #e30101;
 }
 
@@ -258,7 +262,8 @@
 
 
 .blockCity{
-
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
   @media (min-width: mixins.em(global.$tablet)) {
     display: flex;
     justify-content: center;
@@ -301,7 +306,7 @@
 
 .showTextBtn{
   color: #2ba296;
-  font-weight: 600;
+  font-weight: 400;
   flex: 1 1 auto;
   background-color: #c2cacc;
   border-radius: mixins.rem(5);
@@ -329,8 +334,8 @@
 
 
 .image{
-  width: mixins.rem(40);
-  height: mixins.rem(40);
+  width: mixins.rem(35);
+  height: mixins.rem(35);
   border-radius: 50%;
 }
 
@@ -347,16 +352,43 @@
 .pageBtn{
   box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(5) mixins.rem(0) rgb(0 0 0 / 65%);
   color: #fffbfd;
-  flex: 0 0 mixins.rem(40);
-  height: mixins.rem(40);
+  font-size: 14px;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
   padding-left: mixins.rem(5);
   padding-right: mixins.rem(5);
-  background-color: #c98148;
+  background-color: globalIndex.$Theme_main_header_background_button;
   border-radius: mixins.rem(5);
+  transition: background-color ease 0.3s 0s;
 
   &.active{
-    background-color: #79b93e;
+    background-color: globalIndex.$Theme_main_header_background_Button_hover;
+  }
+  @media(min-width: mixins.em(440)) {
+    width: mixins.rem(40);
+    height: mixins.rem(40);
+    flex: 0 0 mixins.rem(40);
+  }
+
+  @media(max-width: mixins.em(440)) {
+    width: mixins.rem(35);
+    height: mixins.rem(35);
+    flex: 0 0 mixins.rem(35);
+  }
+
+  @media (any-hover: hover) {
+     &:hover {
+        transition: background-color ease 0.3s 0s;
+       background-color: globalIndex.$Theme_main_header_background_Button_hover;
+     }
+   }
+
+  &.size {
+    font-size: 12px;
+    @media(max-width: mixins.em(440)) {
+      width: mixins.rem(25);
+      height: mixins.rem(25);
+      flex: 0 0 mixins.rem(25);
+    }
   }
 }

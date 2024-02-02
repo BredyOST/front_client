@@ -79,20 +79,22 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
         setInputKeyWords(''); // Очищаем состояние, чтобы React перерендерил компонент
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        console.log(2)
+        if (e.key === 'Enter' || e.currentTarget.classList.contains(cls.addBtn)) {
+            addWords();
+        }
+    }
+
     return (
         <div className={classNames(cls.secondCover, mod,[classname] )} >
             <div className={cls.header}>
                 <div className={cls.first}>
-                    {/*<label*/}
-                    {/*    htmlFor='words'*/}
-                    {/*    className={cls.title}*/}
-                    {/*>*/}
-                    {/*    Ключевые слова*/}
-                    {/*</label>*/}
                     <div className={cls.coverInput}>
                         <div className={cls.inputZone}>
                             <Input
                                 onInput={(e:ChangeEvent<HTMLInputElement>) => addInputText(e)}
+                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyPress(e)}
                                 name="words"
                                 value={inputKeyWords}
                                 classForInput={cls.input}
@@ -110,15 +112,15 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
                             </Button>
                             }
                         </div>
-                        <div className={cls.coverAddBtn}>
-                            <Button
-                                onClick={addWords}
-                                classname={cls.addBtn}
-                            >
-                                +
-                            </Button>
-                        </div>
                     </div>
+                </div>
+                <div className={cls.coverAddBtn}>
+                    <Button
+                        onClick={addWords}
+                        classname={cls.addBtn}
+                    >
+                        +
+                    </Button>
                 </div>
                 {keyWords && keyWords?.length> 0 && keyWords?.map((item: any) => (
                     <div

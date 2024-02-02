@@ -1,8 +1,9 @@
 @use "sass:math";
-@use './src/app/styles/variable/global';
-@use './src/app/styles/variable/globalIndex';
-@use "./src/app/styles/mixins";
-@use "./src/app/styles/variable/common";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
 
 .postsForSearch{}
 

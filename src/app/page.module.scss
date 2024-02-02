@@ -32,6 +32,7 @@
   justify-content: center;
   flex: 1 1 auto;
   border-radius: mixins.rem(10);
+  margin-top: 30px;
 
   @media(max-width: mixins.em(global.$mobile)) {
     display: flex;

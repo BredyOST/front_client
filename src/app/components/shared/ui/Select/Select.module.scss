@@ -1,7 +1,10 @@
 @use "sass:math";
-@use './src/app/styles/variable/global.scss';
-@use './src/app/styles/variable/globalIndex.scss';
+@use './src/app/styles/variable/global';
+@use './src/app/styles/variable/globalIndex';
 @use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common';
+
 
 .Select{
 }
@@ -9,10 +12,11 @@
   font-family: globalIndex.$Title_font_family;
   line-height: globalIndex.$Search_font_line-height;
   font-weight: globalIndex.$Search_font_weight;
-
 }
 
 .coverSelect{
+  box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
+  border-radius: mixins.rem(5);
   display: flex;
   position: relative;
   @media(min-width: mixins.em(global.$mobile)) {
@@ -25,17 +29,17 @@
   min-width: 100%;
   display: flex;
   cursor: pointer;
-  min-height: mixins.rem(35);
+  min-height: mixins.rem(30);
   border-radius: mixins.rem(5);
   padding-left: mixins.rem(10);
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
   font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(18);
+  font-size: mixins.rem(16);
   line-height: globalIndex.$Search_font_line-height;
   font-weight: globalIndex.$Search_font_weight;
-  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .arrow{
@@ -47,6 +51,7 @@
   transform: translateY(-50%);
   transform-origin:center;
   transition: transform ease 0.3s 0s;
+  font-size: mixins.rem(16);
   .active & {
     transform: rotate(90deg) translate(-50%,0%);
     transition: transform ease 0.3s 0s;
@@ -55,11 +60,11 @@
 
 .option{
   display: flex;
-  font-size: mixins.rem(18);
+  font-size: mixins.rem(16);
   opacity: 0.5;
   font-family: globalIndex.$Title_font_family;
   line-height: globalIndex.$Search_font_line-height;
   font-weight: globalIndex.$Search_font_weight;
-  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 

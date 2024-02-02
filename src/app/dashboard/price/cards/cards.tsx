@@ -10,7 +10,6 @@ import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopu
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import {redirect} from "next/navigation";
 
 interface cardsProps {
@@ -73,7 +72,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             }
         }
 
-        if (item.title == 'Облегченный') {
+        if (item.title == 'Посуточный') {
             if (+period == 1) {
                 setTextMonthSliceTwo('День')
             }
@@ -157,7 +156,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                         }
                     </div>
                     {
-                        (item.title === 'Погрузись в работу' || item.title === 'Облегченный') &&
+                        (item.title === 'Погрузись в работу' || item.title === 'Посуточный') &&
                         <div className={cls.coverSlider}>
                             <Slider
                                 value={period}

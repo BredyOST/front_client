@@ -218,11 +218,11 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     const displayPages = () => {
         if (page <= 4) {
-            return pages.slice(0, 6);
+            return pages.slice(0, 5); // Изменили с 6 на 5
         } else if (page > pageCount - 4) {
-            return pages.slice(-6);
+            return pages.slice(-5); // Изменили с 6 на 5
         } else {
-            return pages.slice(page - 3, page + 3);
+            return pages.slice(page - 3, page + 2); // Изменили с 6 на 5
         }
     };
 
@@ -303,7 +303,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         <div className={cls.blockCity}>
                             <div className={cls.cityBlockOne}>
                                 {!item.city_group && !item.country_group &&
-                                    <div className={cls.noInfo}>информация отсутствует</div>
+                                    <div className={cls.noInfo}>отсутствует город</div>
                                 }
                                 {item.city_group && <div className={cls.noInfo}>{item.city_group}</div>}
                                 {item.country_group && <div className={cls.noInfo}>{item.country_group}</div>}
@@ -323,10 +323,10 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             classname={`${cls.pageBtn} ${cls.size}`}
                             onClick={() => changePage(1)}
                         >
-                            {"В начало"}
+                            {"<<"}
                         </Button>
                         <Button
-                            classname={cls.pageBtn}
+                            classname={`${cls.pageBtn} ${cls.size}`}
                             onClick={() => changePage(page - 5)}
                         >
                             {"<"}
@@ -345,7 +345,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                 {page < pageCount - 4 && (
                     <>
                         <Button
-                            classname={cls.pageBtn}
+                            classname={`${cls.pageBtn} ${cls.size}`}
                             onClick={() => changePage(page + 5)}
                         >
                             {">"}
@@ -354,7 +354,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             classname={`${cls.pageBtn} ${cls.size}`}
                             onClick={() => changePage(pageCount)}
                         >
-                            {"В конец"}
+                            {">>"}
                         </Button>
                     </>
                 )}
