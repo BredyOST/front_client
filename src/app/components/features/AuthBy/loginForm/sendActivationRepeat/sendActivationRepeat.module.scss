@@ -11,14 +11,14 @@
 }
 
 .title {
-  font-size: mixins.rem(24);
-  line-height: math.div(30,24);
   font-weight: 600;
+  font-size: mixins.rem(22);
+  line-height: math.div(28,22);
+  font-family: globalIndex.$Title_font_family;
   color: black;
   position: relative;
   text-align: center;
-
-  @include mixins.adaptiveValue("font-size",24,20,3,650,320);
+  @include mixins.adaptiveValue("font-size",22,20,3,global.$mobile,320);
 }
 
 .input {

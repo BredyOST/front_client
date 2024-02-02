@@ -91,7 +91,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
 
     return (
         <div className={cls.categories}>
-            {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && <h3 className={cls.titleFree}>Подписки пробного периода</h3>}
+            {/*{infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && <h3 className={cls.titleFree}>Подписки пробного периода</h3>}*/}
             <div className={cls.grid}>
                 {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser.categoriesFreePeriod.map((item) => (
                     <div key={item.id} className={cls.blockCategory}>

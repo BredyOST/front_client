@@ -16,7 +16,7 @@
 .section{
     display: flex;
     flex-direction: column;
-    row-gap: mixins.rem(15);
+    row-gap: mixins.rem(5);
     flex: 1 1 auto;
 }
 
@@ -25,6 +25,11 @@
     column-gap: mixins.rem(25);
     border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
     padding-bottom: mixins.rem(20);
+
+    @media(max-width: mixins.em(640)) {
+        flex-direction: column;
+        row-gap: mixins.rem(5);
+    }
 }
 
 .header {
@@ -42,18 +47,29 @@
 }
 
 .linkCover{
-
+    display: flex;
+    column-gap: mixins.rem(10);
+    @media(max-width: mixins.em(640)) {
+        flex-direction: column;
+        row-gap: mixins.rem(5);
+    }
 }
 
 .link{
+    @extend .btnTwo;
+}
+.linkTwo{
     @extend .btn;
+}
+
+.link,
+.linkTwo {
     padding-bottom: mixins.rem(12);
     padding-top: mixins.rem(12);
     padding-left: mixins.rem(15);
     padding-right: mixins.rem(15);
     @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
-    background-color: #d74b4b;
-    font-size: mixins.rem(22);
+    font-size: mixins.rem(20);
 }
 
 .body{
@@ -112,29 +128,15 @@
     font-weight: 800;
 }
 
-.registerText{
-    display: flex;
-    column-gap: mixins.rem(5);
-    align-items: center;
-}
-
-.dateText{
-    font-weight: 600;
-    font-size: mixins.rem(18);
-    align-content: center;
-    align-items: center;
-    align-self: center;
-    min-height: 100%;
+.сategoriesCover{
+    padding-top: mixins.rem(15)
 }
 
 .subTitle{
-    font-size: mixins.rem(globalIndex.$SubTitle_font_size);
-    line-height: globalIndex.$SubTitle_font_line-height;
-    font-weight: globalIndex.$SubTitle_font_weight;
-    color: globalIndex.$SubTitle_color;
-    border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
-    padding-bottom: mixins.rem(20);
-    justify-content: center;
+    @extend .forMainTitle;
+    font-size: mixins.rem(22);
+    padding-bottom: mixins.rem(0);
+    @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .coverNumBtnBlock{

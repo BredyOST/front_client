@@ -8,7 +8,6 @@ import LoginForm from "@/app/components/features/AuthBy/loginForm/loginForm";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import {destroyCookie} from "nookies";
 
 
 interface LoginModalProps {

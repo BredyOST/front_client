@@ -69,6 +69,7 @@ async function PricePage(props:pageProps) {
                             <Cards
                                 item = {item}
                                 key={item.id}
+                                categories={categories}
                             />
                         ))}
                     </div>

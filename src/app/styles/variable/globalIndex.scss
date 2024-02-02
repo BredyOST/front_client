@@ -5,8 +5,6 @@
 
 //background
 $Theme_main_background: rgb(255, 255, 255); // basic background
-//$Theme_main_background: #6E6C78; // basic background
-//$Theme_main_header_background: #21213a; // header background
 $Theme_main_header_background: #42424f; // header background
 $Theme_main_background_additional: #a9c78d; // дополнительный background
 
@@ -22,7 +20,7 @@ $Theme_attention_font_weight: 600; // жирность
 
 //buttons or Links
 $Theme_main_header_background_button: #2ba296;; // button in header
-$Theme_main_header_background_Button_hover: #1f7970; // button in header hover
+$Theme_main_header_background_Button_hover: #24726a; // button in header hover
 $Theme_main_header_color_text: rgb(253 254 255); // кнопка в header hover текст
 $Theme_main_header_background_button_category: rgb(62 140 175); // button in header
 $Theme_main_header_background_button_Two:#d74b4b;
@@ -39,8 +37,8 @@ $Link_font_line-height: math.div(24,18); // межстрочный интерв�
 
 //Inputs
 $Inputs_fontFamily: "OpenSans"; // шрифт
-$Inputs_font_size: 18; // размер
-$Inputs_font_size_adaptive: 18; // размер адаптив
+$Inputs_font_size: 16; // размер
+$Inputs_font_size_adaptive: 16; // размер адаптив
 $Inputs_font_line-height: math.div(24,18); // межстрочный интервал
 $Inputs_font_weight: 500; // жирность
 $Inputs_focus: #20a7ad;

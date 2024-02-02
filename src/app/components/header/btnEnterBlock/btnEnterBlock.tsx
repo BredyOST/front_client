@@ -7,6 +7,10 @@ import ProfileSvg from "@/app/components/svgs/profile.svg";
 import Profile from "@/app/components/header/profileList/profileList";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
+import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {redirect} from "next/navigation";
+import App from "next/app";
+import Link from "next/link";
 
 interface btnEnterBlockProps {
     classname?: string;
@@ -50,19 +54,25 @@ const BtnEnterBlock:FC<btnEnterBlockProps> = React.memo((props) => {
             className={cls.coverProfile}
             onPointerLeave={stateAuth ? mouseLeftProfile : undefined}
         >
-            <Button
-                classname={cls.buttonLogin}
-                onClick ={!stateAuth ? openLoginFormPopup : undefined}
-                onPointerEnter={stateAuth ? mouseOnProfile : undefined}
-                type='button'
-                name='login'
-            >
-                {!stateAuth
-                    ? <LogInSvg  className={cls.svgProfile}/>
-                    : <ProfileSvg className={cls.svgProfile}/>
-                }
-                {!stateAuth ? 'Войти' : 'Профиль'}
-            </Button>
+            {!stateAuth
+                ? <Button
+                    classname={cls.buttonLogin}
+                    onClick={!stateAuth ? openLoginFormPopup : undefined}
+                    onPointerEnter={stateAuth ? mouseOnProfile : undefined}
+                    type='button'
+                    name='login'
+                >
+                    <LogInSvg className={cls.svgProfile}/>
+                    <span>Войти</span>
+                </Button>
+                : <AppLink
+                    classname={cls.buttonLogin}
+                    href={`/dashboard/profile`}
+                >
+                    <ProfileSvg className={cls.svgProfile}/>
+                    <span>Профиль</span>
+                </AppLink>
+            }
             {pointerOnProfile && stateAuth &&
                 <Profile
                     classname={cls.profileBlock}

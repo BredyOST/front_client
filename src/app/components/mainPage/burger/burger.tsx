@@ -2,10 +2,8 @@
 import React, {FC} from 'react';
 import cls from './burger.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
-import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import {ICategory} from "@/app/page";
-import Link from "next/link";
 
 interface burgerProps {
     classname?: string;

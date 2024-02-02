@@ -36,6 +36,7 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
     const [descriptionCategory, setDescriptionIdCategory] = React.useState<string>(item.description ? item.description : '')
     const [positiveCategory, setPositive] = React.useState<string[]>(item.positiveWords ? item.positiveWords : '')
     const [negativeCategory, setNegative] = React.useState<string[]>(item.negativeWords ? item.negativeWords : '')
+    const [salary, setSalary] = React.useState<string>(item.salary ? item.salary : '')
     //USEREF
 
     //FUNCTIONS
@@ -55,7 +56,9 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
     const changNegative = (e:ChangeEvent<HTMLInputElement>) => {
         setNegative(e.target.value.split(',').map(word => word.trim()));
     }
-
+    const changeSalary = (e:ChangeEvent<HTMLInputElement>) => {
+        setSalary(e.target.value)
+    }
     const updateThisCategory = (id:number) => {
         updateCategory({
             id:item.id,
@@ -64,6 +67,7 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
             description: descriptionCategory ? descriptionCategory : item.description,
             positiveWords: positiveCategory ? positiveCategory : item.positiveWords,
             negativeWords: negativeCategory ? negativeCategory : item.negativeWords,
+            salary: salary ? salary : item.salary,
         })
     }
     const deleteThisCategory = (id:number) => {
@@ -99,6 +103,11 @@ const InputCategory:FC<inputCategoryProps> = (props) => {
                 value={negativeCategory ? negativeCategory : ''}
                 className={cls.inputNoPadding}
                 onChange={(e) => changNegative(e)}
+            />
+            <input
+                value={salary ? salary : ''}
+                className={cls.inputNoPadding}
+                onChange={(e) => changeSalary(e)}
             />
             <Button
                 classname={cls.btn}

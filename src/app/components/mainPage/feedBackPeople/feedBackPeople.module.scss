@@ -12,6 +12,7 @@
   margin-top: mixins.rem(100);
   flex-direction: column;
   @include mixins.adaptiveValue("margin-top",100,30,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
+
 }
 
 .coverImage{
@@ -72,6 +73,10 @@
   justify-content: center;
   @include mixins.adaptiveValue("padding-bottom",30,15,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
   @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,20,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+.pictures{
+padding-top: mixins.rem(26)
 }
 
 .video{

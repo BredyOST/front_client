@@ -14,9 +14,10 @@
 
 .text{
   color: #b46145;
-  font-size: mixins.rem(globalIndex.$main_font_size);
   font-weight: 600;
   line-height: globalIndex.$main_font_line-height;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .linkCover{
@@ -45,6 +46,7 @@
     padding-right: mixins.rem(15);
     padding-bottom: mixins.rem(5);
     padding-top: mixins.rem(5);
+    font-weight: 500;
   }
 
   @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,1250,1050);

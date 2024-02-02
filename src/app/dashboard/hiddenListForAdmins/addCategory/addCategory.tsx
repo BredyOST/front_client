@@ -21,6 +21,7 @@ export interface CategoriesInputs {
     description:string;
     positiveWords:string[];
     negativeWords:string[];
+    salary:string,
 }
 
 
@@ -38,7 +39,7 @@ const AddCategory:FC<addCategoryProps> = (props) => {
     const [getCategories, {data: requestCategories, error:errorCategories, isLoading: isLoadingCategories, isError:isErrorCategories}] = useGetCategoriesMutation()
 
     //USESTATE
-    const [inputsCategory, setInputsCategory] = React.useState<CategoriesInputs>({id_category: '', name: '', description:'', positiveWords:[], negativeWords:[]})
+    const [inputsCategory, setInputsCategory] = React.useState<CategoriesInputs>({id_category: '', name: '', description:'', positiveWords:[], negativeWords:[], salary: ''})
     const [showCategory, setShowCategory] = React.useState<boolean>(false)
 
     //USEREF
@@ -55,10 +56,12 @@ const AddCategory:FC<addCategoryProps> = (props) => {
     }
     const addPositiveWords = (e:ChangeEvent<HTMLInputElement>) => {
         setInputsCategory({...inputsCategory, positiveWords: e.target.value.split(',').map(word => word.trim())});
-
     }
     const addNegativeWords = (e:ChangeEvent<HTMLInputElement>) => {
         setInputsCategory({...inputsCategory, negativeWords: e.target.value.split(',').map(word => word.trim())});
+    }
+    const addSalary = (e:ChangeEvent<HTMLInputElement>) => {
+        setInputsCategory({...inputsCategory, salary: e.target.value});
     }
 
     const sendToCreate = () => {
@@ -68,6 +71,7 @@ const AddCategory:FC<addCategoryProps> = (props) => {
             description:inputsCategory.description,
             positiveWords: inputsCategory.positiveWords,
             negativeWords: inputsCategory.negativeWords,
+            salary: inputsCategory.salary,
         }
 
         if (inputsCategory.name && inputsCategory.description && inputsCategory.id_category) {
@@ -121,7 +125,6 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                         >
                         </Input>
                     </div>
-
                     <div className={cls.coverInputTwo}>
                         <div className={cls.label}>позитивные слова</div>
                         <Input
@@ -144,7 +147,17 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                         >
                         </Input>
                     </div>
-
+                    <div className={cls.coverInputTwo}>
+                        <div className={cls.label}>Цена</div>
+                        <Input
+                            onChange={(e:ChangeEvent<HTMLInputElement>) => addSalary(e)}
+                            value={inputsCategory.salary}
+                            classForInput={cls.input}
+                            classname={cls.inputRelative}
+                            placeholder='введите цену'
+                        >
+                        </Input>
+                    </div>
                     <div className={cls.coverBtn}>
                         <Button
                             classname={cls.btn}
@@ -169,6 +182,7 @@ const AddCategory:FC<addCategoryProps> = (props) => {
                             <div className={cls.head}>описание</div>
                             <div className={cls.head}>позитив</div>
                             <div className={cls.head}>негатив</div>
+                            <div className={cls.head}>Цена</div>
                             <div className={cls.head}>изменить</div>
                             <div className={cls.head}>добавить</div>
                         </div>

@@ -20,15 +20,23 @@
     padding-top: mixins.rem(8);
 
     @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
     @media(min-width: mixins.em(505)) {
       padding-left: mixins.rem(15);
       padding-right: mixins.rem(15);
     }
 
     @media(max-width: mixins.em(504)) {
-      padding-left: mixins.rem(8);
-      padding-right: mixins.rem(8);
+      padding-left: mixins.rem(12);
+      padding-right: mixins.rem(12);
     }
+
+  @media(max-width: mixins.em(550)) {
+    display: flex;
+    span {
+      display: none;
+    }
+  }
 
 }
 .buttonLoginMin{
@@ -46,8 +54,9 @@
     font-weight: globalIndex.$NavBar_fontWeight;
     padding-bottom: mixins.rem(8);
     padding-top: mixins.rem(8);
-    padding-left: mixins.rem(10);
-    padding-right: mixins.rem(10);
+    padding-left: mixins.rem(14);
+    padding-right: mixins.rem(14);
+
     @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
   }
 }

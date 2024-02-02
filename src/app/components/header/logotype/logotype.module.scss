@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   justify-items: center;
-  @include mixins.adaptiveValue("font-size",globalIndex.$Logo_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Logo_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,320);
   @media (any-hover: hover) {
     &:hover {
       transition: color ease 0.3s 0s;

@@ -111,7 +111,9 @@ const Header:FC<headerProps> = React.memo((props) => {
                                     classname={cls.link}
                                     href='/dashboard/search'
                                 >
-                                    Перейти к заявкам
+                                    <span className={cls.spanFirst}> Перейти к заявкам</span>
+                                    <span className={cls.spanSecond}> Заявки</span>
+
                                 </AppLink>
                                 <BtnEnterBlock/>
                             </div>

@@ -7,6 +7,7 @@ import Burger from "@/app/components/mainPage/burger/burger";
 
 async function getData() {
     let categories = [];
+    let feedback = [];
 
     try {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 120}})
@@ -20,8 +21,19 @@ async function getData() {
 
     }
 
-    return { categories };
+    try {
+        const feedbackRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/files/getAllStart`, { next: { revalidate: 500 } })
+        if (feedbackRes.ok) {
+            feedback = await feedbackRes.json();
+        } else {
+            console.error('Categories API request failed with status:', feedbackRes.status);
+        }
+    } catch (err) {
+        console.error('save error Redis:', err);
+    }
+    return {feedback, categories};
 }
+
 
 interface pageProps {
 }
@@ -40,7 +52,7 @@ export interface ICategory {
 
 async function Home(props:pageProps) {
     const {} = props;
-    const {categories} = await getData();
+    const {categories, feedback} = await getData();
 
     return (
         <div className={classNames(cls.page, {},[] )} >
@@ -79,7 +91,9 @@ async function Home(props:pageProps) {
             </div>
             <div className={cls.coverFeedBack}>
                 <div className='page__container'>
-                    <FeedBackPeople/>
+                    <FeedBackPeople
+                        pictures = {feedback}
+                    />
                 </div>
             </div>
         </div>

@@ -36,16 +36,13 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
         [cls.activeBurger]: indicatorBurger,
     };
 
-
     const {addChosenCategories} = categoriesActions;
     const dispatch = useAppDispatch();
 
     //STATES FROM REDUX
     // все выбранные категории
-    const {chosenCategory} = useAppSelector(state => state.categories)
 
     const goToPrice = (infroForOnclick:any) => {
-
         if (infroForOnclick && infroForOnclick?.id)
             dispatch(addChosenCategories([ { id: infroForOnclick?.id, text: infroForOnclick?.name }]));
     }
@@ -57,7 +54,7 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
             className={classNames(cls.appLink, mods, [classname])}
             onPointerEnter={onPointerEnter}
             onPointerLeave={onPointerLeave}
-            onClick={() => goToPrice(infroForOnclick)}
+            onClick={onClick ? onClick : () => goToPrice(infroForOnclick)}
         >
             {children}
         </Link>

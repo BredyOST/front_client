@@ -6,13 +6,11 @@
 
 
 .subTitle{
-  font-size:  mixins.rem(globalIndex.$SubTitle_font_size);
-  line-height: globalIndex.$SubTitle_font_line-height;
-  font-weight: globalIndex.$SubTitle_font_weight;
-  color: globalIndex.$SubTitle_color;
-  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
-  padding-bottom: mixins.rem(20);
-  justify-content: center;
+  @extend .forMainTitle;
+  font-size: mixins.rem(22);
+  padding-bottom: mixins.rem(0);
+  padding-top: mixins.rem(20);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .btn {

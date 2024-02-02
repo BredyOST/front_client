@@ -3,9 +3,11 @@ import React, {FC} from 'react';
 import cls from './feedBackPeople.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import Pictures from "@/app/dashboard/feedback/pictures/pictures";
 
 interface feedBackProps {
     classname?: string;
+    pictures?:any
 }
 
 const links = [
@@ -17,7 +19,10 @@ const links = [
 ]
 
 export const FeedBackPeople:FC<feedBackProps> = (props) => {
-    const { classname } = props;
+    const {
+        classname,
+        pictures
+    } = props;
     
     //ACTIONS FROM REDUX
     
@@ -28,6 +33,9 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
     //USEREF
     
     //FUNCTIONS
+
+
+    const nextImages = pictures?.filter((item:any) => /\b2\.\d/.test(item.originalName)).sort((a:any, b:any ) => a.fileName - b.fileName).slice(0,5)
 
     return (
         <div className={classNames(cls.feedBack, {},[classname] )} >
@@ -40,8 +48,6 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         <div className={cls.item_video}>
                             <iframe
                                 className={cls.frame}
-                                width="560"
-                                height="315"
                                 src="https://www.youtube.com/embed/nyoWsqG5QgQ"
                                 frameBorder="0"
                                 allowFullScreen
@@ -53,9 +59,7 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         <div className={cls.item_video}>
                             <iframe
                                 className={cls.frame}
-                                width="560"
-                                height="315"
-                                src="https://www.youtube.com/embed/nyoWsqG5QgQ"
+                                src="https://www.youtube.com//embed/Qcw1SMbC8W8"
                                 frameBorder="0"
                                 allowFullScreen
                                 title="YouTube Video"
@@ -66,9 +70,29 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         <div className={cls.item_video}>
                             <iframe
                                 className={cls.frame}
-                                width="560"
-                                height="315"
-                                src="https://www.youtube.com/embed/nyoWsqG5QgQ"
+                                src="https://www.youtube.com//embed/IYkR6YaYKLY"
+                                frameBorder="0"
+                                allowFullScreen
+                                title="YouTube Video"
+                            ></iframe>
+                        </div>
+                    </div>
+                    <div className={cls.videoWrapper}>
+                        <div className={cls.item_video}>
+                            <iframe
+                                className={cls.frame}
+                                src="https://www.youtube.com//embed/It64FQZfj4g"
+                                frameBorder="0"
+                                allowFullScreen
+                                title="YouTube Video"
+                            ></iframe>
+                        </div>
+                    </div>
+                    <div className={cls.videoWrapper}>
+                        <div className={cls.item_video}>
+                            <iframe
+                                className={cls.frame}
+                                src="https://www.youtube.com//embed/6s7p4tExCJw"
                                 frameBorder="0"
                                 allowFullScreen
                                 title="YouTube Video"
@@ -76,16 +100,9 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className={cls.coverImage}>
-                    {links?.length && links.map((item) => (
-                        <div
-                            className={cls.coverIbg}
-                            key={item.id}
-                        >
-                            <img className={cls.ibg} src={item.link} alt="картинка"/>
-                        </div>
-                    ))}
-                </div>
+                <Pictures
+                    classname={cls.pictures}
+                    pictures={nextImages}/>
             </div>
             <div className={cls.coverBtn}>
                 <AppLink

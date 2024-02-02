@@ -15,6 +15,7 @@ import {redirect} from "next/navigation";
 interface cardsProps {
     classname?: string;
     item:any;
+    categories:any;
 }
 
 const emailAdress= 'клиенты.com';
@@ -22,6 +23,7 @@ const emailAdress= 'клиенты.com';
 const Cards:FC<cardsProps> = React.memo((props) => {
     const {
         item,
+        categories
     } = props;
 
     const cookies = getThisCookie();
@@ -53,8 +55,26 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     }
     React.useEffect(
         () => {
-            setPrice(item.price * +period * chosenCategory.length)
-            if(item.title == 'Бесплатный') setPeriod(`2`)
+
+            let salary = 0;
+
+            if (item.title == 'Посуточный') {
+                chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
+                    let category = categories?.find((elem:any) => elem.id == item.id)
+                    const price = Math.round(+category.salary/30 * 1.5 * +period)
+                    salary += price
+                })
+            }
+            if (item.title == 'Погрузись в работу') {
+                chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
+                    let category = categories?.find((elem:any) => elem.id == item.id)
+                    const price = +category.salary * +period
+                    salary += price;
+                })
+            }
+            if(item.title == 'Бесплатный') setPeriod(`1`)
+
+            setPrice(salary)
         },[item, period,chosenCategory]
     )
 
@@ -149,7 +169,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     <div className={cls.coverPeriod}>
                         <div className={cls.coverPeriodMain}>Период</div>
                         {item.title == 'Бесплатный'
-                            ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>дня</div></div> :
+                            ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>День</div></div> :
                             item.title == 'Погрузись в работу'
                                 ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>{textMonthSliceTwo}</div></div> :
                                 <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>{textMonthSliceTwo}</div></div>

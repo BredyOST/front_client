@@ -49,11 +49,12 @@
 .leftSection{
   display: flex;
   align-items: center;
-  @include mixins.adaptiveValue("column-gap",30,12,3,1220,global.$tablet);
+  @include mixins.adaptiveValue("column-gap",30,0,3,1220,global.$tablet);
 
   @media(min-width: mixins.em(global.$mobile)) {
     column-gap: mixins.rem(30);
   }
+
 }
 
 .coverLogo{
@@ -68,6 +69,7 @@
   @media(max-width:mixins.em(global.$mobile)) {
     justify-content: flex-end;
     column-gap: mixins.rem(20);
+    @include mixins.adaptiveValue("column-gap",globalIndex.$Link_font_size_adaptive,10,3,globalIndex.$Header_adaptive_start,320);
   }
 
   @media(max-width: mixins.em(330)) {
@@ -76,34 +78,50 @@
 
 }
 
-.link {
+.link,
+.linkTwo {
   @extend .btnTwo;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+}
 
-  @media(min-width: mixins.em(505)) {
-    font-family: globalIndex.$NavBar_fontFamily;
-    font-size: globalIndex.$NavBar_fontSize;
-    line-height: globalIndex.$NavBar_fontLine;
-    font-weight: globalIndex.$NavBar_fontWeight;
-    padding-bottom: mixins.rem(11);
-    padding-top: mixins.rem(11);
-    padding-left: mixins.rem(15);
-    padding-right: mixins.rem(15);
-    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+.link {
+  font-family: globalIndex.$NavBar_fontFamily;
+  font-size: globalIndex.$NavBar_fontSize;
+  line-height: globalIndex.$NavBar_fontLine;
+  font-weight: globalIndex.$NavBar_fontWeight;
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  padding-left: mixins.rem(15);
+  padding-right: mixins.rem(15);
+
+  & .spanFirst{
+    @media(max-width: mixins.em(479)) {
+      opacity: 0;
+      display: none;
+      visibility: hidden;
+    }
   }
 
-  @media(max-width: mixins.em(504)) {
-    opacity: 0;
-    display: none;
-    visibility: hidden;
+  & .spanSecond{
+    @media(min-width: mixins.em(480)) {
+      opacity: 0;
+      display: none;
+      visibility: hidden;
+    }
   }
 
 }
 
+.linkTwo{
+
+}
+
 .coverButton{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: mixins.rem(15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: mixins.rem(15);
+  @include mixins.adaptiveValue("column-gap",globalIndex.$Link_font_size_adaptive,7,3,globalIndex.$Header_adaptive_start,320);
 }
 
 .TextLogin{

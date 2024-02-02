@@ -10,6 +10,7 @@ import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {destroyCookie} from "nookies";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
+import {stateBurgerMenuSliceActions} from "@/app/redux/entities/stateBurger/stateBurgerSlice";
 interface BurgerMenuProps {
     classname?: string;
     indicatorOpen:boolean;
@@ -29,7 +30,8 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
     // для изменения состояния попапа loginForm
     const { changeStateLoginFormPopup } = statePopupSliceActions;
     const {addAuthStatus, addAdminRole, addMainAdminRole, LogOutFromProfile,} = authSliceActions;
-
+    const {changeStateMenuBurger} = stateBurgerMenuSliceActions;
+    const {stateMenuBurgerHeader} = useAppSelector(state => state.stateBurgerMenu)
     //STATES FROM REDUX
     const {stateAuth} = useAppSelector(state => state.auth)
     //USESTATE
@@ -57,6 +59,10 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
         location.reload()
     },[])
 
+    const closePopup = () => {
+        dispatch(changeStateMenuBurger(false))
+    }
+
 
     return (
         <div className={classNames(cls.burgerMenu, mod,[classname] )} >
@@ -70,20 +76,35 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
             </Button>
             <div className={cls.section}>
                 <ul className={cls.coverLinks}>
-                    {!stateAuth &&
-                        <Button
+                    {!stateAuth
+                        ? <Button
                             classname={cls.btnEnter}
                             onClick={openLoginFormPopup}
                         >
                             Войти в учетную запись
                         </Button>
+                        :   <AppLink
+                            classname={`${cls.links} ${cls.search}`}
+                            href={'/dashboard/profile'}
+                            onClick={closePopup}
+                        >
+                            Профиль
+                        </AppLink>
                     }
+                    <AppLink
+                        classname={`${cls.links} ${cls.search}`}
+                        href={'/dashboard/search'}
+                        onClick={closePopup}
+                    >
+                        К заявкам
+                    </AppLink>
                     {navbarFirst && navbarFirst?.length > 0 &&
                         navbarFirst.map((item) => (
                             <AppLink
                                 classname={cls.links}
                                 key={item.text}
                                 href={item.href}
+                                onClick={closePopup}
                             >
                                 {item.text}
                             </AppLink>

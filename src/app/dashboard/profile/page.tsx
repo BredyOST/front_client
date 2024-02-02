@@ -8,6 +8,8 @@ import ChangePassword from "@/app/dashboard/profile/changePassword/changePasswor
 import Authorizations from "@/app/dashboard/profile/authorizations/authorizations";
 import BlockCategory from "@/app/dashboard/profile/blockCategory/blockCategory";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {Button} from "@/app/components/shared/ui/Button/Button";
+import LogOutBtn from "@/app/dashboard/profile/logOutBtn/logOutBtn";
 
 interface pageProps {
 }
@@ -33,22 +35,12 @@ const ProfilePage:FC<pageProps> = (props) => {
                                     href='/dashboard/search'>
                                     Перейти к заявкам
                                 </AppLink>
+                                <LogOutBtn
+                                    classname={cls.linkTwo}
+                                >
+                                    Выйти из профиля
+                                </LogOutBtn>
                             </div>
-                        </div>
-                        <div className={cls.header}>
-                            <h2 className={cls.registerText}>
-                                <div className={cls.text}> Дата регистрации</div>
-                                <div className={cls.dateText}>
-                                    {/*{*/}
-                                    {/*    !infoUser*/}
-                                    {/*        ? 'загрузка данных...'*/}
-                                    {/*        : infoUser && infoUser.createdAt*/}
-                                    {/*            // eslint-disable-next-line max-len*/}
-                                    {/*            ? `${ new Date(Date.parse(infoUser.createdAt)).getDate() < 10 ? `0${new Date(Date.parse(infoUser.createdAt)).getDate()}.` : `${new Date(Date.parse(infoUser.createdAt)).getDate()}.` }${ new Date(Date.parse(infoUser.createdAt)).getMonth() < 9 ? `0${new Date(Date.parse(infoUser.createdAt)).getMonth() + 1}.` : `${new Date(Date.parse(infoUser.createdAt)).getMonth() + 1}.` }${ new Date(Date.parse(infoUser.createdAt)).getFullYear() }г`*/}
-                                    {/*            : 'данных нет'*/}
-                                    {/*}*/}
-                                </div>
-                            </h2>
                         </div>
                         <ChangeName/>
                         <ChangeEmail/>

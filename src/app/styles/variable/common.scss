@@ -33,7 +33,6 @@
 }
 
 // добавь только padding и адаптив
-
 .btn{
   color: globalIndex.$Link_color;
   display: flex;
@@ -94,10 +93,7 @@
 
 // кнопка для категорий
 .btnCategory{
-  font-family: globalIndex.$Link_fontFamily;
   color: globalIndex.$Link_color;
-  font-size: mixins.rem(globalIndex.$Link_font_size);
-  line-height: globalIndex.$Logo_font_line-height;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(5);
@@ -105,7 +101,12 @@
   border-radius: mixins.rem(10);
   z-index: 2;
   transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+  font-size: mixins.rem(16);
+  line-height: math.div(22, 16);
+  font-weight: 500;
+  font-family: globalIndex.$Categories_font_family;
 
+  @include mixins.adaptiveValue("column-gap",5,2,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
   @media (any-hover: hover) {
     &:hover {
       background-color: globalIndex.$Theme_main_header_background_Button_hover;
@@ -218,11 +219,12 @@
 
 .blockInfoMain {
   display: flex;
-  flex-direction: column;
   column-gap: mixins.rem(10);
-  align-items: flex-start;
-  justify-content: center;
   flex: 1 1 auto;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+
 }
 
 .linkCoverMain {

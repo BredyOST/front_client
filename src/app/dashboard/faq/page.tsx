@@ -22,12 +22,13 @@ async function Faq (props:faqProps) {
                     <div className={cls.section}>
                         <h1 className={cls.mainTitle}>Ответы на вопросы</h1>
                     </div>
-                    {arrayQuestions?.length && arrayQuestions.map((item:any) => (
-                        <Question
-                            key={item.id}
-                            items = {item}
-                        />
-                    ))}
+                    В разработке
+                    {/*{arrayQuestions?.length && arrayQuestions.map((item:any) => (*/}
+                    {/*    <Question*/}
+                    {/*        key={item.id}*/}
+                    {/*        items = {item}*/}
+                    {/*    />*/}
+                    {/*))}*/}
                 </div>
             </div>
         </div>

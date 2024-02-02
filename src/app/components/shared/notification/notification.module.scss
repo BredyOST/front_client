@@ -22,7 +22,7 @@
   right: 0%;
   border-radius: mixins.rem(5);
 
-  @include mixins.adaptiveValue("max-width",600,270,3,1600,320);
+  @include mixins.adaptiveValue("max-width",600,370,3,1400,320);
 }
 
 @keyframes jump {
@@ -75,14 +75,14 @@
   border-radius: mixins.rem(6);
   box-shadow: 0 0 mixins.rem(10) #000;
 
-  @include mixins.adaptiveValue("font-size",22,14,3,1600,767.98);
-  @include mixins.adaptiveValue("padding-top",20,3,3,1600,767.98);
-  @include mixins.adaptiveValue("padding-bottom",20,18,3,1600,767.98);
-  @include mixins.adaptiveValue("padding-left",20,3,3,1600,767.98);
-  @include mixins.adaptiveValue("padding-right",30,3,3,1600,767.98);
+  @include mixins.adaptiveValue("font-size",22,16,3,1400,767.98);
+  @include mixins.adaptiveValue("padding-top",20,10,3,1400,767.98);
+  @include mixins.adaptiveValue("padding-bottom",20,18,3,1400,767.98);
+  @include mixins.adaptiveValue("padding-left",20,10,3,1400,767.98);
+  @include mixins.adaptiveValue("padding-right",30,10,3,1400,767.98);
 
 
-  @media(max-width: mixins.em(500)) {
+  @media(max-width: mixins.em(400)) {
     flex-direction: column;
   }
 }
@@ -93,8 +93,8 @@
   width: mixins.rem(120);
   height: mixins.rem(100);
 
-  @include mixins.adaptiveValue("width",120,70,3,1600,320);
-  @include mixins.adaptiveValue("height",100,50,3,1600,320);
+  @include mixins.adaptiveValue("width",120,90,3,1400,320);
+  @include mixins.adaptiveValue("height",100,70,3,1400,320);
 
 }
 
