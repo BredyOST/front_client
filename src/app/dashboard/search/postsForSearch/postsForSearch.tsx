@@ -44,7 +44,7 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
             <div className={cls.looking}>
                 {infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.length)) &&
                     <div className={cls.coverBlockNoAccess}>
-                        <div className={cls.titleAboutNoAccess}>Для осуществления поиска, необходимо наличие активной подписки или бесплатного тестового периода </div>
+                        {/*<div className={cls.titleAboutNoAccess}>Для осуществления поиска, необходимо наличие активной подписки или бесплатного тестового периода </div>*/}
                         <div className={cls.coverBtn}>
                             <Link href={navbarFirst[0].href} className={cls.btn}>Посмотреть тарифы</Link>
                         </div>

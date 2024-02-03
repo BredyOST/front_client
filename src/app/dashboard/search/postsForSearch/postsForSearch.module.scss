@@ -20,19 +20,23 @@
   row-gap: mixins.rem(10);
 }
 
+.coverBtn{
+  display: flex;
+}
+
 
 .btn {
-  @extend .btn;
-  padding-top: mixins.rem(3);
-  padding-bottom: mixins.rem(3);
+  @extend .btnTwo;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
   padding-left: mixins.rem(10);
   padding-right: mixins.rem(10);
-  font-size: mixins.rem(22);
+  font-size: mixins.rem(16);
   box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(20) rgb(0 0 0 / 50%);
 }
 
 .titleAboutNoAccess{
-  font-size: mixins.rem(22);
+  font-size: mixins.rem(18);
   font-weight: 600;
   display: flex;
   flex: 1 1 auto;
