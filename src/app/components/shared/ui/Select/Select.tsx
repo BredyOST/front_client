@@ -54,15 +54,18 @@ export const Select:FC<SelectProps> = React.memo((props) => {
 
     React.useEffect(() => {
         const local = localStorage.getItem('_sel_category');
-        console.log('222')
-        const savedCategory = JSON.parse(local);
-        console.log(infoUser)
-        const checAcess = infoUser?.categoriesFreePeriod.find((item:any) => item.id == savedCategory.id)
-        const checAcessBuy = infoUser?.categoriesHasBought.find((item:any) => item.id == savedCategory.id)
-        console.log(checAcess)
-        console.log(1)
-        if (local && (checAcess || checAcessBuy)) {
+        let savedCategory:any;
+        let checAcess:any;
+        let checAcessBuy:any;
 
+        if (local !== null) {
+            savedCategory = JSON.parse(local);
+        }
+        if (savedCategory && savedCategory?.id) {
+            checAcess = infoUser?.categoriesFreePeriod.find((item:any) => item?.id == savedCategory?.id)
+            checAcessBuy = infoUser?.categoriesHasBought.find((item:any) => item?.id == savedCategory?.id)
+        }
+        if (local && (checAcess || checAcessBuy) && savedCategory) {
             try {
                 dispatch(addCategoryChosen(savedCategory))
             } catch (error) {
