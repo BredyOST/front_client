@@ -33,11 +33,10 @@ export const Select:FC<SelectProps> = React.memo((props) => {
     const {chosenCategory} = useAppSelector(state => state.searchParams)
     //ACTIONS
     const {addCategoryChosen} = SearchParamsActions;
-
     // indicators
 
     // Mods
-
+    // console.log(infoUser)
     // functions
     const selectOption = (e: ChangeEvent<HTMLSelectElement>) => {
         const selectedCategory = categories.find((item:any) => item.name === e.target.value);
@@ -55,10 +54,17 @@ export const Select:FC<SelectProps> = React.memo((props) => {
 
     React.useEffect(() => {
         const local = localStorage.getItem('_sel_category');
-        if (local) {
+        console.log('222')
+        const savedCategory = JSON.parse(local);
+        console.log(infoUser)
+        const checAcess = infoUser?.categoriesFreePeriod.find((item:any) => item.id == savedCategory.id)
+        const checAcessBuy = infoUser?.categoriesHasBought.find((item:any) => item.id == savedCategory.id)
+        console.log(checAcess)
+        console.log(1)
+        if (local && (checAcess || checAcessBuy)) {
+
             try {
-                const savedCategory = JSON.parse(local);
-                dispatch(addCategoryChosen(savedCategory));
+                dispatch(addCategoryChosen(savedCategory))
             } catch (error) {
                 // console.error('Ошибка при чтении данных из localStorage:', error);
             }
@@ -87,7 +93,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
                 dispatch(addCategoryChosen(obj));
             }
         }
-    }, [categories]);
+    }, [categories, infoUser]);
 
     return (
 

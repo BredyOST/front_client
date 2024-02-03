@@ -33,7 +33,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     const [expandedPosts, setExpandedPosts] = React.useState<number[]>([]);
     const [page, setPage] = React.useState<number>(1); // номер страницы
     const [filteredPosts, setFilteredPosts] = React.useState<any>([]); // Добавили состояние для отфильтрованных постов
-    console.log(chosenCategory)
     //USEREF
 
     //FUNCTIONS
