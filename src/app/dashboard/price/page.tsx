@@ -22,7 +22,7 @@ async function getData() {
             const responseData = await pricesRes.json();
             if( responseData.length) prices = responseData
         } else {
-            console.error('Categories API request failed with status:', pricesRes.status);
+            console.error('pricesRes API price request failed with status:', pricesRes.status);
         }
     } catch (err) {
         console.error('save error Redis:', err);
@@ -34,7 +34,7 @@ async function getData() {
             const responseData = await categoriesRes.json();
             if( responseData.length) categories = responseData
         } else {
-            console.error('Categories API request failed with status:', categoriesRes.status);
+            console.error('Categories  price API request failed with status:', categoriesRes.status);
         }
     } catch (err) {
         console.error('save error Redis:', err);

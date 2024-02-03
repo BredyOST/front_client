@@ -35,7 +35,7 @@ const Admin:FC<pageProps> = (props) => {
     return (
         <div className={classNames(cls.AdminPage, {},[] )} >
             <div className={'page__container'}>
-                { infoUser && infoUser.isAdmin &&
+                {stateAuth && infoUser && infoUser.isAdmin &&
                 <div className={cls.cover}>
                     <AddGroup/>
                     <AddChat/>

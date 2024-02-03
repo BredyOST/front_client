@@ -26,7 +26,7 @@ async function getData() {
         if (feedbackRes.ok) {
             feedback = await feedbackRes.json();
         } else {
-            console.error('Categories API request failed with status:', feedbackRes.status);
+            console.error('feedbackRes API request failed with status:', feedbackRes.status);
         }
     } catch (err) {
         console.error('save error Redis:', err);

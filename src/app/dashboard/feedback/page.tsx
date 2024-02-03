@@ -2,12 +2,15 @@ import React from 'react';
 import cls from './feedback.module.scss'
 import Pictures from "@/app/dashboard/feedback/pictures/pictures";
 
+
+export const metadata = {
+    title: 'Price',
+    description: 'Отзывы клиентов',
+}
+
+
 interface feedBackProps {
 
-}
-interface ImageProps {
-    src: string;
-    alt: string;
 }
 
 async function getData() {
@@ -19,7 +22,7 @@ async function getData() {
         if (feedbackRes.ok) {
             feedback = await feedbackRes.json();
         } else {
-            console.error('Categories API request failed with status:', feedbackRes.status);
+            console.error('feedbackRes feed API request failed with status:', feedbackRes.status);
         }
     } catch (err) {
         console.error('save error Redis:', err);

@@ -8,8 +8,12 @@ import ChangePassword from "@/app/dashboard/profile/changePassword/changePasswor
 import Authorizations from "@/app/dashboard/profile/authorizations/authorizations";
 import BlockCategory from "@/app/dashboard/profile/blockCategory/blockCategory";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {Button} from "@/app/components/shared/ui/Button/Button";
 import LogOutBtn from "@/app/dashboard/profile/logOutBtn/logOutBtn";
+
+export const metadata = {
+    title: 'Price',
+    description: 'Профиль пользователя',
+}
 
 interface pageProps {
 }

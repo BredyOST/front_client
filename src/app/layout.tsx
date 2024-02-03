@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     metadataBase: new URL(`${process.env['NEXT_PUBLIC_CLIENT_URL']}`),
     openGraph: {
         locale:'ru',
-        title: 'Acme',
-        url:'https/sss',
-        description: 'Acme is a...',
-        images:'sss',
+        title: 'Клиенты.com',
+        url:'https://xn--e1affem4a4d.com/dashboard/price',
+        description: 'Сервис для поиска клиентов',
+        images:'',
         siteName:'Клиенты.com'
 
     },

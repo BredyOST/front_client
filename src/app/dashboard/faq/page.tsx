@@ -1,12 +1,18 @@
 import cls from './faq.module.scss';
 import React from "react";
 import Link from "next/link";
-import Question from "@/app/dashboard/faq/question/question";
+
+
+export const metadata = {
+    title: 'Price',
+    description: 'Раздел вопросов',
+}
+
+
 
 interface faqProps {
 
 }
-
 
 async function Faq (props:faqProps) {
     const {} = props;
