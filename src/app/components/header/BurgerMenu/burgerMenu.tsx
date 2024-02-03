@@ -61,6 +61,7 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
 
     const closePopup = () => {
         dispatch(changeStateMenuBurger(false))
+        document.documentElement.classList.remove("lock")
     }
 
 
