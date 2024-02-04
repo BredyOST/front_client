@@ -7,9 +7,8 @@
 
 .feedBack {
   display: flex;
-  padding-top: mixins.rem(20);
+  padding-top: mixins.rem(30);
   padding-bottom: mixins.rem(50);
-  margin-top: mixins.rem(100);
   flex-direction: column;
   @include mixins.adaptiveValue("margin-top",100,30,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
 

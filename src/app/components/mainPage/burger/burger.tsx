@@ -39,7 +39,6 @@ export const Burger:FC<burgerProps> = (props) => {
         }
     }
 
-
     return (
         <div className={open ? `${cls.category} ${cls.activeBurger}` :cls.category }>
             <h3 className={cls.titleMainCategory}>Категории</h3>
@@ -54,7 +53,7 @@ export const Burger:FC<burgerProps> = (props) => {
             </Button>
             <div className={cls.coverCategory}>
                 {
-                    categ && categ.map((item:ICategory) =>
+                    categ && categ?.map((item:ICategory) =>
                         <div
                             className={cls.coverLink}
                             key={item.id}

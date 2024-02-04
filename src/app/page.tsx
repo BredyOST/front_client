@@ -54,6 +54,9 @@ async function Home(props:pageProps) {
     const {} = props;
     const {categories, feedback} = await getData();
 
+    const categ = categories.filter((item) => item.show)
+
+
     return (
         <div className={classNames(cls.page, {},[] )} >
             <div className='page__container'>
@@ -61,7 +64,7 @@ async function Home(props:pageProps) {
                     <h1 className={cls.mainTitle}><span>Клиенты.com</span> - Сервис для поиска клиентов</h1>
                     <div className={cls.coverMain}>
                         <Burger
-                            categ = {categories}
+                            categ = {categ}
                         />
                         <div className={cls.section}>
                             <div className={cls.coverVideo}>

@@ -51,6 +51,7 @@ async function PricePage(props:pageProps) {
         categories
     } = await getData();
 
+    const categ = categories.filter((item) => item.show)
 
     return (
         <div className={classNames(cls.pricePage, {},[] )} >
@@ -61,7 +62,7 @@ async function PricePage(props:pageProps) {
                     </div>
                     <div className={cls.categories}>
                         <BlockBtnAdd
-                            categories={categories}
+                            categories={categ}
                         />
                     </div>
                     <div className={cls.prices}>
@@ -76,7 +77,7 @@ async function PricePage(props:pageProps) {
                 </div>
             </div>
             <ListsCategory
-                categories={categories}
+                categories={categ}
             />
         </div>
     );

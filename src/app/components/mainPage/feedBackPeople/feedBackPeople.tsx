@@ -10,14 +10,6 @@ interface feedBackProps {
     pictures?:any
 }
 
-const links = [
-    {id:1, link: "https://timgotow.ru/uploads/2.1.jpg"},
-    {id:2, link: "https://timgotow.ru/uploads/2.2.jpg"},
-    {id:3, link: "https://timgotow.ru/uploads/2.3.jpg"},
-    {id:4, link: "https://timgotow.ru/uploads/2.4.jpg"},
-    {id:5, link: "https://timgotow.ru/uploads/2.5.jpg"},
-]
-
 export const FeedBackPeople:FC<feedBackProps> = (props) => {
     const {
         classname,

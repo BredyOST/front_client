@@ -13,6 +13,8 @@ import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
 import Notification from "@/app/components/shared/notification/notification";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import BtnEnterBlock from "@/app/components/header/btnEnterBlock/btnEnterBlock";
+import {Button} from "@/app/components/shared/ui/Button/Button";
+import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 interface headerProps {
     classname?: string;
 }
@@ -45,9 +47,9 @@ const Header:FC<headerProps> = React.memo((props) => {
     // для сохранения данных о пользователе
     const {addAdminRole, addMainAdminRole, addAuthStatus, addInfoUser,} = authSliceActions;
     // добавить категории в стейт
-
+    const {stateAuth} = useAppSelector(state => state.auth)
     // ACTIONS FROM REDUX
-
+    const { changeStateLoginFormPopup } = statePopupSliceActions;
     //STATE
     // для отображения и скрытия подменю профиля
     const [showHeader, setShowHeader] = React.useState(true);
@@ -84,11 +86,16 @@ const Header:FC<headerProps> = React.memo((props) => {
             lastScrollY.current = currentScrollY;
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', handleScroll, { passive: true });
         };
+    }, []);
+
+
+    const openLoginFormPopup = React.useCallback(() => {
+        dispatch(changeStateLoginFormPopup(true));
     }, []);
 
     return (
@@ -107,14 +114,23 @@ const Header:FC<headerProps> = React.memo((props) => {
                         </div>
                         <div className={cls.rightSection}>
                             <div className={cls.coverButton}>
-                                <AppLink
-                                    classname={cls.link}
-                                    href='/dashboard/search'
-                                >
-                                    <span className={cls.spanFirst}> Перейти к заявкам</span>
-                                    <span className={cls.spanSecond}> Заявки</span>
+                                {stateAuth
+                                    ? <AppLink
+                                        classname={cls.link}
+                                        href='/dashboard/search'
+                                    >
+                                        <span className={cls.spanFirst}> Перейти к заявкам</span>
+                                        <span className={cls.spanSecond}> Заявки</span>
 
-                                </AppLink>
+                                    </AppLink>
+                                    :   <Button
+                                        classname={cls.link}
+                                        onClick={openLoginFormPopup}
+                                    >
+                                        <span className={cls.spanFirst}> Перейти к заявкам</span>
+                                        <span className={cls.spanSecond}> Заявки</span>
+                                    </Button>
+                                }
                                 <BtnEnterBlock/>
                             </div>
                             <BurgerButton/>
