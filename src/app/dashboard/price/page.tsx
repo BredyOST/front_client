@@ -51,7 +51,7 @@ async function PricePage(props:pageProps) {
         categories
     } = await getData();
 
-    const categ = categories.filter((item) => item.show)
+    const categ = categories.filter((item:any) => item.show)
 
     return (
         <div className={classNames(cls.pricePage, {},[] )} >

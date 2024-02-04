@@ -54,7 +54,7 @@ async function Home(props:pageProps) {
     const {} = props;
     const {categories, feedback} = await getData();
 
-    const categ = categories.filter((item) => item.show)
+    const categ = categories.filter((item:any) => item.show)
 
 
     return (
