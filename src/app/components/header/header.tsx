@@ -86,10 +86,10 @@ const Header:FC<headerProps> = React.memo((props) => {
             lastScrollY.current = currentScrollY;
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener('scroll', handleScroll, { passive: true });
+            window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
