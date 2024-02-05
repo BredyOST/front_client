@@ -20,7 +20,8 @@ async function getData() {
     try {
         const feedbackRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/files/getAllStart`, { next: { revalidate: 500 } })
         if (feedbackRes.ok) {
-            feedback = await feedbackRes.json();
+            const feedbackArray = await feedbackRes.json();
+            if (feedbackArray.length >= 1)     feedback = feedbackArray
         } else {
             console.error('feedbackRes feed API request failed with status:', feedbackRes.status);
         }
@@ -32,7 +33,6 @@ async function getData() {
 
 async function Feedback (props:feedBackProps) {
     const {  } = props;
-
     const { feedback} = await getData();
 
     //ACTIONS FROM REDUX
@@ -44,7 +44,7 @@ async function Feedback (props:feedBackProps) {
     //USEREF
 
     //FUNCTIONS
-    // const nextImages = feedback?.filter((item) => item.originalName.includes('2.'))
+    // const nextImages = feedback?.filter((item:any) => item.originalName.includes('2.'))
     const nextImages = feedback?.filter((item:any) => /\b2\.\d/.test(item.originalName));
 
     return (

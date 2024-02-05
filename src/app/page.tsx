@@ -13,7 +13,7 @@ async function getData() {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 120}})
         if (categoriesRes.ok) {
             const responseData = await categoriesRes.json();
-            if( responseData.length) categories = responseData
+            if( responseData.length >= 1) categories = responseData
         } else {
             console.error('Categories API request failed with status:', categoriesRes.status);
         }
@@ -24,7 +24,8 @@ async function getData() {
     try {
         const feedbackRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/files/getAllStart`, { next: { revalidate: 500 } })
         if (feedbackRes.ok) {
-            feedback = await feedbackRes.json();
+            const feedbackData = await feedbackRes.json();
+            if( feedbackData.length >= 1) feedback = feedbackData
         } else {
             console.error('feedbackRes API request failed with status:', feedbackRes.status);
         }

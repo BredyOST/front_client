@@ -37,13 +37,13 @@ const BtnEnterBlock:FC<btnEnterBlockProps> = React.memo((props) => {
     //FUNCTIONS
     // для отображения и скрытия всплывающего меню на кнопке профиль
     // отслеживаем когда на кнопке
-    const mouseOnProfile = React.useCallback(() => {
-        setPointerOnProfile(true)
-    },[]);
+    // const mouseOnProfile = React.useCallback(() => {
+    //     setPointerOnProfile(true)
+    // },[]);
     // отслеживаем когда ушел курсор
-    const mouseLeftProfile = React.useCallback(() => {
-        setPointerOnProfile(false)
-    },[]);
+    // const mouseLeftProfile = React.useCallback(() => {
+    //     setPointerOnProfile(false)
+    // },[]);
     // для открытия попапа
     const openLoginFormPopup = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
@@ -52,13 +52,13 @@ const BtnEnterBlock:FC<btnEnterBlockProps> = React.memo((props) => {
     return (
         <div
             className={cls.coverProfile}
-            onPointerLeave={stateAuth ? mouseLeftProfile : undefined}
+            // onPointerLeave={stateAuth ? mouseLeftProfile : undefined}
         >
             {!stateAuth
                 ? <Button
                     classname={cls.buttonLogin}
                     onClick={!stateAuth ? openLoginFormPopup : undefined}
-                    onPointerEnter={stateAuth ? mouseOnProfile : undefined}
+                    // onPointerEnter={stateAuth ? mouseOnProfile : undefined}
                     type='button'
                     name='login'
                 >

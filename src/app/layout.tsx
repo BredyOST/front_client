@@ -26,13 +26,12 @@ export const metadata: Metadata = {
         url:'https://xn--e1affem4a4d.com/dashboard/price',
         description: 'Сервис для поиска клиентов',
         images:'',
-        siteName:'Клиенты.com'
+        siteName:'клиенты.com'
 
     },
     verification: {
-        google: 'google',
-        yandex: 'yandex',
-        yahoo: 'yahoo',
+        googleSiteVerification: '-KRwk54Zal4rSi8KZbKSo2TEbW6lGJoTEHk2j06d5Yg',
+        yandexVerification: "03b4f00fa69070a5",
     }
 }
 

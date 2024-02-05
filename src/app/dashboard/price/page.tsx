@@ -20,7 +20,7 @@ async function getData() {
         const pricesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/prices/getAll`, { next: { revalidate: 420 }})
         if (pricesRes.ok) {
             const responseData = await pricesRes.json();
-            if( responseData.length) prices = responseData
+            if( responseData.length >= 1) prices = responseData
         } else {
             console.error('pricesRes API price request failed with status:', pricesRes.status);
         }
@@ -32,7 +32,7 @@ async function getData() {
         const categoriesRes = await fetch(`${process.env['NEXT_PUBLIC_API_URL']}/categories/getAll`, { next: { revalidate: 500 } })
         if (categoriesRes.ok) {
             const responseData = await categoriesRes.json();
-            if( responseData.length) categories = responseData
+            if( responseData.length  >= 1) categories = responseData
         } else {
             console.error('Categories  price API request failed with status:', categoriesRes.status);
         }
