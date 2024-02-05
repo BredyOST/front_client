@@ -30,8 +30,8 @@ export const metadata: Metadata = {
 
     },
     verification: {
-        googleSiteVerification: '-KRwk54Zal4rSi8KZbKSo2TEbW6lGJoTEHk2j06d5Yg',
-        yandexVerification: "03b4f00fa69070a5",
+        google: '-KRwk54Zal4rSi8KZbKSo2TEbW6lGJoTEHk2j06d5Yg',
+        yandex: "03b4f00fa69070a5",
     }
 }
 
