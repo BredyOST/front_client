@@ -35,8 +35,11 @@ export const Select:FC<SelectProps> = React.memo((props) => {
     const {addCategoryChosen} = SearchParamsActions;
     // indicators
 
+    // if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
+    //
+    // }
+
     // Mods
-    // console.log(infoUser)
     // functions
     const selectOption = (e: ChangeEvent<HTMLSelectElement>) => {
         const selectedCategory = categories.find((item:any) => item.name === e.target.value);
@@ -53,6 +56,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
     };
 
     React.useEffect(() => {
+
         const local = localStorage.getItem('_sel_category');
         let savedCategory:any;
         let checAcess:any;
@@ -61,11 +65,26 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         if (local !== null) {
             savedCategory = JSON.parse(local);
         }
+
         if (savedCategory && savedCategory?.id) {
             checAcess = infoUser?.categoriesFreePeriod.find((item:any) => item?.id == savedCategory?.id)
             checAcessBuy = infoUser?.categoriesHasBought.find((item:any) => item?.id == savedCategory?.id)
         }
-        if (local && (checAcess || checAcessBuy) && savedCategory) {
+
+        if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
+            // const selectedCategory = categories?.find((item:any) => item?.id === infoUser?.categoriesHasBought?.[0]?.id);
+            // const obj = {
+            //     id: selectedCategory.id,
+            //     name: selectedCategory.name,
+            //     positive: selectedCategory.positiveWords,
+            //     negative: selectedCategory.negativeWords,
+            // };
+            // localStorage.setItem('_sel_category', JSON.stringify(obj));
+            // dispatch(addCategoryChosen(obj));
+            return
+        }
+
+        if (savedCategory && (checAcess || checAcessBuy)) {
             try {
                 dispatch(addCategoryChosen(savedCategory))
             } catch (error) {
@@ -74,18 +93,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         } else {
             if (infoUser && infoUser?.activatedFreePeriod && new Date().getTime() < new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime() &&
                 !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.[0]) {
-                const selectedCategory = categories.find((item:any) => item.id === infoUser?.categoriesFreePeriod?.[0].id);
-                const obj = {
-                    id: selectedCategory.id,
-                    name: selectedCategory.name,
-                    positive: selectedCategory.positiveWords,
-                    negative: selectedCategory.negativeWords,
-                };
-                localStorage.setItem('_sel_category', JSON.stringify(obj));
-                dispatch(addCategoryChosen(obj));
-            }
-            if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
-                const selectedCategory = categories.find((item:any) => item.id === infoUser?.categoriesHasBought?.[0].id);
+                const selectedCategory = categories?.find((item:any) => item?.id === infoUser?.categoriesFreePeriod?.[0].id);
                 const obj = {
                     id: selectedCategory.id,
                     name: selectedCategory.name,
