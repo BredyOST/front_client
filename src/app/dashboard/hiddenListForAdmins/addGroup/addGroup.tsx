@@ -22,7 +22,6 @@ const AddGroup:FC<addGroupProps> = (props) => {
     const [getGroups, {data: requestGroups, error:errorGroups, isLoading: isLoadingGroups, isError:isErrorGroups}] = useGetGroupsMutation()
     const [createGroup, {data: requestGroup, error:errorGroup, isLoading: isLoadingGroup, isError:isErrorGroup}] = useAddGroupMutation()
     //ACTIONS FROM REDUX
-
     //STATES FROM REDUX
 
     //USESTATE

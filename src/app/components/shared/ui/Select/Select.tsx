@@ -35,10 +35,6 @@ export const Select:FC<SelectProps> = React.memo((props) => {
     const {addCategoryChosen} = SearchParamsActions;
     // indicators
 
-    // if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
-    //
-    // }
-
     // Mods
     // functions
     const selectOption = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -72,15 +68,6 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         }
 
         if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.[0]))) {
-            // const selectedCategory = categories?.find((item:any) => item?.id === infoUser?.categoriesHasBought?.[0]?.id);
-            // const obj = {
-            //     id: selectedCategory.id,
-            //     name: selectedCategory.name,
-            //     positive: selectedCategory.positiveWords,
-            //     negative: selectedCategory.negativeWords,
-            // };
-            // localStorage.setItem('_sel_category', JSON.stringify(obj));
-            // dispatch(addCategoryChosen(obj));
             return
         }
 
@@ -128,8 +115,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
                         >
                             {item.name}
                         </option>
-                    ))
-                    }
+                    ))}
                     {infoUser && infoUser?.activatedFreePeriod && new Date().getTime() < new Date(infoUser?.categoriesFreePeriod[0]?.purchaseEndDate).getTime() && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.map((item:any) => (
                         <option
                             className={cls.option}

@@ -1,10 +1,8 @@
+'Use client';
 import {
     useAddNewFileMutation, useDeleteFileMutation,
     useGetFilesMutation,
-    useGetGroupsMutation
 } from "@/app/redux/entities/requestApi/requestApi";
-
-'Use client';
 import React, {FC} from 'react';
 import cls from './uploadFiles.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
@@ -37,7 +35,6 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
     
     //FUNCTIONS
 
-
     const handleFileChange = (e:any) => {
         const file = e.target.files[0];
         setFileList(file);
@@ -64,7 +61,6 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
         },[]
     )
 
-    
     return (
         <div className={classNames(cls.uploadFiles, {},[classname] )} >
             <h2 className={cls.mainTitle}>Загрузить файлы</h2>

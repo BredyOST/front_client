@@ -15,25 +15,20 @@
   border-bottom: mixins.rem(1) solid #000;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
-
+  font-size: mixins.rem(16);
   &.deleted {
     background-color: #e11010;
   }
-}
 
+  &.noInfp{
+    background-color: #815a3f;
+  }
+}
 
 .btn{
-  @extend .btn;
-
-  padding-left: mixins.rem(25);
-  padding-right: mixins.rem(25);
-  padding-top: mixins.rem(5);
-  padding-bottom: mixins.rem(5);
-
-  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+  @extend .btnHide;
 }
 
-
 .input{
-  @extend .input;
+  @extend .inputHide;
 }

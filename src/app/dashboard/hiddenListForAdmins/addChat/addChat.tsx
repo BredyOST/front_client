@@ -13,6 +13,7 @@ import {
 } from "@/app/redux/entities/requestApi/requestApi";
 import InputChange from "@/app/dashboard/hiddenListForAdmins/inputChange/inputChange";
 
+
 interface addChatProps {
     classname?: string;
 }
@@ -66,8 +67,6 @@ const AddChat:FC<addChatProps> = (props) => {
             })
         }
     }
-
-
 
     return (
         <div className={classNames(cls.addGroup, {},[classname] )} >

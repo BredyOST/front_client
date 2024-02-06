@@ -4,11 +4,9 @@ import Link from "next/link";
 
 
 export const metadata = {
-    title: 'Price',
-    description: 'Раздел вопросов',
+    title: 'Ответы на вопросы - клиенты.com',
+    description: 'ответы на вопросы',
 }
-
-
 
 interface faqProps {
 

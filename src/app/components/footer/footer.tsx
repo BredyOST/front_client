@@ -34,21 +34,21 @@ const Footer:FC<footerProps> = React.memo((props) => {
                         </AppLink>
                     </div>
                     <div className = {cls.endLinks}>
-                        <AppLink
-                            classname={cls.link}
-                            href=''>
-                            Контакты
-                        </AppLink>
-                        <AppLink
-                            classname={cls.link}
-                            href=''>
-                            Пользовательское соглашение
-                        </AppLink>
-                        <AppLink
-                            classname={cls.link}
-                            href=''>
-                            Политика конфиденциальности
-                        </AppLink>
+                        <div
+                            className={cls.link}
+                        >
+                            infoclient.com@gmail.com
+                        </div>
+                        {/*<AppLink*/}
+                        {/*    classname={cls.link}*/}
+                        {/*    href=''>*/}
+                        {/*    Пользовательское соглашение*/}
+                        {/*</AppLink>*/}
+                        {/*<AppLink*/}
+                        {/*    classname={cls.link}*/}
+                        {/*    href=''>*/}
+                        {/*    Политика конфиденциальности*/}
+                        {/*</AppLink>*/}
                     </div>
                 </div>
             </div>

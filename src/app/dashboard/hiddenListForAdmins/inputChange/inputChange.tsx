@@ -39,13 +39,21 @@ export const InputChange:FC<inputChangeProps> = (props) => {
     const [idGroup, setIdGroup] = React.useState<string>(item.idVk ? item.idVk : '')
     const [deleted, setDeleted] = React.useState<boolean>(false)
 
-    const mod:Mods = {
-        [cls.deleted]: deleted
-    }
-
     //USEREF
 
     //FUNCTIONS
+    const itemTimestamp = new Date(item?.postsLastDate).getTime(); // Замените на вашу временную метку
+    const currentDate = new Date();
+    const timestampDifference = currentDate.getTime() - itemTimestamp;
+    const millisecondsInOneDay = 24 * 60 * 60 * 1000;
+    const daysDifference = Math.floor(timestampDifference / millisecondsInOneDay);
+
+
+    const mod:Mods = {
+        [cls.deleted]: deleted,
+        [cls.noInfp]: (daysDifference > 1)
+    }
+
 
     const changeNewId = () => {
         updateGroup({
@@ -63,6 +71,7 @@ export const InputChange:FC<inputChangeProps> = (props) => {
         setDeleted(true)
     }
 
+
     return (
         <div className={classNames(cls.inputChange, mod,[classname] )} >
             <div>{index ? +index + 1 : ''}</div>
@@ -71,7 +80,7 @@ export const InputChange:FC<inputChangeProps> = (props) => {
                 onChange={(e) => changeValue(e)}
                 className={cls.input}
             />
-            <div>{`${new Date(item.postsLastDate).toTimeString()} ${new Date(item.postsLastDate).toDateString()}`}</div>
+            <div className={cls.no} >{`${new Date(item.postsLastDate).toTimeString()} ${new Date(item.postsLastDate).toDateString()}`}</div>
             <div>{`${new Date(item.postsDateWhenUpdate).toTimeString()} ${new Date(item.postsDateWhenUpdate).toDateString()}`}</div>
             <div>{item.isClosed ? 'закрыта' : '-'}</div>
             <Button

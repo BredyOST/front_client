@@ -1,5 +1,5 @@
 'use client';
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import cls from './postsAll.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {Button} from "@/app/components/shared/ui/Button/Button";
@@ -32,8 +32,6 @@ const PostsAll:FC<postsAllProps> = (props) => {
     const [logs, {data: requestLogs, error:errorLogs, isLoading: isLoadingLogs, isError:isErrorLogs}] =     useGetLogsMutation()
 
     //ACTIONS FROM REDUX
-
-
 
     //STATES FROM REDUX
 
@@ -78,7 +76,6 @@ const PostsAll:FC<postsAllProps> = (props) => {
             }
         },[]
     )
-
 
     return (
         <div className={classNames(cls.postsAll, {},[classname] )} >

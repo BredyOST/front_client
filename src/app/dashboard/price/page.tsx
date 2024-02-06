@@ -8,8 +8,8 @@ import BlockBtnAdd from "@/app/dashboard/price/blockBtnAdd/blockBtnAdd";
 interface pageProps {
 }
 export const metadata = {
-    title: 'Price',
-    description: 'Тарифы в сервисе Клиенты.com',
+    title: 'Описание тарифов - клиенты.com',
+    description: 'тарифы',
 }
 
 async function getData() {

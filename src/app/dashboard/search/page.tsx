@@ -7,39 +7,13 @@ import SearchBlock from "@/app/dashboard/search/searchBlock/searchBlock";
 import Social from "@/app/dashboard/search/social/social";
 import CityBlock from "@/app/dashboard/search/cityBlock/cityBlock";
 import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch";
-import {Metadata} from "next";
-
 
 interface pageProps {
 }
-
-
-export const metadata: Metadata = {
-    title: `${process.env['NEXT_PUBLIC_TITLE_WEBSITE']}`,
-    description: 'Cервис для поиска потенциальных клиентов в социальных сетях, блогах,чатах, форумах, досках объявлений, фриланс-биржах: ВКонтакте, Telegram, Facebook, Одноклассники, Instagram, Twitter, ЖЖ и др. Мы предлагаем готовый проект для поиска клиентов, поиска заказов',
-    keywords: 'Клиенты, клиенты, Клиенты.com, клиенты.com, клиенты ком, клиенты.ком, Клиенты ком, Клиенты.ком,  ' +
-        'поиск лидов, поиск клиентов, лидогенерация, найти клиента, мониторинг соцсетей, мониторинг телеграм, ' +
-        'мониторинг вк, отслеживание групп в соцсетях, поиск учеников, реклама, таргетированная реклама, таргет' +
-        'услуги по поиску клиентов, агентские услуги по поиску клиентов, сервис поиска клиентов, где взять клиентов' +
-        'найду клиента, как найти клиентов, где найти клиентов, рекламное агентство, ищу заявки, клиенты для бизнеса, профи ру, авито' +
-        'где искать учеников, ученики ищущие репетитора, где искать учеников на репетиторство, продвижение это, реклама в интернете заказать, рекламная компания это, заказать рекламу, заказать контекстную рекламу',
-    metadataBase: new URL(`${process.env['NEXT_PUBLIC_CLIENT_URL']}`),
-    openGraph: {
-        locale:'ru',
-        title: 'Клиенты.com',
-        url:'https://xn--e1affem4a4d.com/dashboard/price',
-        description: 'Сервис для поиска клиентов',
-        images:'',
-        siteName:'Клиенты.com'
-
-    },
-    verification: {
-        google: 'google',
-        yandex: 'yandex',
-        yahoo: 'yahoo',
-    }
+export const metadata = {
+    title: 'Поиск клиентов - клиенты.com',
+    description: 'поиск клиентов',
 }
-
 
 async function getData() {
 

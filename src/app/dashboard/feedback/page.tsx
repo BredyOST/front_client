@@ -4,10 +4,9 @@ import Pictures from "@/app/dashboard/feedback/pictures/pictures";
 
 
 export const metadata = {
-    title: 'Price',
-    description: 'Отзывы клиентов',
+    title: 'Отзывы клиентов - клиенты.com',
+    description: 'отзывы',
 }
-
 
 interface feedBackProps {
 

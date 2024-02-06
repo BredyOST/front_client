@@ -3,8 +3,6 @@
 @use './src/app/styles/variable/globalIndex.scss';
 @use "./src/app/styles/mixins.scss";
 @use './src/app/components/shared/ui/Loader/Loader.scss';
-@use './src/app/styles/variable/common.scss';
-
 
 .selectTabs{
   display: flex;

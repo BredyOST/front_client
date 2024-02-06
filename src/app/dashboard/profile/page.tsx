@@ -11,9 +11,10 @@ import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import LogOutBtn from "@/app/dashboard/profile/logOutBtn/logOutBtn";
 
 export const metadata = {
-    title: 'Price',
-    description: 'Профиль пользователя',
+    title: 'Профиль пользователя - клиенты.com',
+    description: 'профиль',
 }
+
 
 interface pageProps {
 }

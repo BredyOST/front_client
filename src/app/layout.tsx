@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     metadataBase: new URL(`${process.env['NEXT_PUBLIC_CLIENT_URL']}`),
     openGraph: {
         locale:'ru',
-        title: 'Клиенты.com',
+        title: 'клиенты.com - сервис для поиска клиентов',
         url:'https://xn--e1affem4a4d.com/dashboard/price',
         description: 'Сервис для поиска клиентов',
         images:'',

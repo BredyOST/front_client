@@ -14,18 +14,7 @@
 }
 
 .mainTitle{
-  text-align: left;
-  font-size: mixins.rem(globalIndex.$Title_font_size);
-  line-height: globalIndex.$Title_font_line-height;
-  font-weight: globalIndex.$Title_font_weight;
-  color: globalIndex.$Title_color;
-  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
-  background-color: #e5d5c3;
-  padding-bottom: mixins.rem(20);
-  padding-top: mixins.rem(20);
-  padding-left: mixins.rem(20);
-  align-items: center;
-  justify-content: flex-start;
+  @extend .title;
 }
 
 .titles{
@@ -74,19 +63,12 @@
 }
 
 .input{
-  @extend .input;
+  @extend .inputHide;
 }
 
 
 .btn{
-  @extend .btn;
-
-  padding-left: mixins.rem(25);
-  padding-right: mixins.rem(25);
-  padding-top: mixins.rem(5);
-  padding-bottom: mixins.rem(5);
-
-  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
+  @extend .btnHide;
 }
 
 .btnSave{
