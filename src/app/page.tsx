@@ -4,6 +4,7 @@ import {classNames} from "@/app/components/shared/lib/classNames/className";
 import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
 import {FeedBackPeople} from "@/app/components/mainPage/feedBackPeople/feedBackPeople";
 import Burger from "@/app/components/mainPage/burger/burger";
+import { MetadataRoute } from 'next';
 
 async function getData() {
     let categories = [];
@@ -32,6 +33,7 @@ async function getData() {
     } catch (err) {
         console.error('save error Redis:', err);
     }
+
     return {feedback, categories};
 }
 
