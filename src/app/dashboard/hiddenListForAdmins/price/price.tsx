@@ -95,18 +95,6 @@ const Price:FC<priceProps> = (props) => {
                         </Input>
                     </div>
                     <div className={cls.coverInputTwo}>
-                        <div className={cls.label}>цена</div>
-                        <Input
-                            onChange={(e:ChangeEvent<HTMLInputElement>) => addPrice(e)}
-                            value={inputsPrice.price}
-                            classForInput={cls.input}
-                            classname={cls.inputRelative}
-                            placeholder='введите цену'
-                        >
-                        </Input>
-                    </div>
-
-                    <div className={cls.coverInputTwo}>
                         <div className={cls.label}>период</div>
                         <Input
                             onChange={(e:ChangeEvent<HTMLInputElement>) => addPeriod(e)}
@@ -125,28 +113,6 @@ const Price:FC<priceProps> = (props) => {
                             classForInput={cls.input}
                             classname={cls.inputRelative}
                             placeholder='описание'
-                        >
-                        </Input>
-                    </div>
-                    <div className={cls.coverInputTwo}>
-                        <div className={cls.label}>скидка</div>
-                        <Input
-                            onChange={(e:ChangeEvent<HTMLInputElement>) => addSale(e)}
-                            value={inputsPrice.sale}
-                            classForInput={cls.input}
-                            classname={cls.inputRelative}
-                            placeholder='скидка true, false'
-                        >
-                        </Input>
-                    </div>
-                    <div className={cls.coverInputTwo}>
-                        <div className={cls.label}>процент скидки</div>
-                        <Input
-                            onChange={(e:ChangeEvent<HTMLInputElement>) => addPercentForSale(e)}
-                            value={inputsPrice.percentForSale}
-                            classForInput={cls.input}
-                            classname={cls.inputRelative}
-                            placeholder='процент скидки'
                         >
                         </Input>
                     </div>
