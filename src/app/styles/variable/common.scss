@@ -258,7 +258,7 @@
 
 // для скрытой страницы
 
-.title {
+.titleHide {
   text-align: left;
   font-size: mixins.rem(18);
   line-height: globalIndex.$Title_font_line-height;
@@ -266,7 +266,7 @@
   color: globalIndex.$Title_color;
   border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
   padding-bottom: mixins.rem(5);
-  background-color: #e5d5c3;
+  //background-color: #e5d5c3;
   display: flex;
   padding-top: mixins.rem(5);
   padding-left: mixins.rem(20);

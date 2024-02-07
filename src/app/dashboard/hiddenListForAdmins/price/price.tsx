@@ -23,7 +23,7 @@ const Price:FC<priceProps> = (props) => {
     const [getPrice, {data: requestGetPrice, error:errorGetPrice, isLoading: isLoadingGetPrice, isError:isErrorGetPrice}] = useGetAllPricesMutation()
 
     //USESTATE
-    const [inputsPrice, setInputsPrice] = React.useState<any>({identificatorId:'', title: '', price: '', period:'', description:'',sale:'', percentForSale:''})
+    const [inputsPrice, setInputsPrice] = React.useState<any>({identificatorId:'', title: '', period:'', description:''})
     const [showPrice, setShowPrice] = React.useState<boolean>(false)
     //USEREF
 
@@ -35,31 +35,28 @@ const Price:FC<priceProps> = (props) => {
     const addTitle = (e:React.ChangeEvent<HTMLInputElement>) => {
         setInputsPrice({...inputsPrice, title:e.target.value})
     }
-    const addPrice = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setInputsPrice({...inputsPrice, price:e.target.value})
-    }
+    // const addPrice = (e:React.ChangeEvent<HTMLInputElement>) => {
+    //     setInputsPrice({...inputsPrice, price:e.target.value})
+    // }
     const addPeriod = (e:React.ChangeEvent<HTMLInputElement>) => {
         setInputsPrice({...inputsPrice, period:e.target.value})
     }
     const addDescription = (e:React.ChangeEvent<HTMLInputElement>) => {
         setInputsPrice({...inputsPrice, description:e.target.value})
     }
-    const addSale = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setInputsPrice({...inputsPrice, sale:e.target.value})
-    }
-    const addPercentForSale = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setInputsPrice({...inputsPrice, percentForSale:e.target.value})
-    }
+    // const addSale = (e:React.ChangeEvent<HTMLInputElement>) => {
+    //     setInputsPrice({...inputsPrice, sale:e.target.value})
+    // }
+    // const addPercentForSale = (e:React.ChangeEvent<HTMLInputElement>) => {
+    //     setInputsPrice({...inputsPrice, percentForSale:e.target.value})
+    // }
 
     const sendToCreate = () => {
         createPrice({
             identificatorId: inputsPrice.identificatorId,
             title:inputsPrice.title,
-            price: inputsPrice.price,
             period: inputsPrice.period,
             description: inputsPrice.description,
-            sale: inputsPrice.sale == 'true' ? true : false,
-            percentForSale: inputsPrice.percentForSale,
         })
     }
 

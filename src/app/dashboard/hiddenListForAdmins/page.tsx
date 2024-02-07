@@ -16,7 +16,7 @@ import {useAppSelector} from "@/app/redux/hooks/redux";
 // }
 
 
-async function Admin ()  {
+function Admin ()  {
 
     //TATES FROM REDUX
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
@@ -36,7 +36,6 @@ async function Admin ()  {
                     <UploadFiles/>
                     <Users/>
                 </div>
-
             </div>
         </div>
     );

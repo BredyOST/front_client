@@ -4,7 +4,6 @@ import {classNames} from "@/app/components/shared/lib/classNames/className";
 import HomePageBtn from "@/app/components/clientBtnForHomePage/homePageBtn/homePageBtn";
 import {FeedBackPeople} from "@/app/components/mainPage/feedBackPeople/feedBackPeople";
 import Burger from "@/app/components/mainPage/burger/burger";
-import { MetadataRoute } from 'next';
 
 async function getData() {
     let categories = [];
@@ -73,20 +72,13 @@ async function Home(props:pageProps) {
                             <div className={cls.coverVideo}>
                                 <div className={cls.videoWrapper}>
                                     <div className={cls.item_video}>
-                                        {/*<iframe*/}
-                                        {/*    className={cls.frame}*/}
-                                        {/*    width="560"*/}
-                                        {/*    height="315"*/}
-                                        {/*    src="https://www.youtube.com/embed/nyoWsqG5QgQ"*/}
-                                        {/*    frameBorder="0"*/}
-                                        {/*    allowFullScreen*/}
-                                        {/*    title="YouTube Video"*/}
-                                        {/*></iframe>*/}
-                                        <video poster='https://timgotow.ru/uploads/e8fb9f338255bb72d4.png' controls preload="metadata">
-                                            <source type="video/mp4" src="https://www.youtube.com/watch?v=nyoWsqG5QgQ"/>
-                                            {/*<source type="video/mp4" src="https://timgotow.ru/uploads/768abc98d7a19a6a93.mp4"/>*/}
-                                            Your browser does not support the video tag.
-                                        </video>
+                                        <iframe
+                                            className={cls.frame}
+                                            src="https://www.youtube.com/embed/QHQHDErkfE0"
+                                            frameBorder="0"
+                                            allowFullScreen
+                                            title="YouTube Video"
+                                        ></iframe>
                                     </div>
                                 </div>
                                 <HomePageBtn/>
