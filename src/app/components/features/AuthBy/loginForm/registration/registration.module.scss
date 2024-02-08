@@ -183,9 +183,21 @@
 }
 
 .checkCover {
-  font-size: mixins.rem(14);
+
   display: flex;
-  column-gap: mixins.rem(10);
+
+  @media(min-width: mixins.em(400)) {
+    font-size: mixins.rem(14);
+    column-gap: mixins.rem(10);
+  }
+
+  @media(max-width: mixins.em(399)) {
+    font-size: mixins.rem(11);
+    column-gap: mixins.rem(2);
+  }
+
+
+
 }
 
 .linkAcess {
