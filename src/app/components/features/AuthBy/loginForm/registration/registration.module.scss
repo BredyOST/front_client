@@ -181,3 +181,27 @@
   row-gap: mixins.rem(15);
   @include mixins.adaptiveValue("row-gap",15,10,3,global.$mobile,320);
 }
+
+.checkCover {
+  font-size: mixins.rem(14);
+  display: flex;
+  column-gap: mixins.rem(10);
+}
+
+.linkAcess {
+  color: #C21F39;
+  font-weight: 600;
+  transition: color ease 0.3s 0s;
+  @media (any-hover: hover) {
+     &:hover {
+       color: #e11010;
+        transition: color ease 0.3s 0s;
+     }
+   }
+}
+
+.textInside{
+  display: flex;
+  align-self: center;
+  column-gap: mixins.rem(5);
+}

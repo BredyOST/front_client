@@ -4,9 +4,11 @@ import cls from './question.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import ArraySvg from '../../../components/svgs/arrow.svg'
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
+import Link from "next/link";
+
 interface questionProps {
     classname?: string;
-    items:any
+    items:any;
 }
 
 export const Question:FC<questionProps> = (props) => {
@@ -43,11 +45,15 @@ export const Question:FC<questionProps> = (props) => {
                     onClick={changeShow}
                 >
                     <ArraySvg className={cls.arrowSvg}/>
-                    <div className={cls.text}>{items.question}</div>
+                    <div className={cls.text}>{items?.question}</div>
                 </Button>
             </div>
             <div className={cls.bodyHide}>
-                {items.answer}
+                {items?.answer?.length >= 1 &&
+                items?.answer?.map((item:any) => (
+                    <div className={cls.elem} key={item.id}>{item.text}</div>
+                ))
+                }
             </div>
         </div>
     );

@@ -24,7 +24,7 @@ const lists = [
 const CheckBox:FC<checkBoxProps> = (props) => {
     const {
         classname,
-        title
+        title,
     } = props;
 
     //ACTIONS FROM REDUX

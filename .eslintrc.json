@@ -13,7 +13,7 @@
     "no-underscore-dangl": "off",     // разшены нижние подчеркивания типа __GLOBAL__,
     "react/function-component-definitio": "off",  // отключаем предпочтительность в использовании function вместо cтрелочных для компонента,
     "react/jsx-props-no-spreading": "warn", // props не стоит разворачивать через spred,
-    "max-len": ["error", { "ignoreComments": true, "ignoreStrings" :true, "code": 650 }], // длинные строки допускаются в комментах и то что в литералах,
+    "max-len": ["error", { "ignoreComments": true, "ignoreStrings" :true, "code": 2000 }], // длинные строки допускаются в комментах и то что в литералах,
     "import/no-unresolved": "off",
     //разобраться ниже
     "no-shadow": "off",

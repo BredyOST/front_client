@@ -1,0 +1,78 @@
+@use "sass:math";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
+
+
+.contacts{
+  @extend .paddingPages;
+  flex: 1 1 auto;
+}
+
+.cover{
+  display: flex;
+  flex-direction: column;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+  flex: 1 1 auto;
+}
+
+.mainTitle{
+  @extend .forMainTitle
+}
+
+.infoPack{
+  font-size: mixins.rem(16);
+  font-weight: 400;
+  line-height: math.div(22, 16);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  flex: 1 1 auto;
+  font-weight: 600;
+  text-align: center;
+  padding-top: mixins.rem(15);
+  padding-bottom: mixins.rem(15);
+  font-size: mixins.rem(20);
+}
+
+.coverList{
+  display: flex;
+  flex-direction: column;
+
+  flex: 1 1 auto;
+  justify-content: space-between;
+  row-gap: mixins.rem(10);
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    min-width: mixins.rem(600);
+  }
+  @media(max-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+  }
+}
+
+.contactsBlock{
+    display: flex;
+    column-gap: mixins.rem(20);
+    justify-content: space-between;
+    border-bottom: mixins.rem(1) solid #000000;
+}
+
+.first{
+
+}
+
+.second{
+
+}

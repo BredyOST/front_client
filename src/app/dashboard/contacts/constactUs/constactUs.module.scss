@@ -1,0 +1,116 @@
+@use "sass:math";
+@use './src/app/styles/variable/global.scss';
+@use './src/app/styles/variable/globalIndex.scss';
+@use "./src/app/styles/mixins.scss";
+@use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
+
+
+.constactUs{
+  display: flex;
+  justify-content: center;
+  padding-top: mixins.rem(50);
+}
+
+.cover{
+  display: flex;
+  justify-content: center;
+  background-color: #a3ccca;
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  border-radius: mixins.rem(10);
+
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    flex: 0 1 mixins.rem(600);
+  }
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+  }
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.mainTitle{
+  font-weight:  600;
+  font-size: mixins.rem(18);
+  line-height: math.div(25, 18);
+  padding-bottom: mixins.rem(10);
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+.coverForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.block{
+
+}
+
+.label{
+  font-weight: 400;
+  font-size: mixins.rem(16);
+  line-height: math.div(22,16);
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+  padding-top: mixins.rem(10);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+.inp{
+  @extend .input;
+}
+
+.textArea {
+  font-size: mixins.rem(globalIndex.$Inputs_font_size);
+  flex: 1 1 100%;
+  min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: mixins.rem(10);
+  padding-top: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-bottom: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-left: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-right: mixins.rem(globalIndex.$Inputs_profile_padding_right);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: em(1);
+  position: relative;
+  background-color: white;
+  min-height: mixins.rem(250);
+  font-weight: 400;
+  font-size: mixins.rem(16);
+  line-height: math.div(22,16);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  &::placeholder {
+    color: globalIndex.$Inputs_placeholder;
+    font-weight: globalIndex.$Inputs_placeholder_font_weight;
+    font-size: mixins.rem(15);
+  }
+
+  &:focus {
+    border: 2px solid globalIndex.$Inputs_focus;
+    transition: border ease 0.3s 0s;
+  }
+}
+
+.coverBtn{
+  display: flex;
+  justify-content: center;
+  padding-top: mixins.rem(10)
+}
+
+.button{
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(20);
+  padding-right: mixins.rem(20);
+  @extend .btn;
+}

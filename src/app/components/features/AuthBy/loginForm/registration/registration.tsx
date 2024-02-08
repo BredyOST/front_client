@@ -1,5 +1,5 @@
 'use client';
-import React, {ChangeEvent, FC} from 'react';
+import React, {FC} from 'react';
 import cls from './registration.module.scss'
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
@@ -13,6 +13,8 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {redirect} from "next/navigation";
+import CheckLogin from "@/app/components/features/AuthBy/checbox/checkLogin";
+import Link from "next/link";
 
 interface RegistrationProps {
     classname?: string;
@@ -61,6 +63,7 @@ const Registration:FC<RegistrationProps> = (props) => {
     const { closeAllPopups } = statePopupSliceActions;
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
     const { changeStateLoginFormPopup } = statePopupSliceActions;
+    const [isChecked, setIsChecked] = React.useState<boolean>(false);
     //STATES FROM REDUX
     // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
     const { clickOnEnter } = useAppSelector((state) => state.statePopup);
@@ -85,12 +88,17 @@ const Registration:FC<RegistrationProps> = (props) => {
     const passwordRegisterCheckRef = React.useRef<HTMLInputElement | null>(null);
     //FUNCTIONS
     const onSubmit: SubmitHandler<loginForm> = (data) => {
+
         const textError = {
             message: 'Не совпадают введенные пароли'
         }
+        const textErrorTwo = {
+            message: 'Не приняты условия политики конфиденциальности'
+        }
+        if(!isChecked) dispatch(addInfoForCommonError(textErrorTwo))
         if(!comparePassword) dispatch(addInfoForCommonError(textError))
         // отправляем данные на регистрацию пользователя и создаем объект для передачи
-        if(comparePassword) {
+        if(comparePassword && isChecked) {
             const infoForRegistration:createUserType = {
                 email:data.mailOrNumberRegistration,
                 password:data.passwordRegistration,
@@ -170,6 +178,13 @@ const Registration:FC<RegistrationProps> = (props) => {
     const backToLoginIn = () => {
         dispatch(changeStateClickOnEnter(0));
     };
+
+
+    const handleCheckboxChange = (value:any) => {
+        setIsChecked(value);
+
+    };
+
 
     if (clickOnEnter != 1 ) {
         return null
@@ -292,6 +307,15 @@ const Registration:FC<RegistrationProps> = (props) => {
                             {comparePassword === false && <div>Пароли не совпадают</div>}
                         </div>
                     </Input>
+                </div>
+                <div className={cls.checkCover}>
+                    <CheckLogin
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                    />
+                    <div className={cls.textInside}>
+                        я соглашаюсь с <Link className={cls.linkAcess} href={'/dashboard/politics'} target={'_blank'}>политикой конфидициальности</Link>
+                    </div>
                 </div>
             </div>
             <div className={cls.btnCoverTwo}>

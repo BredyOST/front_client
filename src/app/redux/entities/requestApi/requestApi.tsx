@@ -109,21 +109,6 @@ export const requestApi = createApi({
     baseQuery: baseQueryWithReauth,
     tagTypes: ['request'],
     endpoints: (builder) => ({
-        getTutorPostz: builder.query<any, any>({
-            query: ((option) => ({
-                url: `${option
-                    ? 'films'
-                    : 'films'
-                }`,
-                params: {
-                    _limit: option.limit,
-                    _page: option.page,
-                },
-                method: 'GET',
-            })),
-            providesTags: (result) => ['request'],
-        }),
-        // методы регистрации и входа
         registerUser: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/auth/register',
@@ -165,6 +150,13 @@ export const requestApi = createApi({
             query:(token) => ({
                 url: '/users/profile',
                 method:'GET'
+            }),
+        }),
+        sendMassage:builder.mutation({
+            query: (params) => ({
+                url: '/users/sendMessage',
+                method: 'POST',
+                body: params,
             }),
         }),
         changeNameAndCard: builder.mutation<any, any>({
@@ -387,7 +379,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
         getLogs:builder.mutation({
             query:(token) => ({
                 url: '/logs/info',
@@ -471,7 +462,6 @@ export const {
     useGetMeMutation,
     useRepeatActivationMutation,
     useChangePasswordMutation,
-    useGetTutorsPostsMutation,
     useChangeNameAndCardMutation,
     useCodeForEmailMutation,
     useChangeEmailMutation,
@@ -494,22 +484,17 @@ export const {
     useAddNewFileMutation,
     useGetFilesMutation,
     useDeleteFileMutation,
-    useGetCategoryMutation,
     useDeleteGroupInMainRepositoryMutation,
     useGetLogsMutation,
     useGetAuthorizationsMutation,
     useAddNewPriceBlockMutation,
     useGetAllPricesMutation,
     useGetFreePeriodMutation,
-    useGetALLTestMutation,
     useAddChatMutation,
-    useDeleteChatMutation,
     useGetChatMutation,
-    useUpdateChatMutation,
-    useGetSortedPostsFromSearchPageMutation,
     useActivateFreeNotificationMutation,
-    useGetNanniesPostsMutation,
     useGetAllKeysRedisMutation,
     useGetPostsRedisMutation,
     useUpdatePriceMutation,
+    useSendMassageMutation,
 } = requestApi;

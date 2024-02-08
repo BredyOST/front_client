@@ -8,16 +8,32 @@
 .body{
   display: flex;
   flex-direction: column;
+}
 
-  &.active{
-    background-color: #f7f8f9;
-  }
+.question{
+
 }
 
 .coverBtn{
   display: flex;
   flex: 1 1 auto;
   align-items: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: color ease 0.3s 0s, background-color ease 0.3s 0s;
+
+  .active &{
+    background-color: globalIndex.$Theme_main_header_background_button;
+    color: white;
+    transition: color ease 0.3s 0s, background-color ease 0.3s 0s;
+  }
+
+  @media (any-hover: hover) {
+     &:hover {
+       background-color: globalIndex.$Theme_main_header_background_button;
+        transition: background-color ease 0.3s 0s;
+     }
+   }
 }
 
 .arrowSvg{
@@ -31,39 +47,62 @@
   display: flex;
   align-items: center;
   column-gap: mixins.rem(15);
-  padding-bottom: mixins.rem(5);
-  padding-top: mixins.rem(5);
-  padding-right: mixins.rem(10);
-  padding-left: mixins.rem(10);
   flex: 1 1 auto;
   min-width: 100%;
-  transition: background-color ease 0.3s 0s;
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: #bbbdba;
-      transition: background-color ease 0.3s 0s;
-    }
-  }
+  padding-top:  mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-left: mixins.rem(5);
+  padding-right: mixins.rem(5);
+
 }
 
 .text{
   color: #000;
-  font-weight: 600;
+  font-family: globalIndex.$SubTitle_font_family;
+  font-weight: 500;
   display: flex;
   flex: 1 1 auto;
+  font-size: mixins.rem(18);
+  line-height: math.div(24, 18);
+  text-align: left;
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+
 }
 
 
 .bodyHide{
     opacity: 0;
     height: 0;
-    padding-bottom: mixins.rem(5);
-    padding-top: mixins.rem(5);
-    padding-right: mixins.rem(10);
-    padding-left: mixins.rem(10);
+    font-weight: 400;
+    font-size: mixins.rem(16);
+    line-height: math.div(22, 16);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 
   .active &{
     opacity: 1;
     height: 100%;
   }
+
+  a{
+    color: globalIndex.$Theme_main_header_background_button_Two;
+    font-weight: 600;
+    transition: background-color ease 0.3s 0s;
+    @media (any-hover: hover) {
+       &:hover {
+         color: globalIndex.$Theme_main_header_background_button_hover_Two;;
+          transition: background-color ease 0.3s 0s;
+       }
+     }
+  }
+
+}
+
+.elem{
+  font-size: mixins.rem(16);
+  line-height: math.div(25, 16);
+  font-weight: 400;
+  background-color: #ced3dc;
+  padding-left: mixins.rem(10);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+
 }

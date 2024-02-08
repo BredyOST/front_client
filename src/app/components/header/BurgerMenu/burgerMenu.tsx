@@ -111,6 +111,27 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
                             </AppLink>
                         ))
                     }
+                    <AppLink
+                        classname={`${cls.links} ${cls.search}`}
+                        href={'/dashboard/contacts'}
+                        onClick={closePopup}
+                    >
+                        Контакты
+                    </AppLink>
+                    <AppLink
+                        classname={`${cls.links} ${cls.search}`}
+                        href={'/dashboard/terms'}
+                        onClick={closePopup}
+                    >
+                        Пользовательское соглашение
+                    </AppLink>
+                    <AppLink
+                        classname={`${cls.links} ${cls.search}`}
+                        href={'/dashboard/politics'}
+                        onClick={closePopup}
+                    >
+                        Политика конфедициальности
+                    </AppLink>
                     {stateAuth &&
                         <Button
                             classname={cls.btnEnter}
