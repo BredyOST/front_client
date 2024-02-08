@@ -22,16 +22,16 @@ const Footer:FC<footerProps> = React.memo((props) => {
                         <Logotype/>
                     </div>
                     <div className={cls.coverLinks}>
-                        <AppLink href=''>
-                            <VkSvg
-                                className={cls.vkSvg}
-                            />
-                        </AppLink>
-                        <AppLink href=''>
-                            <TelegrammSvg
-                                className={cls.telegramSvg}
-                            />
-                        </AppLink>
+                        {/*<AppLink href=''>*/}
+                        {/*    <VkSvg*/}
+                        {/*        className={cls.vkSvg}*/}
+                        {/*    />*/}
+                        {/*</AppLink>*/}
+                        {/*<AppLink href=''>*/}
+                        {/*    <TelegrammSvg*/}
+                        {/*        className={cls.telegramSvg}*/}
+                        {/*    />*/}
+                        {/*</AppLink>*/}
                     </div>
                     <div className = {cls.endLinks}>
                         <div
