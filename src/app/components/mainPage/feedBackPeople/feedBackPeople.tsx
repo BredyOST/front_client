@@ -4,7 +4,6 @@ import cls from './feedBackPeople.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import Pictures from "@/app/dashboard/feedback/pictures/pictures";
-import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface feedBackProps {
     classname?: string;
