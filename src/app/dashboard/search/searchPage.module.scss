@@ -162,3 +162,8 @@
   font-size: mixins.rem(22);
   box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(20) rgb(0 0 0 / 50%);
 }
+
+.coverClean{
+  display: flex;
+  justify-content: flex-end;
+}

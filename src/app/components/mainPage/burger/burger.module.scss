@@ -40,9 +40,11 @@
     max-height: 0px;
 
     .activeBurger & {
-      height: 100vh;
+      overflow: auto;
+      padding-top: mixins.rem(40);
       max-height: mixins.rem(400);
     }
+
   }
 }
 

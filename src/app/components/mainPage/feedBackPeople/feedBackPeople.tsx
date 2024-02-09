@@ -1,9 +1,10 @@
-'use client';
+'use client'
 import React, {FC} from 'react';
 import cls from './feedBackPeople.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import Pictures from "@/app/dashboard/feedback/pictures/pictures";
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface feedBackProps {
     classname?: string;
@@ -40,7 +41,7 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         <div className={cls.item_video}>
                             <iframe
                                 className={cls.frame}
-                                src="https://www.youtube.com/embed/nyoWsqG5QgQ"
+                                src="https://www.youtube.com//embed/nyoWsqG5QgQ"
                                 frameBorder="0"
                                 allowFullScreen
                                 title="YouTube Video"

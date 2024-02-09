@@ -61,7 +61,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             if (item.title == 'Посуточный') {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem.id == item.id)
-                    const price = Math.round(+category.salary/30 * 1.5 * +period)
+                    const price = Math.round(+category.salary * 2.5 /30 * +period)
                     salary += price
                 })
             }

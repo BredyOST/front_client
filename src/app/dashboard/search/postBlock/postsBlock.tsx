@@ -158,6 +158,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             }
         };
         loadAndFilterPosts()
+        setPage(1)
     }, [keyWords, keyCityWords, social, postsCount, chosenCategory])
 
     // Пагинация

@@ -8,7 +8,7 @@
 
   @media(min-width: mixins.em(global.$mobile)) {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(150px, 250px));
+    grid-template-columns: repeat(auto-fit,minmax(150px, 1fr));
     grid-template-rows: auto;
     column-gap: mixins.rem(10);
     row-gap: mixins.rem(10);
@@ -26,10 +26,11 @@
 .ibg{
   position: relative;
   cursor: pointer;
-
+  width: 100%;
+  height: auto;
   @media(min-width: mixins.em(global.$mobile)) {
     width: 100%;
-    padding-bottom: 500px;
+    padding-bottom: 300px;
   }
   @media(max-width: mixins.em(global.$mobile)) {
     width: 33%;

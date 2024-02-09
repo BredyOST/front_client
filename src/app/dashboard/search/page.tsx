@@ -7,6 +7,7 @@ import SearchBlock from "@/app/dashboard/search/searchBlock/searchBlock";
 import Social from "@/app/dashboard/search/social/social";
 import CityBlock from "@/app/dashboard/search/cityBlock/cityBlock";
 import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch";
+import СleanFilter from "@/app/dashboard/search/cleanFilter/cleanFilter";
 
 interface pageProps {
 }
@@ -66,6 +67,9 @@ async function SearchPage(props: pageProps) {
                             </div>
                             <div className={cls.chooseFilter}>
                                 <SearchBlock />
+                            </div>
+                            <div className={cls.coverClean}>
+                                <СleanFilter/>
                             </div>
                         </div>
                         <PostsForSearch/>
