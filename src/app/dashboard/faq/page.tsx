@@ -2,7 +2,6 @@ import cls from './faq.module.scss';
 import React from "react";
 import Question from "@/app/dashboard/faq/question/question";
 import Link from "next/link";
-import {spans} from "next/dist/build/webpack/plugins/profiling-plugin";
 
 export const metadata = {
     title: 'Ответы на вопросы - клиенты.com',
@@ -71,6 +70,9 @@ async function Faq (props:faqProps) {
         ]
         },
         {id:15, question: 'Не нашли ответа на ваш вопрос?', answer: [{id:1, text: `Напишите нам сообщение на наш почтовый адрес infoclient.com@gmail.com.`}]},
+        {id:15, question: 'Сколько стоит подписка?', answer: [
+            {id:1, text:<span>* Ознакомиться с ценами вы можете на странице <Link className={cls.link} href='/dashboard/price'>тарифов</Link>. После перехода на страницу выберите одну или несколько категорий и стоимость отобразится в карточке. После чего перемещайте ползунок для выбора периода подписки.</span>}
+        ]},
     ];
     return (
         <div className={cls.faq}>

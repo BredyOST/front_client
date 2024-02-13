@@ -10,9 +10,6 @@ import {useAppSelector} from "@/app/redux/hooks/redux";
 interface postsForSearchProps {
     classname?: string;
 }
-const counterSkeleton = [
-    1,2,3,4,5
-]
 
 const PostsForSearch:FC<postsForSearchProps> = (props) => {
     const {classname} = props;
@@ -22,6 +19,8 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
     //STATES FROM REDUX
     // states from redux
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
+    const [accessFree, setAccessFree] = React.useState<Boolean>(false)
+    const [accessPay, setAccessPay] = React.useState<Boolean>(false)
 
     //USESTATE
 
@@ -29,16 +28,46 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
     
     //FUNCTIONS
 
+    const currenDate = new Date();
+
+    React.useEffect(() => {
+        if (!stateAuth || !infoUser) return;
+
+        let checkFree = false;
+        let checkPay = false;
+
+        if (infoUser?.categoriesFreePeriod?.length >= 1) {
+            for (let item of infoUser?.categoriesFreePeriod) {
+                if (currenDate.getTime() <= new Date(item.purchaseEndDate).getTime()) {
+                    checkFree = true;
+                    break;
+                }
+            }
+        } else if (infoUser?.categoriesHasBought?.length >= 1) {
+            for (let item of infoUser?.categoriesHasBought) {
+                if (currenDate.getTime() <= new Date(item.purchaseEndDate).getTime()) {
+                    checkPay = true;
+                    break;
+                }
+            }
+        }
+
+        setAccessFree(checkFree);
+        setAccessPay(checkPay);
+    }, [infoUser, stateAuth]);
+
+
     if (!stateAuth) {
         return null
     }
 
-    if (!infoUser?.categoriesHasBought?.length && infoUser?.categoriesFreePeriod[0]?.purchaseEndDate) {
-        if ( new Date().getTime() > new Date(infoUser.categoriesFreePeriod[0].purchaseEndDate).getTime()) {
-            return null
-        }
+    if (!accessFree && !accessPay) {
+        return  <div className={cls.active}>Активные подписки отсутствуют.
+            <Link className={cls.linkGo} href={'/dashboard/price'}> Оформить подписку</Link>
+            <Link className={cls.linkGo} href={'/dashboard/profile'}> Перейти в профиль</Link>
+        </div>
     }
-
+  
     return (
         <div className={classNames(cls.postsForSearch, {},[classname] )} >
             <div className={cls.looking}>
@@ -50,7 +79,10 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
                         </div>
                     </div>
                 }
-                {infoUser && stateAuth && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (infoUser?.categoriesHasBought?.length)) ?
+                {/*{infoUser && stateAuth && ((infoUser?.activatedFreePeriod && accessFree) || (infoUser?.categoriesHasBought?.length && accessPay)) ?*/}
+                {/*    <PostsBlock/> :''*/}
+                {/*}*/}
+                {infoUser && stateAuth && (accessPay || accessFree) && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (infoUser?.categoriesHasBought?.length)) ?
                     <PostsBlock/> :''
                 }
             </div>

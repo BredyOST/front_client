@@ -133,7 +133,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
 
-        if (title === `Бесплатный` && chosenCategory.length == 1) {
+        if (title == `Бесплатный` && chosenCategory.length == 1) {
             getFreePeriod(chosenCategory).then((result) => {
                 if('data' in result && result?.data?.text == `Бесплатный период активирован` && cookies && cookies._z) {
                     getInfoUser(cookies).then((result) => {
@@ -146,8 +146,15 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     });
                 }
             })
-        } else if (title === `Бесплатный` && chosenCategory.length > 1){
+        } else if (title == `Бесплатный` && chosenCategory.length > 1){
             dispatch(addInfoForCommonError({ message:'Выберите одну категорию для бесплатного периода'} ))
+        }
+
+        if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
+            dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
+        } else if((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
+            // window.location.href = "https://t.me/Teodor2896";
+            window.open("https://t.me/Teodor2896", "_blank");
         }
     }
 
@@ -163,7 +170,11 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
-                    <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>
+                    {(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
+                    {(price == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
+                    {(price !== 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
+
+
                 </div>
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>

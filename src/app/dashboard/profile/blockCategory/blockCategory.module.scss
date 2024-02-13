@@ -10,15 +10,14 @@
     row-gap: mixins.rem(15);
     font-size: mixins.rem(18);
 
-  @media(min-width: mixins.rem(global.$mobile)) {
-    max-width: mixins.rem(350);
-  }
-
     @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
 }
 
 .blockCategory{
 
+  @media(min-width: mixins.rem(global.$tablet)) {
+    max-width: mixins.rem(600);
+  }
 }
 
 .grid{
@@ -27,8 +26,7 @@
     display: grid;
     column-gap: mixins.rem(10);
     row-gap: mixins.rem(30);
-    justify-content: space-between;
-    grid-template-columns: repeat(auto-fit,minmax(450px, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(400px, 1fr));
     grid-template-rows: auto;
   }
 

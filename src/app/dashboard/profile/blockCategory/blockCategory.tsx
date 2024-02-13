@@ -9,6 +9,7 @@ import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
 import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
+import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 interface blockCategoryProps {
     classname?: string;
 }
@@ -28,6 +29,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
     //ACTIONS FROM REDUX
 
     const {addAdminRole, addMainAdminRole, addAuthStatus, addInfoUser,} = authSliceActions;
+    const {addInfoForCommonError} = indicatorsNotifications;
     // STATES FROM REDUX
     const {data:infoUser} = useAppSelector(state => state.auth)
 
@@ -62,31 +64,33 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
         return `${weekdays[weekday]}, ${day} ${months[+month - 1]} ${year} г. ${hours}:${minutes}`;
     }
     const activateNotification = (item:any) => {
-        const obj = {
-            category: item.id,
-            categoryName: item.name,
-            purchaseBuyDate: new Date(),
-            purchaseEndDate: item.purchaseEndDate,
-            purchasePeriod: 2,
-            freePeriod: true,
-        }
+        dispatch(addInfoForCommonError({message: 'Раздел в разработке'}))
 
-        addFreeNotification(obj).then((result) => {
-            if(result && 'data' in result && result?.data?.text == `Бесплатный период активирован`) {
-                if (cookies && cookies._z) {
-                    getInfoUser(cookies).then((result) => {
-                        if ('data' in result && result.data) {
-                            dispatch(addInfoUser(result.data));
-                            dispatch(addMainAdminRole(result.data.isMainAdmin));
-                            dispatch(addAdminRole(result.data.isAdmin));
-                            dispatch(addAuthStatus(true));
-                            location.reload()
-                        }
-                    });
+        // const obj = {
+        //     category: item.id,
+        //     categoryName: item.name,
+        //     purchaseBuyDate: new Date(),
+        //     purchaseEndDate: item.purchaseEndDate,
+        //     purchasePeriod: 2,
+        //     freePeriod: true,
+        // }
 
-                }
-            }
-        })
+        // addFreeNotification(obj).then((result) => {
+        //     if(result && 'data' in result && result?.data?.text == `Бесплатный период активирован`) {
+        //         if (cookies && cookies._z) {
+        //             getInfoUser(cookies).then((result) => {
+        //                 if ('data' in result && result.data) {
+        //                     dispatch(addInfoUser(result.data));
+        //                     dispatch(addMainAdminRole(result.data.isMainAdmin));
+        //                     dispatch(addAdminRole(result.data.isAdmin));
+        //                     dispatch(addAuthStatus(true));
+        //                     location.reload()
+        //                 }
+        //             });
+        //
+        //         }
+        //     }
+        // })
     }
 
     return (
@@ -94,6 +98,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
             {/*{infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && <h3 className={cls.titleFree}>Подписки пробного периода</h3>}*/}
             <div className={cls.grid}>
                 {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser.categoriesFreePeriod.map((item) => (
+                    new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
                     <div key={item.id} className={cls.blockCategory}>
                         <div className={cls.blockInfo}>
                             <div className={cls.categoryName}>{item?.name}</div>
