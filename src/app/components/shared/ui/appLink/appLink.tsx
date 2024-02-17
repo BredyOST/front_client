@@ -38,13 +38,16 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
 
     const {addChosenCategories} = categoriesActions;
     const dispatch = useAppDispatch();
-
+    const [open, setOpen] = React.useState<boolean>(false);
     //STATES FROM REDUX
     // все выбранные категории
 
     const goToPrice = (infroForOnclick:any) => {
-        if (infroForOnclick && infroForOnclick?.id)
+        if (infroForOnclick && infroForOnclick?.id) {
+            setOpen(prevState => !prevState)
+            document.documentElement.classList.remove("lock")
             dispatch(addChosenCategories([ { id: infroForOnclick?.id, text: infroForOnclick?.name }]));
+        }
     }
 
 

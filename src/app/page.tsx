@@ -74,7 +74,7 @@ async function Home(props:pageProps) {
                                     <div className={cls.item_video}>
                                         <iframe
                                             className={cls.frame}
-                                            src="https://www.youtube.com/embed/QHQHDErkfE0"
+                                            src="https://www.youtube.com/embed/JzzH4MdjXQU"
                                             frameBorder="0"
                                             allowFullScreen
                                             title="YouTube Video"

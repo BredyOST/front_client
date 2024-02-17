@@ -228,6 +228,35 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     const pagesToDisplay = displayPages();
 
+    // функция для обрамления ключевых слов в span
+    const highlightKeywords = (text: string) => {
+        // Создаем регулярное выражение для поиска всех ключевых слов, игнорируя регистр
+        const regex = new RegExp(`\\b(${keyWords.join('|')})\\b`, 'ig');
+
+        // Разбиваем текст на части с использованием регулярного выражения
+        const parts = text.split(regex);
+
+        // Создаем массив для результата
+        const highlightedText: JSX.Element[] = [];
+
+        // Проходимся по всем частям текста
+        parts.forEach((part, index) => {
+            // Проверяем, является ли часть текста ключевым словом
+            const isKeyword = keyWords.includes(part.toLowerCase());
+
+            // Если часть текста является ключевым словом, добавляем ее в результат с тегом span
+            if (isKeyword) {
+                highlightedText.push(<span key={index} className={cls.spanWord}>{part}</span>);
+            } else {
+                // Если часть текста не является ключевым словом, добавляем ее без изменений
+                highlightedText.push(part);
+            }
+        });
+
+        // Возвращаем результат как JSX-элемент
+        return <div>{highlightedText}</div>;
+    };
+
     return (
         <div className={cls.bodyInfo}>
             {postsToShow && postsToShow?.length > 0 &&
@@ -278,15 +307,11 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                     href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
                                     target="_blank"
                                 >
-                                    {/*<div className={cls.linkTop}>*/}
-                                    {/*    ссылка*/}
-                                    {/*    <LinkSvg*/}
-                                    {/*        className={cls.linkSvg}*/}
-                                    {/*    />*/}
-                                    {/*</div>*/}
                                     {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
-                                        ? item?.post_text
-                                        : `${item.post_text?.slice(0, 350)}...`
+                                        ? highlightKeywords(item?.post_text)
+                                        : highlightKeywords(`${item.post_text?.slice(0, 350)}...`)
+                                        // ? item?.post_text
+                                        // : `${item.post_text?.slice(0, 350)}...`
                                     }
                                 </Link>
                                 {item?.post_text?.length > 350 &&
