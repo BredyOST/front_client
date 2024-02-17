@@ -229,33 +229,33 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     const pagesToDisplay = displayPages();
 
     // функция для обрамления ключевых слов в span
-    const highlightKeywords = (text: string) => {
-        // Создаем регулярное выражение для поиска всех ключевых слов, игнорируя регистр
-        const regex = new RegExp(`\\b(${keyWords.join('|')})\\b`, 'ig');
-
-        // Разбиваем текст на части с использованием регулярного выражения
-        const parts = text.split(regex);
-
-        // Создаем массив для результата
-        const highlightedText: JSX.Element[] = [];
-
-        // Проходимся по всем частям текста
-        parts.forEach((part, index) => {
-            // Проверяем, является ли часть текста ключевым словом
-            const isKeyword = keyWords.includes(part.toLowerCase());
-
-            // Если часть текста является ключевым словом, добавляем ее в результат с тегом span
-            if (isKeyword) {
-                highlightedText.push(<span key={index} className={cls.spanWord}>{part}</span>);
-            } else {
-                // Если часть текста не является ключевым словом, добавляем ее без изменений
-                highlightedText.push(part);
-            }
-        });
-
-        // Возвращаем результат как JSX-элемент
-        return <div>{highlightedText}</div>;
-    };
+    // const highlightKeywords = (text: string) => {
+    //     // Создаем регулярное выражение для поиска всех ключевых слов, игнорируя регистр
+    //     const regex = new RegExp(`\\b(${keyWords.join('|')})\\b`, 'ig');
+    //
+    //     // Разбиваем текст на части с использованием регулярного выражения
+    //     const parts = text.split(regex);
+    //
+    //     // Создаем массив для результата
+    //     const highlightedText: JSX.Element[] = [];
+    //
+    //     // Проходимся по всем частям текста
+    //     parts.forEach((part, index) => {
+    //         // Проверяем, является ли часть текста ключевым словом
+    //         const isKeyword = keyWords.includes(part.toLowerCase());
+    //
+    //         // Если часть текста является ключевым словом, добавляем ее в результат с тегом span
+    //         if (isKeyword) {
+    //             highlightedText.push(<span key={index} className={cls.spanWord}>{part}</span>);
+    //         } else {
+    //             // Если часть текста не является ключевым словом, добавляем ее без изменений
+    //             highlightedText.push(part);
+    //         }
+    //     });
+    //
+    //     // Возвращаем результат как JSX-элемент
+    //     return <div>{highlightedText}</div>;
+    // };
 
     return (
         <div className={cls.bodyInfo}>
@@ -308,10 +308,10 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                     target="_blank"
                                 >
                                     {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
-                                        ? highlightKeywords(item?.post_text)
-                                        : highlightKeywords(`${item.post_text?.slice(0, 350)}...`)
-                                        // ? item?.post_text
-                                        // : `${item.post_text?.slice(0, 350)}...`
+                                        // ? highlightKeywords(item?.post_text)
+                                        // : highlightKeywords(`${item.post_text?.slice(0, 350)}...`)
+                                        ? item?.post_text
+                                        : `${item.post_text?.slice(0, 350)}...`
                                     }
                                 </Link>
                                 {item?.post_text?.length > 350 &&

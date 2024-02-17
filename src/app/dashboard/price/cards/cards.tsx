@@ -108,7 +108,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             if(+period  >= 22 ) {
                 setTextMonthSliceTwo('Дня')
             }
-            if(+period  == 30 ) {
+            if(+period  >= 25 && +period  <= 30) {
                 setTextMonthSliceTwo('Дней')
             }
             if(+period  == 31 ) {
