@@ -242,6 +242,13 @@ export const requestApi = createApi({
                 method: 'GET',
             }),
         }),
+        payment: builder.mutation<any, any>({
+            query: (params) => ({
+                url: '/categories/payment',
+                method: 'POST',
+                body: params,
+            }),
+        }),
         getFreePeriod: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/categories/freePeriod',
@@ -249,7 +256,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
 
 
         addGroup: builder.mutation<any, any>({
@@ -497,4 +503,5 @@ export const {
     useGetPostsRedisMutation,
     useUpdatePriceMutation,
     useSendMassageMutation,
+    usePaymentMutation,
 } = requestApi;

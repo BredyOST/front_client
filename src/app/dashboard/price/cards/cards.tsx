@@ -4,7 +4,11 @@ import cls from './cards.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import Slider from "@/app/components/shared/ui/slider/slider";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {useGetFreePeriodMutation, useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {
+    useGetFreePeriodMutation,
+    useGetMeMutation,
+    usePaymentMutation
+} from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
@@ -32,6 +36,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     //RTK
     const [getFreePeriod, {data: requestFreePeriod, error:errorFreePeriod, isLoading: isLoadingFreePeriod, isError: isErrorFreePeriod}] = useGetFreePeriodMutation()
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
+    const [payment, {data: requestPayment, error:errorPayment, isLoading: isLoadingPayment, isError: isErrorPayment}] = usePaymentMutation()
 
     //ACTIONS FROM REDUX
     // для изменения состояния попапа loginForm
@@ -123,6 +128,12 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         }
     },[requestFreePeriod])
 
+    React.useEffect(() => {
+        if(requestPayment?.url) {
+            redirect(requestPayment?.url)
+        }
+    }, [requestPayment])
+
     //USEREF
 
     //FUNCTIONS
@@ -153,8 +164,12 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         } else if((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
-            // window.location.href = "https://t.me/Teodor2896";
-            window.open("https://t.me/Teodor2896", "_blank");
+            payment({
+                categ: chosenCategory,
+                price: price,
+                period: period,
+                title: title,
+            })
         }
     }
 
@@ -219,7 +234,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                 Оформить подписку
             </Button>
             }
-            { isLoadingFreePeriod
+            { (isLoadingFreePeriod || isLoadingPayment)
                 && (
                     <Loader
                         classname="color-dark"
