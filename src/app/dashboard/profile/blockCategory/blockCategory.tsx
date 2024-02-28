@@ -19,7 +19,8 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
     const { classname } = props;
     const cookies = getThisCookie();
     const dispatch = useAppDispatch()
-
+    const [userCategories, setUserCategories] = React.useState<any>(null)
+    const [userCategoriesFree, setUserCategoriesFree] = React.useState<any>(null)
     // RTK
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
     const [
@@ -38,8 +39,6 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
     //USEREF
 
     //FUNCTIONS
-
-
 
     function formatDateToRussian(dateString:string | Date) {
         const date = new Date(dateString);
@@ -93,15 +92,68 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
         // })
     }
 
+    React.useEffect(() => {
+        if (infoUser && infoUser?.categoriesHasBought && infoUser?.categoriesHasBought.length >= 1) {
+            setUserCategories(infoUser?.categoriesHasBought)
+        }
+        if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
+            setUserCategoriesFree(infoUser?.categoriesFreePeriod)
+        }
+        console.log(userCategoriesFree)
+    },[infoUser])
+
     return (
         <div className={cls.categories}>
-            {/*{infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && <h3 className={cls.titleFree}>Подписки пробного периода</h3>}*/}
             <div className={cls.grid}>
-                {infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser.categoriesFreePeriod.map((item) => (
+                {userCategories?.length >= 1 && userCategories.map((item:any) => (
                     new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
                     <div key={item.id} className={cls.blockCategory}>
                         <div className={cls.blockInfo}>
-                            <div className={cls.categoryName}>{item?.name}</div>
+                            <div className={cls.categoryName}>{item?.name || item?.category}</div>
+                            <div className={cls.dates}>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Дата активации:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseBuyDate)}</div>
+                                    </div>
+                                </div>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Действует до:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseEndDate)}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className={cls.top}>
+                                        <h2 className={cls.title}>Уведомления в телеграмме</h2>
+                                        {infoUser && infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id)
+                                            ? <div className={cls.textVerify}>Подключен<VerifySvg className={cls.verifySvg}/></div>
+                                            : <div className={cls.textVerify}>Не подключен<NotVerifySvg className={cls.notVerifySvg}/></div>
+                                        }
+                                        <div>
+                                            <div>Доступный период: до окончания пробного периода</div>
+                                        </div>
+                                    </div>
+                                    {infoUser && !infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id) &&
+                                    <div className={cls.btnCover}>
+                                        <Button
+                                            classname={cls.btn}
+                                            onClick={() => activateNotification(item)}
+                                        >
+                                            Подключить
+                                        </Button>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                {userCategoriesFree?.length >= 1 && userCategoriesFree.map((item:any) => (
+                    new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
+                    <div key={item.id} className={cls.blockCategory}>
+                        <div className={cls.blockInfo}>
+                            <div className={cls.categoryName}>{item?.name || item?.category}</div>
                             <div className={cls.dates}>
                                 <div className={cls.coverForDatesBuy}>
                                     <h3 className={cls.dateBuy}>Дата активации:</h3>

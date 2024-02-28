@@ -36,14 +36,15 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
         let checkFree = false;
         let checkPay = false;
 
-        if (infoUser?.categoriesFreePeriod?.length >= 1) {
+        if (infoUser?.categoriesFreePeriod?.length >= 1 && !infoUser?.endFreePeriod) {
             for (let item of infoUser?.categoriesFreePeriod) {
                 if (currenDate.getTime() <= new Date(item.purchaseEndDate).getTime()) {
                     checkFree = true;
                     break;
                 }
             }
-        } else if (infoUser?.categoriesHasBought?.length >= 1) {
+        }
+        if (infoUser?.categoriesHasBought?.length >= 1) {
             for (let item of infoUser?.categoriesHasBought) {
                 if (currenDate.getTime() <= new Date(item.purchaseEndDate).getTime()) {
                     checkPay = true;
@@ -71,19 +72,15 @@ const PostsForSearch:FC<postsForSearchProps> = (props) => {
     return (
         <div className={classNames(cls.postsForSearch, {},[classname] )} >
             <div className={cls.looking}>
-                {infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.length) && (!infoUser?.categoriesHasBought?.length)) &&
+                {infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length == 0) && (infoUser?.categoriesHasBought?.length == 0)) &&
                     <div className={cls.coverBlockNoAccess}>
-                        {/*<div className={cls.titleAboutNoAccess}>Для осуществления поиска, необходимо наличие активной подписки или бесплатного тестового периода </div>*/}
                         <div className={cls.coverBtn}>
                             <Link href={navbarFirst[0].href} className={cls.btn}>Посмотреть тарифы</Link>
                         </div>
                     </div>
                 }
-                {/*{infoUser && stateAuth && ((infoUser?.activatedFreePeriod && accessFree) || (infoUser?.categoriesHasBought?.length && accessPay)) ?*/}
-                {/*    <PostsBlock/> :''*/}
-                {/*}*/}
-                {infoUser && stateAuth && (accessPay || accessFree) && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length) || (infoUser?.categoriesHasBought?.length)) ?
-                    <PostsBlock/> :''
+                {infoUser && stateAuth && (accessPay || accessFree) && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) || (infoUser?.categoriesHasBought?.length >= 1)) ?
+                    <PostsBlock/> : ''
                 }
             </div>
         </div>
