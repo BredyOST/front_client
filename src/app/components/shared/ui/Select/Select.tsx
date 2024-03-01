@@ -55,6 +55,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         if (!categories || !infoUser) return;
 
         const local = localStorage.getItem('_sel_category');
+
         let savedCategory:any;
         let checAcess:any;
         let checAcessBuy:any;
@@ -67,7 +68,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
             const findCategFree = infoUser?.categoriesFreePeriod.find((item:any) => item?.id == savedCategory?.id);
             const findCategBuy = infoUser?.categoriesHasBought.find((item:any) => item?.id == savedCategory?.id);
 
-            if (currenDate && findCategFree?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategFree?.purchaseEndDate).getTime())) {
+            if (currenDate && !infoUser.endFreePeriod && findCategFree?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategFree?.purchaseEndDate).getTime())) {
                 checAcess = findCategFree;
             }
             if (currenDate && findCategBuy?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategBuy?.purchaseEndDate).getTime())) {
@@ -89,7 +90,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
             if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
                 for (let item of infoUser?.categoriesFreePeriod) {
                     if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                        const selectedCategory = categories?.find((item:any) => item?.id == item.id);
+                        const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
                         const obj = {
                             id: selectedCategory?.id,
                             name: selectedCategory?.name,

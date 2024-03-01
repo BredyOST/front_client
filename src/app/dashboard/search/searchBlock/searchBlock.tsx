@@ -80,7 +80,6 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
     }
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        console.log(2)
         if (e.key === 'Enter' || e.currentTarget.classList.contains(cls.addBtn)) {
             addWords();
         }
