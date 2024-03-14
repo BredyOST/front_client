@@ -23,9 +23,13 @@ export type User = {
     activatedFreePeriodNotification: boolean
     endFreePeriodNotification: boolean
     ip: string
+    lastVisit: null | Date
+    activationNumber: string
+    activationTgNumber: string
     categoriesFreePeriod: PurchasedCategory[]
     notificationsFreePeriod: PurchasedCategory[]
     categoriesHasBought: PurchasedCategory[]
+    notificationsHasBought: PurchasedCategory[]
     timeCallVerify: Date
     timeSendMessageVerify: Date
     createdAt: Date

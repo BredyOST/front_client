@@ -222,50 +222,50 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
             <h2 className={cls.titleNotifications}>Уведомления</h2>
             <div className={cls.grid}>
                 {userCategoriesNotifications?.length >= 1 && userCategoriesNotifications.map((item:any) => (
-                  new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
-                  <div key={item.id} className={cls.blockCategory}>
-                      <div className={cls.blockInfo}>
-                          <div className={cls.categoryName}>{item?.name || item?.category}</div>
-                          <div className={cls.dates}>
-                              <div className={cls.coverForDatesBuy}>
-                                  <h3 className={cls.dateBuy}>Дата активации:</h3>
-                                  <div className = {cls.time}>
-                                      <div>{formatDateToRussian(item?.purchaseBuyDate)}</div>
-                                  </div>
-                              </div>
-                              <div className={cls.coverForDatesBuy}>
-                                  <h3 className={cls.dateBuy}>Действует до:</h3>
-                                  <div className = {cls.time}>
-                                      <div>{formatDateToRussian(item?.purchaseEndDate)}</div>
-                                  </div>
-                              </div>
-                              <div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                    new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
+                    <div key={item.id} className={cls.blockCategory}>
+                        <div className={cls.blockInfo}>
+                            <div className={cls.categoryName}>{item?.name || item?.category}</div>
+                            <div className={cls.dates}>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Дата активации:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseBuyDate)}</div>
+                                    </div>
+                                </div>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Действует до:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseEndDate)}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ))}
                 {userCategoriesFreeNotifications?.length >= 1 && userCategoriesFreeNotifications.map((item:any) => (
-                  new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
-                  <div key={item.id} className={cls.blockCategory}>
-                      <div className={cls.blockInfo}>
-                          <div className={cls.categoryName}>{item?.name || item?.category}</div>
-                          <div className={cls.dates}>
-                              <div className={cls.coverForDatesBuy}>
-                                  <h3 className={cls.dateBuy}>Дата активации:</h3>
-                                  <div className = {cls.time}>
-                                      <div>{formatDateToRussian(item?.purchaseBuyDate)}</div>
-                                  </div>
-                              </div>
-                              <div className={cls.coverForDatesBuy}>
-                                  <h3 className={cls.dateBuy}>Действует до:</h3>
-                                  <div className = {cls.time}>
-                                      <div>{formatDateToRussian(item?.purchaseEndDate)}</div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                    new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
+                    <div key={item.id} className={cls.blockCategory}>
+                        <div className={cls.blockInfo}>
+                            <div className={cls.categoryName}>{item?.name || item?.category}</div>
+                            <div className={cls.dates}>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Дата активации:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseBuyDate)}</div>
+                                    </div>
+                                </div>
+                                <div className={cls.coverForDatesBuy}>
+                                    <h3 className={cls.dateBuy}>Действует до:</h3>
+                                    <div className = {cls.time}>
+                                        <div>{formatDateToRussian(item?.purchaseEndDate)}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ))}
             </div>
             { loadingFreeNotification
