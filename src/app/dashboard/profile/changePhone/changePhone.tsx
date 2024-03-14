@@ -6,11 +6,18 @@ import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {useCallCodeMutation, useCallMutation, useChangePhoneMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {
+    useActivateTgMutation,
+    useCallCodeMutation,
+    useCallMutation,
+    useChangePhoneMutation,
+    useVerifyTgMutation
+} from "@/app/redux/entities/requestApi/requestApi";
 import {parseCookies} from "nookies";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import SelectCountry from "@/app/dashboard/profile/selectCountry/selectCountry";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
+import { AppLink } from "@/app/components/shared/ui/appLink/appLink";
 
 interface changePhoneProps {
     classname?: string;
@@ -53,15 +60,20 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     const [changeRequestPhone, {
         data: requestChangePhone, error: errorPhone, isError: isErrorPhone,  isLoading: loadingPhone,
     }] =   useChangePhoneMutation()
-    const [reqCallCode, {data:requestCallCode, error:errorrequestCallCode, isError: isErrorCallCode, }] =  useCallCodeMutation()
-    const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, }] =  useCallMutation()
+    const [reqCallCode, {data:requestCallCode, error:errorrequestCallCode, isError: isErrorCallCode, isLoading: loadingCall}] =  useCallCodeMutation()
+    const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
+    const [reqVerify, {data:requestVerify, error:errorrequestVerify, isError: isErrorVerify, isLoading: loadingVerify,}] = useVerifyTgMutation()
+    const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgMutation();
+
     //ACTIONS FROM REDUX
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
 
     //STATES FROM REDUX
     const {data:infoUser} = useAppSelector(state => state.auth)
     const [codeVerify, setCodeVerify] = React.useState<boolean>(false); // отследить когда сделан запрос и отобразить
+    const [codeVerifyTg, setCodeVerifyTg] = React.useState<boolean>(false); // отследить когда сделан запрос и отобразить
     const [inputCode, setInputCode] =  React.useState<string>('')
+    const [inputCodeTg, setInputCodeTg] =  React.useState<string>('')
     const [inputPhone, setInputPhone] = React.useState<string>('')
     const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(null);
     const [error, setError] = React.useState<boolean>(false);
@@ -104,6 +116,9 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     }
 
     const checkPhone = () => {
+        if (inputPhone.length <= 0) {
+            dispatch(addInfoForCommonError({message: 'Не введен номер телефона'}))
+        }
         if (inputPhone && inputPhone.length > 6 && inputPhone != "Не введен номер телефона") {
             reqCall({
                 phone: inputPhone
@@ -112,15 +127,23 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
             setError(true)
             setCodeVerify(true)
         }
-
     }
+
     const addCode = (e:any) => {
         setInputCode(e.target.value);
     }
+    const addCodeTg = (e:any) => {
+        setInputCodeTg(e.target.value);
+    }
+
     // отправояем изменения
     const showInputCode = () => {
         setCodeVerify(prevState => !prevState)
     }
+    const showInputCodeTg = () => {
+        setCodeVerifyTg(prevState => !prevState)
+    }
+
     const sendCodeVerify = () => {
         if (inputCode) {
             reqCallCode({
@@ -128,6 +151,26 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
             })
         }
     }
+
+    const activateTgNumber = () => {
+        if (inputCodeTg) {
+            reqActivateTg({
+                number: inputCodeTg
+            })
+        }
+    }
+
+    const verifyTg = () => {
+        if (inputPhone.length <= 0) {
+            dispatch(addInfoForCommonError({message: 'Не введен номер телефона'}))
+        }
+        if (inputPhone && inputPhone.length > 6 && inputPhone != "Не введен номер телефона") {
+            reqVerify({
+                phoneNumber: inputPhone
+            })
+        }
+    }
+
     React.useEffect(
         () => {
             if( infoUser && infoUser?.phoneNumber) {
@@ -173,7 +216,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                     {error && <div className={cls.error}>введите номер телефона</div>}
                 </div>
             </div>
-            {infoUser != null && infoUser != undefined && infoUser && !infoUser.isActivatedPhone && showBtnNumber &&
+            {showBtnNumber &&
             <div className={cls.coverNumBtn}>
                 <Button
                     classname={cls.btn}
@@ -210,12 +253,78 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                 }
             </div>
             }
+            {showBtnNumber &&
+            <div className={cls.coverNumBtn}>
+                <Button
+                    classname={cls.btn}
+                    onClick = {showInputCodeTg}
+                >
+                    {!codeVerifyTg ? `Подтвердить телефон в телеграмме` : `Скрыть поле` }
+                </Button>
+                {codeVerifyTg &&
+                <div className={cls.linkCoverCode}>
+                    <Input
+                        classForInput={cls.input}
+                        classname={cls.inputRelativeCode}
+                        value={ inputCodeTg}
+                        placeholder='Введите код'
+                        onChange={(e:ChangeEvent<HTMLInputElement>) => addCodeTg(e)}
+                    />
+                    <div className={cls.coverBtn}>
+                        <Button
+                            classname={cls.btn}
+                            onClick = {verifyTg}
+                        >
+                            Запрос кода
+                        </Button>
+                    </div>
+                    <div className={cls.coverBtn}>
+                        <Button
+                            classname={cls.btn}
+                            onClick={activateTgNumber}
+                        >
+                            Отправить код
+                        </Button>
+                    </div>
+                </div>
+                }
+            </div>
+            }
             { loadingPhone
                 && (
                     <Loader
                         classname="color-dark"
                     />
-                )}
+                )
+            }
+            { loadingVerify
+              && (
+                  <Loader
+                      classname="color-dark"
+                  />
+              )
+            }
+            { loadingActivateTg
+              && (
+                  <Loader
+                      classname="color-dark"
+                  />
+              )
+            }
+            { loadingCall
+              && (
+                  <Loader
+                      classname="color-dark"
+                  />
+              )
+            }
+            { loadingReqCall
+              && (
+                  <Loader
+                      classname="color-dark"
+                  />
+              )
+            }
         </>
     );
 };

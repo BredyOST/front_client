@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useGetFreePeriodMutation,
     useGetMeMutation,
-    usePaymentMutation
+    usePaymentMutation, usePayNotificationsMutation
 } from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
@@ -37,6 +37,9 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const [getFreePeriod, {data: requestFreePeriod, error:errorFreePeriod, isLoading: isLoadingFreePeriod, isError: isErrorFreePeriod}] = useGetFreePeriodMutation()
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
     const [payment, {data: requestPayment, error:errorPayment, isLoading: isLoadingPayment, isError: isErrorPayment}] = usePaymentMutation()
+    const [paymentNotifications, {data: requestPaymentNotifications, error:errorPaymentNotifications, isLoading: isLoadingPaymentNotifications, isError: isErrorPaymentNotifications}] = usePayNotificationsMutation()
+
+
 
     //ACTIONS FROM REDUX
     // для изменения состояния попапа loginForm
@@ -49,6 +52,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const {chosenCategory} = useAppSelector(state => state.categories)
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
+    const {activePriceWindows} = useAppSelector(state => state.prices)
 
     //USESTATE
     const [price, setPrice] = React.useState<string | number>('');
@@ -58,29 +62,46 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const changePeriod = (value:string) => {
         setPeriod(value)
     }
+
     React.useEffect(
         () => {
 
             let salary = 0;
 
-            if (item.title == 'Посуточный') {
+            if (item.title == 'Посуточный' && activePriceWindows == 1) {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem.id == item.id)
+                    console.log(category.salaryChanel)
                     const price = Math.round(+category.salary * 2.5 /30 * +period)
                     salary += price
                 })
+            } else if (item.title == 'Посуточный' && activePriceWindows == 2) {
+                chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
+                    let category = categories?.find((elem:any) => elem.id == item.id)
+                    console.log(category.salaryChanel)
+                    const price = Math.round(+category.salaryChanel * 2.5 /30 * +period)
+                    salary += price
+                })
             }
-            if (item.title == 'Погрузись в работу') {
+
+            if (item.title == 'Погрузись в работу'  && activePriceWindows == 1) {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem.id == item.id)
                     const price = +category.salary * +period
                     salary += price;
                 })
+            }  else if (item.title == 'Погрузись в работу' && activePriceWindows == 2) {
+                chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
+                    let category = categories?.find((elem:any) => elem.id == item.id)
+                    const price = +category.salaryChanel * +period
+                    salary += price;
+                })
             }
+
             if(item.title == 'Бесплатный') setPeriod(`1`)
 
             setPrice(salary)
-        },[item, period,chosenCategory]
+        },[item, period,chosenCategory, activePriceWindows]
     )
 
     React.useEffect(() => {
@@ -132,7 +153,10 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         if(requestPayment?.url) {
             redirect(requestPayment?.url)
         }
-    }, [requestPayment])
+        if(requestPaymentNotifications?.url) {
+            redirect(requestPaymentNotifications?.url)
+        }
+    }, [requestPayment,requestPaymentNotifications])
 
     //USEREF
 
@@ -144,7 +168,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
 
-        if (title == `Бесплатный` && chosenCategory.length == 1) {
+        if (title == `Бесплатный` && chosenCategory.length == 1 && activePriceWindows == 1) {
             getFreePeriod(chosenCategory).then((result) => {
                 if('data' in result && result?.data?.text == `Бесплатный период активирован` && cookies && cookies._z) {
                     getInfoUser(cookies).then((result) => {
@@ -163,8 +187,15 @@ const Cards:FC<cardsProps> = React.memo((props) => {
 
         if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
-        } else if((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
+        } else if((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1 && activePriceWindows == 1) {
             payment({
+                categ: chosenCategory,
+                price: price,
+                period: period,
+                title: title,
+            })
+        } else if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1 && activePriceWindows == 2) {
+            paymentNotifications({
                 categ: chosenCategory,
                 price: price,
                 period: period,
@@ -172,7 +203,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             })
         }
     }
-
+    
     // для открытия попапа
     const openLoginFormPopup = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
@@ -181,15 +212,18 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     return (
         <div className={cls.card} >
             <div className={cls.coverSubtitle}>
-                <h2 className={cls.subtitle}>{item.title}</h2>
+                {item.title == 'Бесплатный' && activePriceWindows == 1 && <h2 className={cls.subtitle}>{item.title}</h2>}
+                {item.title == 'Бесплатный' && activePriceWindows == 2 && <h2 className={cls.subtitle}>Протестируй</h2>}
+                {item.title == 'Посуточный' && activePriceWindows == 1 && <h2 className={cls.subtitle}>{item.title}</h2>}
+                {item.title == 'Посуточный' && activePriceWindows == 2 && <h2 className={cls.subtitle}>Упрощенный</h2>}
+                {item.title == 'Погрузись в работу' && activePriceWindows == 1 && <h2 className={cls.subtitle}>{item.title}</h2>}
+                {item.title == 'Погрузись в работу' && activePriceWindows == 2 && <h2 className={cls.subtitle}>Пакет уведомлений</h2>}
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
                     {(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
                     {(price == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
                     {(price !== 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
-
-
                 </div>
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>
@@ -203,17 +237,17 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     </div>
                     {
                         (item.title === 'Погрузись в работу' || item.title === 'Посуточный') &&
-                        <div className={cls.coverSlider}>
-                            <Slider
-                                value={period}
-                                min={item.title == 'Бесплатный' ? '2' : '1'}
-                                max={item.title == 'Бесплатный' ? '2' : item.title == 'Погрузись в работу' ? '12' : '30'}
-                                classname={cls.forSliderCover}
-                                classnameInput={cls.sliderInput}
-                                onInput={changePeriod}
-                                classnameForTicks={cls.ticks}
-                            />
-                        </div>
+                            <div className={cls.coverSlider}>
+                                <Slider
+                                    value={period}
+                                    min={item.title == 'Бесплатный' ? '2' : '1'}
+                                    max={item.title == 'Бесплатный' ? '2' : item.title == 'Погрузись в работу' ? '12' : '30'}
+                                    classname={cls.forSliderCover}
+                                    classnameInput={cls.sliderInput}
+                                    onInput={changePeriod}
+                                    classnameForTicks={cls.ticks}
+                                />
+                            </div>
                     }
                 </div>
             </div>
@@ -226,20 +260,31 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     <li>Аккаунт для одного пользователя</li>
                 </ul>
             </div>
-            {<Button
+            <Button
                 onClick={!stateAuth ?  openLoginFormPopup :  () => payOrTryFreePeriod(item.title)  }
                 classname={cls.btn}
                 disabled={isLoadingFreePeriod}
             >
-                Оформить подписку
+                {activePriceWindows == 1 ? `Оформить подписку`: `Подключить уведомления`}
             </Button>
-            }
-            { (isLoadingFreePeriod || isLoadingPayment)
+            { (isLoadingFreePeriod)
                 && (
                     <Loader
                         classname="color-dark"
                     />
                 )}
+            { (isLoadingPayment)
+              && (
+                  <Loader
+                      classname="color-dark"
+                  />
+              )}
+            { (isLoadingPaymentNotifications)
+              && (
+                  <Loader
+                      classname="color-dark"
+                  />
+              )}
         </div>
     );
 });

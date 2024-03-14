@@ -3,7 +3,8 @@ import {IPriceSchema} from "@/app/redux/entities/prices/pricesSchema";
 
 
 const initialState:IPriceSchema = {
-    prices:[]
+    prices:[],
+    activePriceWindows: 1
 };
 
 export const PricesSLice = createSlice({
@@ -12,6 +13,9 @@ export const PricesSLice = createSlice({
     reducers: {
         addPrices: (state, action:PayloadAction<any>) => {
             state.prices = action.payload;
+        },
+        addActivePrice: (state, action:PayloadAction<any>) => {
+            state.activePriceWindows = action.payload;
         },
     },
 });

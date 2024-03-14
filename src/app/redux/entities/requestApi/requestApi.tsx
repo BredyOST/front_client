@@ -208,6 +208,20 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        verifyTg: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/users/sendTg`,
+                method: 'POST',
+                body: params,
+            }),
+        }),
+        activateTg: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/users/numberTgActivate`,
+                method: 'POST',
+                body: params,
+            }),
+        }),
 
         createCategory: builder.mutation<any, any>({
             query: (params) => ({
@@ -444,6 +458,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        payNotifications: builder.mutation({
+            query: (params) => ({
+                url: 'categories/notifications',
+                method: 'POST',
+                body: params,
+            }),
+        }),
         getAllKeysRedis:builder.mutation({
             query: (params) => ({
                 url: '/posts-from-redis/redisKeys',
@@ -504,4 +525,7 @@ export const {
     useUpdatePriceMutation,
     useSendMassageMutation,
     usePaymentMutation,
+    useVerifyTgMutation,
+    useActivateTgMutation,
+    usePayNotificationsMutation,
 } = requestApi;

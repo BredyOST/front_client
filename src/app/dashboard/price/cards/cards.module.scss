@@ -240,6 +240,12 @@
   }
 }
 
+.btnCover{
+  display: flex;
+  justify-content: center;
+  column-gap: mixins.rem(5);
+}
+
 .btn{
   @extend .btn;
   cursor: pointer;
@@ -247,6 +253,11 @@
   padding-right: mixins.rem(15);
   padding-bottom: mixins.rem(10);
   padding-top: mixins.rem(10);
+
+  &.active {
+    background-color: black;
+  }
+
 }
 
 .btnSpanMain{

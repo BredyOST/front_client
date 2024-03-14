@@ -13,6 +13,13 @@
     @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
 }
 
+.titleNotifications{
+  @extend .forMainTitle;
+  font-size: mixins.rem(22);
+  padding-bottom: mixins.rem(0);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
 .blockCategory{
 
   @media(min-width: mixins.rem(global.$tablet)) {
@@ -164,6 +171,35 @@
 
 .texTg {
 
+}
+
+.inputs {
+  margin-top: mixins.rem(3);
+  font-size: mixins.rem(globalIndex.$Inputs_font_size);
+  //flex: 1 1 100%;
+  //min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: 10px;
+  padding-top: mixins.rem(4);
+  padding-bottom: mixins.rem(4);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: em(1);
+  position: relative;
+  background-color: white;
+
+  &::placeholder {
+    color: globalIndex.$Inputs_placeholder;
+    font-weight: globalIndex.$Inputs_placeholder_font_weight;
+    font-size: mixins.rem(15);
+  }
+
+  &:focus {
+    border: 2px solid globalIndex.$Inputs_focus;
+    transition: border ease 0.3s 0s;
+  }
 }
 
 .btn {

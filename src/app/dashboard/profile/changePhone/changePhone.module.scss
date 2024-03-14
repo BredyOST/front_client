@@ -77,12 +77,22 @@
   column-gap: mixins.rem(10);
   align-items: center;
   min-height: mixins.rem(55);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+    row-gap: mixins.rem(10);
+  }
 }
 
 .linkCoverCode{
   display: flex;
   flex: 1 1 auto;
   column-gap: mixins.rem(10);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+    row-gap: mixins.rem(10);
+  }
 }
 
 .notVerifySvg{

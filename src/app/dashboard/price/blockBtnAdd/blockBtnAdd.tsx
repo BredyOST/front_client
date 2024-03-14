@@ -9,6 +9,7 @@ import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopu
 import ListsCategory from "@/app/dashboard/price/listsCategory/listsCategory";
 import CloseSvg from "@/app/components/svgs/close.svg";
 import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
+import { PricesSLiceActions } from "@/app/redux/entities/prices/pricesSlice";
 
 interface blockBtnAddProps {
     classname?: string;
@@ -24,11 +25,13 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
 
     //ACTIONS FROM REDUX
     const {changeStateCategoriesPopup} = statePopupSliceActions;
-    const { closeAllPopups } = statePopupSliceActions;
+    const {closeAllPopups } = statePopupSliceActions;
     const {addChosenCategories} = categoriesActions;
+    const {addActivePrice} = PricesSLiceActions;
     //STATES FROM REDUX
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
     const {chosenCategory} = useAppSelector(state => state.categories)
+    const {activePriceWindows} = useAppSelector(state => state.prices)
 
     //USESTATE
 
@@ -52,9 +55,27 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
         }
     }
 
+    const changeStateActiveWindow = (num:number) => {
+        dispatch(addActivePrice(num))
+    }
+
     
     return (
         <div className={cls.coverCategories}>
+            <div className={cls.coverBtns}>
+                <Button
+                    classname={`${cls.btnTwo} ${activePriceWindows == 1 && cls.btnActive} `}
+                    onClick = {() => changeStateActiveWindow(1)}
+                >
+                    Выбор подписки
+                </Button>
+                <Button
+                    classname={`${cls.btnTwo} ${activePriceWindows == 2 && cls.btnActive} `}
+                    onClick = {() => changeStateActiveWindow(2)}
+                >
+                    Подключить уведомления
+                </Button>
+            </div>
             <div className={classNames(cls.coverButtonCategories, {},[classname] )} >
                 <Button
                     classname={cls.btn}

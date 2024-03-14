@@ -32,17 +32,7 @@
   padding-right: mixins.rem(40);
   box-shadow: mixins.rem(0) mixins.rem(10) mixins.rem(20) #000000;
   font-size: mixins.rem(20);
-  color: globalIndex.$Link_color;
-  display: flex;
-  align-items: center;
-  column-gap: mixins.rem(5);
-  background-color: globalIndex.$Theme_main_header_background_button;
-  border-radius: mixins.rem(10);
-  z-index: 2;
-  text-align: center;
   transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
-  justify-content: center;
-
   @media (any-hover: hover) {
     &:hover {
       background-color: globalIndex.$Theme_main_header_background_Button_hover;
@@ -51,9 +41,41 @@
       transform: translateY(2px);
     }
   }
-
-
 }
+
+.btnTwo{
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(25);
+  padding-right: mixins.rem(25);
+  font-size: mixins.rem(18);
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_Button_hover;
+    }
+  }
+
+  &.btnActive {
+    background-color: #2c6c3a;
+  }
+}
+
+.btnTwo,
+.btn {
+  color: globalIndex.$Link_color;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  background-color: globalIndex.$Theme_main_header_background_button;
+  border-radius: mixins.rem(10);
+  z-index: 2;
+  text-align: center;
+  justify-content: center;
+}
+
+
+
 
 .close{
   align-items: center;
@@ -91,6 +113,11 @@
 }
 
 .chosen{
+}
+.coverBtns{
+  display: flex;
+  justify-content: center;
+  column-gap: mixins.rem(15);
 }
 
 .coverCategories{
