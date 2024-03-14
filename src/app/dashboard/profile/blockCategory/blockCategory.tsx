@@ -15,6 +15,8 @@ import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
 import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import { Input } from "@/app/components/shared/ui/input/Input";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 interface blockCategoryProps {
     classname?: string;
 }
@@ -71,40 +73,11 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
 
         return `${weekdays[weekday]}, ${day} ${months[+month - 1]} ${year} г. ${hours}:${minutes}`;
     }
-    const activateNotification = (item:any) => {
+    const goToSearch = () => {
         if (!infoUser?.isActivatedPhone) {
             dispatch(addInfoForCommonError({message: 'Не подтвержден номер телефона'}))
         }
-        payNotification({
-            item:item,
-            days: days,
-        })
-
-        // const obj = {
-        //     category: item.id,
-        //     categoryName: item.name,
-        //     purchaseBuyDate: new Date(),
-        //     purchaseEndDate: item.purchaseEndDate,
-        //     purchasePeriod: 2,
-        //     freePeriod: true,
-        // }
-
-        // addFreeNotification(obj).then((result) => {
-        //     if(result && 'data' in result && result?.data?.text == `Бесплатный период активирован`) {
-        //         if (cookies && cookies._z) {
-        //             getInfoUser(cookies).then((result) => {
-        //                 if ('data' in result && result.data) {
-        //                     dispatch(addInfoUser(result.data));
-        //                     dispatch(addMainAdminRole(result.data.isMainAdmin));
-        //                     dispatch(addAdminRole(result.data.isAdmin));
-        //                     dispatch(addAuthStatus(true));
-        //                     location.reload()
-        //                 }
-        //             });
-        //
-        //         }
-        //     }
-        // })
+        redirect('/dashboard/price')
     }
 
 
@@ -161,12 +134,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
                                     </div>
                                     {infoUser && !infoUser?.notificationsHasBought?.find((elem:any) => elem.id == item.id) &&
                                     <div className={cls.btnCover}>
-                                        <Button
-                                            classname={cls.btn}
-                                            onClick={() => activateNotification(item)}
-                                        >
-                                            Подключить
-                                        </Button>
+                                        <Link className={cls.btn} href="/dashboard/price">Подключить</Link>
                                     </div>
                                     }
                                 </div>
@@ -199,18 +167,10 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
                                             ? <div className={cls.textVerify}>Подключен<VerifySvg className={cls.verifySvg}/></div>
                                             : <div className={cls.textVerify}>Не подключен<NotVerifySvg className={cls.notVerifySvg}/></div>
                                         }
-                                        {/*<div>*/}
-                                        {/*    <div>Доступный период: до окончания пробного периода</div>*/}
-                                        {/*</div>*/}
                                     </div>
                                     {infoUser && !infoUser?.notificationsFreePeriod?.find((elem:any) => elem.id == item.id) &&
                                     <div className={cls.btnCover}>
-                                        <Button
-                                            classname={cls.btn}
-                                            onClick={() => activateNotification(item)}
-                                        >
-                                            Подключить
-                                        </Button>
+                                        <Link className={cls.btn} href="/dashboard/price">Подключить</Link>
                                     </div>
                                     }
                                 </div>

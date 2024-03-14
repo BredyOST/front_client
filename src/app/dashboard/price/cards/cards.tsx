@@ -67,18 +67,17 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         () => {
 
             let salary = 0;
-
             if (item.title == 'Посуточный' && activePriceWindows == 1) {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem.id == item.id)
-                    console.log(category.salaryChanel)
+                    console.log(category)
                     const price = Math.round(+category.salary * 2.5 /30 * +period)
                     salary += price
                 })
             } else if (item.title == 'Посуточный' && activePriceWindows == 2) {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem.id == item.id)
-                    console.log(category.salaryChanel)
+                    console.log(category)
                     const price = Math.round(+category.salaryChanel * 2.5 /30 * +period)
                     salary += price
                 })
