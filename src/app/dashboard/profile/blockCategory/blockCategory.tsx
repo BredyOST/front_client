@@ -185,7 +185,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
                     new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
                     <div key={item.id} className={cls.blockCategory}>
                         <div className={cls.blockInfo}>
-                            <div className={cls.categoryName}>{item?.name || item?.category}</div>
+                            <div className={cls.categoryName}>{item?.name || item?.category} ({item.chatList})</div>
                             <div className={cls.dates}>
                                 <div className={cls.coverForDatesBuy}>
                                     <h3 className={cls.dateBuy}>Дата активации:</h3>
