@@ -270,7 +270,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
+        getFreePeriodNotification: builder.mutation<any, any>({
+            query: (params) => ({
+                url: '/categories/freePeriodNotification',
+                method: 'POST',
+                body: params,
+            }),
+        }),
 
         addGroup: builder.mutation<any, any>({
             query: (params) => ({
@@ -528,4 +534,5 @@ export const {
     useVerifyTgMutation,
     useActivateTgMutation,
     usePayNotificationsMutation,
+    useGetFreePeriodNotificationMutation,
 } = requestApi;

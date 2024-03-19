@@ -14,12 +14,14 @@ import { PricesSLiceActions } from "@/app/redux/entities/prices/pricesSlice";
 interface blockBtnAddProps {
     classname?: string;
     categories:any
+    activeWindow?:string
 }
 
 const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
     const {
         classname,
         categories,
+        activeWindow
     } = props;
     const dispatch = useAppDispatch();
 
@@ -31,7 +33,6 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
     //STATES FROM REDUX
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
     const {chosenCategory} = useAppSelector(state => state.categories)
-    const {activePriceWindows} = useAppSelector(state => state.prices)
 
     //USESTATE
 
@@ -63,18 +64,18 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
     return (
         <div className={cls.coverCategories}>
             <div className={cls.coverBtns}>
-                <Button
-                    classname={`${cls.btnTwo} ${activePriceWindows == 1 && cls.btnActive} `}
-                    onClick = {() => changeStateActiveWindow(1)}
-                >
-                    Выбор подписки
-                </Button>
-                <Button
-                    classname={`${cls.btnTwo} ${activePriceWindows == 2 && cls.btnActive} `}
-                    onClick = {() => changeStateActiveWindow(2)}
-                >
-                    Подключить уведомления
-                </Button>
+                {/*<Button*/}
+                {/*    classname={`${cls.btnTwo} ${activePriceWindows == 1 && cls.btnActive} `}*/}
+                {/*    onClick = {() => changeStateActiveWindow(1)}*/}
+                {/*>*/}
+                {/*    Выбор подписки*/}
+                {/*</Button>*/}
+                {/*<Button*/}
+                {/*    classname={`${cls.btnTwo} ${activePriceWindows == 2 && cls.btnActive} `}*/}
+                {/*    onClick = {() => changeStateActiveWindow(2)}*/}
+                {/*>*/}
+                {/*    Подключить уведомления*/}
+                {/*</Button>*/}
             </div>
             <div className={classNames(cls.coverButtonCategories, {},[classname] )} >
                 <Button

@@ -18,6 +18,8 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import SelectCountry from "@/app/dashboard/profile/selectCountry/selectCountry";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import { AppLink } from "@/app/components/shared/ui/appLink/appLink";
+import Link from "next/link";
+import {userInfo} from "os";
 
 interface changePhoneProps {
     classname?: string;
@@ -101,6 +103,10 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     };
     const sendNewPhone = () => {
         if (inputPhone && inputPhone.length > 6 && inputPhone != "Не введен номер телефона") {
+            if (inputPhone.replace('+','') == infoUser?.phoneNumber.replace('+','')) {
+                dispatch(addInfoForCommonError({message: 'Вы уже используете этот номер телефона'}))
+                return
+            }
             if (!showBtnNumber) setShowBtnNumber(true)
             changeRequestPhone({
                 phoneNumber: inputPhone
@@ -145,6 +151,10 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     }
 
     const sendCodeVerify = () => {
+        if(inputCode.length <= 0) {
+            dispatch(addInfoForCommonError({message: 'Вы не ввели код'}))
+            return
+        }
         if (inputCode) {
             reqCallCode({
                 actovatedCode: inputCode
@@ -153,20 +163,13 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     }
 
     const activateTgNumber = () => {
+        if(inputCodeTg.length <= 0) {
+            dispatch(addInfoForCommonError({message: 'Вы не ввели код'}))
+            return
+        }
         if (inputCodeTg) {
             reqActivateTg({
                 number: inputCodeTg
-            })
-        }
-    }
-
-    const verifyTg = () => {
-        if (inputPhone.length <= 0) {
-            dispatch(addInfoForCommonError({message: 'Не введен номер телефона'}))
-        }
-        if (inputPhone && inputPhone.length > 6 && inputPhone != "Не введен номер телефона") {
-            reqVerify({
-                phoneNumber: inputPhone
             })
         }
     }
@@ -262,32 +265,35 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                     {!codeVerifyTg ? `Подтвердить телефон в телеграмме` : `Скрыть поле` }
                 </Button>
                 {codeVerifyTg &&
-                <div className={cls.linkCoverCode}>
-                    <Input
-                        classForInput={cls.input}
-                        classname={cls.inputRelativeCode}
-                        value={ inputCodeTg}
-                        placeholder='Введите код'
-                        onChange={(e:ChangeEvent<HTMLInputElement>) => addCodeTg(e)}
-                    />
-                    <div className={cls.coverBtn}>
-                        <Button
-                            classname={cls.btn}
-                            onClick = {verifyTg}
-                        >
-                            Запрос кода
-                        </Button>
+                <div className={cls.linkCoverCodes}>
+                    <div className={cls.linkCoverCode}>
+                        <Input
+                            classForInput={cls.input}
+                            classname={cls.inputRelativeCode}
+                            value={ inputCodeTg}
+                            placeholder='Введите код'
+                            onChange={(e:ChangeEvent<HTMLInputElement>) => addCodeTg(e)}
+                        />
+                        <div className={cls.coverBtn}>
+                            <Link
+                                href={'https://t.me/com_check_bot'}
+                                className={cls.btn}
+                                target="_blank" rel="noopener noreferrer"
+                            >
+                                Перейти в тг
+                            </Link>
+                        </div>
+                        <div className={cls.coverBtn}>
+                            <Button
+                                classname={cls.btn}
+                                onClick={activateTgNumber}
+                            >
+                                Отправить код
+                            </Button>
+                        </div>
                     </div>
-                    <div className={cls.coverBtn}>
-                        <Button
-                            classname={cls.btn}
-                            onClick={activateTgNumber}
-                        >
-                            Отправить код
-                        </Button>
-                    </div>
-                </div>
-                }
+                </div>}
+                <div className={cls.textTwo}>В чате бота нажмите кнопку передать контакт</div>
             </div>
             }
             { loadingPhone

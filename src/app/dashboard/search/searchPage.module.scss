@@ -163,6 +163,23 @@
   box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(20) rgb(0 0 0 / 50%);
 }
 
+.coverForLink{
+  display: flex;
+}
+
+.btnLink {
+  @extend .btn;
+  padding-top: mixins.rem(6);
+  padding-bottom: mixins.rem(6);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(10);
+  font-size: mixins.rem(18);
+  background-color: #C21F39;
+  font-family: globalIndex.$Title_font_family;
+  @include mixins.adaptiveValue("column-gap",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+}
+
+
 .coverClean{
   display: flex;
   justify-content: flex-end;

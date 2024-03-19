@@ -13,6 +13,7 @@ interface sliderProps {
     max?:string;
     onInput?:any;
     classnameForTicks:string;
+    step?:string
 }
 
 export const Slider:FC<sliderProps> = React.memo((props) => {
@@ -23,6 +24,7 @@ export const Slider:FC<sliderProps> = React.memo((props) => {
         min,
         max,
         onInput,
+        step,
         classnameForTicks
     } = props;
 
@@ -34,6 +36,7 @@ export const Slider:FC<sliderProps> = React.memo((props) => {
                 type="range"
                 min={min}
                 max={max}
+                step={step}
                 value={value}
                 onInput={(e:any) => onInput(e.target.value)}
             />

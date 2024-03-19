@@ -1,6 +1,6 @@
 'use client';
 import React, {FC} from 'react';
-import cls from './cards.module.scss'
+import cls from './notificationsCards.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import Slider from "@/app/components/shared/ui/slider/slider";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
@@ -22,10 +22,15 @@ interface cardsProps {
     categories:any;
 }
 
-const Cards:FC<cardsProps> = React.memo((props) => {
+type Countrer = {
+    id:string,
+    chats:string[]
+}
+
+const NotificationsCards:FC<cardsProps> = React.memo((props) => {
     const {
         item,
-        categories
+        categories,
     } = props;
 
     const cookies = getThisCookie();
@@ -34,11 +39,9 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     //RTK
     const [getFreePeriod, {data: requestFreePeriod, error:errorFreePeriod, isLoading: isLoadingFreePeriod, isError: isErrorFreePeriod}] = useGetFreePeriodMutation()
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
-    const [payment, {data: requestPayment, error:errorPayment, isLoading: isLoadingPayment, isError: isErrorPayment}] = usePaymentMutation()
+    // const [payment, {data: requestPayment, error:errorPayment, isLoading: isLoadingPayment, isError: isErrorPayment}] = usePaymentMutation()
     const [paymentNotifications, {data: requestPaymentNotifications, error:errorPaymentNotifications, isLoading: isLoadingPaymentNotifications, isError: isErrorPaymentNotifications}] = usePayNotificationsMutation()
     const [paymentNotificationsFree, {data: requestPaymentNotificationsFree, error:errorPaymentNotificationsFree, isLoading: isLoadingPaymentNotificationsFree, isError: isErrorPaymentNotificationsFree}] = useGetFreePeriodNotificationMutation()
-
-
 
     //ACTIONS FROM REDUX
     // для изменения состояния попапа loginForm
@@ -51,42 +54,52 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const {chosenCategory} = useAppSelector(state => state.categories)
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
+    const {activePriceWindows} = useAppSelector(state => state.prices)
 
     //USESTATE
     const [price, setPrice] = React.useState<string | number>('');
     const [period, setPeriod] = React.useState<string>(item.title == 'Посуточный' ? '7': '1');
     const [textMonthSliceTwo, setTextMonthSliceTwo] = React.useState<string>('Месяц'); // месяц во втором слайсе
-
+    const [selectedChats, setSelectedChats] = React.useState<Countrer[]>([]);
     const changePeriod = (value:string) => {
         setPeriod(value)
     }
 
+    React.useEffect(() => {
+        // console.log(selectedChats)
+    },[selectedChats])
+
     React.useEffect(
         () => {
-
             let salary = 0;
             if (item.title == 'Посуточный') {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
-                    let category = categories?.find((elem:any) => elem.id == item.id)
-                    const price = Math.round(+category.salary * 2 /30 * +period)
+                    let category = categories?.find((elem:any) => elem?.id == item?.id)
+                    const countChats:any = selectedChats.find((elem:any) => elem?.id == item?.id);
+                    console.log(countChats)
+                    const price = Math.round(+category.salaryChanel * 2 /30 * +period) * (+countChats?.chats?.length  || 0)
                     salary += price
                 })
             }
 
             if (item.title == 'Погрузись в работу') {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
-                    let category = categories?.find((elem:any) => elem.id == item.id)
-                    const price = +category.salary * +period
+                    let category = categories?.find((elem:any) => elem?.id == item?.id)
+                    const countChats:any = selectedChats.find((elem) => elem?.id == item?.id);
+                    const price = +category.salaryChanel * +period * (+countChats?.chats?.length  || 0)
                     salary += price;
                 })
             }
 
-            if(item.title == 'Бесплатный') setPeriod(`1`)
-            // if(item.title == 'Посуточный') setPeriod(`7`)
 
             setPrice(salary)
-        },[item, period,chosenCategory]
+        },[item, period,chosenCategory, activePriceWindows, selectedChats]
     )
+
+    React.useEffect(() => {
+
+
+    }, [chosenCategory])
 
     React.useEffect(() => {
 
@@ -128,25 +141,15 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     },[period])
 
     React.useEffect(() => {
-        if (requestFreePeriod?.text ==`Бесплатный период активирован` ) {
-            redirect('/dashboard/search')
-        }
-    },[requestFreePeriod])
-
-    React.useEffect(() => {
-        if(requestPayment?.url) {
-            redirect(requestPayment?.url)
-        }
         if(requestPaymentNotifications?.url) {
             redirect(requestPaymentNotifications?.url)
         }
-    }, [requestPayment,requestPaymentNotifications])
+    }, [requestPaymentNotifications])
 
     //USEREF
 
     //FUNCTIONS
-
-    const payOrTryFreePeriod = (title:string) => {
+    const payOrTryFreePeriod = (title:string, activePriceWindows:number) => {
 
 
         if(!chosenCategory.length) {
@@ -155,40 +158,33 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             return
         }
 
-        if(title == `Бесплатный` && chosenCategory.length > 1) {
-            dispatch(addInfoForCommonError({ message:'Выберите одну категорию для бесплатного периода'} ))
-            return;
-        }
+        // if(title == `Бесплатный` && chosenCategory.length > 1) {
+        //     dispatch(addInfoForCommonError({ message:'Выберите одну категорию для бесплатного периода'} ))
+        //     return;
+        // }
 
         if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
         
-        if (title == `Бесплатный` && chosenCategory.length == 1) {
-            getFreePeriod(chosenCategory).then((result) => {
-                if('data' in result && result?.data?.text == `Бесплатный период активирован` && cookies && cookies._z) {
-                    getInfoUser(cookies).then((result) => {
-                        if ('data' in result && result?.data) {
-                            dispatch(addInfoUser(result?.data));
-                            dispatch(addMainAdminRole(result?.data?.isMainAdmin));
-                            dispatch(addAdminRole(result?.data?.isAdmin));
-                            dispatch(addAuthStatus(true));
-                        }
-                    });
-                }
-            })
-        }
+        if (!infoUser?.phoneNumber) dispatch(addInfoForCommonError({ message:'Для подключения уведомлений, требуется добавить номер телефона в профиле'} ))
 
-        if((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
-            payment({
+        if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
+
+
+            const filterChats = selectedChats.filter((item) => item?.chats?.length > 0)
+
+            paymentNotifications({
                 categ: chosenCategory,
                 price: price,
                 period: period,
                 title: title,
+                chatList:filterChats,
             })
         }
+   
     }
-    
+
     // для открытия попапа
     const openLoginFormPopup = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
@@ -201,15 +197,54 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         })
     })
 
+    const handleChatChange = (categoryId:string, chatName:string, isChecked:boolean) => {
+        setSelectedChats(prevState => {
+            // Проверяем, есть ли уже объект с таким ID в массиве
+            const existingCategory = prevState.find(category => category.id === categoryId);
+
+            if (isChecked) {
+                // Если объект с таким ID уже есть в массиве, обновляем его
+                if (existingCategory) {
+                    return prevState.map(category =>
+                        category.id === categoryId
+                            ? { ...category, chats: [...category.chats, chatName] }
+                            : category
+                    );
+                } else {
+                    // Если объекта с таким ID нет, добавляем новый объект в массив
+                    return [...prevState, { id: categoryId, chats: [chatName] }];
+                }
+            } else {
+                // Если checkbox был снят, удаляем чат из массива чатов соответствующей категории
+                if (existingCategory) {
+                    return prevState.map(category =>
+                        category.id === categoryId
+                            ? { ...category, chats: category.chats.filter(name => name !== chatName) }
+                            : category
+                    );
+                } else {
+                    // Если объект с таким ID не существует, оставляем состояние без изменений
+                    return prevState;
+                }
+            }
+        });
+    };
+
+
+
+    if (item.title == 'Бесплатный') return null
+
+
     return (
         <div className={cls.card} >
             <div className={cls.coverSubtitle}>
-                <div className={cls.subtitle}><div>{item.title}</div><h3 className={cls.titleTwo}>(Подписка)</h3></div>
+                <div className={cls.subtitle}><div>{item.title}</div><h3 className={cls.titleTwo}>(Уведомления)</h3></div>
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
                     {(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
-                    {(price == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
+                    {/*{(price == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}*/}
+                    {(chosenCategory?.length == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
                     {(price !== 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
                 </div>
                 <div className={cls.slider}>
@@ -224,17 +259,17 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     </div>
                     {
                         (item.title === 'Погрузись в работу') &&
-                            <div className={cls.coverSlider}>
-                                <Slider
-                                    value={period}
-                                    min={item.title == 'Бесплатный' ? '2' : '1'}
-                                    max={item.title == 'Бесплатный' ? '2' : item.title == 'Погрузись в работу' ? '12' : '30'}
-                                    classname={cls.forSliderCover}
-                                    classnameInput={cls.sliderInput}
-                                    onInput={changePeriod}
-                                    classnameForTicks={cls.ticks}
-                                />
-                            </div>
+                        <div className={cls.coverSlider}>
+                            <Slider
+                                value={period}
+                                min={item.title == 'Бесплатный' ? '2' : '1'}
+                                max={item.title == 'Бесплатный' ? '2' : item.title == 'Погрузись в работу' ? '12' : '30'}
+                                classname={cls.forSliderCover}
+                                classnameInput={cls.sliderInput}
+                                onInput={changePeriod}
+                                classnameForTicks={cls.ticks}
+                            />
+                        </div>
                     }
                     {
                         (item.title === 'Посуточный') &&
@@ -253,23 +288,50 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     }
                 </div>
             </div>
+            {/*{(chosenCategory?.length > 0 && Object.keys(selectedChats)?.length == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите чат для отображения цены </div>}*/}
+            {((item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите чат для отображения цены </div>}
+            {chosenCategory?.length > 0 && <div className={cls.titleChoose}>Выбор чатов</div>}
+            {chosenCategory?.length > 0 && chosenCategory.map((category:any) => (
+                <div
+                    key={category.id}
+                    className={cls.lineCover}
+                >
+                    <h3 className={cls.titleInput}>{category.text}</h3>
+                    <div>
+                        {category?.chatNames?.length > 0 && category.chatNames.map((chatName:any) => (
+                            <div
+                                key={chatName}
+                                className={cls.coverInputCheck}
+                            >
+                                <input
+                                    className={cls.check}
+                                    type="checkbox"
+                                    checked={selectedChats?.find((item) => item.chats.includes(chatName)) && true || false}
+                                    onChange={(e) => handleChatChange(category.id, chatName, e.target.checked)}
+                                />
+                                <span className={cls.checkCustom}></span>
+                                <label htmlFor={category.id}>{chatName}</label>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            ))}
             <div className={cls.additional}>
                 <div className={cls.additionalTitle}>
                     Информация о тарифе:
                 </div>
                 <ul className={cls.textLi}>
-                    <li>{item.description}</li>
-                    <li>Аккаунт для одного пользователя</li>
+                    <li>{item.descriptionNotification}</li>
+                    <li>Для одного пользователя</li>
                 </ul>
             </div>
-
-
             <Button
-                onClick={!stateAuth ?  openLoginFormPopup :  () => payOrTryFreePeriod(item.title)  }
+                onClick={!stateAuth ?  openLoginFormPopup :  () => payOrTryFreePeriod(item.title, activePriceWindows)}
                 classname={cls.btn}
                 disabled={isLoadingFreePeriod}
             >
-                Оформить подписку
+                Подключить уведомления
             </Button>
             { (isLoadingFreePeriod)
                 && (
@@ -277,18 +339,12 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                         classname="color-dark"
                     />
                 )}
-            { (isLoadingPayment)
-              && (
-                  <Loader
-                      classname="color-dark"
-                  />
-              )}
             { (isLoadingPaymentNotifications)
-              && (
-                  <Loader
-                      classname="color-dark"
-                  />
-              )}
+                && (
+                    <Loader
+                        classname="color-dark"
+                    />
+                )}
             { (isLoadingPaymentNotificationsFree)
                 && (
                     <Loader
@@ -299,4 +355,4 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     );
 });
 
-export default Cards;
+export default NotificationsCards;

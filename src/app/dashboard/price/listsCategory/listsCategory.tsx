@@ -57,7 +57,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
             dispatch(addChosenCategories(updatedChosen));
         } else {
             // Если элемент отсутствует, добавьте его в состояние
-            const newItem = { id: item.id, text: item.name };
+            const newItem = { id: item.id, text: item.name, chatNames: item.chatNames };
             dispatch(addChosenCategories([...chosenCategory, newItem]));
         }
     }

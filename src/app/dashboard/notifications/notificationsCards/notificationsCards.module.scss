@@ -21,7 +21,7 @@
   max-width: mixins.rem(350);
   position: relative;
   @media(max-width: mixins.em(global.$mobile)) {
-   flex: 1 1 auto;
+    flex: 1 1 auto;
     min-width: 100%;
   }
 }
@@ -212,7 +212,57 @@
     border: 0;
   }
 }
-.textLi{
+
+.coverInputCheck{
+  display: flex;
+  //column-gap: mixins.rem(5);
+  align-items: center;
+}
+
+.inputCheck{
+
+}
+
+.check{
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+}
+
+
+.checkCustom {
+  width: mixins.rem(16);
+  height: mixins.rem(16);
+  border-radius: mixins.rem(4);
+  position: relative;
+}
+
+.checkCustom::after {
+  content: '';
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  background-color: #555;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.check:checked + .check-custom::after {
+  display: block;
+}
+
+
+.titleInput{
+  font-size: mixins.rem(16);
+  font-weight: 600;
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+}
+
+
+.textLi,
+.coverInputCheck{
   font-size: mixins.rem(16);
   line-height: globalIndex.$main_font_line-height;
   font-weight: 500;
@@ -228,7 +278,18 @@
   row-gap: mixins.rem(5);
 }
 
-.additionalTitle{
+.lineCover {
+  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 35%);
+  padding-bottom: mixins.rem(20);
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(4);
+}
+
+
+
+.additionalTitle,
+.titleChoose{
   font-size: mixins.rem(18);
   font-weight: 600;
   @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
@@ -293,26 +354,26 @@
   top: 0;
   border-radius: mixins.rem(10);
   opacity: 0;
-    animation-name: rise;
-    animation-duration: 3s;
-    @keyframes rise {
-      0% {
-        background-color: #ee5d5d;
-        width: 0;
-        opacity: 0;
-      }
-      60% {
-        background-color: #ee5d5d;
-        width: 100%;
-        opacity: 0.9;
-      }
-      90% {
-        background-color: #ee5d5d;
-        width: 0%;
-        opacity: 0;
-      }
+  animation-name: rise;
+  animation-duration: 3s;
+  @keyframes rise {
+    0% {
+      background-color: #ee5d5d;
+      width: 0;
+      opacity: 0;
+    }
+    60% {
+      background-color: #ee5d5d;
+      width: 100%;
+      opacity: 0.9;
+    }
+    90% {
+      background-color: #ee5d5d;
+      width: 0%;
+      opacity: 0;
     }
   }
+}
 
 .error {
   @extend .error;

@@ -8,6 +8,7 @@ import Social from "@/app/dashboard/search/social/social";
 import CityBlock from "@/app/dashboard/search/cityBlock/cityBlock";
 import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch";
 import СleanFilter from "@/app/dashboard/search/cleanFilter/cleanFilter";
+import Link from "next/link";
 
 interface pageProps {
 }
@@ -46,6 +47,9 @@ async function SearchPage(props: pageProps) {
                 <div className={cls.cover}>
                     <div className={cls.section}>
                         <h1 className={cls.mainTitle}>Поиск клиентов</h1>
+                        <div className={cls.coverForLink}>
+                            <Link className={cls.btnLink} href={'/dashboard/notifications'}>Подключить уведомления</Link>
+                        </div>
                     </div>
                     <div className={cls.filters}>
                         <div className={cls.coverSearchBlock}>
