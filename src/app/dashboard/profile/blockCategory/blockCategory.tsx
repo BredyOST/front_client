@@ -134,7 +134,7 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
                                     </div>
                                     {infoUser && !infoUser?.notificationsHasBought?.find((elem:any) => elem.id == item.id) &&
                                     <div className={cls.btnCover}>
-                                        <Link className={cls.btn} href="/dashboard/price">Подключить</Link>
+                                        <Link className={cls.btn} href="/dashboard/notifications">Подключить</Link>
                                     </div>
                                     }
                                 </div>
