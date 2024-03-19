@@ -19,11 +19,18 @@
   row-gap: mixins.rem(15);
   min-height: 100%;
   max-width: mixins.rem(350);
+
   position: relative;
   @media(max-width: mixins.em(global.$mobile)) {
     flex: 1 1 auto;
     min-width: 100%;
   }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    min-width: mixins.rem(350);
+  }
+
+
 }
 
 .headCard{
