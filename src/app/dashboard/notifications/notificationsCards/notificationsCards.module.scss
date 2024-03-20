@@ -222,7 +222,6 @@
 
 .coverInputCheck{
   display: flex;
-  //column-gap: mixins.rem(5);
   align-items: center;
 }
 
@@ -231,10 +230,18 @@
 }
 
 .check{
-  width: mixins.rem(20);
-  height: mixins.rem(20);
-}
 
+  @media(max-width: mixins.em(global.$tablet)) {
+    width: mixins.rem(25);
+    height: mixins.rem(25);
+  }
+
+  @media(min-width: mixins.em(global.$tablet)) {
+    width: mixins.rem(20);
+    height: mixins.rem(20);
+  }
+
+}
 
 .checkCustom {
   width: mixins.rem(16);
@@ -260,6 +267,11 @@
   display: block;
 }
 
+.blockInputs{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(5);
+}
 
 .titleInput{
   font-size: mixins.rem(16);
@@ -292,8 +304,6 @@
   flex-direction: column;
   row-gap: mixins.rem(4);
 }
-
-
 
 .additionalTitle,
 .titleChoose{

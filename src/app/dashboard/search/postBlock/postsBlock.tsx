@@ -65,6 +65,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     // получиь ключи по категории
     const getKeys = async (idCat: string | number) => {
         let result = [];
+
         try {
             const response = await keysRedis({ id: `${idCat}` });
             if ('data' in response && response.data.length) {

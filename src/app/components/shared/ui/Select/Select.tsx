@@ -68,7 +68,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
             const findCategFree = infoUser?.categoriesFreePeriod.find((item:any) => item?.id == savedCategory?.id);
             const findCategBuy = infoUser?.categoriesHasBought.find((item:any) => item?.id == savedCategory?.id);
 
-            if (currenDate && !infoUser.endFreePeriod && findCategFree?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategFree?.purchaseEndDate).getTime())) {
+            if (currenDate && !infoUser?.endFreePeriod && findCategFree?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategFree?.purchaseEndDate).getTime())) {
                 checAcess = findCategFree;
             }
             if (currenDate && findCategBuy?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategBuy?.purchaseEndDate).getTime())) {

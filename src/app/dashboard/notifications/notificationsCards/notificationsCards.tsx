@@ -242,10 +242,8 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
-                    {(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
-                    {/*{(price == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}*/}
-                    {(chosenCategory?.length == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
                     {(price !== 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
+                    {(chosenCategory?.length == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
                 </div>
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>
@@ -297,7 +295,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
                     className={cls.lineCover}
                 >
                     <h3 className={cls.titleInput}>{category.text}</h3>
-                    <div>
+                    <div className={cls.blockInputs}>
                         {category?.chatNames?.length > 0 && category.chatNames.map((chatName:any) => (
                             <div
                                 key={chatName}
