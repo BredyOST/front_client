@@ -49,33 +49,33 @@ const ChangeName:FC<changeNameProps> = (props) => {
     )
 
     return (
-            <div className={cls.block}>
-                <div className={cls.blockInfo}>
-                    <div className={cls.text}>Имя</div>
+        <div className={cls.block}>
+            <div className={cls.blockInfo}>
+                <div className={cls.text}>Имя</div>
+            </div>
+            <div className={cls.linkCover}>
+                <Input
+                    classForInput={cls.input}
+                    classname={cls.inputRelative}
+                    value={inputInp}
+                    onChange={(e:any) => addFullNameText(e)}
+                />
+                <div className={cls.coverBtn}>
+                    <Button
+                        type='submit'
+                        classname={cls.btn}
+                        onClick={sendNewFullName}
+                    >
+                        Изменить имя</Button>
                 </div>
-                <div className={cls.linkCover}>
-                    <Input
-                        classForInput={cls.input}
-                        classname={cls.inputRelative}
-                        value={inputInp}
-                        onChange={(e:any) => addFullNameText(e)}
-                    />
-                    <div className={cls.coverBtn}>
-                        <Button
-                            type='submit'
-                            classname={cls.btn}
-                            onClick={sendNewFullName}
-                        >
-                            Изменить имя</Button>
-                    </div>
-                </div>
-                { loadingNameAndCard
+            </div>
+            { loadingNameAndCard
                     && (
                         <Loader
                             classname="color-dark"
                         />
                     )}
-            </div>
+        </div>
     );
 };
 

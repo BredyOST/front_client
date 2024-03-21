@@ -17,7 +17,6 @@ import {parseCookies} from "nookies";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 interface changePhoneProps {
     classname?: string;
@@ -103,7 +102,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
 
     const getAccessCode = () => {
         // if(infoUser && infoUser?.phoneNumber) {
-        reqGetCode({phoneNumber: infoUser.phoneNumber, phoneToChange: inputPhone} )
+        reqGetCode({phoneNumber: infoUser?.phoneNumber, phoneToChange: inputPhone} )
         // } else {
         //     dispatch(addInfoForCommonError({message: 'Обновите страницу и попробуйте еще раз'}))
         // }

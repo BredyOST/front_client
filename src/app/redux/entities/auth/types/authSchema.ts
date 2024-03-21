@@ -9,11 +9,14 @@ export interface PurchasedCategory {
 
 
 export type User = {
+    id:number
     email: string
     forChangeEmail: string
     phoneNumber: string
     forChangePhoneNumber: string
     fullName: string
+    chatIdTg: string
+    userIdTg: string
     isAdmin: boolean
     isMainAdmin: boolean
     isActivatedEmail: boolean
