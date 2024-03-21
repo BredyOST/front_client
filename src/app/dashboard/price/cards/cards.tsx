@@ -148,6 +148,10 @@ const Cards:FC<cardsProps> = React.memo((props) => {
 
     const payOrTryFreePeriod = (title:string) => {
 
+        if(!infoUser?.phoneNumber || !infoUser?.isActivatedPhone) {
+            dispatch(addInfoForCommonError({ message:'С 21.03.2024г требуется подтвержденный номер телефона в профиле. Вам необходимо создать новый аккаунт с использованием номера телефона '} ))
+            return
+        }
 
         if(!chosenCategory.length) {
             dispatch(changeStateCategoriesPopup(!categoriesPopup))

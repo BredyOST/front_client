@@ -99,6 +99,13 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
                     >
                         К заявкам
                     </AppLink>
+                    <AppLink
+                        classname={`${cls.links} ${cls.search}`}
+                        href={'/dashboard/notifications'}
+                        onClick={closePopup}
+                    >
+                        Уведомления
+                    </AppLink>
                     {navbarFirst && navbarFirst?.length > 0 &&
                         navbarFirst.map((item) => (
                             <AppLink
