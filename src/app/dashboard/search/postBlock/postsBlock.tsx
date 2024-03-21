@@ -152,7 +152,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                     break;
                 }
                 // если бесплатный период есть
-                if (infoUser?.categoriesFreePeriod.length > 0 && !infoUser?.endFreePeriod) {
+                if (infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod) {
                     const currentDate = new Date();
                     currentDate.setDate(currentDate.getDate() - 3); // Получаем дату от текущей минус 3 дня
                     newPosts = newPosts.filter((item: any) => new Date(item.post_date_publish*1000).getTime() < currentDate.getTime());
