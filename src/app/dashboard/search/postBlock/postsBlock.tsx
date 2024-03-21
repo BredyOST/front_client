@@ -29,6 +29,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     //STATES FROM REDUX
     const {chosenCategory, keyWords, keyCityWords, postsCount, social} = useAppSelector(state => state.searchParams)
+    const {data:infoUser} = useAppSelector(state => state.auth)
+
     //USESTATE
     const [expandedPosts, setExpandedPosts] = React.useState<number[]>([]);
     const [page, setPage] = React.useState<number>(1); // номер страницы
@@ -39,10 +41,11 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     // функция фильтрации
     const applyFilters =(allLoadedPosts:any) => {
+
         if ((!keyWords || !keyWords?.length) && (!keyCityWords || !keyCityWords?.length)) {
             return allLoadedPosts;
         }
-        const filtered = allLoadedPosts?.filter((post: any) => {
+        let filtered = allLoadedPosts?.filter((post: any) => {
             const matchesWords = !keyWords.length || keyWords.some((word:string) =>
                 post.post_text.toLowerCase().includes(word.toLowerCase())
             );
@@ -50,8 +53,10 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             const matchesCity = !keyCityWords?.length || (keyCityWords?.some((word:string) =>
                 post.city_group?.toLowerCase().includes(word.toLowerCase()))) || (keyCityWords?.some((word:string) =>
                 post.city_user?.toLowerCase().includes(word.toLowerCase())));
+
             return matchesWords && matchesCity
         });
+
         return filtered;
     }
 
@@ -132,6 +137,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     React.useEffect(() =>  {
         //Функция для Загрузки и Фильтрации Постов:
+
         const loadAndFilterPosts = async () => {
             let postsToLoad = 300; // начальное количество постов для загрузки
             let allLoadedPosts:any = []; // массив для всех загруженных постов
@@ -141,14 +147,20 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
             while (allLoadedPosts.length < postsToLoad) {
-                const newPosts = await loadPostsFromRedis(i, keys); // функция для загрузки постов из Redis
+                let newPosts = await loadPostsFromRedis(i, keys); // функция для загрузки постов из Redis
                 if (!newPosts.length) {
                     break;
                 }
+                // если бесплатный период есть
+                if (infoUser?.categoriesFreePeriod.length > 0 && !infoUser?.endFreePeriod) {
+                    const currentDate = new Date();
+                    currentDate.setDate(currentDate.getDate() - 3); // Получаем дату от текущей минус 3 дня
+                    newPosts = newPosts.filter((item: any) => new Date(item.post_date_publish*1000).getTime() < currentDate.getTime());
+                }
 
                 allLoadedPosts = [...allLoadedPosts, ...newPosts];
-
                 filteredPosts = applyFilters(allLoadedPosts); // функция для применения фильтров
+
                 setFilteredPosts(filteredPosts.sort((a:any, b:any) => a.data - b.data))
                 if (filteredPosts.length >= postsToLoad) {
                     break;

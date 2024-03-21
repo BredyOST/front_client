@@ -54,7 +54,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
 
     //USESTATE
     const [price, setPrice] = React.useState<string | number>('');
-    const [period, setPeriod] = React.useState<string>(item.title == 'Посуточный' ? '7': '1');
+    const [period, setPeriod] = React.useState<string>(item.title == 'Недельный' ? '7': '1');
     const [textMonthSliceTwo, setTextMonthSliceTwo] = React.useState<string>('Месяц'); // месяц во втором слайсе
 
     const changePeriod = (value:string) => {
@@ -65,7 +65,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         () => {
 
             let salary = 0;
-            if (item.title == 'Посуточный') {
+            if (item.title == 'Недельный') {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem.id == item.id)
                     const price = Math.round(+category.salary * 2 /30 * +period)
@@ -82,7 +82,6 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             }
 
             if(item.title == 'Бесплатный') setPeriod(`1`)
-            // if(item.title == 'Посуточный') setPeriod(`7`)
 
             setPrice(salary)
         },[item, period,chosenCategory]
@@ -102,7 +101,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             }
         }
 
-        if (item.title == 'Посуточный') {
+        if (item.title == 'Недельный') {
             if (+period == 1) {
                 setTextMonthSliceTwo('День')
             }
@@ -149,7 +148,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const payOrTryFreePeriod = (title:string) => {
 
         if(!infoUser?.phoneNumber || !infoUser?.isActivatedPhone) {
-            dispatch(addInfoForCommonError({ message:'С 21.03.2024г требуется подтвержденный номер телефона в профиле. Вам необходимо создать новый аккаунт с использованием номера телефона '} ))
+            dispatch(addInfoForCommonError({ message:'С 21.03.2024г требуется подтвержденный номер телефона в профиле. Требуется создать новый аккаунт с использованием номера телефона '} ))
             return
         }
 
@@ -164,7 +163,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             return;
         }
 
-        if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
+        if ((title == `Недельный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
         
@@ -183,7 +182,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             })
         }
 
-        if((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
+        if((title == `Недельный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
             payment({
                 categ: chosenCategory,
                 price: price,
@@ -213,8 +212,8 @@ const Cards:FC<cardsProps> = React.memo((props) => {
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
                     {(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
-                    {(price == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
-                    {(price !== 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
+                    {(price == 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
+                    {(price !== 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
                 </div>
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>
@@ -241,7 +240,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                             </div>
                     }
                     {
-                        (item.title === 'Посуточный') &&
+                        (item.title === 'Недельный') &&
                         <div className={cls.coverSlider}>
                             <Slider
                                 value={period}
@@ -266,8 +265,6 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                     <li>Аккаунт для одного пользователя</li>
                 </ul>
             </div>
-
-
             <Button
                 onClick={!stateAuth ?  openLoginFormPopup :  () => payOrTryFreePeriod(item.title)  }
                 classname={cls.btn}

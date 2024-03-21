@@ -65,8 +65,8 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         }
 
         if (savedCategory && savedCategory?.id) {
-            const findCategFree = infoUser?.categoriesFreePeriod.find((item:any) => item?.id == savedCategory?.id);
-            const findCategBuy = infoUser?.categoriesHasBought.find((item:any) => item?.id == savedCategory?.id);
+            const findCategFree = infoUser?.categoriesFreePeriod?.find((item:any) => item?.id == savedCategory?.id);
+            const findCategBuy = infoUser?.categoriesHasBought?.find((item:any) => item?.id == savedCategory?.id);
 
             if (currenDate && !infoUser?.endFreePeriod && findCategFree?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategFree?.purchaseEndDate).getTime())) {
                 checAcess = findCategFree;
@@ -81,48 +81,46 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         }
 
         if (savedCategory && (checAcess || checAcessBuy)) {
-            try {
-                dispatch(addCategoryChosen(savedCategory))
-            } catch (error) {
-                // console.error('Ошибка при чтении данных из localStorage:', error);
-            }
-        } else {
-            if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
-                for (let item of infoUser?.categoriesFreePeriod) {
-                    if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                        const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
-                        const obj = {
-                            id: selectedCategory?.id,
-                            name: selectedCategory?.name,
-                            positive: selectedCategory?.positiveWords,
-                            negative: selectedCategory?.negativeWords,
-                        };
-                        localStorage.setItem('_sel_category', JSON.stringify(obj));
-                        dispatch(addCategoryChosen(obj));
-                        break;
-                    }
+            dispatch(addCategoryChosen(savedCategory))
+        }
+        if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
+            for (let item of infoUser?.categoriesFreePeriod) {
+                if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
+                    const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
+                    const obj = {
+                        id: selectedCategory?.id,
+                        name: selectedCategory?.name,
+                        positive: selectedCategory?.positiveWords,
+                        negative: selectedCategory?.negativeWords,
+                    };
+                    localStorage.setItem('_sel_category', JSON.stringify(obj));
+                    dispatch(addCategoryChosen(obj));
+                    break;
                 }
-            } else if (infoUser && infoUser?.categoriesHasBought?.length >= 1) {
-                for (let item of infoUser?.categoriesHasBought) {
-                    if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                        const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
-                        const obj = {
-                            id: selectedCategory?.id,
-                            name: selectedCategory?.name,
-                            positive: selectedCategory?.positiveWords,
-                            negative: selectedCategory?.negativeWords,
-                        };
-                        localStorage.setItem('_sel_category', JSON.stringify(obj));
-                        dispatch(addCategoryChosen(obj));
-                        break;
-                    }
+            }
+        } else if (infoUser && infoUser?.categoriesHasBought?.length >= 1) {
+            for (let item of infoUser?.categoriesHasBought) {
+                if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
+                    const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
+                    const obj = {
+                        id: selectedCategory?.id,
+                        name: selectedCategory?.name,
+                        positive: selectedCategory?.positiveWords,
+                        negative: selectedCategory?.negativeWords,
+                    };
+                    localStorage.setItem('_sel_category', JSON.stringify(obj));
+                    dispatch(addCategoryChosen(obj));
+                    break;
                 }
             }
         }
     }, [categories, infoUser]);
 
-    return (
+    React.useEffect(() => {
+        console.log(chosenCategory)
+    },[chosenCategory])
 
+    return (
         <div className={classNames(cls.Select, {}, [classname])}>
             { title &&
                 <label className={cls.label}>
@@ -135,21 +133,21 @@ export const Select:FC<SelectProps> = React.memo((props) => {
                     value={chosenCategory?.name}
                     onChange ={(e:any) => selectOption(e)}
                 >
-                    {infoUser && !infoUser.endFreePeriod && infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length && infoUser?.categoriesFreePeriod?.map((item:any) => (
+                    {infoUser && !infoUser.endFreePeriod && infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length > 0 && infoUser?.categoriesFreePeriod?.map((item:any, index:number) => (
                         currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime() &&
                         <option
                             className={cls.option}
-                            key={item.id}
-                            value={item.name}
+                            key={index}
+                            value={item.category}
                         >
-                            {item.name}
+                            {item.category}
                         </option>
                     ))}
-                    {infoUser && infoUser?.categoriesHasBought?.length >= 1 && infoUser?.categoriesHasBought?.map((item:any) => (
+                    {infoUser && infoUser?.categoriesHasBought?.length > 0 && infoUser?.categoriesHasBought?.map((item:any, index:number) => (
                         currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime() &&
                         <option
                             className={cls.option}
-                            key={item.id}
+                            key={index}
                             value={item.category}
                         >
                             {item.category}

@@ -58,7 +58,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
 
     //USESTATE
     const [price, setPrice] = React.useState<string | number>('');
-    const [period, setPeriod] = React.useState<string>(item.title == 'Посуточный' ? '7': '1');
+    const [period, setPeriod] = React.useState<string>(item.title == 'Недельный' ? '7': '1');
     const [textMonthSliceTwo, setTextMonthSliceTwo] = React.useState<string>('Месяц'); // месяц во втором слайсе
     const [selectedChats, setSelectedChats] = React.useState<Countrer[]>([]);
     const changePeriod = (value:string) => {
@@ -72,7 +72,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
     React.useEffect(
         () => {
             let salary = 0;
-            if (item.title == 'Посуточный') {
+            if (item.title == 'Недельный') {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:any) => {
                     let category = categories?.find((elem:any) => elem?.id == item?.id)
                     const countChats:any = selectedChats.find((elem:any) => elem?.id == item?.id);
@@ -115,7 +115,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
             }
         }
 
-        if (item.title == 'Посуточный') {
+        if (item.title == 'Недельный') {
             if (+period == 1) {
                 setTextMonthSliceTwo('День')
             }
@@ -152,7 +152,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
     const payOrTryFreePeriod = (title:string, activePriceWindows:number) => {
 
         if(!infoUser?.phoneNumber || !infoUser?.isActivatedPhone) {
-            dispatch(addInfoForCommonError({ message:'С 21.03.2024г требуется подтвержденный номер телефона в профиле. Вам необходимо создать новый аккаунт с использованием номера телефона '} ))
+            dispatch(addInfoForCommonError({ message:'С 21.03.2024г требуется подтвержденный номер телефона в профиле. Требуется создать новый аккаунт с использованием номера телефона '} ))
             return
         }
 
@@ -167,13 +167,13 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
         //     return;
         // }
 
-        if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
+        if ((title == `Недельный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
         
         if (!infoUser?.phoneNumber) dispatch(addInfoForCommonError({ message:'Для подключения уведомлений, требуется добавить номер телефона в профиле'} ))
 
-        if ((title == `Посуточный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
+        if ((title == `Недельный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
 
 
             const filterChats = selectedChats.filter((item) => item?.chats?.length > 0)
@@ -246,8 +246,8 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
-                    {(price !== 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
-                    {(chosenCategory?.length == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
+                    {(price !== 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
+                    {(chosenCategory?.length == 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
                 </div>
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>
@@ -274,7 +274,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
                         </div>
                     }
                     {
-                        (item.title === 'Посуточный') &&
+                        (item.title === 'Недельный') &&
                         <div className={cls.coverSlider}>
                             <Slider
                                 value={period}
@@ -290,8 +290,7 @@ const NotificationsCards:FC<cardsProps> = React.memo((props) => {
                     }
                 </div>
             </div>
-            {/*{(chosenCategory?.length > 0 && Object.keys(selectedChats)?.length == 0 && (item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите чат для отображения цены </div>}*/}
-            {((item.title == 'Посуточный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите чат для отображения цены </div>}
+            {((item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите чат для отображения цены </div>}
             {chosenCategory?.length > 0 && <div className={cls.titleChoose}>Выбор чатов</div>}
             {chosenCategory?.length > 0 && chosenCategory.map((category:any) => (
                 <div
