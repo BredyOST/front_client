@@ -10,19 +10,20 @@ import HideSvg from "@/app/components/svgs/hide.svg";
 import {useLoginInMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {Control, Controller, SubmitHandler, useForm} from "react-hook-form";
 import {setThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {redirect} from "next/navigation";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
+import PhoneInput from "react-phone-number-input";
 
 interface LogiInProps {
 }
 
 const loginText: any = [
-    { id: 1, text: 'Email' },
-    { id: 2, text: 'Телефон' }
+    { id: 2, text: 'Телефон' },
+    { id: 1, text: 'Email' }
 ]
 
 type loginForm = {
@@ -62,7 +63,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
     // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
     const { clickOnEnter } = useAppSelector((state) => state.statePopup);
     // что выбрано - email или phone при авторизации
-    const [activeTab, setActiveTab] = React.useState<number>(1);
+    const [activeTab, setActiveTab] = React.useState<number>(2);
     //USESTATE
 
     // для отображения введенных символов в инпуте пароля, login и registration, registerCheck - false значит ничего в поля не введено, loginShowHide, registerShowHide: false - значит пароль скрыт
@@ -94,12 +95,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
     }
 
     //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isValid },
-    } = useForm<loginForm>({
+    const {register, handleSubmit, setError, control, formState: { errors, isValid },} = useForm<loginForm>({
         mode: 'onChange',
     });
 
@@ -116,6 +112,9 @@ const LogiIn:FC<LogiInProps> = (props) => {
     const changeStateEnterOrRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(changeStateClickOnEnter(1));
     };
+    const changeStateAccessNumber = () => {
+        dispatch(changeStateClickOnEnter(4));
+    }
 
     // для отображения кнопки показать/скрыть пароль в окне входа в учетную запись
     const checkTextFormsLogin = (e: any) => {
@@ -134,7 +133,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
         dispatch(changeStateClickOnEnter(2));
     };
     const dontGetMessageActivation= () => {
-        dispatch(changeStateClickOnEnter(3));
+        dispatch(changeStateClickOnEnter(4));
     };
 
     React.useEffect(() => {
@@ -182,26 +181,49 @@ const LogiIn:FC<LogiInProps> = (props) => {
                             indicatorActiveTab={item.id == activeTab}
                             onClick={() => changeActiveTab(item.id)}
                         >
-                            {item.text === 'Email' && <EmailSvg className={cls.emailSvg} />}
                             {item.text === 'Телефон' && <PhoneSvg className={cls.phoneSvg} />}
-                            { item.text}
+                            {item.text === 'Email' && <EmailSvg className={cls.emailSvg} />}
+                            {item.text}
                         </Button>
                     ))}
                 </div>
             </div>
             <div className={cls.inputsForm}>
-                <Input
-                    type={activeTab === 1 ? 'text' : 'tel'}
-                    classForInput={cls.input}
-                    classname={cls.inputRelative}
-                    placeholder={activeTab === 1 ? 'Введите email' : 'Номер телефона'}
-                    autofocus
-                    defaultValue={textFromForms.loginIn}
-                    autoComplete="login"
-                    forRef={loginRef}
-                    disabled={loadingLogin && true}
-                    register={{ ...register('mailOrNumberLoginIn') }}
-                />
+                {activeTab == 1 &&
+                    <Input
+                        type={activeTab === 1 ? 'text' : 'tel'}
+                        classForInput={cls.input}
+                        classname={cls.inputRelative}
+                        placeholder={activeTab === 1 ? 'Введите email' : 'Номер телефона'}
+                        autofocus
+                        defaultValue={textFromForms.loginIn}
+                        autoComplete="login"
+                        forRef={loginRef}
+                        disabled={loadingLogin && true}
+                        register={{ ...register('mailOrNumberLoginIn') }}
+                    />
+                }
+                {activeTab == 2 &&
+                    <Controller
+                        name="mailOrNumberLoginIn"
+                        control={control}
+                        defaultValue=""
+                        render={({ field }: { field: any}) => (
+                            <PhoneInput
+                                className={cls.input}
+                                international
+                                placeholder="Введите номер телефона"
+                                value={textFromForms.loginIn}
+                                defaultCountry="RU"
+                                inputStyle={{ width: '100%' }} // Настройте стили ввода
+                                register={{
+                                    ...register('mailOrNumberLoginIn', {}),
+                                }}
+                                {...field}
+                            />
+                        )}
+                    />
+                }
                 <div
                     className={cls.coverPassword}
                 >
@@ -242,17 +264,23 @@ const LogiIn:FC<LogiInProps> = (props) => {
                         Регистрация
                     </Button>
                     <Button
+                        classname={cls.profileRegistration}
+                        onClick={changeStateAccessNumber}
+                    >
+                        Подтвердить номер телефона
+                    </Button>
+                    <Button
                         classname={cls.forgetPassword}
                         onClick={openWindowRecoveryAccess}
                     >
                         Восстановление пароля
                     </Button>
-                    <Button
-                        classname={cls.noMessage}
-                        onClick={dontGetMessageActivation}
-                    >
-                        Не пришло сообщение после регистрации?
-                    </Button>
+                    {/*<Button*/}
+                    {/*    classname={cls.noMessage}*/}
+                    {/*    onClick={dontGetMessageActivation}*/}
+                    {/*>*/}
+                    {/*    Получить код подтверждения повторно*/}
+                    {/*</Button>*/}
                 </div>
                 <div className={cls.button}>
                     <Button

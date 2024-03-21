@@ -83,3 +83,23 @@
   @extend .btn;
   @extend .widthAndPaddingBtn;
 }
+
+.coverLink{
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  line-height: math.div(27,18);
+  font-size: mixins.rem(18);
+  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+}
+
+.link {
+  color: #e5be3e;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+  @media (any-hover: hover) {
+    &:hover {
+      color: globalIndex.$Theme_main_header_background_button_hover_Two;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+    }
+  }
+}

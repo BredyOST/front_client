@@ -48,8 +48,8 @@ const ProfilePage:FC<pageProps> = (props) => {
                             </div>
                         </div>
                         <ChangeName/>
-                        <ChangeEmail/>
                         <ChangePhone/>
+                        <ChangeEmail/>
                         <ChangePassword/>
                         <Authorizations/>
                         <div className={cls.сategoriesCover}>

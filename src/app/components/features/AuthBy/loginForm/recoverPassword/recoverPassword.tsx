@@ -5,15 +5,17 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {Control, Controller, FieldValues, SubmitHandler, useForm} from "react-hook-form";
 import {useChangePasswordMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
+import PhoneInput from "react-phone-number-input";
 
 interface recoverPasswordProps {
     classname?: string;
 }
 
 type loginForm = {
+    phoneNumber:string,
     myEmail:string,
 }
 
@@ -50,17 +52,16 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
     //FUNCTIONS
 
     const onSubmit: SubmitHandler<loginForm> = (data) => {
+
         const forNewPassword:string = data.myEmail
         //восстановление пароля
-        sendNewPassword({ email:forNewPassword})
+        sendNewPassword({
+            email:forNewPassword,
+            phoneNumber: data.phoneNumber
+        })
     };
     //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
-    const {
-        register,
-        handleSubmit,
-        setError,
-        formState: { errors, isValid },
-    } = useForm<loginForm>({
+    const {register, handleSubmit, control, setError, formState: { errors, isValid },} = useForm<loginForm>({
         mode: 'onChange',
     });
 
@@ -89,6 +90,27 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                 Восстановление пароля
             </h2>
             <div className={cls.inputsForm}>
+                <h3 className={cls.text}>Введите номер телефона</h3>
+                <Controller
+                    name="phoneNumber"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }: { field: any}) => (
+                        <PhoneInput
+                            className={cls.input}
+                            international
+                            placeholder="Введите номер телефона"
+                            defaultValue=""
+                            defaultCountry="RU"
+                            inputStyle={{ width: '100%' }} // Настройте стили ввода
+                            register={{
+                                ...register('phoneNumber', {}),
+                            }}
+                            {...field}
+                        />
+                    )}
+                />
+                <h3 className={cls.text}>или email адрес</h3>
                 <Input
                     type="text"
                     classForInput={cls.input}
@@ -98,7 +120,6 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                     defaultValue=""
                     register={{ ...(register('myEmail')) }}
                 />
-
             </div>
             <div className={cls.btnCoverTwo}>
                 <Button

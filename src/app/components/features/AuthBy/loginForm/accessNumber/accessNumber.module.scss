@@ -3,35 +3,21 @@
 @use './src/app/styles/variable/globalIndex';
 @use "./src/app/styles/mixins";
 
-
-
 .form {
   display: flex;
   flex-direction: column;
   row-gap: mixins.rem(25);
 }
 
-.text{
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(18);
-}
-
 .title {
+  font-weight: 600;
   font-size: mixins.rem(22);
   line-height: math.div(28,22);
-  font-weight: 600;
+  font-family: globalIndex.$Title_font_family;
   color: black;
   position: relative;
   text-align: center;
-  font-family: globalIndex.$Title_font_family;
   @include mixins.adaptiveValue("font-size",22,20,3,global.$mobile,320);
-}
-
-.inputsForm {
-  display: flex;
-  flex-direction: column;
-  row-gap: mixins.rem(7);
-  position: relative;
 }
 
 .input {
@@ -45,7 +31,7 @@
   padding-right: mixins.rem(60);
   outline: 0 solid transparent;
   transition: border ease 0.3s 0s;
-  letter-spacing: mixins.em(1);
+  letter-spacing: em(1);
   position: relative;
   background-color: transparent;
 
@@ -53,6 +39,7 @@
     color: rgb(124 41 41 / 45%);
     font-weight: 600;
     font-size: mixins.rem(15);
+
   }
 
   &:focus {
@@ -61,12 +48,7 @@
   }
 }
 
-.inputRelative{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  row-gap: mixins.rem(5);
-}
+
 
 .btnCoverTwo {
   display: flex;
@@ -75,7 +57,18 @@
   flex-direction: column;
   row-gap: mixins.rem(10);
 }
+.coverInp{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(3);
+}
 
+.inputsForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(25);
+  position: relative;
+}
 
 .btnEnter {
   line-height: globalIndex.$main_font_line-height;
@@ -102,4 +95,28 @@
       transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
     }
   }
+}
+
+.linkBot{
+  color: #fc0202;
+  font-weight: 800;
+
+  @media (any-hover: hover) {
+     &:hover {
+       color: #a966a1;
+        transition: background-color ease 0.3s 0s;
+     }
+   }
+}
+
+.textCover{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(5);
+}
+
+.text{
+  font-family: globalIndex.$Title_font_family;
+  font-size: mixins.rem(15);
+  line-height: math.div(20,15);
 }

@@ -27,6 +27,7 @@ export type NavBar = {
 
 export const navbarFirst:NavBar[] = [
     {text: 'Тарифы', href:'/dashboard/price'},
+    {text: 'Уведомления', href:'/dashboard/notifications'},
     {text: 'Вопросы', href:'/dashboard/faq'},
     {text: 'Отзывы', href:'/dashboard/feedback'},
 ]

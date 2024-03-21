@@ -10,43 +10,19 @@ import {
     useActivateTgMutation,
     useCallCodeMutation,
     useCallMutation,
-    useChangePhoneMutation,
+    useChangePhoneMutation, useGetPhoneCodeTgMutation,
     useVerifyTgMutation
 } from "@/app/redux/entities/requestApi/requestApi";
 import {parseCookies} from "nookies";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
-import SelectCountry from "@/app/dashboard/profile/selectCountry/selectCountry";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
-import { AppLink } from "@/app/components/shared/ui/appLink/appLink";
 import Link from "next/link";
-import {userInfo} from "os";
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 interface changePhoneProps {
     classname?: string;
 }
-
-const countries:Country[] = [
-    {name:'Russia(Россия)', value: `+7`},
-    {name:'Ukraine(Украина)', value: `+380`},
-    {name:'Belarus (Беларусь)', value: `+375`},
-    {name:'Armenia (Հայաստան)', value: `+374`},
-    {name:'Azerbaijan (Azərbaycan)', value: `+994`},
-    {name:'Bulgaria (България)', value: `+359`},
-    {name:'Czech Republic (Česká republika)', value: `+420`},
-    {name:'Estonia (Eesti)', value: `+372`},
-    {name:'Georgia (საქართველო)', value: `+995`},
-    {name:'Germany (Deutschland)', value: `+49`},
-    {name:'Israel (‫ישראל‬‎)', value: `+972`},
-    {name:'Kazakhstan (Казахстан)', value: `+7`},
-    {name:'Kyrgyzstan (Кыргызстан)', value: `+996`},
-    {name:'Latvia (Latvija)', value: `+371`},
-    {name:'Lithuania (Lietuva)', value: `+370`},
-    {name:'Moldova (Republica Moldova)', value: `+373`},
-    {name:'Poland (Polska)', value: `+48`},
-    {name:'Uzbekistan (Oʻzbekiston)', value: `+998`},
-    {name:'Tajikistan', value: `+992`},
-    {name:'Romania (România)', value: `+40`},
-]
 
 export interface Country {
     name: string;
@@ -60,24 +36,23 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
 
     //RTK
     const [changeRequestPhone, {
-        data: requestChangePhone, error: errorPhone, isError: isErrorPhone,  isLoading: loadingPhone,
-    }] =   useChangePhoneMutation()
+        data: requestChangePhone, error: errorPhone, isError: isErrorPhone,  isLoading: loadingPhone,}] =   useChangePhoneMutation()
     const [reqCallCode, {data:requestCallCode, error:errorrequestCallCode, isError: isErrorCallCode, isLoading: loadingCall}] =  useCallCodeMutation()
     const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
     const [reqVerify, {data:requestVerify, error:errorrequestVerify, isError: isErrorVerify, isLoading: loadingVerify,}] = useVerifyTgMutation()
     const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgMutation();
+    const [reqGetCode, {data:requestGetCode, error:errorrequestGetCode, isError: isErrorGetCode, isLoading: loadingGetCode}] =  useGetPhoneCodeTgMutation()
+
+
 
     //ACTIONS FROM REDUX
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
 
     //STATES FROM REDUX
     const {data:infoUser} = useAppSelector(state => state.auth)
-    const [codeVerify, setCodeVerify] = React.useState<boolean>(false); // отследить когда сделан запрос и отобразить
-    const [codeVerifyTg, setCodeVerifyTg] = React.useState<boolean>(false); // отследить когда сделан запрос и отобразить
     const [inputCode, setInputCode] =  React.useState<string>('')
     const [inputCodeTg, setInputCodeTg] =  React.useState<string>('')
     const [inputPhone, setInputPhone] = React.useState<string>('')
-    const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(null);
     const [error, setError] = React.useState<boolean>(false);
     const [showBtnNumber, setShowBtnNumber] = React.useState<boolean>(false)
 
@@ -85,24 +60,13 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
 
     //FUNCTIONS
 
-    const countryOptions: Country[] = countries.map((country) => ({
-        name: country.name,
-        value: country.value, // Используйте нужное значение для значения
-    }));
-    const addPhone = (e: any) => {
-        const input = e.target.value;
-        const hasCountryCode = input.startsWith(selectedCountry?.value || '');
-        if (e.target.value.length) {
-            setError(false)
-        }
-        if(!selectedCountry?.name || selectedCountry == null) {
-            setInputPhone('Выберите страну из списка');
-        } else {
-            setInputPhone(hasCountryCode ? input.replace(/[A-Za-zА-Яа-яЁё]/, ''): (selectedCountry?.value.replace(/[A-Za-zА-Яа-яЁё]/, '') || ''));
-        }
-    };
     const sendNewPhone = () => {
-        if (inputPhone && inputPhone.length > 6 && inputPhone != "Не введен номер телефона") {
+
+        if (infoUser?.forChangePhoneNumber.replace('+','') == inputPhone.replace('+','')) {
+            dispatch(addInfoForCommonError({message: 'Вы уже используете этот номер телефона, нажмите на кнопку "Подтвердить телефон"'}))
+            if (!showBtnNumber) setShowBtnNumber(true)
+            return
+        } else if (inputPhone && inputPhone.length > 5 && inputPhone != "Не введен номер телефона") {
             if (inputPhone.replace('+','') == infoUser?.phoneNumber.replace('+','')) {
                 dispatch(addInfoForCommonError({message: 'Вы уже используете этот номер телефона'}))
                 return
@@ -115,39 +79,12 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
             const textError = {
                 message: 'Не введен номер телефона'
             }
-
             setInputPhone('Не введен номер телефона');
             dispatch(addInfoForCommonError(textError))
         }
     }
-
-    const checkPhone = () => {
-        if (inputPhone.length <= 0) {
-            dispatch(addInfoForCommonError({message: 'Не введен номер телефона'}))
-        }
-        if (inputPhone && inputPhone.length > 6 && inputPhone != "Не введен номер телефона") {
-            reqCall({
-                phone: inputPhone
-            })
-        } else {
-            setError(true)
-            setCodeVerify(true)
-        }
-    }
-
-    const addCode = (e:any) => {
-        setInputCode(e.target.value);
-    }
     const addCodeTg = (e:any) => {
         setInputCodeTg(e.target.value);
-    }
-
-    // отправояем изменения
-    const showInputCode = () => {
-        setCodeVerify(prevState => !prevState)
-    }
-    const showInputCodeTg = () => {
-        setCodeVerifyTg(prevState => !prevState)
     }
 
     const sendCodeVerify = () => {
@@ -162,15 +99,27 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
         }
     }
 
+    const getAccessCode = () => {
+        if(infoUser && infoUser?.phoneNumber) {
+            reqGetCode({phoneNumber: infoUser.phoneNumber, phoneToChange: inputPhone} )
+        } else {
+            dispatch(addInfoForCommonError({message: 'Обновите страницу и попробуйте еще раз'}))
+        }
+    }
+
     const activateTgNumber = () => {
         if(inputCodeTg.length <= 0) {
             dispatch(addInfoForCommonError({message: 'Вы не ввели код'}))
             return
         }
-        if (inputCodeTg) {
+        if (inputCodeTg && infoUser?.phoneNumber) {
             reqActivateTg({
+                phoneNumber: infoUser.phoneNumber,
+                phoneToChange: inputPhone,
                 number: inputCodeTg
             })
+        } else {
+            dispatch(addInfoForCommonError({message: 'Обновите страницу и попробуйте еще раз'}))
         }
     }
 
@@ -195,78 +144,39 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                     }
                 </div>
                 <div className={cls.linkCover}>
-                    <Input
-                        classForInput={cls.input}
-                        classname={cls.inputRelative}
-                        placeholder={selectedCountry?.value}
-                        value={ inputPhone}
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        onChange={(e:ChangeEvent<HTMLInputElement>) => addPhone(e)}
-                    />
-                    <div className={cls.coverBtn}>
-                        <SelectCountry
-                            setSelectedCountry={setSelectedCountry}
-                            options={countryOptions}
-                            setInputPhone={setInputPhone}
+                    <div className={cls.inputAdd}>
+                        <PhoneInput
+                            className={cls.input}
+                            international
+                            placeholder="Введите номер телефона"
+                            value={inputPhone}
+                            defaultCountry="RU"
+                            onChange={(e:any) => setInputPhone(e?.target?.value)}
                         />
+                    </div>
+                    <div className={cls.coverBtn}>
                         <Button
                             classname={cls.btn}
                             onClick={sendNewPhone}
                         >
                             Изменить номер</Button>
                     </div>
-                    {error && <div className={cls.error}>введите номер телефона</div>}
                 </div>
             </div>
             {showBtnNumber &&
             <div className={cls.coverNumBtn}>
-                <Button
-                    classname={cls.btn}
-                    onClick = {showInputCode}
-                >
-                    {!codeVerify ? `Подтвердить телефон` : `Скрыть поле` }
-                </Button>
-                {codeVerify &&
-                <div className={cls.linkCoverCode}>
-                    <Input
-                        classForInput={cls.input}
-                        classname={cls.inputRelativeCode}
-                        value={ inputCode}
-                        placeholder='Введите 4 последние цифры номера'
-                        onChange={(e:ChangeEvent<HTMLInputElement>) => addCode(e)}
-                    />
-                    <div className={cls.coverBtn}>
-                        <Button
-                            classname={cls.btn}
-                            onClick = {checkPhone}
-                        >
-                            Запрос вызова
-                        </Button>
-                    </div>
-                    <div className={cls.coverBtn}>
-                        <Button
-                            classname={cls.btn}
-                            onClick={sendCodeVerify}
-                        >
-                            Отправить код
-                        </Button>
-                    </div>
-                </div>
-                }
-            </div>
-            }
-            {showBtnNumber &&
-            <div className={cls.coverNumBtn}>
-                <Button
-                    classname={cls.btn}
-                    onClick = {showInputCodeTg}
-                >
-                    {!codeVerifyTg ? `Подтвердить телефон в телеграмме` : `Скрыть поле` }
-                </Button>
-                {codeVerifyTg &&
                 <div className={cls.linkCoverCodes}>
                     <div className={cls.linkCoverCode}>
+                        <div className={cls.textTwo}>1. Нажмите на кнопку ниже “Получить код подтверждения“. После чего Официальный бот - @com_check_bot, отправит вам сообщение с кодом на указанный номер.</div>
+                        <div className={cls.coverBtn}>
+                            <Button
+                                classname={cls.btn}
+                                onClick={getAccessCode}
+                            >
+                                Получить код подтверждения
+                            </Button>
+                        </div>
+                        <div className={cls.textTwo}>2. После того как получен код, введите его в поле ниже. </div>
                         <Input
                             classForInput={cls.input}
                             classname={cls.inputRelativeCode}
@@ -274,15 +184,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                             placeholder='Введите код'
                             onChange={(e:ChangeEvent<HTMLInputElement>) => addCodeTg(e)}
                         />
-                        <div className={cls.coverBtn}>
-                            <Link
-                                href={'https://t.me/com_check_bot'}
-                                className={cls.btn}
-                                target="_blank" rel="noopener noreferrer"
-                            >
-                                Перейти в тг
-                            </Link>
-                        </div>
+                        <div className={cls.textTwo}>3. Теперь можно отправить код для подтверждения номера телефона. </div>
                         <div className={cls.coverBtn}>
                             <Button
                                 classname={cls.btn}
@@ -291,9 +193,9 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                                 Отправить код
                             </Button>
                         </div>
+
                     </div>
-                </div>}
-                <div className={cls.textTwo}>В чате бота нажмите кнопку передать контакт</div>
+                </div>
             </div>
             }
             { loadingPhone

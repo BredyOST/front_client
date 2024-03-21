@@ -41,6 +41,19 @@
   position: relative;
 }
 
+.inputAdd {
+  max-width: mixins.rem(500);
+  row-gap: mixins.rem(5);
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    min-width: mixins.rem(500);
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+  }
+
+}
 
 .input{
   @extend .input;
@@ -98,8 +111,10 @@
 .linkCoverCode{
   display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
+  align-items: start;
+  row-gap: mixins.rem(5);
   column-gap: mixins.rem(10);
-  align-items: center;
   @media(max-width: mixins.em(global.$mobile)) {
     flex-direction: column;
     row-gap: mixins.rem(10);
@@ -126,7 +141,11 @@
 .header {
   display: flex;
   flex-direction: column;
+}
 
+.textThree{
+  font-size: mixins.rem(16);
+  line-height: math.div(22,16);
 }
 
 .error {

@@ -6,6 +6,7 @@ import LogiIn from "@/app/components/features/AuthBy/loginForm/loginIn/LogiIn";
 import Registration from "@/app/components/features/AuthBy/loginForm/registration/registration";
 import RecoverPassword from "@/app/components/features/AuthBy/loginForm/recoverPassword/recoverPassword";
 import SendActivationRepeat from "@/app/components/features/AuthBy/loginForm/sendActivationRepeat/sendActivationRepeat";
+import AccessNumber from "@/app/components/features/AuthBy/loginForm/accessNumber/accessNumber";
 
 interface LoginFormProps {
 	classname?: string;
@@ -33,7 +34,8 @@ const LoginForm: FC<LoginFormProps> = React.memo((props) => {
             <LogiIn/>
             <Registration/>
             <RecoverPassword/>
-            <SendActivationRepeat/>
+            {/*<SendActivationRepeat/>*/}
+            <AccessNumber/>
         </div>
     );
 });

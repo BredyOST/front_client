@@ -4,6 +4,7 @@ import {classNames} from "@/app/components/shared/lib/classNames/className";
 import ListsCategory from "@/app/dashboard/price/listsCategory/listsCategory";
 import Cards from "@/app/dashboard/price/cards/cards";
 import BlockBtnAdd from "@/app/dashboard/price/blockBtnAdd/blockBtnAdd";
+import Link from "next/link";
 
 interface pageProps {
 }
@@ -58,7 +59,11 @@ async function PricePage(props:pageProps) {
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Тарифы</h1>
+                        <h1 className={cls.mainTitle}>Тарифы на подписку</h1>
+                        <div className={cls.coverLink}>
+                            <div className={cls.text}>Вы находитесь в разделе подключения подписки, для доступа к выбранной категории через сайт.</div>
+                            <div className={cls.text}>Помимо этого вы можете дополнительно или отдельно  подключить уведомления в телеграмм чате. Для ознакомления с тарифами подключения телеграмм чатов, <Link className={cls.link} href={'/dashboard/notifications'}>“перейти к уведомлениям“</Link>.</div>
+                        </div>
                     </div>
                     <div className={cls.categories}>
                         <BlockBtnAdd

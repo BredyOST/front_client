@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useGetFreePeriodMutation, useGetFreePeriodNotificationMutation,
     useGetMeMutation,
-    usePaymentMutation, usePayNotificationsMutation
+    usePayNotificationsMutation
 } from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";

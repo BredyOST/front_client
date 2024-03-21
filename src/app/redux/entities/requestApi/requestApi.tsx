@@ -187,6 +187,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        getPhoneCodeTg: builder.mutation<any, any>({
+            query: (params) => ({
+                url: '/users/update/phoneCodeTg',
+                method: 'PATCH',
+                body: params,
+            }),
+        }),
         changePasswordInProfile: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/users/update/password',
@@ -305,7 +312,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
 
         addChat: builder.mutation<any, any>({
             query: (params) => ({
@@ -535,4 +541,5 @@ export const {
     useActivateTgMutation,
     usePayNotificationsMutation,
     useGetFreePeriodNotificationMutation,
+    useGetPhoneCodeTgMutation,
 } = requestApi;

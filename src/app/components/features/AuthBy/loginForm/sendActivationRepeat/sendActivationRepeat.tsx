@@ -13,13 +13,8 @@ interface sendActivationRepeatProps {
     classname?: string;
 }
 
-
 type loginForm = {
     activationRepeat:string,
-}
-
-type email = {
-    email:string
 }
 
 const SendActivationRepeat:FC<sendActivationRepeatProps> = (props) => {
@@ -90,7 +85,6 @@ const SendActivationRepeat:FC<sendActivationRepeatProps> = (props) => {
                     defaultValue=""
                     register={{ ...(register('activationRepeat')) }}
                 />
-
             </div>
             <div className={cls.btnCoverTwo}>
                 <Button

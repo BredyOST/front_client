@@ -5,6 +5,7 @@ import ListsCategory from "@/app/dashboard/price/listsCategory/listsCategory";
 import Cards from "@/app/dashboard/price/cards/cards";
 import BlockBtnAdd from "@/app/dashboard/price/blockBtnAdd/blockBtnAdd";
 import NotificationsCards from "@/app/dashboard/notifications/notificationsCards/notificationsCards";
+import Link from "next/link";
 
 interface pageProps {
 }
@@ -59,7 +60,11 @@ async function NotificationsPage(props:pageProps) {
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Уведомления</h1>
+                        <h1 className={cls.mainTitle}>Тарифы на уведомления</h1>
+                        <div className={cls.coverLink}>
+                            <div className={cls.text}>Вы находитесь в разделе подключения подписки для уведомлений в телеграмме.</div>
+                            <div className={cls.text}>Вы можете подключить уведомления в телеграмм чате без оформления основной подписки для доступа через сайт в разделе <Link className={cls.link} href={'/dashboard/price'}>“тарифы на сайте“</Link>.</div>
+                        </div>
                     </div>
                     <div className={cls.categories}>
                         <BlockBtnAdd

@@ -105,7 +105,8 @@
   height: mixins.rem(30);
 }
 
-.btnEnter {
+.btnEnter,
+.link {
   line-height: globalIndex.$main_font_line-height;
   font-size: mixins.rem(globalIndex.$main_font_size);
   color: white;
