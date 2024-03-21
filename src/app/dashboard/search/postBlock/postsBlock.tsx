@@ -272,6 +272,9 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     return (
         <div className={cls.bodyInfo}>
+            {infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod &&
+            <div className={cls.textAttent}>В бесплатном тарифе доступны заявки старше 3 суток с текущей даты</div>
+            }
             {postsToShow && postsToShow?.length > 0 &&
                 postsToShow.map((item: any) => (
                     <div

@@ -11,6 +11,13 @@
   font-size: mixins.rem(16);
 }
 
+.textAttent{
+  font-size: mixins.rem(16);
+  line-height: math.div(22, 16);
+  color: #C21F39;
+  font-weight: 600;
+}
+
 .spanWord{
   background-color: #2ba296;
 }
