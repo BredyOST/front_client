@@ -194,6 +194,14 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        activateTgProfile: builder.mutation<any, any>({
+            query: (params) => ({
+                url: '/users/activateTgProfile',
+                method: 'POST',
+                body: params,
+            }),
+        }),
+
         changePasswordInProfile: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/users/update/password',
@@ -542,4 +550,5 @@ export const {
     usePayNotificationsMutation,
     useGetFreePeriodNotificationMutation,
     useGetPhoneCodeTgMutation,
+    useActivateTgProfileMutation,
 } = requestApi;

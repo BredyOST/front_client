@@ -7,7 +7,7 @@ import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {
-    useActivateTgMutation,
+    useActivateTgProfileMutation,
     useCallCodeMutation,
     useCallMutation,
     useChangePhoneMutation, useGetPhoneCodeTgMutation,
@@ -16,7 +16,6 @@ import {
 import {parseCookies} from "nookies";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
-import Link from "next/link";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
@@ -40,7 +39,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     const [reqCallCode, {data:requestCallCode, error:errorrequestCallCode, isError: isErrorCallCode, isLoading: loadingCall}] =  useCallCodeMutation()
     const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
     const [reqVerify, {data:requestVerify, error:errorrequestVerify, isError: isErrorVerify, isLoading: loadingVerify,}] = useVerifyTgMutation()
-    const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgMutation();
+    const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgProfileMutation();
     const [reqGetCode, {data:requestGetCode, error:errorrequestGetCode, isError: isErrorGetCode, isLoading: loadingGetCode}] =  useGetPhoneCodeTgMutation()
 
 
@@ -62,12 +61,12 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
 
     const sendNewPhone = () => {
 
-        if (infoUser?.forChangePhoneNumber.replace('+','') == inputPhone.replace('+','')) {
-            dispatch(addInfoForCommonError({message: 'Вы уже используете этот номер телефона, нажмите на кнопку "Подтвердить телефон"'}))
+        if (infoUser?.forChangePhoneNumber?.replace('+','') == inputPhone?.replace('+','')) {
+            dispatch(addInfoForCommonError({message: 'Номер уже внесен во временное хранилище, нажмите на кнопку "Получить код подтверждения"'}))
             if (!showBtnNumber) setShowBtnNumber(true)
             return
-        } else if (inputPhone && inputPhone.length > 5 && inputPhone != "Не введен номер телефона") {
-            if (inputPhone.replace('+','') == infoUser?.phoneNumber.replace('+','')) {
+        } else if (inputPhone && inputPhone?.length > 5 && inputPhone != "Не введен номер телефона") {
+            if (inputPhone?.replace('+','') == infoUser?.phoneNumber.replace('+','')) {
                 dispatch(addInfoForCommonError({message: 'Вы уже используете этот номер телефона'}))
                 return
             }
@@ -133,6 +132,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
         }, [infoUser]
     )
 
+
     return (
         <>
             <div className={cls.block}>
@@ -151,7 +151,14 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                             placeholder="Введите номер телефона"
                             value={inputPhone}
                             defaultCountry="RU"
-                            onChange={(e:any) => setInputPhone(e?.target?.value)}
+                            // onChange={(e:any) => setInputPhone(e?.target?.value)}
+                            onChange={(value:any) => {
+                                if (value) {
+                                    setInputPhone(value.toString());
+                                } else {
+                                    setInputPhone(""); // Обработка случая, когда значение undefined
+                                }
+                            }}
                         />
                     </div>
                     <div className={cls.coverBtn}>
@@ -159,7 +166,8 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                             classname={cls.btn}
                             onClick={sendNewPhone}
                         >
-                            Изменить номер</Button>
+                            Изменить номер
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -167,7 +175,8 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
             <div className={cls.coverNumBtn}>
                 <div className={cls.linkCoverCodes}>
                     <div className={cls.linkCoverCode}>
-                        <div className={cls.textTwo}>1. Нажмите на кнопку ниже “Получить код подтверждения“. После чего Официальный бот - @com_check_bot, отправит вам сообщение с кодом на указанный номер.</div>
+                        <div className={cls.textTwo}>1. После того как вы ввели номер в соответствующее поле выше и нажали кнопку “изменить номер“, номер был помещен во временное хранилище.</div>
+                        <div className={cls.textTwo}>2. Нажмите на кнопку ниже “Получить код подтверждения“. После чего Официальный бот - @com_check_bot, отправит вам сообщение с кодом на указанный номер.</div>
                         <div className={cls.coverBtn}>
                             <Button
                                 classname={cls.btn}
@@ -176,7 +185,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                                 Получить код подтверждения
                             </Button>
                         </div>
-                        <div className={cls.textTwo}>2. После того как получен код, введите его в поле ниже. </div>
+                        <div className={cls.textTwo}>3. После того как получен код, введите его в поле ниже. </div>
                         <Input
                             classForInput={cls.input}
                             classname={cls.inputRelativeCode}
@@ -184,7 +193,7 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                             placeholder='Введите код'
                             onChange={(e:ChangeEvent<HTMLInputElement>) => addCodeTg(e)}
                         />
-                        <div className={cls.textTwo}>3. Теперь можно отправить код для подтверждения номера телефона. </div>
+                        <div className={cls.textTwo}>4. Теперь можно отправить код для подтверждения номера телефона. </div>
                         <div className={cls.coverBtn}>
                             <Button
                                 classname={cls.btn}
@@ -232,6 +241,13 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                       classname="color-dark"
                   />
               )
+            }
+            { loadingGetCode
+                && (
+                    <Loader
+                        classname="color-dark"
+                    />
+                )
             }
         </>
     );
