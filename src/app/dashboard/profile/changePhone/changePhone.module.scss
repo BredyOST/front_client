@@ -42,17 +42,8 @@
 }
 
 .inputAdd {
-  max-width: mixins.rem(500);
-  row-gap: mixins.rem(5);
-
-  @media(min-width: mixins.em(global.$mobile)) {
-    min-width: mixins.rem(500);
-  }
-
-  @media(max-width: mixins.em(global.$mobile)) {
-    min-width: 100%;
-  }
-
+  display: flex;
+  align-items: center;
 }
 
 .input{

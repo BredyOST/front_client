@@ -237,6 +237,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        giveInfo: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/users/giveInfo`,
+                method: 'POST',
+                body: params,
+            }),
+        }),
 
         createCategory: builder.mutation<any, any>({
             query: (params) => ({
@@ -551,4 +558,5 @@ export const {
     useGetFreePeriodNotificationMutation,
     useGetPhoneCodeTgMutation,
     useActivateTgProfileMutation,
+    useGiveInfoMutation,
 } = requestApi;

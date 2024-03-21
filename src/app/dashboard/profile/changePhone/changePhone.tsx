@@ -10,7 +10,7 @@ import {
     useActivateTgProfileMutation,
     useCallCodeMutation,
     useCallMutation,
-    useChangePhoneMutation, useGetPhoneCodeTgMutation,
+    useChangePhoneMutation, useGetPhoneCodeTgMutation, useGiveInfoMutation,
     useVerifyTgMutation
 } from "@/app/redux/entities/requestApi/requestApi";
 import {parseCookies} from "nookies";
@@ -41,6 +41,9 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     const [reqVerify, {data:requestVerify, error:errorrequestVerify, isError: isErrorVerify, isLoading: loadingVerify,}] = useVerifyTgMutation()
     const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgProfileMutation();
     const [reqGetCode, {data:requestGetCode, error:errorrequestGetCode, isError: isErrorGetCode, isLoading: loadingGetCode}] =  useGetPhoneCodeTgMutation()
+    // для тех кто регался до 21.03.2024
+    const [reqGiveInfo, {data:requestGiveInfo, error:errorrequestGiveInfo, isError: isErrorGiveInfo, isLoading: loadingGiveInfo}] =  useGiveInfoMutation()
+
 
 
 
@@ -99,11 +102,11 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     }
 
     const getAccessCode = () => {
-        if(infoUser && infoUser?.phoneNumber) {
-            reqGetCode({phoneNumber: infoUser.phoneNumber, phoneToChange: inputPhone} )
-        } else {
-            dispatch(addInfoForCommonError({message: 'Обновите страницу и попробуйте еще раз'}))
-        }
+        // if(infoUser && infoUser?.phoneNumber) {
+        reqGetCode({phoneNumber: infoUser.phoneNumber, phoneToChange: inputPhone} )
+        // } else {
+        //     dispatch(addInfoForCommonError({message: 'Обновите страницу и попробуйте еще раз'}))
+        // }
     }
 
     const activateTgNumber = () => {
@@ -133,6 +136,16 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     )
 
 
+    // СТАРЫЙ КОД
+    const senOldInfo = () => {
+        reqGiveInfo({
+            mail: infoUser?.email,
+            phoneToChange: inputPhone,
+        })
+    }
+
+
+    // @ts-ignore
     return (
         <>
             <div className={cls.block}>
@@ -145,33 +158,46 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
                 </div>
                 <div className={cls.linkCover}>
                     <div className={cls.inputAdd}>
-                        <PhoneInput
-                            className={cls.input}
-                            international
-                            placeholder="Введите номер телефона"
-                            value={inputPhone}
-                            defaultCountry="RU"
-                            // onChange={(e:any) => setInputPhone(e?.target?.value)}
-                            onChange={(value:any) => {
-                                if (value) {
-                                    setInputPhone(value.toString());
-                                } else {
-                                    setInputPhone(""); // Обработка случая, когда значение undefined
-                                }
-                            }}
-                        />
+                        {infoUser?.phoneNumber ? infoUser?.phoneNumber : 'номер отсутствует'}
+                        {/*<PhoneInput*/}
+                        {/*    className={cls.input}*/}
+                        {/*    international*/}
+                        {/*    placeholder="Введите номер телефона"*/}
+                        {/*    value={inputPhone}*/}
+                        {/*    defaultCountry="RU"*/}
+                        {/*    // onChange={(e:any) => setInputPhone(e?.target?.value)}*/}
+                        {/*    onChange={(value:any) => {*/}
+                        {/*        if (value) {*/}
+                        {/*            setInputPhone(value.toString());*/}
+                        {/*        } else {*/}
+                        {/*            setInputPhone(""); // Обработка случая, когда значение undefined*/}
+                        {/*        }*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </div>
-                    <div className={cls.coverBtn}>
-                        <Button
-                            classname={cls.btn}
-                            onClick={sendNewPhone}
-                        >
-                            Изменить номер
-                        </Button>
-                    </div>
+                    {/*<div className={cls.coverBtn}>*/}
+                    {/*    <Button*/}
+                    {/*        classname={cls.btn}*/}
+                    {/*        onClick={sendNewPhone}*/}
+                    {/*    >*/}
+                    {/*        Изменить номер*/}
+                    {/*    </Button>*/}
+                    {/*</div>*/}
                 </div>
             </div>
-            {showBtnNumber &&
+            {(showBtnNumber && !infoUser?.userIdTg && !infoUser?.chatIdTg ) &&
+                <div>
+                    <div>21/03/2024г. были внесены изменения,поэтому для полноценного пользования сайтом, вам необходимо привязать аккаунт телеграмма.</div>
+                    <div>Если вы видите этот текст, то номер который вы указали помещен во временное хранилище</div>
+                    <div>Теперь нажмите на кнопку ниже для того чтобы привязать номер</div>
+                    <Button
+                        classname={cls.btn}
+                        onClick={senOldInfo}
+                    >отправить данные в тг
+                    </Button>
+                </div>
+            }
+            {(showBtnNumber && infoUser?.userIdTg && infoUser?.chatIdTg) &&
             <div className={cls.coverNumBtn}>
                 <div className={cls.linkCoverCodes}>
                     <div className={cls.linkCoverCode}>
