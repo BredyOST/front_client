@@ -126,11 +126,8 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
 
 
     React.useEffect(() => {
-        if (requestRegister?.text ==`Регистрация завершена. Подтвердите номер в мессенджере телеграмм` ) {
-            // dispatch(changeStateLoginFormPopup(false));
+        if (requestRegister?.text ==`Регистрация завершена. Осталось подтвердить номер телефона` ) {
             dispatch(changeStateClickOnEnter(4))
-            // redirect('/dashboard/price')
-            // dispatch(closeAllPopups(true));
         }
     },[requestRegister])
 
@@ -171,12 +168,8 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                         : setPasswordHideButton({ ...passwordHideButton, registerCheck: false });
                 }
             }
-            // if(targetName === 'mailOrNumberRegistration') {
-            //     setTextFromForms({ ...textFromForms, loginRegister: value });
-            // }
 
             if(targetName === 'phoneNumberRegistration') {
-
                 const hasCountryCode = value.startsWith(selectedCountry?.value || '');
                 if(!selectedCountry?.name || selectedCountry == null) {
                     setTextFromForms({...textFromForms, phoneRegister: 'Выберите страну из списка'})
@@ -184,7 +177,6 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                     setTextFromForms({...textFromForms, phoneRegister: hasCountryCode ? value.replace(/[A-Za-zА-Яа-яЁё]/, ''): (selectedCountry?.value.replace(/[A-Za-zА-Яа-яЁё]/, '') || '')})
                 }
             }
-            console.log(targetName)
         }
     };
 
@@ -224,6 +216,11 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
             </h2>
             <div className={cls.inputsForm}>
                 <div className={cls.inputsForm}>
+                    <div>
+                        <div className={cls.text}>1. Выберите страну из выпадающего списка.</div>
+                        <div className={cls.text}>2. В поле ввода отобразится флаг страны.</div>
+                        <div className={cls.text}>3. Введите номер в международном формате.</div>
+                    </div>
                     <div className={cls.coverBtn}>
                         <Controller
                             name="phoneNumberRegistration"

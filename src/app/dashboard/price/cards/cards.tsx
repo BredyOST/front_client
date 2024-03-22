@@ -35,10 +35,6 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     const [getFreePeriod, {data: requestFreePeriod, error:errorFreePeriod, isLoading: isLoadingFreePeriod, isError: isErrorFreePeriod}] = useGetFreePeriodMutation()
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
     const [payment, {data: requestPayment, error:errorPayment, isLoading: isLoadingPayment, isError: isErrorPayment}] = usePaymentMutation()
-    const [paymentNotifications, {data: requestPaymentNotifications, error:errorPaymentNotifications, isLoading: isLoadingPaymentNotifications, isError: isErrorPaymentNotifications}] = usePayNotificationsMutation()
-    const [paymentNotificationsFree, {data: requestPaymentNotificationsFree, error:errorPaymentNotificationsFree, isLoading: isLoadingPaymentNotificationsFree, isError: isErrorPaymentNotificationsFree}] = useGetFreePeriodNotificationMutation()
-
-
 
     //ACTIONS FROM REDUX
     // для изменения состояния попапа loginForm
@@ -136,10 +132,7 @@ const Cards:FC<cardsProps> = React.memo((props) => {
         if(requestPayment?.url) {
             redirect(requestPayment?.url)
         }
-        if(requestPaymentNotifications?.url) {
-            redirect(requestPaymentNotifications?.url)
-        }
-    }, [requestPayment,requestPaymentNotifications])
+    }, [requestPayment])
 
     //USEREF
 
@@ -284,18 +277,6 @@ const Cards:FC<cardsProps> = React.memo((props) => {
                       classname="color-dark"
                   />
               )}
-            { (isLoadingPaymentNotifications)
-              && (
-                  <Loader
-                      classname="color-dark"
-                  />
-              )}
-            { (isLoadingPaymentNotificationsFree)
-                && (
-                    <Loader
-                        classname="color-dark"
-                    />
-                )}
         </div>
     );
 });

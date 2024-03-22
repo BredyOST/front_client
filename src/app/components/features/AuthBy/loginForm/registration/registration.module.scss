@@ -28,6 +28,19 @@
   position: relative;
 }
 
+.textInside{
+
+}
+
+.textInside,
+.text{
+  font-family: globalIndex.$Title_font_family;
+  font-size: mixins.rem(16);
+  text-align: left;
+  line-height: math.div(25,16);
+  font-weight: 400;
+  @include mixins.adaptiveValue("font-size",16,14,3,global.$mobile,320);
+}
 
 .input {
   flex: 1 1 auto;
@@ -186,7 +199,7 @@
 .checkCover {
 
   display: flex;
-
+  align-items: center;
   @media(min-width: mixins.em(400)) {
     font-size: mixins.rem(14);
     column-gap: mixins.rem(10);
@@ -194,11 +207,8 @@
 
   @media(max-width: mixins.em(399)) {
     font-size: mixins.rem(11);
-    column-gap: mixins.rem(2);
+    column-gap: mixins.rem(5);
   }
-
-
-
 }
 
 .linkAcess {
@@ -211,10 +221,4 @@
         transition: color ease 0.3s 0s;
      }
    }
-}
-
-.textInside{
-  display: flex;
-  align-self: center;
-  column-gap: mixins.rem(5);
 }

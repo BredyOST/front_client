@@ -8,7 +8,6 @@ import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useActivateTgProfileMutation,
-    useCallCodeMutation,
     useCallMutation,
     useChangePhoneMutation, useGetPhoneCodeTgMutation, useGiveInfoMutation,
     useVerifyTgMutation
@@ -35,16 +34,11 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     //RTK
     const [changeRequestPhone, {
         data: requestChangePhone, error: errorPhone, isError: isErrorPhone,  isLoading: loadingPhone,}] =   useChangePhoneMutation()
-    const [reqCallCode, {data:requestCallCode, error:errorrequestCallCode, isError: isErrorCallCode, isLoading: loadingCall}] =  useCallCodeMutation()
-    const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
     const [reqVerify, {data:requestVerify, error:errorrequestVerify, isError: isErrorVerify, isLoading: loadingVerify,}] = useVerifyTgMutation()
     const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgProfileMutation();
     const [reqGetCode, {data:requestGetCode, error:errorrequestGetCode, isError: isErrorGetCode, isLoading: loadingGetCode}] =  useGetPhoneCodeTgMutation()
     // для тех кто регался до 21.03.2024
     const [reqGiveInfo, {data:requestGiveInfo, error:errorrequestGiveInfo, isError: isErrorGiveInfo, isLoading: loadingGiveInfo}] =  useGiveInfoMutation()
-
-
-
 
     //ACTIONS FROM REDUX
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
@@ -86,18 +80,6 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
     }
     const addCodeTg = (e:any) => {
         setInputCodeTg(e.target.value);
-    }
-
-    const sendCodeVerify = () => {
-        if(inputCode.length <= 0) {
-            dispatch(addInfoForCommonError({message: 'Вы не ввели код'}))
-            return
-        }
-        if (inputCode) {
-            reqCallCode({
-                actovatedCode: inputCode
-            })
-        }
     }
 
     const getAccessCode = () => {
@@ -247,20 +229,6 @@ const ChangePhone:FC<changePhoneProps> = (props) => {
               )
             }
             { loadingActivateTg
-              && (
-                  <Loader
-                      classname="color-dark"
-                  />
-              )
-            }
-            { loadingCall
-              && (
-                  <Loader
-                      classname="color-dark"
-                  />
-              )
-            }
-            { loadingReqCall
               && (
                   <Loader
                       classname="color-dark"

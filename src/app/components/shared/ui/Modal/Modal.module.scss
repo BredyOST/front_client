@@ -12,7 +12,6 @@
     z-index: -1;
     transition: opacity ease 0.4s 0.1s,  background-color ease 0.4s 0.1s, z-index ease 0s 0.3s;
     display: flex;
-
     &.opened {
         background-color: rgba(0 0 0 / 60%);
         transition: opacity ease 0.3s 0s, background-color ease 0.3s 0s, z-index ease 0s 0s;
@@ -23,9 +22,8 @@
 .opened {
     opacity: 1;
     pointer-events: auto;
-    z-index: 13;
+    z-index: 50;
     transition: opacity ease 0.3s 0s;
-
     .content {
         transform: scale(1);
         transition: transform ease 0.3s 0s;

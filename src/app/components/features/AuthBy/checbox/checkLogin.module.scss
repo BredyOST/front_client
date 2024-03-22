@@ -12,8 +12,8 @@
 }
 
 .check {
-  width: mixins.rem(20); /* Увеличиваем ширину квадрата */
-  height: mixins.rem(20); /* Увеличиваем высоту квадрата */
+  width: mixins.rem(25); /* Увеличиваем ширину квадрата */
+  height: mixins.rem(25); /* Увеличиваем высоту квадрата */
 }
 
 .checkCover{
@@ -21,8 +21,8 @@
 }
 
 .checkCustom {
-  width: mixins.rem(16);; /* Увеличиваем ширину квадрата */
-  height: mixins.rem(16);; /* Увеличиваем высоту квадрата */
+  width: mixins.rem(20);; /* Увеличиваем ширину квадрата */
+  height: mixins.rem(20);; /* Увеличиваем высоту квадрата */
   //border: 2px solid #555;
   border-radius: mixins.rem(4);;
   position: relative;

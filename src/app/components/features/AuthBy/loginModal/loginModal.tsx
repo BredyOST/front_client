@@ -26,7 +26,7 @@ const LoginModal:FC<LoginModalProps> = React.memo((props) => {
 
     // states from redux
     // состояние попапа для loginForm
-    const {stateLoginFormPopup} = useAppSelector((state) => state.loginPopup);
+    const {stateLoginFormPopup, stateFreePeriodPopup, categoriesPopup} = useAppSelector((state) => state.loginPopup);
 
     // функция для изменения состояния попапа loginForm
     const closeLoginFormPopup = React.useCallback(() => {

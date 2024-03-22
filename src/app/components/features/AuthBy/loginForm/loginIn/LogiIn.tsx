@@ -23,7 +23,7 @@ interface LogiInProps {
 
 const loginText: any = [
     { id: 2, text: 'Телефон' },
-    { id: 1, text: 'Email' }
+    { id: 1, text: 'Email' },
 ]
 
 type loginForm = {

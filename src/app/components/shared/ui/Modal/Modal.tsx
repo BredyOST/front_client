@@ -76,6 +76,7 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
             setTimeout(() => {
                 setIndicatorOpen(true);
             }, 100);
+            document.documentElement.classList.add("lock")
         } else if (!isOpen && indicatorOpen) {
             setIsClosing(true);
             timerRef.current = setTimeout(() => {
@@ -90,6 +91,7 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
     // функция для закрытия попапа
     const closePopup = React.useCallback(() => {
         setIsClosing(true);
+        document.documentElement.classList.remove("lock")
         timerRef.current = setTimeout(() => {
             if (onClose) {
                 onClose();
