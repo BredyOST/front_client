@@ -95,7 +95,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
     const passwordRegisterCheckRef = React.useRef<HTMLInputElement | null>(null);
     //FUNCTIONS
     const onSubmit: SubmitHandler<loginForm> = (data) => {
-
+        console.log(data)
         const textError = {
             message: 'Не совпадают введенные пароли'
         }
@@ -105,6 +105,8 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
         const textErrorThree= {
             message: 'Введен некорректный номер телефона'
         }
+
+
 
         if(data.phoneNumberRegistration.length <= 6) {
             dispatch(addInfoForCommonError(textErrorThree))
@@ -233,7 +235,6 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                                     placeholder="Введите номер телефона"
                                     value={textFromForms.phoneRegister}
                                     defaultCountry="RU"
-                                    inputStyle={{ width: '100%' }} // Настройте стили ввода
                                     register={{
                                         ...register('phoneNumberRegistration', {}),
                                     }}

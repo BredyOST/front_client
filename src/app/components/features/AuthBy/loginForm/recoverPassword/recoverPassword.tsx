@@ -280,7 +280,6 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                             placeholder="Введите номер телефона"
                             defaultValue=""
                             countries={['RU', 'KZ', 'BY', 'UA']}
-                            inputStyle={{ width: '100%' }} // Настройте стили ввода
                             register={{
                                 ...register('phoneNumber', {}),
                             }}

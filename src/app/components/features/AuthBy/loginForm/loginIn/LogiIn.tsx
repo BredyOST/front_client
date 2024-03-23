@@ -215,7 +215,6 @@ const LogiIn:FC<LogiInProps> = (props) => {
                                 placeholder="Введите номер телефона"
                                 value={textFromForms.loginIn}
                                 defaultCountry="RU"
-                                inputStyle={{ width: '100%' }} // Настройте стили ввода
                                 register={{
                                     ...register('mailOrNumberLoginIn', {}),
                                 }}

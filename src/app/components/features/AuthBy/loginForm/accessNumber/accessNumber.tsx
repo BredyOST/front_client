@@ -190,7 +190,6 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
                                 value=""
                                 defaultCountry="RU"
                                 countries={['RU', 'KZ', 'BY', 'UA']}
-                                inputStyle={{ width: '100%' }} // Настройте стили ввода
                                 register={{
                                     ...register('phoneNumber', {}),
                                 }}
