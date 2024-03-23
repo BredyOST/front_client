@@ -237,6 +237,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        numberTgForgetPassword: builder.mutation<any, any>({
+            query: (params) => ({
+                url: `/users/numberTgForgetPassword`,
+                method: 'POST',
+                body: params,
+            }),
+        }),
         giveInfo: builder.mutation<any, any>({
             query: (params) => ({
                 url: `/users/giveInfo`,
@@ -559,4 +566,5 @@ export const {
     useGetPhoneCodeTgMutation,
     useActivateTgProfileMutation,
     useGiveInfoMutation,
+    useNumberTgForgetPasswordMutation
 } = requestApi;

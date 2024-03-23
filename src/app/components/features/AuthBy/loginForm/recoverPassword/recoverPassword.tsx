@@ -6,7 +6,11 @@ import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {Control, Controller, FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {useCallMutation, useChangePasswordMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {
+    useCallMutation,
+    useChangePasswordMutation,
+    useNumberTgForgetPasswordMutation
+} from "@/app/redux/entities/requestApi/requestApi";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import PhoneInput from "react-phone-number-input";
 import PhoneSvg from "@/app/components/svgs/phone.svg";
@@ -53,9 +57,9 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
 
     //RTK
     // восстановление пароля
-    let[sendNewPassword, {data:messageNewPassword, error:errorNewPassword, isError: isNewPassword, isLoading: loadingNewPassword}
-    ] = useChangePasswordMutation();
+    let[sendNewPassword, {data:messageNewPassword, error:errorNewPassword, isError: isNewPassword, isLoading: loadingNewPassword}] = useChangePasswordMutation();
     const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
+    const [reqTgForgetPassword, {data:requestTgForgetPassword, error:errorrequestTgForgetPassword, isError: isErrorTgForgetPassword, isLoading: loadingReqTgForgetPassword}] =  useNumberTgForgetPasswordMutation()
 
     //ACTIONS FROM REDUX
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
@@ -96,10 +100,8 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
 
         // если выбран звонок
         if(activeTab == 1) {
-
             //если нажали на кнопку запроса вызова
             if(activeWindow == `1`) {
-
                 if(data?.phoneNumber?.length <= 6) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательное поле, номер телефона'}))
                     return;
@@ -110,36 +112,56 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                     })
                 }
             }
-        }
 
-        if(activeTab == 1 && activeWindow == `2`) {
-            if(data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
-                dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона, пароли и код подтверждения'}))
-                return;
-            } else  {
-                //восстановление пароля
-                sendNewPassword({
-                    email:data?.myEmail,
-                    phoneNumber: data?.phoneNumber,
-                    password: data?.password,
-                    passwordTwo: data?.passwordTwo,
-                    code:data?.code,
-                    indicator: `2`
-                })
+            if(activeWindow == `2`) {
+                if(data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
+                    dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона, пароли и код подтверждения'}))
+                    return;
+                } else  {
+                    //восстановление пароля
+                    sendNewPassword({
+                        email:data?.myEmail,
+                        phoneNumber: data?.phoneNumber,
+                        password: data?.password,
+                        passwordTwo: data?.passwordTwo,
+                        code:data?.code,
+                        indicator: `2`
+                    })
+                }
             }
         }
 
-        //если нажали на кнопку запроса вызова  и форма смены пароля через тг
-        if (activeTab == 2 && activeWindow == `2`) {
-            if(data?.phoneNumber?.length <= 6) {
-                dispatch(addInfoForCommonError({message: 'Проверьте обязательное поле, номер телефона'}))
-                return;
-            } else {
-                sendNewPassword({
-                    phoneNumber: data?.phoneNumber,
-                    indicator: `1`
-                })
+        // если выбран телеграмм
+        if(activeTab == 2) {
+            //если нажали на кнопку запроса вызова
+            if(activeWindow == `1`) {
+                if(data?.phoneNumber?.length <= 6) {
+                    dispatch(addInfoForCommonError({message: 'Проверьте обязательное поле, номер телефона'}))
+                    return;
+                } else {
+                    reqTgForgetPassword({
+                        phoneNumber: data?.phoneNumber,
+                        indicator: `1`
+                    })
+                }
             }
+
+            if (activeWindow == `2`) {
+                if(data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
+                    dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона, пароли и код подтверждения'}))
+                    return;
+                } else  {
+                    //восстановление пароля
+                    sendNewPassword({
+                        phoneNumber: data?.phoneNumber,
+                        password: data?.password,
+                        passwordTwo: data?.passwordTwo,
+                        code:data?.code,
+                        indicator: `2`
+                    })
+                }
+            }
+
         }
     };
     //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
@@ -240,6 +262,11 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         Восстановление пароля по звонку доступно для России, Казахстана, Беларуси, Украины.
                     </div>
                 }
+                {activeTab == 2 &&
+                    <div className={cls.text}>
+                        На зарегистрированный номер в телеграмм чат придет код.
+                    </div>
+                }
                 <h3 className={cls.text}>Введите номер в международном формате на который зарегистрирован аккаунт.</h3>
                 <Controller
                     name="phoneNumber"
@@ -261,14 +288,14 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         />
                     )}
                 />
-                {activeTab == 1 &&
                 <Button
                     classname={cls.btnEnter}
                     type={'submit'}
                     onClick={() => changeClickWindow(`1`)}
                 >
-                    Запрос вызова</Button>
-                }
+                    {activeTab == 1 ? "Запрос вызова" : "Запрос кода"}
+                </Button>
+
                 {/*<h3 className={cls.text}>или email адрес</h3>*/}
                 {/*<Input*/}
                 {/*    type="text"*/}
@@ -279,29 +306,29 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                 {/*    defaultValue=""*/}
                 {/*    register={{ ...(register('myEmail')) }}*/}
                 {/*/>*/}
-                {activeTab == 1 &&
-                    <>
-                        <Input
-                            type="text"
-                            classForInput={cls.input}
-                            placeholder="4 последние цифры номера"
-                            classname={cls.inputRelative}
-                            autofocus
-                            defaultValue=''
-                            register={{ ...(register('code')) }}
-                        />
-                        <Input
-                            classForInput={cls.input}
-                            placeholder="Введите новый пароль"
-                            type={passwordHideButton.registerShowHide ? 'text' : 'password'}
-                            classname={cls.inputRelative}
-                            forRef={passwordRegisterRef}
-                            autofocus
-                            defaultValue={textFromForms.passwordRegister}
-                            register={{ ...(register('password')) }}
-                        >
-                            {
-                                passwordHideButton.register
+
+                <>
+                    <Input
+                        type="text"
+                        classForInput={cls.input}
+                        placeholder="4 последние цифры номера"
+                        classname={cls.inputRelative}
+                        autofocus
+                        defaultValue=''
+                        register={{ ...(register('code')) }}
+                    />
+                    <Input
+                        classForInput={cls.input}
+                        placeholder="Введите новый пароль"
+                        type={passwordHideButton.registerShowHide ? 'text' : 'password'}
+                        classname={cls.inputRelative}
+                        forRef={passwordRegisterRef}
+                        autofocus
+                        defaultValue={textFromForms.passwordRegister}
+                        register={{ ...(register('password')) }}
+                    >
+                        {
+                            passwordHideButton.register
                                 && (
                                     <Button
                                         type="button"
@@ -313,20 +340,20 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                                         {!passwordHideButton.registerShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                     </Button>
                                 )
-                            }
-                        </Input>
-                        <Input
-                            classForInput={cls.input}
-                            placeholder="Повторите новый пароль"
-                            type={passwordHideButton.registerCheckShowHide ? 'text' : 'password'}
-                            classname={cls.inputRelative}
-                            forRef={passwordRegisterCheckRef}
-                            autofocus
-                            defaultValue={textFromForms.passwordRegisterCheck}
-                            register={{ ...(register('passwordTwo')) }}
-                        >
-                            {
-                                passwordHideButton.registerCheck
+                        }
+                    </Input>
+                    <Input
+                        classForInput={cls.input}
+                        placeholder="Повторите новый пароль"
+                        type={passwordHideButton.registerCheckShowHide ? 'text' : 'password'}
+                        classname={cls.inputRelative}
+                        forRef={passwordRegisterCheckRef}
+                        autofocus
+                        defaultValue={textFromForms.passwordRegisterCheck}
+                        register={{ ...(register('passwordTwo')) }}
+                    >
+                        {
+                            passwordHideButton.registerCheck
                                 && (
                                     <Button
                                         type="button"
@@ -338,11 +365,9 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                                         {!passwordHideButton.registerCheckShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                     </Button>
                                 )
-                            }
-                        </Input>
-                    </>
-                }
-
+                        }
+                    </Input>
+                </>
             </div>
             <div className={cls.btnCoverTwo}>
                 <Button

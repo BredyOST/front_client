@@ -29,6 +29,8 @@ export type User = {
     lastVisit: null | Date
     activationNumber: string
     activationTgNumber: string
+    activationCodeForChangePassword: string
+    activationCodeForChangePasswordTg: string
     categoriesFreePeriod: PurchasedCategory[]
     notificationsFreePeriod: PurchasedCategory[]
     categoriesHasBought: PurchasedCategory[]
