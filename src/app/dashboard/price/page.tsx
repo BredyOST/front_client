@@ -62,7 +62,8 @@ async function PricePage(props:pageProps) {
                         <h1 className={cls.mainTitle}>Тарифы на подписку</h1>
                         <div className={cls.coverLink}>
                             <div className={cls.text}>Вы находитесь в разделе подключения подписки, для доступа к выбранной категории через сайт.</div>
-                            <div className={cls.text}>Помимо этого вы можете дополнительно или отдельно  подключить уведомления в телеграмм чате. Для ознакомления с тарифами подключения телеграмм чатов, <Link className={cls.link} href={'/dashboard/notifications'}>“перейти к уведомлениям“</Link>.</div>
+                            <div className={cls.text}>Дополнительно или отдельно можно подписаться на уведомления в телеграмм канале, для этого переходите по ссылке к боту, нажмите для перехода на <Link className={cls.link} href={'https://t.me/com_client_acceess_to_chats_bot'}>“@com_client_acceess_to_chats_bot“</Link>.</div>
+                            <div className={cls.text}>После перехода в чат бота, нажмите кнопку start и следуйте инструкциям для получения информации и ознакомления с тарифами</div>
                         </div>
                     </div>
                     <div className={cls.categories}>

@@ -57,6 +57,7 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
             dispatch(changeStateCategoriesPopup(false))
             dispatch(changeStateLoginFormPopup(false))
             dispatch(changeStateFreePeriod(false))
+            document.documentElement.classList.remove("lock")
             timerRef.current = setTimeout(() => {
                 if (onClose) {
                     onClose();

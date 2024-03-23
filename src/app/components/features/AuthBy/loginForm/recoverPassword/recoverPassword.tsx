@@ -157,7 +157,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         password: data?.password,
                         passwordTwo: data?.passwordTwo,
                         code:data?.code,
-                        indicator: `2`
+                        indicator: `1`
                     })
                 }
             }
@@ -219,8 +219,6 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                     : setPasswordHideButton({ ...passwordHideButton, registerCheck: false });
             }
         }
-
-
     };
 
 

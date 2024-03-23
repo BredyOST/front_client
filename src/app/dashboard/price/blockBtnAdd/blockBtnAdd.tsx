@@ -56,26 +56,10 @@ const BlockBtnAdd:FC<blockBtnAddProps> = (props) => {
         }
     }
 
-    const changeStateActiveWindow = (num:number) => {
-        dispatch(addActivePrice(num))
-    }
 
-    
     return (
         <div className={cls.coverCategories}>
             <div className={cls.coverBtns}>
-                {/*<Button*/}
-                {/*    classname={`${cls.btnTwo} ${activePriceWindows == 1 && cls.btnActive} `}*/}
-                {/*    onClick = {() => changeStateActiveWindow(1)}*/}
-                {/*>*/}
-                {/*    Выбор подписки*/}
-                {/*</Button>*/}
-                {/*<Button*/}
-                {/*    classname={`${cls.btnTwo} ${activePriceWindows == 2 && cls.btnActive} `}*/}
-                {/*    onClick = {() => changeStateActiveWindow(2)}*/}
-                {/*>*/}
-                {/*    Подключить уведомления*/}
-                {/*</Button>*/}
             </div>
             <div className={classNames(cls.coverButtonCategories, {},[classname] )} >
                 <Button
