@@ -99,6 +99,7 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                     {/*</label>*/}
                     <div className={cls.coverInput}>
                         <div className={cls.inputZone}>
+
                             <Input
                                 onInput={(e:ChangeEvent<HTMLInputElement>) => addInputText(e)}
                                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyPress(e)}
