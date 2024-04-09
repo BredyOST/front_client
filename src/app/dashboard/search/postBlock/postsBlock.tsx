@@ -151,8 +151,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                 if (!newPosts.length) {
                     break;
                 }
-                console.log(keys)
-                console.log(newPosts)
+
                 // если бесплатный период есть
                 if (infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod) {
                     const currentDate = new Date();
