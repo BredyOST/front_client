@@ -116,10 +116,6 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         }
     }, [categories, infoUser]);
 
-    React.useEffect(() => {
-        console.log(chosenCategory)
-    },[chosenCategory])
-
     return (
         <div className={classNames(cls.Select, {}, [classname])}>
             { title &&

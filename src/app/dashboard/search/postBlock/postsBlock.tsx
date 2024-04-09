@@ -36,7 +36,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     const [page, setPage] = React.useState<number>(1); // номер страницы
     const [filteredPosts, setFilteredPosts] = React.useState<any>([]); // Добавили состояние для отфильтрованных постов
     //USEREF
-    console.log(chosenCategory)
+
     //FUNCTIONS
 
     // функция фильтрации
@@ -151,6 +151,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                 if (!newPosts.length) {
                     break;
                 }
+                console.log(keys)
                 console.log(newPosts)
                 // если бесплатный период есть
                 if (infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod) {
