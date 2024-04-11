@@ -52,7 +52,12 @@ export const Select:FC<SelectProps> = React.memo((props) => {
     };
 
     React.useEffect(() => {
+
         if (!categories || !infoUser) return;
+
+        if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.[0]) && (!infoUser?.categoriesHasBought?.[0]))) {
+            return
+        }
 
         const local = localStorage.getItem('_sel_category');
 
@@ -64,7 +69,9 @@ export const Select:FC<SelectProps> = React.memo((props) => {
             savedCategory = JSON.parse(local);
         }
 
+
         if (savedCategory && savedCategory?.id) {
+
             const findCategFree = infoUser?.categoriesFreePeriod?.find((item:any) => item?.id == savedCategory?.id);
             const findCategBuy = infoUser?.categoriesHasBought?.find((item:any) => item?.id == savedCategory?.id);
 
@@ -74,45 +81,44 @@ export const Select:FC<SelectProps> = React.memo((props) => {
             if (currenDate && findCategBuy?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategBuy?.purchaseEndDate).getTime())) {
                 checAcessBuy = findCategBuy;
             }
-        }
 
-        if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.[0]) && (!infoUser?.categoriesHasBought?.[0]))) {
-            return
-        }
+            if (checAcess || checAcessBuy) {
+                dispatch(addCategoryChosen(savedCategory))
+            }
+        } else {
+            if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
 
-        if (savedCategory && (checAcess || checAcessBuy)) {
-            dispatch(addCategoryChosen(savedCategory))
-        }
-        if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
-            for (let item of infoUser?.categoriesFreePeriod) {
-                if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                    const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
-                    const obj = {
-                        id: selectedCategory?.id,
-                        name: selectedCategory?.name,
-                        positive: selectedCategory?.positiveWords,
-                        negative: selectedCategory?.negativeWords,
-                    };
-                    localStorage.setItem('_sel_category', JSON.stringify(obj));
-                    dispatch(addCategoryChosen(obj));
-                    break;
+                for (let item of infoUser?.categoriesFreePeriod) {
+                    if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
+                        const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
+                        const obj = {
+                            id: selectedCategory?.id,
+                            name: selectedCategory?.name,
+                            positive: selectedCategory?.positiveWords,
+                            negative: selectedCategory?.negativeWords,
+                        };
+                        localStorage.setItem('_sel_category', JSON.stringify(obj));
+                        dispatch(addCategoryChosen(obj));
+                        break;
+                    }
+                }
+            } else if (infoUser && infoUser?.categoriesHasBought?.length >= 1) {
+                for (let item of infoUser?.categoriesHasBought) {
+                    if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
+                        const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
+                        const obj = {
+                            id: selectedCategory?.id,
+                            name: selectedCategory?.name,
+                            positive: selectedCategory?.positiveWords,
+                            negative: selectedCategory?.negativeWords,
+                        };
+                        localStorage.setItem('_sel_category', JSON.stringify(obj));
+                        dispatch(addCategoryChosen(obj));
+                        break;
+                    }
                 }
             }
-        } else if (infoUser && infoUser?.categoriesHasBought?.length >= 1) {
-            for (let item of infoUser?.categoriesHasBought) {
-                if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                    const selectedCategory = categories?.find((elem:any) => elem?.id == item.id);
-                    const obj = {
-                        id: selectedCategory?.id,
-                        name: selectedCategory?.name,
-                        positive: selectedCategory?.positiveWords,
-                        negative: selectedCategory?.negativeWords,
-                    };
-                    localStorage.setItem('_sel_category', JSON.stringify(obj));
-                    dispatch(addCategoryChosen(obj));
-                    break;
-                }
-            }
+
         }
     }, [categories, infoUser]);
 

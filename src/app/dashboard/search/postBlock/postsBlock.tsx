@@ -325,8 +325,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                     target="_blank"
                                 >
                                     {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
-                                        // ? highlightKeywords(item?.post_text)
-                                        // : highlightKeywords(`${item.post_text?.slice(0, 350)}...`)
                                         ? item?.post_text
                                         : `${item.post_text?.slice(0, 350)}...`
                                     }
@@ -343,17 +341,15 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             </div>
                         </div>
                         <div className={cls.blockCity}>
-                            <div className={cls.cityBlockOne}>
-                                {!item.city_group && !item.country_group &&
-                                    <div className={cls.noInfo}>отсутствует город</div>
-                                }
-                                {item.city_group && <div className={cls.noInfo}>{item.city_group}</div>}
-                                {item.country_group && <div className={cls.noInfo}>{item.country_group}</div>}
-                            </div>
                             <div className={cls.cityBlockTwo}>
-                                {item.city_user && <div className={cls.noInfo}>{item.city_user}</div>}
-                                {item.country_user && <div className={cls.noInfo}>{item.country_user}</div>}
+                                {!item.city_user && <div className={cls.noInfo}>город пользователя:  -</div>}
+                                {item.city_user && <div className={cls.noInfo}>город пользователя: {item.city_user}</div>}
                             </div>
+                            <div className={cls.cityBlockOne}>
+                                {!item.city_group && !item.country_group && <div className={cls.noInfo}>город группы: -</div>}
+                                {item.city_group && <div className={cls.noInfo}>город группы: {item.city_group}</div>}
+                            </div>
+
                         </div>
                     </div>
                 ))
