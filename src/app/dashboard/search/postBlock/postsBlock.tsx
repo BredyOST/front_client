@@ -9,6 +9,7 @@ import {
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import Link from "next/link";
 import VkSvg from "./../../../components/svgs/vk.svg"
+import TgSvg from "./../../../components/svgs/telegram.svg"
 
 interface postsBlockProps {
 
@@ -285,6 +286,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             <div>{getFormattedDate(item.post_date_publish)}</div>
                             <div>{getFormattedTime(item.post_date_publish)}</div>
                             {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
+                            {item.identification_post == 'tg' && <div className={cls.identificatorTg}><TgSvg/></div>}
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
@@ -321,7 +323,12 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             </div>
                             <div className={cls.blockText}>
                                 <Link className={cls.linkText}
-                                    href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                    href={
+                                        item.identification_post == 'vk' ?
+                                            `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:
+                                            item.identification_post == 'tg' ?
+                                            `https://t.me/voprosBali/66336  https://vk.com/wall${item.post_owner_id}_${item.post_id}`:''
+                                }
                                     target="_blank"
                                 >
                                     {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350

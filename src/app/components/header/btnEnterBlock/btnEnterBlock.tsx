@@ -46,6 +46,7 @@ const BtnEnterBlock:FC<btnEnterBlockProps> = React.memo((props) => {
     // },[]);
     // для открытия попапа
     const openLoginFormPopup = React.useCallback(() => {
+        console.log('2')
         dispatch(changeStateLoginFormPopup(true));
     }, []);
 

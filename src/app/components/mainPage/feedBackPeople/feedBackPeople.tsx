@@ -40,8 +40,17 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         <div className={cls.item_video}>
                             <iframe
                                 className={cls.frame}
+                                src="https://www.youtube.com//embed/M2WoS2mSEOY"
+                                allowFullScreen
+                                title="YouTube Video"
+                            ></iframe>
+                        </div>
+                    </div>
+                    <div className={cls.videoWrapper}>
+                        <div className={cls.item_video}>
+                            <iframe
+                                className={cls.frame}
                                 src="https://www.youtube.com//embed/nyoWsqG5QgQ"
-                                frameBorder="0"
                                 allowFullScreen
                                 title="YouTube Video"
                             ></iframe>
@@ -52,7 +61,6 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                             <iframe
                                 className={cls.frame}
                                 src="https://www.youtube.com//embed/Qcw1SMbC8W8"
-                                frameBorder="0"
                                 allowFullScreen
                                 title="YouTube Video"
                             ></iframe>
@@ -63,7 +71,6 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                             <iframe
                                 className={cls.frame}
                                 src="https://www.youtube.com//embed/IYkR6YaYKLY"
-                                frameBorder="0"
                                 allowFullScreen
                                 title="YouTube Video"
                             ></iframe>
