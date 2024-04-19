@@ -327,8 +327,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                         item.identification_post == 'vk' ?
                                             `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:
                                             item.identification_post == 'tg' ?
-                                            `https://t.me/voprosBali/66336  https://vk.com/wall${item.post_owner_id}_${item.post_id}`:''
-                                }
+                                                `https://t.me/voprosBali/66336  https://vk.com/wall${item.post_owner_id}_${item.post_id}`:''
+                                    }
                                     target="_blank"
                                 >
                                     {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
