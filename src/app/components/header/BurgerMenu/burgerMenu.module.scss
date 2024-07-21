@@ -16,7 +16,7 @@
   align-items: center;
   z-index: -1;
   transform: translateX(-100%);
-  background-color: #fcfcfc;
+  background-color: globalIndex.$Theme_main_background;
   overflow: auto;
   opacity: 0;
   transition: opacity ease 0.3s, transform ease 0.3s 0s;
@@ -55,9 +55,9 @@
     left: 0;
     content: '';
     min-width: 100%;
-    height: mixins.rem(53);
+    height: mixins.rem(59);
     z-index: 2;
-    background-color: #a19494;
+    background-color: globalIndex.$Theme_main_header_background;
   }
 }
 

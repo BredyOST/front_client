@@ -9,13 +9,11 @@
 .Select{
 }
 .label{
-  font-family: globalIndex.$Title_font_family;
-  line-height: globalIndex.$Search_font_line-height;
-  font-weight: globalIndex.$Search_font_weight;
+  @extend .forNames;
 }
 
 .coverSelect{
-  box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
+  //box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
   border-radius: mixins.rem(5);
   display: flex;
   position: relative;
@@ -35,11 +33,6 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(16);
-  line-height: globalIndex.$Search_font_line-height;
-  font-weight: globalIndex.$Search_font_weight;
-  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .arrow{
@@ -59,12 +52,9 @@
 }
 
 .option{
-  display: flex;
-  font-size: mixins.rem(16);
+  @extend .forNames;
   opacity: 0.5;
-  font-family: globalIndex.$Title_font_family;
-  line-height: globalIndex.$Search_font_line-height;
-  font-weight: globalIndex.$Search_font_weight;
+  display: flex;
   @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 

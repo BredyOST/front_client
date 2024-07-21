@@ -11,9 +11,6 @@
 .list{
     display: flex;
     align-items: center;
-    column-gap: mixins.rem(15);
     flex-wrap: wrap;
     row-gap: mixins.rem(3);
-
-    @include mixins.adaptiveValue("column-gap",15,10,3,900,767.98);
 }

@@ -5,7 +5,6 @@ import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {BurgerMenu} from "@/app/components/header/BurgerMenu/burgerMenu";
-import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {stateBurgerMenuSliceActions} from "@/app/redux/entities/stateBurger/stateBurgerSlice";
 
 

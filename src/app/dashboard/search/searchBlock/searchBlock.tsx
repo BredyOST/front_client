@@ -143,7 +143,7 @@ const SearchBlock:FC<searchBlockProps> = React.memo((props) => {
                 ))}
                 {keyWords?.length === 0 &&
                 <div className={cls.coverKeyWords}>
-                    <div className={cls.keyWords}>Ключевые слова не выбраны</div>
+                    <div className={cls.keyWords}>Фильтр отсутствует</div>
                 </div>
                 }
             </div>

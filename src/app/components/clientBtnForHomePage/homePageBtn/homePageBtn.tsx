@@ -40,6 +40,11 @@ const HomePageBtn:FC<homePageBtnProps> = (props) => {
 
     return (
         <div className={classNames(cls.coverBtn, {},[classname] )} >
+            <AppLink
+                classname={cls.linkTwo}
+                href='/dashboard/contacts'>
+                <span>Поддержка</span>
+            </AppLink>
             {stateAuth ?
                 <AppLink
                     classname={cls.link}

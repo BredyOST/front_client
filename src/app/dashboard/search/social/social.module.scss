@@ -33,7 +33,8 @@ position: relative;
 
 .indicator{
   background-color: #ffffff;
-  box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
+  //box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
+  display: flex;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -43,10 +44,10 @@ position: relative;
   align-items: center;
   position: relative;
   font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(16);
+  font-size: mixins.rem(14);
   line-height: globalIndex.$Search_font_line-height;
   font-weight: globalIndex.$Search_font_weight;
-  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("font-size",14,12,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .btn {

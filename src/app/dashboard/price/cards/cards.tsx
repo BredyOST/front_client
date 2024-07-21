@@ -15,6 +15,7 @@ import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {redirect} from "next/navigation";
+import RubleSvg from '../../../components/svgs/rubleTwo.svg'
 
 interface cardsProps {
     classname?: string;
@@ -87,37 +88,37 @@ const Cards:FC<cardsProps> = React.memo((props) => {
 
         if (item.title == 'Погрузись в работу') {
             if (+period == 1) {
-                setTextMonthSliceTwo('Месяц')
+                setTextMonthSliceTwo('МЕСЯЦ')
             }
             if(+period >= 2 && +period <= 4) {
-                setTextMonthSliceTwo('Месяца')
+                setTextMonthSliceTwo('МЕСЯЦА')
             }
             if(+period  >=5 && +period <= 12) {
-                setTextMonthSliceTwo('Месяцев')
+                setTextMonthSliceTwo('МЕСЯЦЕВ')
             }
         }
 
         if (item.title == 'Недельный') {
             if (+period == 1) {
-                setTextMonthSliceTwo('День')
+                setTextMonthSliceTwo('ДЕНЬ')
             }
             if(+period >= 2 && +period <= 4) {
-                setTextMonthSliceTwo('Дня')
+                setTextMonthSliceTwo('ДНЯ')
             }
             if(+period  >=5 && +period <= 20) {
-                setTextMonthSliceTwo('Дней')
+                setTextMonthSliceTwo('ДНЕЙ')
             }
             if(+period  == 21) {
-                setTextMonthSliceTwo('День')
+                setTextMonthSliceTwo('ДЕНЬ')
             }
             if(+period  >= 22 ) {
-                setTextMonthSliceTwo('Дня')
+                setTextMonthSliceTwo('ДНЯ')
             }
             if(+period  >= 25 && +period  <= 30) {
-                setTextMonthSliceTwo('Дней')
+                setTextMonthSliceTwo('ДНЕЙ')
             }
             if(+period  == 31 ) {
-                setTextMonthSliceTwo('День')
+                setTextMonthSliceTwo('ДЕНЬ')
             }
         }
     },[period])
@@ -200,19 +201,20 @@ const Cards:FC<cardsProps> = React.memo((props) => {
     return (
         <div className={cls.card} >
             <div className={cls.coverSubtitle}>
-                <div className={cls.subtitle}><div>{item.title}</div><h3 className={cls.titleTwo}>(Подписка)</h3></div>
+                <div className={cls.subtitle}><div>{item.title}</div><h3 className={cls.titleTwo}></h3></div>
             </div>
             <div className={cls.body}>
                 <div className={cls.coverPrice}>
-                    {(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
-                    {(price == 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}
-                    {(price !== 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}>р</div> </div>}
+                    <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}></div> </div>
+                    {/*{(price == 0 && item.title == 'Бесплатный') && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}></div> </div>}*/}
+                    {/*{(price == 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.priceRed}>Выберите категорию для отображения цены</div>}*/}
+                    {/*{(price !== 0 && (item.title == 'Недельный' ||  item.title == 'Погрузись в работу')) && <div className={cls.price}><div className={cls.textPrice}>{price}</div><div className={cls.textRubble}></div> </div>}*/}
                 </div>
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>
-                        <div className={cls.coverPeriodMain}>Период</div>
+                        <div className={cls.coverPeriodMain}>ПЕРИОД</div>
                         {item.title == 'Бесплатный'
-                            ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>День</div></div> :
+                            ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>ДЕНЬ</div></div> :
                             item.title == 'Погрузись в работу'
                                 ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>{textMonthSliceTwo}</div></div> :
                                 <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>{textMonthSliceTwo}</div></div>

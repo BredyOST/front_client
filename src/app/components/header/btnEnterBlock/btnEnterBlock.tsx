@@ -8,9 +8,6 @@ import Profile from "@/app/components/header/profileList/profileList";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {redirect} from "next/navigation";
-import App from "next/app";
-import Link from "next/link";
 
 interface btnEnterBlockProps {
     classname?: string;

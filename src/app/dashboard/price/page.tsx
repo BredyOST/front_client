@@ -61,9 +61,11 @@ async function PricePage(props:pageProps) {
                     <div className={cls.section}>
                         <h1 className={cls.mainTitle}>Тарифы на подписку</h1>
                         <div className={cls.coverLink}>
-                            <div className={cls.text}>Вы находитесь в разделе подключения подписки, для доступа к выбранной категории через сайт.</div>
-                            <div className={cls.text}>Дополнительно или отдельно можно подписаться на уведомления в телеграмм канале, для этого переходите по ссылке к боту, нажмите для перехода на <Link className={cls.link} href={'https://t.me/com_client_acceess_to_chats_bot'}>“@com_client_acceess_to_chats_bot“</Link>.</div>
-                            <div className={cls.text}>После перехода в чат бота, нажмите кнопку start и следуйте инструкциям для получения информации и ознакомления с тарифами</div>
+                            <div className={cls.text}>Вы находитесь в разделе оформления доступа к подписке.</div>
+                            <div className={cls.text}>Выберите интересующую вас категорию, тариф и произведите оплату через сертифицированный сервис.</div>
+                            <div className={cls.text}>После успешной оплаты вы получите доступ к заявкам и чек о совершенной операции.</div>
+                            {/*<div className={cls.text}>Дополнительно или отдельно можно подписаться на уведомления в телеграмм канале, для этого переходите по ссылке к боту, нажмите для перехода на <Link className={cls.link} href={'https://t.me/com_client_acceess_to_chats_bot'}>“@com_client_acceess_to_chats_bot“</Link>.</div>*/}
+                            {/*<div className={cls.text}>После перехода в чат бота, нажмите кнопку start и следуйте инструкциям для получения информации и ознакомления с тарифами</div>*/}
                         </div>
                     </div>
                     <div className={cls.categories}>

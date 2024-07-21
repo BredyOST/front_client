@@ -29,6 +29,7 @@ export const navbarFirst:NavBar[] = [
     {text: 'Тарифы', href:'/dashboard/price'},
     {text: 'Вопросы', href:'/dashboard/faq'},
     {text: 'Отзывы', href:'/dashboard/feedback'},
+    // {text: 'контакты', href:'/dashboard/feedback'},
 ]
 
 const Header:FC<headerProps> = React.memo((props) => {
@@ -121,7 +122,6 @@ const Header:FC<headerProps> = React.memo((props) => {
                                     >
                                         <span className={cls.spanFirst}> Перейти к заявкам</span>
                                         <span className={cls.spanSecond}> Заявки</span>
-
                                     </AppLink>
                                     :   <Button
                                         classname={cls.link}

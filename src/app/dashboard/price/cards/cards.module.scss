@@ -5,7 +5,8 @@
 @use "../../../styles/variable/common";
 
 .card{
-  font-family: 'Montserrat';
+  font-family: globalIndex.$Categories_font_family;
+  color: globalIndex.$Theme_main_header_background_button;
   display: flex;
   flex-direction: column;
   border: mixins.rem(1) solid globalIndex.$Card_border_color;
@@ -13,9 +14,8 @@
   padding-bottom: mixins.rem(15);
   padding-left: mixins.rem(20);
   padding-right: mixins.rem(20);
-  background-color: #f3f4f5;
+  background-color: #F2F2F2;
   border-radius: 10px;
-  box-shadow: 0 0 mixins.rem(8) mixins.rem(2) rgba(100, 97, 97, 0.68);
   row-gap: mixins.rem(15);
   min-height: 100%;
   max-width: mixins.rem(350);
@@ -42,22 +42,20 @@
   font-size: mixins.rem(18);
   font-weight: 600;
   color: #C21F39;
-  @include mixins.adaptiveValue("font-size",20,16,3,global.$mobile,320);
+  @include mixins.adaptiveValue("font-size",18,16,3,global.$mobile,320);
 }
 
 .subtitle{
+  font-size: mixins.rem(18);
+  font-weight: 400;
   row-gap: mixins.rem(105);
-  font-family: 'Montserrat';
+  line-height: math.div(25,18);
   text-align: center;
-  color: #000000;
-  font-size: mixins.rem(22);
-  font-weight: 600;
-  padding-right: mixins.rem(15);
-  padding-left: mixins.rem(15);
-  padding-top: mixins.rem(5);
-  padding-bottom: mixins.rem(5);
-  @include mixins.adaptiveValue("font-size",22,20,3,global.$mobile,320);
-  //flex-direction: column;
+  //padding-right: mixins.rem(15);
+  //padding-left: mixins.rem(15);
+  //padding-top: mixins.rem(5);
+  //padding-bottom: mixins.rem(5);
+  @include mixins.adaptiveValue("font-size",18,16,3,global.$mobile,320);
 }
 
 .body{
@@ -73,17 +71,33 @@
   flex-direction: column;
 }
 
+.price,
+.month{
+  font-family: globalIndex.$Categories_Two_font_family;
+  font-size: mixins.rem(globalIndex.$Categories_Two_font_size);
+  font-weight: globalIndex.$Categories_Two_font_weight;
+  line-height: globalIndex.$Categories_Two_font_line-height;
+  letter-spacing: mixins.em(0.15);
+  @include mixins.adaptiveValue("font-size",70,40,3,globalIndex.$Cards_adaptive_start,600);
+}
+
+.period,
+.coverPeriod,
+.periodText {
+  font-family: globalIndex.$Categories_Two_font_family;
+  font-size: mixins.rem(35);
+  font-weight: 500;
+  line-height: math.div(42,35);
+  letter-spacing: mixins.em(0.15);
+  @include mixins.adaptiveValue("font-size",35,28,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+}
+
 .price{
-  font-size: mixins.rem(40);
-  letter-spacing: mixins.em(0.5);
-  font-weight: 600;
   justify-content: center;
   text-align: center;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(3);
-  color: #1979b4;
-  @include mixins.adaptiveValue("font-size",40,22,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .priceRed {
@@ -101,7 +115,9 @@
 }
 
 .textPrice{
-
+  &::after {
+    content: '\20BD';
+  }
 }
 
 .textRubble{
@@ -113,10 +129,8 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  border-top: mixins.rem(2) solid rgb(0 0 0 / 35%);
-  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 35%);
-  padding-top: mixins.rem(10);
-  padding-bottom: mixins.rem(20);
+  //padding-top: mixins.rem(10);
+  //padding-bottom: mixins.rem(10);
   row-gap: mixins.rem(20);
 }
 
@@ -129,8 +143,6 @@
 .coverPeriodMain{
   text-align: center;
   font-size: mixins.rem(20);
-  font-weight: 600;
-
   @include mixins.adaptiveValue("font-size",20,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
@@ -143,7 +155,15 @@
   justify-content: center;
   column-gap: mixins.rem(15);
   font-size: mixins.rem(20);
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  //flex-direction: column;
+}
+
+.rubleSvg{
+  fill: globalIndex.$Theme_main_header_background_button;
+  min-width: mixins.rem(20);
+  min-height: mixins.rem(60);
 }
 
 .period{
@@ -152,17 +172,11 @@
   display: flex;
   align-items: center;
   column-gap: mixins.rem(3);
-  font-weight: 600;
-  color: #1979b4;
-  font-size: mixins.rem(40);
-  @include mixins.adaptiveValue("font-size",40,22,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .periodText{
   justify-content: center;
   text-align: center;
-  font-size: mixins.rem(22);
-  @include mixins.adaptiveValue("font-size",22,18,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .sliderInput{
@@ -172,7 +186,7 @@
   width: 100%;
   -webkit-appearance: none;
   height: mixins.rem(6);
-  background: rgb(16 16 16 / 78%);
+  background: globalIndex.$Theme_main_header_background_button;
   outline: none;
   padding: 0;
   margin: 0;
@@ -183,8 +197,8 @@
     width: mixins.rem(25);
     height: mixins.rem(25);
     border-radius: 50%;
-    background: globalIndex.$Theme_main_header_background_button;
-    border: mixins.rem(5) solid #fdfdfd ;
+    background: mixins.rem(5) #fdfdfd;
+    border: mixins.rem(5) solid globalIndex.$Theme_main_header_background_button ;
     cursor: pointer;
     -webkit-transition: background .15s ease-in-out;
     transition: background .15s ease-in-out;
@@ -222,16 +236,15 @@
 .additional{
   display: flex;
   flex-direction: column;
-  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 35%);
   padding-top: mixins.rem(10);
-  padding-bottom: mixins.rem(20);
+  //padding-bottom: mixins.rem(10);
   row-gap: mixins.rem(5);
 }
 
 .additionalTitle{
-  font-size: mixins.rem(18);
+  font-size: mixins.rem(16);
   font-weight: 600;
-  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
 }
 
 .forSliderCover{
@@ -262,6 +275,10 @@
   padding-right: mixins.rem(15);
   padding-bottom: mixins.rem(10);
   padding-top: mixins.rem(10);
+  color: white;
+
+  @include mixins.adaptiveValue("font-size",18,15,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+
 
   &.active {
     background-color: black;

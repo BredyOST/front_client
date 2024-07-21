@@ -19,26 +19,16 @@ const Footer:FC<footerProps> = React.memo((props) => {
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <Logotype/>
-                    </div>
-                    <div className={cls.coverLinks}>
-                        {/*<AppLink href=''>*/}
-                        {/*    <VkSvg*/}
-                        {/*        className={cls.vkSvg}*/}
-                        {/*    />*/}
-                        {/*</AppLink>*/}
-                        {/*<AppLink href=''>*/}
-                        {/*    <TelegrammSvg*/}
-                        {/*        className={cls.telegramSvg}*/}
-                        {/*    />*/}
-                        {/*</AppLink>*/}
-                    </div>
-                    <div className = {cls.endLinks}>
-                        <div
-                            className={`${cls.link} ${cls.mail}`}
-                        >
+                        <div className={cls.cover}>
                             infoclient.com@gmail.com
                         </div>
+                    </div>
+                    <div className = {cls.endLinks}>
+                        {/*<div*/}
+                        {/*    className={`${cls.link} ${cls.mail}`}*/}
+                        {/*>*/}
+                        {/*    infoclient.com@gmail.com*/}
+                        {/*</div>*/}
                         <AppLink
                             classname={cls.link}
                             href='/dashboard/contacts'>

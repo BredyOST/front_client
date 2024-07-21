@@ -17,15 +17,20 @@
   color: globalIndex.$Logo_color;
   transition: color ease 0.3s 0s;
   min-height: 100%;
+  letter-spacing: mixins.em(globalIndex.$Logo_letter);
   align-self: center;
   align-items: center;
   justify-content: center;
   justify-items: center;
-  @include mixins.adaptiveValue("font-size",globalIndex.$Logo_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,320);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Logo_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,520);
+
+  @include mixins.adaptiveValue("font-size",16,13,3,400,320);
+
   @media (any-hover: hover) {
     &:hover {
       transition: color ease 0.3s 0s;
       color: globalIndex.$Theme_main_navBar_color_Hover;
     }
   }
+
 }

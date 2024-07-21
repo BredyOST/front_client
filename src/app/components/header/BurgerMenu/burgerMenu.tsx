@@ -77,35 +77,35 @@ export const BurgerMenu:FC<BurgerMenuProps> = React.memo((props) => {
             </Button>
             <div className={cls.section}>
                 <ul className={cls.coverLinks}>
-                    {!stateAuth
-                        ? <Button
-                            classname={cls.btnEnter}
-                            onClick={openLoginFormPopup}
-                        >
-                            Войти в учетную запись
-                        </Button>
-                        :   <AppLink
-                            classname={`${cls.links} ${cls.search}`}
-                            href={'/dashboard/profile'}
-                            onClick={closePopup}
-                        >
-                            Профиль
-                        </AppLink>
-                    }
-                    <AppLink
-                        classname={`${cls.links} ${cls.search}`}
-                        href={'/dashboard/search'}
-                        onClick={closePopup}
-                    >
-                        К заявкам
-                    </AppLink>
-                    <AppLink
-                        classname={`${cls.links} ${cls.search}`}
-                        href={'/dashboard/notifications'}
-                        onClick={closePopup}
-                    >
-                        Уведомления
-                    </AppLink>
+                    {/*{!stateAuth*/}
+                    {/*    ? <Button*/}
+                    {/*        classname={cls.btnEnter}*/}
+                    {/*        onClick={openLoginFormPopup}*/}
+                    {/*    >*/}
+                    {/*        Войти в учетную запись*/}
+                    {/*    </Button>*/}
+                    {/*    :   <AppLink*/}
+                    {/*        classname={`${cls.links} ${cls.search}`}*/}
+                    {/*        href={'/dashboard/profile'}*/}
+                    {/*        onClick={closePopup}*/}
+                    {/*    >*/}
+                    {/*        Профиль*/}
+                    {/*    </AppLink>*/}
+                    {/*}*/}
+                    {/*<AppLink*/}
+                    {/*    classname={`${cls.links} ${cls.search}`}*/}
+                    {/*    href={'/dashboard/search'}*/}
+                    {/*    onClick={closePopup}*/}
+                    {/*>*/}
+                    {/*    К заявкам*/}
+                    {/*</AppLink>*/}
+                    {/*<AppLink*/}
+                    {/*    classname={`${cls.links} ${cls.search}`}*/}
+                    {/*    href={'/dashboard/notifications'}*/}
+                    {/*    onClick={closePopup}*/}
+                    {/*>*/}
+                    {/*    Уведомления*/}
+                    {/*</AppLink>*/}
                     {navbarFirst && navbarFirst?.length > 0 &&
                         navbarFirst.map((item) => (
                             <AppLink

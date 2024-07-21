@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20;
+  z-index: 22;
   background-color: globalIndex.$Theme_main_header_background;
   transform: translateY(0%);
   opacity: 1;
@@ -43,18 +43,17 @@
   display: flex;
   justify-content: space-between;
   flex: 1 1 auto;
-  column-gap: mixins.rem(12);
+  column-gap: mixins.rem(50);
+
+  @include mixins.adaptiveValue("column-gap",50,10,3,globalIndex.$Header_adaptive_start,770);
+  @include mixins.adaptiveValue("column-gap",10,3,3,400,320);
 }
 
 .leftSection{
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
-  @include mixins.adaptiveValue("column-gap",30,0,3,1220,global.$tablet);
-
-  @media(min-width: mixins.em(global.$mobile)) {
-    column-gap: mixins.rem(30);
-  }
-
+  justify-content: space-between;
 }
 
 .coverLogo{
@@ -63,13 +62,14 @@
 }
 
 .rightSection{
+
   display: flex;
   align-items: center;
 
   @media(max-width:mixins.em(global.$mobile)) {
     justify-content: flex-end;
     column-gap: mixins.rem(20);
-    @include mixins.adaptiveValue("column-gap",globalIndex.$Link_font_size_adaptive,10,3,globalIndex.$Header_adaptive_start,320);
+    @include mixins.adaptiveValue("column-gap",20,10,3,globalIndex.$Header_adaptive_start,320);
   }
 
   @media(max-width: mixins.em(330)) {
@@ -80,19 +80,26 @@
 
 .link,
 .linkTwo {
-  @extend .btnTwo;
-  @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @extend .btnThree;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
 }
 
 .link {
-  font-family: globalIndex.$NavBar_fontFamily;
-  font-size: globalIndex.$NavBar_fontSize;
-  line-height: globalIndex.$NavBar_fontLine;
-  font-weight: globalIndex.$NavBar_fontWeight;
+  font-family: globalIndex.$GoSearch_fontFamily;
+  font-size: globalIndex.$GoSearch_fontSize;
+  line-height: globalIndex.$GoSearch_fontLine;
+  font-weight: globalIndex.$GoSearch_fontWeight;
   padding-bottom: mixins.rem(11);
   padding-top: mixins.rem(11);
-  padding-left: mixins.rem(15);
-  padding-right: mixins.rem(15);
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  z-index: 30;
+  @include mixins.adaptiveValue("padding-left",27,18,3,900,770);
+  @include mixins.adaptiveValue("padding-right",27,18,3,900,770);
+
+  @include mixins.adaptiveValue("padding-left",18,12,3,420,320);
+  @include mixins.adaptiveValue("padding-right",18,12,3,420,320);
+
 
   & .spanFirst{
     @media(max-width: mixins.em(479)) {
@@ -109,7 +116,6 @@
       visibility: hidden;
     }
   }
-
 }
 
 .linkTwo{
@@ -121,7 +127,7 @@
   align-items: center;
   justify-content: center;
   column-gap: mixins.rem(15);
-  @include mixins.adaptiveValue("column-gap",globalIndex.$Link_font_size_adaptive,7,3,globalIndex.$Header_adaptive_start,320);
+  @include mixins.adaptiveValue("column-gap",15,7,3,globalIndex.$Header_adaptive_start,320);
 }
 
 .TextLogin{
@@ -135,24 +141,31 @@
 
 .navBarFirst{
   font-family: globalIndex.$NavBar_fontFamily;
-  font-size: globalIndex.$NavBar_fontSize;
+  font-size: mixins.rem(globalIndex.$NavBar_fontSize);
   color: globalIndex.$NavBar_Color;
   line-height: globalIndex.$NavBar_fontLine;
   font-weight: globalIndex.$NavBar_fontWeight;
-  letter-spacing: globalIndex.$NavBar_fontLetterSpacing;
-  padding-top: mixins.rem(20);
-  padding-bottom: mixins.rem(20);
-  padding-left: mixins.rem(10);
-  padding-right: mixins.rem(10);
+  letter-spacing: mixins.em(globalIndex.$NavBar_fontLetterSpacing);
+  padding-top: mixins.rem(42);
+  padding-bottom: mixins.rem(42);
+  padding-left: mixins.rem(40);
+  padding-right: mixins.rem(40);
   transition: color ease 0.3s 0s, background-color ease 2s 0s;
+  border-radius: mixins.rem(0);
 
   @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("padding-left",40,15,3,1200,850);
+  @include mixins.adaptiveValue("padding-right",40,15,3,1200,850);
+  @include mixins.adaptiveValue("padding-top",42,30,3,1200,992);
+  @include mixins.adaptiveValue("padding-bottom",42,30,3,1200,992);
 
   @media (any-hover: hover) {
      &:hover {
-       background-color: globalIndex.$Theme_main_navBar_background_color_Hover;
-       color: globalIndex.$Theme_main_navBar_color_Hover;
+       background-color: #eed69b;
+       opacity: 0.8;
+       box-shadow: rgba(59, 59, 57, 0.3) mixins.rem(0) mixins.rem(0) mixins.rem(15);
        transition: color ease 0.3s 0s, background-color ease 0.3s 0s;
+       border-radius: mixins.rem(5);
      }
    }
 

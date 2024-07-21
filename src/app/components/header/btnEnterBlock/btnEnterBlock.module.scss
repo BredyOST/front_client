@@ -12,33 +12,30 @@
 
 .buttonLogin{
   @extend .btn;
-    font-family: globalIndex.$NavBar_fontFamily;
-    font-size: globalIndex.$NavBar_fontSize;
-    line-height: globalIndex.$NavBar_fontLine;
-    font-weight: globalIndex.$NavBar_fontWeight;
-    padding-bottom: mixins.rem(8);
-    padding-top: mixins.rem(8);
+    z-index: 30;
 
-    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+    @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+    @include mixins.adaptiveValue("padding-left",27,18,3,900,770);
+    @include mixins.adaptiveValue("padding-right",27,18,3,900,770);
 
-    @media(min-width: mixins.em(505)) {
-      padding-left: mixins.rem(15);
-      padding-right: mixins.rem(15);
+    @include mixins.adaptiveValue("padding-left",18,12,3,420,320);
+    @include mixins.adaptiveValue("padding-right",18,12,3,420,320);
+
+    @media(min-width: mixins.em(551)) {
+      padding-left: mixins.rem(27);
+      padding-right: mixins.rem(27);
     }
 
-    @media(max-width: mixins.em(504)) {
-      padding-left: mixins.rem(12);
-      padding-right: mixins.rem(12);
+    @media(max-width: mixins.em(550)) {
+      padding-left: mixins.rem(17);
+      padding-right: mixins.rem(17);
+      display: flex;
+      span {
+        display: none;
+      }
     }
-
-  @media(max-width: mixins.em(550)) {
-    display: flex;
-    span {
-      display: none;
-    }
-  }
-
 }
+
 .buttonLoginMin{
   @extend .btn;
 
@@ -74,6 +71,12 @@
   @include mixins.adaptiveValue("width",30,27,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
   @include mixins.adaptiveValue("height",30,27,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
   @include mixins.adaptiveValue("flex-basis",30,27,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(min-width: mixins.em(551)) {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 .profileBlock{

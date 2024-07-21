@@ -41,34 +41,36 @@ export const Burger:FC<burgerProps> = (props) => {
 
     return (
         <div className={open ? `${cls.category} ${cls.activeBurger}` :cls.category }>
-            <h3 className={cls.titleMainCategory}>Категории</h3>
-            <Button
-                classname={cls.titleMainCategoryBtn}
-                onClick = {changeOpen}
-            >
-                <div className={open ? `${cls.burger} ${cls.activeBurger}` :cls.burger}>
-                    <span />
-                </div>
-                <div>Категории</div>
-            </Button>
-            <div className={cls.coverCategory}>
-                {
-                    categ && categ?.map((item:ICategory) =>
-                        <div
-                            className={cls.coverLink}
-                            key={item.id}
-                        >
-                            <AppLink
-                                classname={cls.titleCategory}
+            <div className={cls.block}>
+                <h3 className={cls.titleMainCategory}>Категории</h3>
+                <Button
+                    classname={cls.titleMainCategoryBtn}
+                    onClick = {changeOpen}
+                >
+                    <div className={open ? `${cls.burger} ${cls.activeBurger}` :cls.burger}>
+                        <span />
+                    </div>
+                    <div>Категории</div>
+                </Button>
+                <div className={cls.coverCategory}>
+                    {
+                        categ && categ?.map((item:ICategory) =>
+                            <div
+                                className={cls.coverLink}
                                 key={item.id}
-                                infroForOnclick = {item}
-                                href={'/dashboard/price'}
                             >
-                                {item.name}
-                            </AppLink>
-                        </div>
-                    )
-                }
+                                <AppLink
+                                    classname={cls.titleCategory}
+                                    key={item.id}
+                                    infroForOnclick = {item}
+                                    href={'/dashboard/price'}
+                                >
+                                    {item.name}
+                                </AppLink>
+                            </div>
+                        )
+                    }
+                </div>
             </div>
         </div>
     );

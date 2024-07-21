@@ -1,12 +1,61 @@
 @use "sass:math";
 
 // переменные для тем
-// переменные для темной темы (основная)
 
 //background
 $Theme_main_background: rgb(255, 255, 255); // basic background
-$Theme_main_header_background: #42424f; // header background
-$Theme_main_background_additional: #a9c78d; // дополнительный background
+$Theme_main_header_background: #FFE7AB; // header background
+$Theme_main_header_background_hover: #a19167; // hover в popup
+
+
+// logotype
+$Logo_font_family: "Montserrat"; // шрифт
+$Logo_font_size: 24; // размер
+$Logo_font_size_adaptive: 24; // размер адаптив
+$Logo_font_line-height: math.div(28,24); // межстрочный интервал
+$Logo_font_weight: 400; // жирность
+$Logo_color: 000000;  // цвет текста
+$Logo_letter: -0.15;
+$Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
+
+// NavBar (тарифы, вопросы, отзывы)
+$NavBar_fontFamily: "GothamProRegular"; // шрифт
+$NavBar_Color: 000000; // шрифт
+$NavBar_fontSize: 20; // размер шрифта
+$NavBar_fontSize_AdaptiveStart: 20; // размер шрифта
+$NavBar_fontLine: math.div(24,20); // line-height
+$NavBar_fontWeight: 400; //  font-weight
+$NavBar_fontLetterSpacing: -0.2; //  Letter Spacing
+$Theme_main_navBar_color_Hover: rgb(176 66 66); // basic color hover
+$Theme_main_navBar_background_color_Hover: rgb(64 89 105 / 68%); // basic color hover
+
+// btns
+// header - перейти к заявкам
+$GoSearch_fontFamily: "GothamProRegular"; // шрифт
+$GoSearch_Color: 000000; // шрифт
+$GoSearch_fontSize: 16; // размер шрифта
+$GoSearch_fontSize_AdaptiveStart: 16; // размер шрифта
+$GoSearch_fontLine: math.div(22,16); // line-height
+$GoSearch_fontWeight: 400; //  font-weight
+$GoSearch_fontLetterSpacing: -0.15; //  Letter Spacing
+// header - Войти
+$Enter_fontFamily: "Montserrat"; // шрифт
+$Enter_Color: 000000; // шрифт
+$Enter_fontSize: 16; // размер шрифта
+$Enter_fontSize_AdaptiveStart: 16; // размер шрифта
+$Enter_fontLine: math.div(22,16); // line-height
+$Enter_fontWeight: 400; //  font-weight
+$Enter_fontLetterSpacing: -0.15; //  Letter Spacing
+
+//Footer
+$Footer_fontFamily: "Montserrat"; // шрифт
+$Footer_Color: 000000; // шрифт
+$Footer_fontSize: 16; // размер шрифта
+$Footer_fontSize_AdaptiveStart: 16; // размер шрифта
+$Footer_fontLine: math.div(22,16); // line-height
+$Footer_fontWeight: 400; //  font-weight
+$Footer_fontLetterSpacing: -0.15; //  Letter Spacing
+
 
 //color
 $Theme_main_text_color: rgb(0 0 0); // basic color
@@ -19,7 +68,8 @@ $Theme_attention_font_size_adaptive: 18; // размер адаптив
 $Theme_attention_font_weight: 600; // жирность
 
 //buttons or Links
-$Theme_main_header_background_button: #2ba296;; // button in header
+//$Theme_main_header_background_button: #2ba296;; // button in header
+$Theme_main_header_background_button: #FF9B53; // button in header
 $Theme_main_header_background_Button_hover: #24726a; // button in header hover
 $Theme_main_header_color_text: rgb(253 254 255); // кнопка в header hover текст
 $Theme_main_header_background_button_category: rgb(62 140 175); // button in header
@@ -32,7 +82,7 @@ $Link_font_size: 18; // размер
 $Link_font_size_adaptive: 18; // размер адаптив
 $Link_font_line-height: math.div(24,18); // межстрочный интервал
 $Link_font_weight: 500; // жирность
-$Link_color: #fff; // шрифт
+$Link_color: #000000; // шрифт
 $Link_font_line-height: math.div(24,18); // межстрочный интервал
 
 //Inputs
@@ -50,25 +100,35 @@ $Inputs_profile_padding: 10;
 $Inputs_profile_padding_right: 30;
 
 //Основые отступы внутри страниц
-$padding_top_pages: 80; // отступ внутри страницы
-$padding_top_pages_adaptive: 80; // отступ внутри страницы
+$padding_top_pages: 180; // отступ внутри страницы
+$padding_top_pages_adaptive: 180; // отступ внутри страницы
 $padding_bottom_pages: 60; // отступ внутри страницы
 $padding_bottom_pages_adaptive: 60; // отступ внутри страницы
 
 // для основного текста
-$main_font_family: "OpenSans"; // шрифт
+$main_font_family: "Montserrat"; // шрифт
 $main_font_size: 18; // размер
 $main_font_size_adaptive: 18; // размер адаптив
 $main_font_line-height: math.div(24,18); // межстрочный интервал
-$main_font_weight: 500; // жирность
+$main_font_weight: 400; // жирность
 
-// для заголовков
+// для текста на 30px
+$second_font_family: "Montserrat"; // шрифт
+$second_font_size: 30; // размер
+$second_font_size_adaptive: 30; // размер адаптив
+$second_font_line-height: math.div(35,30); // межстрочный интервал
+$second_font_weight: 400; // жирность
+$second_fontLetterSpacing: -0.35; //  Letter Spacing
+
+
+// для заголовков вначале страниц
 $Title_font_family: "Montserrat"; // шрифт
-$Title_font_size: 28; // размер
-$Title_font_size_adaptive: 28;// размер адаптив
-$Title_font_line-height: math.div(35,28); // межстрочный интервал
+$Title_font_size: 72; // размер
+$Title_font_size_adaptive: 72;// размер адаптив
+$Title_font_line-height: math.div(72,72); // межстрочный интервал
 $Title_font_weight: 700; // жирность
 $Title_color: rgb(0, 0, 0); // цвет текста
+$Title_fontLetterSpacing: -0.2; //  Letter Spacin
 
 //Для поисковой страницы
 $Search_font_family: "Montserrat"; // шрифт
@@ -77,35 +137,52 @@ $Search_font_line-height: math.div(22,16); // межстрочный интер�
 $Search_font_weight: 500; // жирность
 
 // для подзаголовков
-$SubTitle_font_family: "EncodeSans"; // шрифт
+$SubTitle_font_family: "Montserrat"; // шрифт
 $SubTitle_font_size: 28; // размер
 $SubTitle_font_size_adaptive: 28;// размер адаптив
-$SubTitle_font_line-height: math.div(34,28); // межстрочный интервал
+$SubTitle_font_line-height: math.div(35,28); // межстрочный интервал
+$SubTitle_letter-spacing: -0.15;
 $SubTitle_font_weight: 700; // жирность
 $SubTitle_color: rgb(0 0 0); // цвет текста
 
+// дл попапов
+$Popup_font_family: "Montserrat"; // шрифт
+$Popup_font_size: 24; // размер
+$Popup_font_size_adaptive: 24;// размер адаптив
+$Popup_font_line-height: math.div(28,24); // межстрочный интервал
+$Popup_letter-spacing: -0.15;
+$Popup_font_weight: 700; // жирность
+
+$PopupSub_font_family: "Montserrat"; // шрифт
+$PopupSub_font_size: 16; // размер
+$PopupSub_font_size_adaptive: 16;// размер адаптив
+$PopupSub_font_line-height: math.div(24,16); // межстрочный интервал
+$PopupSub_letter-spacing: -0.15;
+$PopupSub_font_weight: 400; // жирность
+
+$Button_back_Popup:#CDCDCD;
+$Button_back_Popup_hover: #a4a4a4;
+
+
 // Для BurgerMenu
-$BurgerMenu_font_family: "OpenSans"; // шрифт
+$BurgerMenu_font_family: "Montserrat"; // шрифт
 $BurgerMenu_font_size: 18; // размер
 $BurgerMenu_font_size_adaptive: 18; // размер адаптив
 $BurgerMenu_font_line-height: math.div(24,18); // межстрочный интервал
 $BurgerMenu_font_weight: 400; // жирность
 
 // Для блока категории
-$Categories_font_family: "Roboto"; // шрифт
+$Categories_font_family: "GothamProRegular"; // шрифт
 $Categories_font_size: 16; // размер
 $Categories_font_size_adaptive: 16; // размер адаптив
 $Categories_font_line-height: math.div(22,16); // межстрочный интервал
 $Categories_font_weight: 400; // жирность
 
-// logotype
-$Logo_font_family: "OpenSans"; // шрифт
-$Logo_font_size: 22; // размер
-$Logo_font_size_adaptive: 20; // размер адаптив
-$Logo_font_line-height: math.div(25,20); // межстрочный интервал
-$Logo_font_weight: 600; // жирность
-$Logo_color: rgb(255, 255, 255);  // цвет текста
-$Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
+$Categories_Two_font_family: "GothamProMedium";
+$Categories_Two_font_size: 70;
+$Categories_Two_font_size_adaptive: 70;
+$Categories_Two_font_line-height: math.div(75,70);
+$Categories_Two_font_weight: 500; // жирность
 
 //второй тект
 $Second_font_family:"Roboto";
@@ -115,25 +192,13 @@ $Header_paddingTop: 2; // отступ внутри контентной час�
 $Header_paddingTop_adaptive: 2; // отступ внутри кондентной части для страниц для адаптивного свойства
 $Header_paddingBottom: 2; // отступ внутри контентной части для страниц
 $Header_paddingBottom__adaptive: 2; // отступ внутри кондентной части для страниц для адаптивного свойства
-$Header_adaptive_start: 1000;
+$Header_adaptive_start: 1300;
 $Header_adaptive_end: 767.98;
 $Header_point_for_two_floors: 540;
 $Header_btn_fontSize:18;
 $NavBar_btn_fontSize_AdaptiveStart: 18;
 $NavBar_btn_fontLine:math.div(24,18);
 $NavBar_btn_fontWeight:400;
-
-// NavBar
-$NavBar_fontFamily: "OpenSans"; // шрифт
-$NavBar_Color: #fff; // шрифт
-//$NavBar_Color: #000000; // шрифт
-$NavBar_fontSize: 18; // размер шрифта
-$NavBar_fontSize_AdaptiveStart: 18; // размер шрифта
-$NavBar_fontLine: math.div(24,18); // line-height
-$NavBar_fontWeight: 400; //  font-weight
-$NavBar_fontLetterSpacing: 0.5; //  Letter Spacing
-$Theme_main_navBar_color_Hover: rgb(176 66 66); // basic color hover
-$Theme_main_navBar_background_color_Hover: rgb(64 89 105 / 68%); // basic color hover
 
 // карточка тарифа
 $Card_border_color: #000;
@@ -154,6 +219,8 @@ $home_highlight-color_end: #a9c78d;
 $home_highlight-color_words: seagreen;
 $PageHome_adaptive_start: 991.98;
 $PageHome_adaptive_end: 320;
+
+$PageHome_adaptive_Title: 1500;
 
 // cards
 $Cards_adaptive_start: 1600;

@@ -10,15 +10,30 @@
   padding-bottom: mixins.rem(globalIndex.$padding_bottom_pages);
   font-family: globalIndex.$main_font_family;
   font-weight: globalIndex.$main_font_weight;
-  @include mixins.adaptiveValue("padding-bottom",globalIndex.$padding_bottom_pages_adaptive,30,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
-  @include mixins.adaptiveValue("padding-top",globalIndex.$padding_top_pages_adaptive,70,3,globalIndex.$PageHome_adaptive_start,767.98);
+  @include mixins.adaptiveValue("padding-bottom",globalIndex.$padding_bottom_pages_adaptive,30,3,globalIndex.$PageHome_adaptive_Title,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-top",globalIndex.$padding_top_pages_adaptive,100,3,globalIndex.$PageHome_adaptive_Title,767.98);
 }
 
 // стиль для текста fz rem(18)
 .mainFontSize {
+  font-size: globalIndex.$main_font_size;
+  font-family: globalIndex.$main_font_family;
+  font-weight: globalIndex.$main_font_weight;
+  line-height: globalIndex.$main_font_line-height;
   @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
 }
 
+// стиль для текста fz rem(30)
+.secondFontSize {
+  font-family: globalIndex.$second_font_family;
+  font-size: mixins.rem(globalIndex.$second_font_size);
+  line-height: math.div(34,globalIndex.$second_font_size);
+  letter-spacing: mixins.em(globalIndex.$second_fontLetterSpacing);
+  font-weight: 500;
+  @include mixins.adaptiveValue("font-size",30,16,3,1400,globalIndex.$Header_adaptive_end);
+}
+
+// Основной заголовок на каждой странице
 .forMainTitle {
   font-family: globalIndex.$Title_font_family;
   text-align: left;
@@ -26,33 +41,74 @@
   line-height: globalIndex.$Title_font_line-height;
   font-weight: globalIndex.$Title_font_weight;
   color: globalIndex.$Title_color;
-  border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
-  padding-bottom: mixins.rem(10);
   justify-content: center;
-  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,20,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  letter-spacing: mixins.rem(globalIndex.$Title_fontLetterSpacing);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,25,3,globalIndex.$PageHome_adaptive_Title,globalIndex.$PageHome_adaptive_end);
 }
 
-// добавь только padding и адаптив
+//=============================
+// для попапов
+.popupTitle {
+  font-family: globalIndex.$Popup_font_family;
+  font-size: mixins.rem(globalIndex.$Popup_font_size);
+  line-height: globalIndex.$Popup_font_line-height;
+  font-weight: globalIndex.$Popup_font_weight;
+  color: black;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Popup_font_size_adaptive,20,3,global.$mobile,320);
+}
+
+.popupSubTitle {
+  font-family: globalIndex.$PopupSub_font_family;
+  font-size: mixins.rem(globalIndex.$PopupSub_font_size);
+  line-height: globalIndex.$PopupSub_font_line-height;
+  font-weight: globalIndex.$PopupSub_font_weight;
+  color: black;
+  text-align: center;
+  @include mixins.adaptiveValue("font-size",globalIndex.$PopupSub_font_size_adaptive,14,3,global.$mobile,320);
+}
+  //=============================
+
+
+// шрифт для страницы поиска в блоке поиск
+.forNames {
+  font-family: globalIndex.$Title_font_family;
+  font-size: mixins.rem(14);
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",14,12,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+
+// добавь только padding и адаптив (оранжевая кнопка)
 .btn{
+  font-family: globalIndex.$Enter_fontFamily;
+  font-size: globalIndex.$Enter_fontSize;
+  line-height: globalIndex.$Enter_fontLine;
+  font-weight: globalIndex.$Enter_fontWeight;
+  letter-spacing: mixins.em(globalIndex.$Enter_fontLetterSpacing);
+  padding-bottom: mixins.rem(10);
+  padding-top: mixins.rem(10);
   color: globalIndex.$Link_color;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(5);
   background-color: globalIndex.$Theme_main_header_background_button;
-  border-radius: mixins.rem(10);
+  border-radius: mixins.rem(20);
   z-index: 2;
   text-align: center;
-  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
   justify-content: center;
 
   @media (any-hover: hover) {
     &:hover {
       background-color: globalIndex.$Theme_main_header_background_Button_hover;
       box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
-      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+      color: white;
     }
   }
 }
+
 //вторая кнопка другой цвет
 .btnTwo{
   color: globalIndex.$Link_color;
@@ -75,6 +131,140 @@
   }
 }
 
+// header
+.btnThree{
+  font-size: mixins.rem(globalIndex.$Enter_fontSize_AdaptiveStart);
+  color: globalIndex.$Link_color;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  border-radius: mixins.rem(20);
+  z-index: 1;
+  text-align: center;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+  justify-content: center;
+  border:  mixins.rem(1) solid black;
+  letter-spacing: globalIndex.$Logo_letter;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_button_hover_Two;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_button_hover_Two;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+      color: white;
+    }
+  }
+}
+
+// кнопка в попапе входа
+.btnLogin{
+  font-family: globalIndex.$Logo_font_family;
+  font-size: mixins.rem(globalIndex.$Enter_fontSize_AdaptiveStart);
+  color: globalIndex.$Link_color;
+  display: flex;
+  align-items: center;
+  column-gap: mixins.rem(5);
+  border-radius: mixins.rem(20);
+  z-index: 1;
+  text-align: center;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+  justify-content: center;
+  letter-spacing: globalIndex.$Logo_letter;
+  flex: 1 1 50%;
+  font-weight: 500;
+  padding-top: mixins.rem(3);
+  padding-bottom: mixins.rem(3);
+  background-color: globalIndex.$Theme_main_header_background;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_hover;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_hover;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+      color: white;
+    }
+  }
+}
+
+.btnGradient {
+  font-family: globalIndex.$GoSearch_fontFamily;
+  font-size: mixins.rem(16);
+  line-height: globalIndex.$GoSearch_fontLine;
+  font-weight: globalIndex.$GoSearch_fontWeight;
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  background: rgb(255,155,83);
+  background: linear-gradient(-90deg, rgba(255,155,83,1) 32%, rgba(255,207,83,1) 78%);
+  border-radius: mixins.rem(20);
+  align-items: center;
+  display: flex;
+  transition: background-color ease 0.3s 0s;
+  position: relative;
+  text-align: center;
+  justify-content: center;
+
+  span {
+    z-index: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(255,155,83);
+    background: linear-gradient(90deg, rgba(255,155,83,1) 32%, rgba(255,207,83,1) 78%);
+    opacity: 0;
+    border-radius: mixins.rem(20);
+    transition: background ease 0.3s 0s, opacity ease 0.3s 0s;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      &::before {
+        transition: background ease 0.3s 0s, opacity ease 0.3s 0s;
+        opacity: 1;
+        z-index: 1;
+      }
+    }
+  }
+}
+
+.btnBack{
+  font-family: globalIndex.$GoSearch_fontFamily;
+  font-size: mixins.rem(16);
+  line-height: globalIndex.$GoSearch_fontLine;
+  font-weight: globalIndex.$GoSearch_fontWeight;
+    letter-spacing: mixins.em(globalIndex.$Enter_fontLetterSpacing);
+    padding-bottom: mixins.rem(10);
+    padding-top: mixins.rem(10);
+    color: globalIndex.$Link_color;
+    display: flex;
+    align-items: center;
+    column-gap: mixins.rem(5);
+    background-color: globalIndex.$Button_back_Popup;
+    border-radius: mixins.rem(20);
+    z-index: 2;
+    text-align: center;
+    transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+    justify-content: center;
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: globalIndex.$Button_back_Popup_hover;
+        box-shadow: 0 0 5px globalIndex.$Button_back_Popup_hover;
+        transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+        color: white;
+      }
+    }
+
+}
+
+
 
 //паддинги для большинства кнопок и увеличение на всю ширину на мобилках
 .widthAndPaddingBtn {
@@ -93,28 +283,30 @@
 
 // кнопка для категорий
 .btnCategory{
+  font-size: mixins.rem(globalIndex.$Enter_fontSize_AdaptiveStart);
   color: globalIndex.$Link_color;
   display: flex;
   align-items: center;
   column-gap: mixins.rem(5);
-  background-color: globalIndex.$Theme_main_header_background_button;
-  border-radius: mixins.rem(10);
-  z-index: 2;
-  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
-  font-size: mixins.rem(16);
+  border-radius: mixins.rem(20);
+  z-index: 1;
+  text-align: center;
+  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+  justify-content: center;
+  border:  mixins.rem(1) solid black;
+  letter-spacing: globalIndex.$Logo_letter;
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: globalIndex.$Theme_main_header_background_button_hover_Two;
+      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_button_hover_Two;
+      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s, color ease 0.3s 0s;
+      color: white;
+    }
+  }
   line-height: math.div(22, 16);
   font-weight: 500;
   font-family: globalIndex.$Categories_font_family;
-
-  @include mixins.adaptiveValue("column-gap",5,2,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: globalIndex.$Theme_main_header_background_Button_hover;
-      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
-      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
-    }
-  }
-
 }
 
 // инпут в профиле
@@ -198,7 +390,6 @@
 
 
 // для профиля
-
 .blockMain {
   border-top: mixins.rem(1) solid rgb(187 173 173 / 65%);
   padding-top: mixins.rem(10);
@@ -206,7 +397,7 @@
 
   @media(min-width: mixins.em(global.$tablet)) {
     display: grid;
-    grid-template-columns: minmax(mixins.rem(130),mixins.rem(130)) 1fr;
+    grid-template-columns: minmax(mixins.rem(150),mixins.rem(160)) 1fr;
     column-gap: mixins.rem(20);
   }
 
@@ -325,5 +516,34 @@
       box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
       transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
     }
+  }
+}
+
+.inputPopupLogin {
+  flex: 1 1 auto;
+  min-width: 100%;
+  border: mixins.rem(2) solid #9d9696;
+  border-radius: 10px;
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(10);
+  padding-right: mixins.rem(60);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  letter-spacing: mixins.em(1);
+  position: relative;
+  background-color: transparent;
+  font-weight: 400;
+
+  &::placeholder {
+    color: #616161;
+    font-weight: 400;
+    font-size: mixins.rem(15);
+
+  }
+
+  &:focus {
+    border: 2px solid #20a7ad;
+    transition: border ease 0.3s 0s;
   }
 }

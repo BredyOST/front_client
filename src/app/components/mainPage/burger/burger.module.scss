@@ -10,55 +10,34 @@
   flex-direction: column;
   row-gap: mixins.rem(10);
 
-  @media(max-width: mixins.em(global.$tablet)) {
-    position: relative;
-    z-index: 2;
-  }
+  //@media(max-width: mixins.em(global.$tablet)) {
+  //  position: relative;
+  //  z-index: 2;
+  //}
 }
+.block{
+  display: flex;
+  flex-direction: column;
+}
+
 
 .coverCategory{
   display: flex;
-  flex-direction: column;
-
-  @media(min-width: mixins.em(global.$tablet)) {
-    border-left: mixins.rem(1) solid rgba(0, 0, 0, 0.15);
-    border-right: mixins.rem(1) solid rgba(0, 0, 0, 0.15);
-    border-radius: mixins.rem(5);
-    max-height: mixins.rem(1160);
-    overflow: auto;
-    background-color: #ffffff;
-  }
-  @media(max-width: mixins.em(global.$tablet)) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    overflow: auto;
-    flex: 1 1 auto;
-    background-color: #fffcfc;
-    z-index: 9;
-    max-height: 0px;
-
-    .activeBurger & {
-      overflow: auto;
-      padding-top: mixins.rem(40);
-      max-height: mixins.rem(400);
-    }
-
-  }
+  padding-top: mixins.rem(60);
+  padding-bottom: mixins.rem(60);
+  @include mixins.adaptiveValue("padding-top", 60, 30, 3, globalIndex.$PageHome_adaptive_Title, global.$mobile);
+  column-gap: mixins.rem(5);
+  row-gap: mixins.rem(10);
+  flex-wrap: wrap;
 }
 
 .titleMainCategory,
 .titleMainCategoryBtn {
-  font-size: mixins.rem(globalIndex.$main_font_size);
-  font-weight: 500;
-  text-align: center;
-  color: white;
-  z-index: 12;
-  background-color: #484f55;
-  padding-top: mixins.rem(7);
-  padding-bottom: mixins.rem(7);
-  border-radius: mixins.rem(5) mixins.rem(5) mixins.rem(5) mixins.rem(5);
+  font-family: globalIndex.$main_font_family;
+  font-size: mixins.rem(33);
+  line-height: math.div(35,33);
+  letter-spacing: mixins.em(-0.35);
+  @include mixins.adaptiveValue("font-size", 33, 25, 3, globalIndex.$PageHome_adaptive_Title, global.$mobile);
 }
 .titleMainCategory {
 
@@ -143,36 +122,26 @@
 
 .coverLink {
   display: flex;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
 }
 
 .titleCategory{
-  display: flex;
-  font-family: mixins.rem(globalIndex.$Title_font_family);
-  font-size: mixins.rem(globalIndex.$Categories_font_size);
-  line-height: globalIndex.$Categories_font_line-height;
-  text-align: left;
-  min-width: 100%;
-  transition: background-color ease 0.3s 0s;
+  @extend .btnThree;
 
-  @media(min-width: mixins.em(global.$tablet)) {
-    padding-bottom: mixins.rem(5);
-    padding-top: mixins.rem(5);
-    padding-left: mixins.rem(5);
-    padding-right: mixins.rem(5);
-    border-radius: mixins.rem(5);
-  }
-  @media(max-width: mixins.em(global.$tablet)) {
-    padding-bottom: mixins.rem(5);
-    padding-top: mixins.rem(5);
-    padding-left: mixins.rem(5);
-    padding-right: mixins.rem(5);
-  }
+  font-family: globalIndex.$GoSearch_fontFamily;
+  font-size: globalIndex.$GoSearch_fontSize;
+  line-height: globalIndex.$GoSearch_fontLine;
+  font-weight: globalIndex.$GoSearch_fontWeight;
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
 
-  @media (any-hover: hover) {
-    &:hover {
-      transition: background-color ease 0.3s 0s;
-      background-color: #b7b0b0;
-    }
-  }
+  @include mixins.adaptiveValue("padding-left",27,15,3,900,770);
+  @include mixins.adaptiveValue("padding-right",27,15,3,900,770);
+
+  @include mixins.adaptiveValue("padding-left",15,12,3,420,320);
+  @include mixins.adaptiveValue("padding-right",15,12,3,420,320);
+
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,500);
 }

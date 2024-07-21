@@ -99,9 +99,9 @@ export const FeedBackPeople:FC<feedBackProps> = (props) => {
                         </div>
                     </div>
                 </div>
-                <Pictures
-                    classname={cls.pictures}
-                    pictures={nextImages}/>
+                {/*<Pictures*/}
+                {/*    classname={cls.pictures}*/}
+                {/*    pictures={nextImages}/>*/}
             </div>
             <div className={cls.coverBtn}>
                 <AppLink

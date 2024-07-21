@@ -99,7 +99,6 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                     {/*</label>*/}
                     <div className={cls.coverInput}>
                         <div className={cls.inputZone}>
-
                             <Input
                                 onInput={(e:ChangeEvent<HTMLInputElement>) => addInputText(e)}
                                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyPress(e)}
@@ -151,7 +150,7 @@ const CityBlock:FC<cityBlockProps> = (props) => {
                 ))}
                 {keyCityWords?.length === 0 &&
                 <div className={cls.coverKeyWords}>
-                    <div className={cls.keyWords}>Поиск осуществляется везде</div>
+                    <div className={cls.keyWords}>Фильтр отсутствует</div>
                 </div>
                 }
             </div>

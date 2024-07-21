@@ -7,7 +7,6 @@
 .pricePage {
   @extend .paddingPages;
   flex: 1 1 auto;
-  background-image: linear-gradient(to left top, #051937, #133457, #215179, #2e719b, #3b92bd);
 }
 
 .cover{
@@ -18,21 +17,22 @@
 .section{
   display: flex;
   flex-direction: column;
-  row-gap: mixins.rem(15);
+  //row-gap: mixins.rem(15);
   flex: 1 1 auto;
 }
 
 .mainTitle{
   @extend .forMainTitle;
+  padding-bottom: mixins.rem(70);
+  @include mixins.adaptiveValue("padding-bottom",70,30,3,global.$tablet,global.$mobile);
 }
 
 .coverLink{
+  @extend .secondFontSize;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  line-height: math.div(27,18);
-  font-size: mixins.rem(18);
-  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+  row-gap: mixins.rem(7);
 }
 
 .link {

@@ -229,7 +229,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
                     <Input
                         classForInput={cls.input}
                         type={passwordHideButton.loginShowHide ? 'text' : 'password'}
-                        placeholder="Пароль"
+                        placeholder="Введите пароль"
                         defaultValue={textFromForms.passwordLogin}
                         classname={cls.inputRelative}
                         autoComplete="password"
@@ -286,7 +286,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
                         classname={cls.btnEnter}
                         type="submit"
                     >
-                        Войти
+                        <span>Войти</span>
                     </Button>
                 </div>
             </div>

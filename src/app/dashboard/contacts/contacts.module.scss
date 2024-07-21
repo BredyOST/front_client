@@ -24,26 +24,28 @@
 }
 
 .mainTitle{
-  @extend .forMainTitle
+  @extend .forMainTitle;
+  padding-bottom: mixins.rem(70);
+  @include mixins.adaptiveValue("padding-bottom",70,30,3,global.$tablet,global.$mobile);
+
 }
 
 .infoPack{
-  font-size: mixins.rem(16);
-  font-weight: 400;
-  line-height: math.div(22, 16);
+  @extend .secondFontSize;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 }
 
 .title {
+  @extend .secondFontSize;
   flex: 1 1 auto;
-  font-weight: 600;
-  text-align: center;
+  text-align: left;
   padding-top: mixins.rem(15);
-  padding-bottom: mixins.rem(15);
-  font-size: mixins.rem(20);
+  padding-bottom: mixins.rem(35);
+
 }
 
 .coverList{
@@ -52,10 +54,10 @@
 
   flex: 1 1 auto;
   justify-content: space-between;
-  row-gap: mixins.rem(10);
+  row-gap: mixins.rem(20);
 
   @media(min-width: mixins.em(global.$mobile)) {
-    min-width: mixins.rem(600);
+    min-width: 100%;
   }
   @media(max-width: mixins.em(global.$mobile)) {
     min-width: 100%;

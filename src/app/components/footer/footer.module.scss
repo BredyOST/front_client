@@ -6,17 +6,35 @@
 
 .footer{
   background-color: globalIndex.$Theme_main_header_background;
-  padding-top: mixins.rem(50);
-  padding-bottom: mixins.rem(70);
-
-  @include mixins.adaptiveValue("padding-top",50,30,3,globalIndex.$PageHome_adaptive_start,991.98);
-  @include mixins.adaptiveValue("padding-bottom",70,30,3,globalIndex.$PageHome_adaptive_start,991.98);
+  padding-top: mixins.rem(38);
+  padding-bottom: mixins.rem(38);
+  @include mixins.adaptiveValue("padding-top",38,30,3,globalIndex.$PageHome_adaptive_start,991.98);
+  @include mixins.adaptiveValue("padding-bottom",38,30,3,globalIndex.$PageHome_adaptive_start,991.98);
+}
+.section {
+  @media(max-width: mixins.rem(990)) {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
 }
 
 .cover{
+
+}
+
+
+.cover{
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   row-gap: mixins.rem(15);
+  column-gap: mixins.rem(70);
+  align-items: center;
+  @include mixins.adaptiveValue("column-gap",70,30,3,1200,1100);
+
+  @media(max-width: mixins.rem(991)) {
+    flex-direction: column;
+  }
 }
 
 .vkSvg,
@@ -34,28 +52,34 @@
    }
 }
 
-.coverLinks{
-  display: flex;
-  column-gap: mixins.rem(10);
-}
-
 .endLinks {
-  font-size: mixins.rem(15);
+  font-family: globalIndex.$Footer_fontFamily;
+  font-size: mixins.rem(globalIndex.$Footer_fontSize);
+  color: globalIndex.$Footer_Color;
+  line-height: globalIndex.$Footer_fontLine;
+  font-weight: globalIndex.$Footer_fontWeight;
+  letter-spacing: mixins.em(globalIndex.$Footer_fontLetterSpacing);
   display: flex;
+  flex: 1 1 auto;
+  min-width: 100%;
+  justify-content: flex-start;
 
-  @media(min-width: mixins.rem(global.$mobile)) {
+  @include mixins.adaptiveValue("font-size",globalIndex.$Footer_fontSize,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(min-width: mixins.rem(990)) {
     column-gap: mixins.rem(15);
+    justify-content: flex-start;
   }
 
-  @media(max-width: mixins.rem(global.$mobile)) {
+  @media(max-width: mixins.rem(990)) {
     flex-direction: column;
+
   }
 
 }
 
 .link {
   display: flex;
-  color: white;
   transition: color ease 0.3s 0s;
 
   @media(min-width: mixins.rem(global.$mobile)) {
@@ -67,20 +91,18 @@
   @media(max-width: mixins.rem(global.$mobile)) {
     padding-top: mixins.rem(10);
     padding-bottom: mixins.rem(10);
-    padding-left: mixins.rem(3);
     padding-right: mixins.rem(3);
     align-items: center;
   }
 
   @media (any-hover: hover) {
     &:hover {
-      color: #79b93e;
+      color: globalIndex.$Theme_main_header_background_button_hover_Two;
       transition: color ease 0.3s 0s;
     }
   }
 
   &.mail{
-    color: #c8d375;
+    color: black;
   }
-
 }

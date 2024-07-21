@@ -3,19 +3,16 @@
 @use './src/app/styles/variable/globalIndex.scss';
 @use "./src/app/styles/mixins.scss";
 @use './src/app/components/shared/ui/Loader/Loader.scss';
+@use './src/app/styles/variable/common.scss';
 
 .selectTabs{
   display: flex;
 }
 
 .title {
+  @extend .forNames;
   display: flex;
   align-items: center;
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(16);
-  line-height: globalIndex.$Search_font_line-height;
-  font-weight: globalIndex.$Search_font_weight;
-  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .coverBtn{
@@ -23,20 +20,14 @@
 }
 
 .tabBtn{
+  @extend .forNames;
   background-color: #ffffff;
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(16);
-  line-height: globalIndex.$Search_font_line-height;
-  font-weight: globalIndex.$Search_font_weight;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
   padding-left: mixins.rem(10);
   padding-right: mixins.rem(10);
   transition: background-color ease 0.3s 0s;
   border: mixins.rem(1) solid rgb(0 0 0 / 45%);
-
-  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
-
   &.left{
     border-radius: mixins.rem(5) mixins.rem(0) mixins.rem(0) mixins.rem(5);
   }

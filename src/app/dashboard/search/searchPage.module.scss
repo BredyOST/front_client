@@ -23,7 +23,9 @@
 }
 
 .mainTitle{
-  @extend .forMainTitle
+  @extend .forMainTitle;
+  padding-bottom: mixins.rem(70);
+  @include mixins.adaptiveValue("padding-bottom",70,30,3,global.$tablet,global.$mobile);
 }
 
 .filters{
@@ -33,7 +35,9 @@
   padding-right: mixins.rem(10);
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f5;
+  //background-color: #f5f5f5;
+  background-color: rgb(242, 242, 242);
+  border-radius: mixins.rem(10);
   row-gap: mixins.rem(10);
 }
 
@@ -169,14 +173,29 @@
 
 .btnLink {
   @extend .btn;
-  padding-top: mixins.rem(6);
-  padding-bottom: mixins.rem(6);
-  padding-left: mixins.rem(10);
-  padding-right: mixins.rem(10);
-  font-size: mixins.rem(18);
-  background-color: #C21F39;
-  font-family: globalIndex.$Title_font_family;
-  @include mixins.adaptiveValue("column-gap",18,16,3,globalIndex.$Cards_adaptive_start,globalIndex.$Cards_adaptive_end);
+  color: white;
+  padding-top: mixins.rem(10);
+  padding-Bottom: mixins.rem(10);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("padding-left",27,18,3,900,770);
+  @include mixins.adaptiveValue("padding-right",27,18,3,900,770);
+
+  @include mixins.adaptiveValue("padding-left",18,12,3,420,320);
+  @include mixins.adaptiveValue("padding-right",18,12,3,420,320);
+
+  @media(min-width: mixins.em(551)) {
+    padding-left: mixins.rem(27);
+    padding-right: mixins.rem(27);
+  }
+
+  @media(max-width: mixins.em(550)) {
+    padding-left: mixins.rem(17);
+    padding-right: mixins.rem(17);
+    display: flex;
+    span {
+      display: none;
+    }
+  }
 }
 
 

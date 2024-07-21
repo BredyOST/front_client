@@ -331,10 +331,10 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                     classname={cls.btnEnter}
                     type="submit"
                 >
-                    Зарегистрироваться
+                    <span>Зарегистрироваться</span>
                 </Button>
                 <Button
-                    classname={cls.btnEnter}
+                    classname={cls.back}
                     onClick={backToLoginIn}
                     type="button"
                 >

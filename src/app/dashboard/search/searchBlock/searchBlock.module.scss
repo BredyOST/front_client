@@ -71,10 +71,8 @@
 }
 
 .inputZone{
-
   position: relative;
   align-items: center;
-
   @media(min-width: mixins.em(global.$tablet)) {
     flex: 0 1 mixins.rem(250);
   }
@@ -101,17 +99,18 @@
   padding-right: mixins.rem(40);
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
-  outline: 1px solid rgb(0 0 0 / 30%);
+  //outline: 1px solid rgb(0 0 0 / 30%);
   transition: outline ease 0.3s 0s;
   font-size: mixins.rem(14);
 
   &::placeholder {
-    color: #d77f7f;
+    color: #616161;
+    font-weight: 400;
   }
 
   &:focus {
-    outline: 2px solid #000;
-    transition: outline ease 0.3s 0s;
+    //outline: 2px solid #000;
+    //transition: outline ease 0.3s 0s;
   }
 
   @media(max-width: mixins.em(global.$tablet)) {
@@ -183,14 +182,13 @@
 
 
 .areaKey{
-  color: white;
+  color: #000000;
   font-weight: 400;
   letter-spacing: mixins.em(0.5);
   font-size: mixins.rem(14);
   display: inline-flex;
-  background-color: #20a7ad;
+  border: mixins.rem(1) solid #0e0e0e;
   border-radius: mixins.rem(10);
-
   align-items: center;
   font-family: globalIndex.$Title_font_family;
   line-height: globalIndex.$Search_font_line-height;
@@ -201,7 +199,7 @@
     padding-bottom: mixins.rem(5);
     padding-right: mixins.rem(10);
     padding-left: mixins.rem(10);
-    column-gap: mixins.rem(10);
+    column-gap: mixins.rem(5);
   }
   @media(max-width: mixins.em(global.$tablet)) {
     padding-top: mixins.rem(3);
@@ -215,14 +213,14 @@
 
 .deleteKey{
   display: flex;
-  color: #ffffff;
+  color: #000000;
   align-items: center;
 }
 
 .keyWords{
   display: inline-flex;
-  color: white;
-  background-color: #20a7ad;
+  color: #000000;
+  border: mixins.rem(1) solid #0e0e0e;
   padding-top: mixins.rem(5);
   padding-bottom: mixins.rem(5);
   padding-right: mixins.rem(10);
@@ -231,7 +229,7 @@
   font-family: globalIndex.$Title_font_family;
   line-height: globalIndex.$Search_font_line-height;
   font-weight: globalIndex.$Search_font_weight;
-  @include mixins.adaptiveValue("font-size",18,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("font-size",14,12,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .coverKeyWords{
@@ -243,7 +241,7 @@
   width: mixins.rem(20);
   height: mixins.rem(20);
   stroke-width: mixins.rem(3);
-  stroke: #ffffff;
+  stroke: #000000;
   stroke-linecap:round;
   transition: stroke-widthease 0.3s 0s;
 

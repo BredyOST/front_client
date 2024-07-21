@@ -22,9 +22,10 @@
 
 .coverLink{
     display: flex;
+    flex-direction: column;
     column-gap: mixins.rem(25);
-    border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
-    padding-bottom: mixins.rem(20);
+    //border-bottom: mixins.rem(2) solid rgb(0 0 0 / 65%);
+    //padding-bottom: mixins.rem(20);
 
     @media(max-width: mixins.em(640)) {
         flex-direction: column;
@@ -40,10 +41,9 @@
 }
 
 .mainTitle{
-   @extend .forMainTitle;
-    border-bottom: none;
-    padding-bottom: mixins.rem(0);
-    align-self: center;
+    @extend .forMainTitle;
+    padding-bottom: mixins.rem(70);
+    @include mixins.adaptiveValue("padding-bottom",70,30,3,global.$tablet,global.$mobile);
 }
 
 .linkCover{
@@ -56,20 +56,23 @@
 }
 
 .link{
-    @extend .btnTwo;
+    @extend .btnThree;
 }
 .linkTwo{
     @extend .btn;
+    font-size: mixins.rem(16);
 }
 
 .link,
 .linkTwo {
-    padding-bottom: mixins.rem(12);
-    padding-top: mixins.rem(12);
-    padding-left: mixins.rem(15);
-    padding-right: mixins.rem(15);
-    @include mixins.adaptiveValue("font-size",globalIndex.$Link_font_size_adaptive,16,3,1250,1050);
-    font-size: mixins.rem(20);
+    padding-bottom: mixins.rem(11);
+    padding-top: mixins.rem(11);
+    padding-left: mixins.rem(27);
+    padding-right: mixins.rem(27);
+    @include mixins.adaptiveValue("padding-left",27,18,3,900,770);
+    @include mixins.adaptiveValue("padding-right",27,18,3,900,770);
+    @include mixins.adaptiveValue("padding-left",18,12,3,420,320);
+    @include mixins.adaptiveValue("padding-right",18,12,3,420,320);
 }
 
 .body{
@@ -134,9 +137,8 @@
 
 .subTitle{
     @extend .forMainTitle;
-    font-size: mixins.rem(22);
-    padding-bottom: mixins.rem(0);
-    @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+    padding-bottom: mixins.rem(70);
+    @include mixins.adaptiveValue("padding-bottom",70,30,3,global.$tablet,global.$mobile);
 }
 
 .coverNumBtnBlock{

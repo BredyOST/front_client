@@ -2,6 +2,7 @@
 @use './src/app/styles/variable/global';
 @use './src/app/styles/variable/globalIndex';
 @use "./src/app/styles/mixins";
+@use './src/app/styles/variable/common.scss';
 
 .form {
   display: flex;
@@ -10,52 +11,25 @@
 }
 
 .title {
-  font-weight: 600;
-  font-size: mixins.rem(22);
-  line-height: math.div(28,22);
-  font-family: globalIndex.$Title_font_family;
-  color: black;
+  @extend .popupTitle;
   position: relative;
   text-align: center;
-  @include mixins.adaptiveValue("font-size",22,20,3,global.$mobile,320);
 }
 
 .input {
-  flex: 1 1 auto;
-  min-width: 100%;
-  border: mixins.rem(2) solid #9d9696;
-  border-radius: 10px;
-  padding-top: mixins.rem(10);
-  padding-bottom: mixins.rem(10);
-  padding-left: mixins.rem(10);
-  padding-right: mixins.rem(10);
-  outline: 0 solid transparent;
-  transition: border ease 0.3s 0s;
-  letter-spacing: em(1);
-  position: relative;
-  background-color: transparent;
-
-  &::placeholder {
-    color: rgb(124 41 41 / 45%);
-    font-weight: 600;
-    font-size: mixins.rem(15);
-
-  }
-
-  &:focus {
-    border: 2px solid #20a7ad;
-    transition: border ease 0.3s 0s;
-  }
+  @extend .inputPopupLogin;
 }
 
 
 
 .btnCoverTwo {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   column-gap: mixins.rem(20);
-  flex-direction: column;
   row-gap: mixins.rem(10);
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+  }
 }
 .coverInp{
   display: flex;
@@ -70,32 +44,45 @@
   position: relative;
 }
 
-.btnEnter,
-.btn{
-  line-height: globalIndex.$main_font_line-height;
-  font-size: mixins.rem(globalIndex.$main_font_size);
-  color: white;
-  display: flex;
-  align-items: center;
-  column-gap: mixins.rem(5);
-  background-color: globalIndex.$Theme_main_header_background_button;
-  border-radius: mixins.rem(10);
-  padding-left: mixins.rem(65);
-  padding-right: mixins.rem(65);
-  flex: 1 1 auto;
-  text-align: center;
-  justify-content: center;
-  padding-bottom: mixins.rem(8);
-  padding-top: mixins.rem(8);
-  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+.btnEnter {
+  @extend .btnGradient;
+  font-weight: 600;
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
 
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: globalIndex.$Theme_main_header_background_Button_hover;
-      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
-      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
-    }
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
   }
+
+}
+
+.back{
+  @extend .btnBack;
+  font-weight: 600;
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+}
+
+.btnGet{
+  @extend .btnLogin;
+  display: inline-flex;
+  max-width: mixins.rem(200);
+  padding-left: mixins.rem(18);
+  padding-right: mixins.rem(18);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
 }
 
 .linkBot{
@@ -111,9 +98,7 @@
 }
 
 .text{
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(15);
-  line-height: math.div(22,15);
+  @extend .popupSubTitle;
   max-width: mixins.rem(460);
   display: flex;
   flex-direction: column;
@@ -127,9 +112,11 @@
 
 .coverCallBtn{
   display: flex;
-  flex: 1 1 auto;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
+  //display: flex;
+  //flex: 1 1 auto;
+  //justify-content: flex-end;
+  //align-items: center;
 }
 
 .coverBtn{
@@ -151,46 +138,24 @@
 .coverPhoneAndMail{
   display: flex;
   column-gap: mixins.rem(5);
-
+  justify-content: center;
 
   @media(max-width: mixins.em(global.$mobile)) {
-    flex-direction: column;
-    row-gap: mixins.rem(7);
+    //flex-direction: column;
+    //row-gap: mixins.rem(7);
   }
 }
 
 .choose{
-  font-size: mixins.rem(16);
-  flex: 1 1 50%;
-  font-weight: 400;
-  background-color: #5b6060;
-  padding-top: mixins.rem(3);
-  padding-bottom: mixins.rem(3);
-  padding-left: mixins.rem(5);
-  padding-right: mixins.rem(5);
-  border-radius: mixins.rem(7);
-  border: mixins.rem(2) solid rgb(0 0 0 / 36%);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: mixins.rem(20);
-  transition: background-color ease 0.3s 0s;
-
-  @media (any-hover: hover) {
-    &:hover {
-      transition: background-color ease 0.3s 0s;
-      background-color: #79b93e;
-    }
-  }
-
+  @extend .btnLogin;
+  flex: 0 1 mixins.rem(180);
 }
 
 .emailSvg {
   max-width: mixins.rem(30);
   max-height: mixins.rem(30);
   flex: 0 0  mixins.rem(30);
-  fill: white;
+  fill: #000000;
   text-align: center;
 }
 
@@ -198,6 +163,6 @@
   max-width: mixins.rem(30);
   max-height: mixins.rem(30);
   flex: 0 0 mixins.rem(30);
-  fill: white;
+  fill: #000000;
   text-align: center;
 }

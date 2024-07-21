@@ -62,16 +62,9 @@
 }
 
 .mainTitle{
+  @extend .forMainTitle;
   padding-bottom: mixins.rem(30);
-  font-family: globalIndex.$Title_font_family;
   text-align: center;
-  font-size: mixins.rem(globalIndex.$Title_font_size);
-  line-height: globalIndex.$Title_font_line-height;
-  font-weight: globalIndex.$Title_font_weight;
-  color: globalIndex.$Title_color;
-  justify-content: center;
-  @include mixins.adaptiveValue("padding-bottom",30,15,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
-  @include mixins.adaptiveValue("font-size",globalIndex.$Title_font_size_adaptive,20,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .pictures{
@@ -123,16 +116,34 @@ padding-top: mixins.rem(26)
   display: flex;
   flex: 1 1  auto;
   justify-content: center;
-  padding-top: mixins.rem(50);
-  @include mixins.adaptiveValue("padding-top",50,25,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  padding-top: mixins.rem(30);
+  @include mixins.adaptiveValue("padding-top",30,25,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
 .link{
-  @extend .btnTwo;
-  padding-top: mixins.rem(15);
-  padding-bottom: mixins.rem(15);
-  padding-left: mixins.rem(40);
-  padding-right: mixins.rem(40);
-  font-size: mixins.rem(20);
-  @include mixins.adaptiveValue("font-size",20,16,3,1200,global.$mobile);
+  @extend .btnThree;
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+  font-family: globalIndex.$GoSearch_fontFamily;
+  font-size: globalIndex.$GoSearch_fontSize;
+  line-height: globalIndex.$GoSearch_fontLine;
+  font-weight: globalIndex.$GoSearch_fontWeight;
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+
+  @include mixins.adaptiveValue("padding-left",27,18,3,900,770);
+  @include mixins.adaptiveValue("padding-right",27,18,3,900,770);
+
+  @include mixins.adaptiveValue("padding-left",18,12,3,420,320);
+  @include mixins.adaptiveValue("padding-right",18,12,3,420,320);
+
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+  }
+
+
+
+
 }

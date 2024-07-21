@@ -47,9 +47,9 @@ async function SearchPage(props: pageProps) {
                 <div className={cls.cover}>
                     <div className={cls.section}>
                         <h1 className={cls.mainTitle}>Поиск клиентов</h1>
-                        <div className={cls.coverForLink}>
-                            <Link className={cls.btnLink} href={'/dashboard/notifications'}>Подключить уведомления</Link>
-                        </div>
+                        {/*<div className={cls.coverForLink}>*/}
+                        {/*    <Link className={cls.btnLink} href={'/dashboard/notifications'}>Подключить уведомления</Link>*/}
+                        {/*</div>*/}
                     </div>
                     <div className={cls.filters}>
                         <div className={cls.coverSearchBlock}>

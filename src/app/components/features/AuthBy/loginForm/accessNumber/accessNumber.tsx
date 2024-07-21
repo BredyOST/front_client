@@ -25,7 +25,7 @@ export type accessNumber = {
 
 const loginText: any = [
     { id: 1, text: 'Звонок' },
-    { id: 2, text: 'Телеграмм-бот' },
+    { id: 2, text: 'Телеграмм' },
 ]
 
 
@@ -155,7 +155,7 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
                             onClick={() => changeActiveTab(item.id)}
                         >
                             {item.text === 'Звонок' && <PhoneSvg className={cls.phoneSvg} />}
-                            {item.text === 'Телеграмм-бот'&& <EmailSvg className={cls.emailSvg} />}
+                            {item.text === 'Телеграмм'&& <EmailSvg className={cls.emailSvg} />}
                             {item.text}
                         </Button>
                     ))}
@@ -203,10 +203,11 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
                 <>
                     <div className={cls.coverCallBtn}>
                         <Button
-                            classname={cls.btn}
+                            classname={cls.btnGet}
                             type={'submit'}
                             onClick={() => changeClickWindow(`1`)}
-                        >Запрос вызова</Button>
+                        >Запрос вызова
+                        </Button>
                     </div>
                     <div className={cls.textCover}>
                         <ul className={cls.text}>
@@ -234,7 +235,7 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
                     Отправить
                 </Button>
                 <Button
-                    classname={cls.btnEnter}
+                    classname={cls.back}
                     onClick={backToLoginIn}
                 >
                     Вернуться

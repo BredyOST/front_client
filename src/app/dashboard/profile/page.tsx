@@ -51,7 +51,7 @@ const ProfilePage:FC<pageProps> = (props) => {
                         <ChangePhone/>
                         <ChangeEmail/>
                         <ChangePassword/>
-                        <Authorizations/>
+                        {/*<Authorizations/>*/}
                         <div className={cls.сategoriesCover}>
                             <h3 className={cls.subTitle}>Активные подписки</h3>
                             <BlockCategory/>

@@ -46,7 +46,7 @@ interface ForTextForms {
 
 const loginText: any = [
     { id: 1, text: 'Звонок' },
-    { id: 2, text: 'Телеграмм-бот' },
+    { id: 2, text: 'Телеграмм' },
 ]
 
 export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
@@ -248,7 +248,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                             onClick={() => changeActiveTab(item.id)}
                         >
                             {item.text === 'Звонок' && <PhoneSvg className={cls.phoneSvg} />}
-                            {item.text === 'Телеграмм-бот'&& <EmailSvg className={cls.emailSvg} />}
+                            {item.text === 'Телеграмм'&& <EmailSvg className={cls.emailSvg} />}
                             {item.text}
                         </Button>
                     ))}
@@ -285,14 +285,15 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         />
                     )}
                 />
-                <Button
-                    classname={cls.btnEnter}
-                    type={'submit'}
-                    onClick={() => changeClickWindow(`1`)}
-                >
-                    {activeTab == 1 ? "Запрос вызова" : "Запрос кода"}
-                </Button>
-
+                <div className={cls.coverBtnTwo}>
+                    <Button
+                        classname={cls.btnGet}
+                        type={'submit'}
+                        onClick={() => changeClickWindow(`1`)}
+                    >
+                        {activeTab == 1 ? "Запрос вызова" : "Запрос кода"}
+                    </Button>
+                </div>
                 {/*<h3 className={cls.text}>или email адрес</h3>*/}
                 {/*<Input*/}
                 {/*    type="text"*/}
@@ -368,14 +369,14 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
             </div>
             <div className={cls.btnCoverTwo}>
                 <Button
-                    classname={cls.btnEnter}
+                    classname={cls.btnLogIn}
                     type="submit"
                     onClick={() => changeClickWindow(`2`)}
                 >
-                    Отправить
+                    <span>Отправить</span>
                 </Button>
                 <Button
-                    classname={cls.btnEnter}
+                    classname={cls.back}
                     onClick={backToLoginIn}
                 >
                     Вернуться

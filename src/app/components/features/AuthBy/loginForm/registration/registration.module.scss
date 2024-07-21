@@ -2,6 +2,7 @@
 @use './src/app/styles/variable/global';
 @use './src/app/styles/variable/globalIndex';
 @use "./src/app/styles/mixins";
+@use './src/app/styles/variable/common.scss';
 
 .form {
   display: flex;
@@ -10,15 +11,9 @@
 }
 
 .title {
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(22);
-  line-height: math.div(28,22);
-  font-weight: 600;
-  color: black;
+  @extend .popupTitle;
   position: relative;
   text-align: center;
-  @include mixins.adaptiveValue("font-size",22,20,3,global.$mobile,320);
-
 }
 
 .inputsForm {
@@ -29,45 +24,17 @@
 }
 
 .textInside{
-
+  font-size: mixins.rem(14);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,10,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
 }
 
-.textInside,
 .text{
-  font-family: globalIndex.$Title_font_family;
-  font-size: mixins.rem(16);
+  @extend .popupSubTitle;
   text-align: left;
-  line-height: math.div(25,16);
-  font-weight: 400;
-  @include mixins.adaptiveValue("font-size",16,14,3,global.$mobile,320);
 }
 
 .input {
-  flex: 1 1 auto;
-  min-width: 100%;
-  border: mixins.rem(2) solid #9d9696;
-  border-radius: 10px;
-  padding-top: mixins.rem(10);
-  padding-bottom: mixins.rem(10);
-  padding-left: mixins.rem(10);
-  padding-right: mixins.rem(60);
-  outline: 0 solid transparent;
-  transition: border ease 0.3s 0s;
-  letter-spacing: mixins.em(1);
-  position: relative;
-  background-color: transparent;
-
-  &::placeholder {
-    color: rgb(124 41 41 / 45%);
-    font-weight: 600;
-    font-size: mixins.rem(15);
-
-  }
-
-  &:focus {
-    border: 2px solid #20a7ad;
-    transition: border ease 0.3s 0s;
-  }
+  @extend .inputPopupLogin;
 }
 
 
@@ -118,7 +85,37 @@
   height: mixins.rem(30);
 }
 
-.btnEnter,
+.btnEnter{
+  @extend .btnGradient;
+  font-weight: 600;
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+}
+
+  .back{
+    @extend .btnBack;
+    font-weight: 600;
+    padding-left: mixins.rem(27);
+    padding-right: mixins.rem(27);
+    padding-bottom: mixins.rem(11);
+    padding-top: mixins.rem(11);
+    @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+    @media(max-width: mixins.em(global.$mobile)) {
+      flex: 1 1 auto;
+      min-width: 100%;
+    }
+  }
+
+
 .link {
   line-height: globalIndex.$main_font_line-height;
   font-size: mixins.rem(globalIndex.$main_font_size);
@@ -148,37 +145,12 @@
 
 .btnCoverTwo {
   display: flex;
-  justify-content: space-between;
   column-gap: mixins.rem(20);
-  flex-direction: column;
-  row-gap: mixins.rem(10);
-}
-
-
-.btnEnter {
-  line-height: globalIndex.$main_font_line-height;
-  font-size: mixins.rem(globalIndex.$main_font_size);
-  color: white;
-  display: flex;
-  align-items: center;
-  column-gap: mixins.rem(5);
-  background-color: globalIndex.$Theme_main_header_background_button;
-  border-radius: mixins.rem(10);
-  padding-left: mixins.rem(65);
-  padding-right: mixins.rem(65);
-  flex: 1 1 auto;
-  text-align: center;
   justify-content: center;
-  padding-bottom: mixins.rem(8);
-  padding-top: mixins.rem(8);
-  transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
+  row-gap: mixins.rem(10);
 
-  @media (any-hover: hover) {
-    &:hover {
-      background-color: globalIndex.$Theme_main_header_background_Button_hover;
-      box-shadow: 0 0 5px globalIndex.$Theme_main_header_background_Button_hover;
-      transition: background-color ease 0.3s 0s, box-shadow ease 0.3s 0s;
-    }
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
   }
 }
 
