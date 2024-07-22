@@ -30,7 +30,7 @@
   line-height: math.div(34,globalIndex.$second_font_size);
   letter-spacing: mixins.em(globalIndex.$second_fontLetterSpacing);
   font-weight: 500;
-  @include mixins.adaptiveValue("font-size",30,16,3,1400,globalIndex.$Header_adaptive_end);
+  @include mixins.adaptiveValue("font-size",26,16,3,1400,globalIndex.$Header_adaptive_end);
 }
 
 // Основной заголовок на каждой странице

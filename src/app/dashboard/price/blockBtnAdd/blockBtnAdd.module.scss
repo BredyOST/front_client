@@ -28,6 +28,7 @@
 .btn{
   @extend .btn;
   color: white;
+  font-size: mixins.rem(16);
   @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
   @include mixins.adaptiveValue("padding-left",27,18,3,900,770);
   @include mixins.adaptiveValue("padding-right",27,18,3,900,770);

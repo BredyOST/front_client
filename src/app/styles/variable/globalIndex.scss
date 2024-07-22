@@ -114,9 +114,9 @@ $main_font_weight: 400; // жирность
 
 // для текста на 30px
 $second_font_family: "Montserrat"; // шрифт
-$second_font_size: 30; // размер
-$second_font_size_adaptive: 30; // размер адаптив
-$second_font_line-height: math.div(35,30); // межстрочный интервал
+$second_font_size: 26; // размер
+$second_font_size_adaptive: 26; // размер адаптив
+$second_font_line-height: math.div(35,26); // межстрочный интервал
 $second_font_weight: 400; // жирность
 $second_fontLetterSpacing: -0.35; //  Letter Spacing
 
@@ -138,9 +138,9 @@ $Search_font_weight: 500; // жирность
 
 // для подзаголовков
 $SubTitle_font_family: "Montserrat"; // шрифт
-$SubTitle_font_size: 28; // размер
-$SubTitle_font_size_adaptive: 28;// размер адаптив
-$SubTitle_font_line-height: math.div(35,28); // межстрочный интервал
+$SubTitle_font_size: 26; // размер
+$SubTitle_font_size_adaptive: 26;// размер адаптив
+$SubTitle_font_line-height: math.div(35,26); // межстрочный интервал
 $SubTitle_letter-spacing: -0.15;
 $SubTitle_font_weight: 700; // жирность
 $SubTitle_color: rgb(0 0 0); // цвет текста

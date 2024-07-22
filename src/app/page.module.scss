@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   row-gap: mixins.rem(70);
-  @include mixins.adaptiveValue("row-gap",70,30,3,global.$tablet,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("row-gap",70,30,3,global.$tablet,global.$mobile);
 }
 
 .coverTitle{
@@ -45,8 +45,11 @@
 .videoWrapper {
   display: flex;
   justify-content: center;
-  flex: 1 1 auto;
   border-radius: mixins.rem(10);
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+  }
 
   @media(max-width: mixins.em(global.$mobile)) {
     display: flex;
@@ -60,20 +63,22 @@
   position: relative;
   aspect-ratio: 16/9;
   border-radius:20%;
-  flex: 0 1 mixins.rem(550);
+
 
   @media(min-width: mixins.em(global.$tablet)) {
     min-width: mixins.rem(450);
     max-height: mixins.rem(350);
+    flex: 0 1 mixins.rem(550);
   }
 
   @media( (min-width: mixins.em(global.$mobile)) and (max-width:mixins.rem(global.$tablet))) {
     min-width: mixins.rem(350);
     max-height: mixins.rem(350);
+
   }
 
   @media(max-width: mixins.em(global.$mobile)) {
-    min-width: 100%;
+
   }
 }
 
@@ -159,7 +164,6 @@
 .basic{
   position: relative;
   white-space: nowrap;
-
 }
 
 .svgLine{
