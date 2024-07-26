@@ -42,7 +42,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     // функция фильтрации
     const applyFilters =(allLoadedPosts:any) => {
-
+        console.log(4)
         if ((!keyWords || !keyWords?.length) && (!keyCityWords || !keyCityWords?.length)) {
             return allLoadedPosts;
         }
@@ -68,8 +68,9 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         return index;
     };
 
-    // получиь ключи по категории
+    // получить ключи по категории
     const getKeys = async (idCat: string | number) => {
+        console.log(2)
         let result = [];
 
         try {
@@ -87,7 +88,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     };
 
     const loadPostsFromRedis = async (i:number, keys:string[]) => {
-
+        console.log(33)
         let result = [];
 
         try {
@@ -104,6 +105,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     }
 
     const loadMorePostsIfNeeded = async (currentPage:string | number) => {
+        console.log(44)
         const postsPerPage = postsCount; // количество постов на страницу 10, 30, 50
         const neededPosts = +currentPage * (postsPerPage + 3); // 2 * (10 + 3) =
         const postsInKey = 300; // количество постов в одном ключе
@@ -136,18 +138,26 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         setPage(1)
     }, [chosenCategory])
 
+
     React.useEffect(() =>  {
         //Функция для Загрузки и Фильтрации Постов:
 
+        const abortController = new AbortController();
+        const { signal } = abortController;
         const loadAndFilterPosts = async () => {
+            console.log(1)
+
             let postsToLoad = 300; // начальное количество постов для загрузки
             let allLoadedPosts:any = []; // массив для всех загруженных постов
             let filteredPosts= [];
             let keys:string[] = [];
             let i = 0;
 
+            // если есть выбранная категория, то получаем ключи из redis
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
+
             while (allLoadedPosts.length < postsToLoad) {
+                if (signal.aborted) return;
                 let newPosts = await loadPostsFromRedis(i, keys); // функция для загрузки постов из Redis
                 if (!newPosts.length) {
                     break;
@@ -174,7 +184,59 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         };
         loadAndFilterPosts()
         setPage(1)
+        return () => {
+            console.log('11111')
+            abortController.abort(); // Отменяем предыдущий запрос при очистке эффекта
+        };
     }, [keyWords, keyCityWords, social, postsCount, chosenCategory])
+
+
+    // React.useEffect(() =>  {
+    //     //Функция для Загрузки и Фильтрации Постов:
+    //     let abort = false
+    //     const loadAndFilterPosts = async () => {
+    //         console.log(1)
+    //
+    //         let postsToLoad = 300; // начальное количество постов для загрузки
+    //         let allLoadedPosts:any = []; // массив для всех загруженных постов
+    //         let filteredPosts= [];
+    //         let keys:string[] = [];
+    //         let i = 0;
+    //
+    //         // если есть выбранная категория, то получаем ключи из redis
+    //         if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
+    //
+    //         while (allLoadedPosts.length < postsToLoad) {
+    //             let newPosts = await loadPostsFromRedis(i, keys); // функция для загрузки постов из Redis
+    //             if (!newPosts.length) {
+    //                 break;
+    //             }
+    //
+    //             // если бесплатный период есть
+    //             if (infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod) {
+    //                 const currentDate = new Date();
+    //                 currentDate.setDate(currentDate.getDate() - 3); // Получаем дату от текущей минус 3 дня
+    //                 newPosts = newPosts.filter((item: any) => new Date(item.post_date_publish*1000).getTime() < currentDate.getTime());
+    //             }
+    //
+    //             allLoadedPosts = [...allLoadedPosts, ...newPosts];
+    //             filteredPosts = applyFilters(allLoadedPosts); // функция для применения фильтров
+    //
+    //             setFilteredPosts(filteredPosts.sort((a:any, b:any) => a.data - b.data))
+    //             if (filteredPosts.length >= postsToLoad) {
+    //                 break;
+    //             }
+    //
+    //             postsToLoad += 300; // увеличиваем количество постов для следующей загрузки
+    //             i++;
+    //         }
+    //     };
+    //     loadAndFilterPosts()
+    //     setPage(1)
+    //     return () => {
+    //         abort = true;
+    //     };
+    // }, [keyWords, keyCityWords, social, postsCount, chosenCategory])
 
     // Пагинация
     const pageCount = Math.ceil(filteredPosts?.length / postsCount);
