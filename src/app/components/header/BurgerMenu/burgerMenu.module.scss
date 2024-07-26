@@ -20,9 +20,10 @@
   overflow: auto;
   opacity: 0;
   transition: opacity ease 0.3s, transform ease 0.3s 0s;
+  font-size: mixins.rem(16);
 
   @include mixins.adaptiveValue("width",450,380,3,970,767.98);
-  @include mixins.adaptiveValue("font-size",25,18,3,500,320);
+  @include mixins.adaptiveValue("font-size",16,14,3,500,320);
 
   @media(min-width: mixins.em(global.$mobile)) {
     width: mixins.rem(450);
