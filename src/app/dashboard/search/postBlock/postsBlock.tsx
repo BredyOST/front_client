@@ -42,7 +42,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     // функция фильтрации
     const applyFilters =(allLoadedPosts:any) => {
-        console.log(4)
         if ((!keyWords || !keyWords?.length) && (!keyCityWords || !keyCityWords?.length)) {
             return allLoadedPosts;
         }
@@ -51,9 +50,19 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                 post.post_text.toLowerCase().includes(word.toLowerCase())
             );
 
-            const matchesCity = !keyCityWords?.length || (keyCityWords?.some((word:string) =>
-                post.city_group?.toLowerCase().includes(word.toLowerCase()))) || (keyCityWords?.some((word:string) =>
-                post.city_user?.toLowerCase().includes(word.toLowerCase())));
+            // const matchesCity = !keyCityWords?.length || (keyCityWords?.some((word:string) =>
+            //     post.city_group?.toLowerCase().includes(word.toLowerCase()))) || (keyCityWords?.some((word:string) =>
+            //     post.city_user?.toLowerCase().includes(word.toLowerCase())));
+
+            const matchesCity = !keyCityWords.length || (
+                post.city_group ?
+                    keyCityWords.some((word: string) =>
+                        post.city_group.toLowerCase().includes(word.toLowerCase())
+                    ) :
+                    keyCityWords.some((word: string) =>
+                        post.city_user?.toLowerCase().includes(word.toLowerCase())
+                    )
+            );
 
             return matchesWords && matchesCity
         });
@@ -70,7 +79,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     // получить ключи по категории
     const getKeys = async (idCat: string | number) => {
-        console.log(2)
         let result = [];
 
         try {
@@ -88,7 +96,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     };
 
     const loadPostsFromRedis = async (i:number, keys:string[]) => {
-        console.log(33)
         let result = [];
 
         try {
@@ -105,7 +112,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     }
 
     const loadMorePostsIfNeeded = async (currentPage:string | number) => {
-        console.log(44)
         const postsPerPage = postsCount; // количество постов на страницу 10, 30, 50
         const neededPosts = +currentPage * (postsPerPage + 3); // 2 * (10 + 3) =
         const postsInKey = 300; // количество постов в одном ключе
@@ -146,7 +152,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         const { signal } = abortController;
         const loadAndFilterPosts = async () => {
             console.log(1)
-
             let postsToLoad = 300; // начальное количество постов для загрузки
             let allLoadedPosts:any = []; // массив для всех загруженных постов
             let filteredPosts= [];
@@ -155,6 +160,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
             // если есть выбранная категория, то получаем ключи из redis
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
+            console.log(2)
+            console.log(keys)
 
             while (allLoadedPosts.length < postsToLoad) {
                 if (signal.aborted) return;
@@ -185,7 +192,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         loadAndFilterPosts()
         setPage(1)
         return () => {
-            console.log('11111')
             abortController.abort(); // Отменяем предыдущий запрос при очистке эффекта
         };
     }, [keyWords, keyCityWords, social, postsCount, chosenCategory])
@@ -410,15 +416,19 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             </div>
                         </div>
                         <div className={cls.blockCity}>
-                            <div className={cls.cityBlockTwo}>
-                                {!item.city_user && <div className={cls.noInfo}>город пользователя:  -</div>}
-                                {item.city_user && <div className={cls.noInfo}>город пользователя: {item.city_user}</div>}
-                            </div>
-                            <div className={cls.cityBlockOne}>
-                                {!item.city_group && !item.country_group && <div className={cls.noInfo}>город группы: -</div>}
-                                {item.city_group && <div className={cls.noInfo}>город группы: {item.city_group}</div>}
-                            </div>
-
+                            {!item?.city_group &&
+                                <div className={cls.cityBlockTwo}>
+                                    {!item.city_user && <div className={cls.noInfo}>пользователь: - </div>}
+                                    {item.city_user && <div className={cls.noInfo}>пользователь: {item.city_user}</div>}
+                                </div>
+                            }
+                            {
+                                item?.city_group &&
+                                <div className={cls.cityBlockOne}>
+                                    {!item.city_group && !item.country_group && <div className={cls.noInfo}>группа: -</div>}
+                                    {item.city_group && <div className={cls.noInfo}>группа: {item.city_group}</div>}
+                                </div>
+                            }
                         </div>
                     </div>
                 ))

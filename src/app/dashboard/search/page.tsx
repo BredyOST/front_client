@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './searchPage.module.scss'
-import { classNames, Mods } from "@/app/components/shared/lib/classNames/className";
+import { classNames } from "@/app/components/shared/lib/classNames/className";
 import { Select } from "@/app/components/shared/ui/Select/Select";
 import Tabs from "@/app/components/shared/ui/tabs/tabs";
 import SearchBlock from "@/app/dashboard/search/searchBlock/searchBlock";
@@ -8,7 +8,6 @@ import Social from "@/app/dashboard/search/social/social";
 import CityBlock from "@/app/dashboard/search/cityBlock/cityBlock";
 import PostsForSearch from "@/app/dashboard/search/postsForSearch/postsForSearch";
 import СleanFilter from "@/app/dashboard/search/cleanFilter/cleanFilter";
-import Link from "next/link";
 
 interface pageProps {
 }
