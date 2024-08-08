@@ -157,6 +157,38 @@
   fill: #693cda;
 }
 
+.identificatorFl{
+  display: flex;
+  color: white;
+  font-weight: 500;
+  position: absolute;
+  right: mixins.rem(5);
+  top: mixins.rem(2);
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  background-color: #04cc60;
+  border-radius: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.identificatorFR{
+  display: flex;
+  color: white;
+  font-weight: 500;
+  position: absolute;
+  right: mixins.rem(5);
+  top: mixins.rem(2);
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  background-color: #87b948;
+  border-radius: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 .linkCover{
   display: flex;
   column-gap: mixins.rem(5);

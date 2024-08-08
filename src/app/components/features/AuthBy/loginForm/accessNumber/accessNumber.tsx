@@ -232,7 +232,7 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
                     type={'submit'}
                     onClick={() => changeClickWindow(`2`)}
                 >
-                    Отправить
+                    <span>Отправить</span>
                 </Button>
                 <Button
                     classname={cls.back}

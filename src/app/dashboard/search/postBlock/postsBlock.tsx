@@ -42,6 +42,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     // функция фильтрации
     const applyFilters =(allLoadedPosts:any) => {
+
         if ((!keyWords || !keyWords?.length) && (!keyCityWords || !keyCityWords?.length)) {
             return allLoadedPosts;
         }
@@ -63,6 +64,15 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         post.city_user?.toLowerCase().includes(word.toLowerCase())
                     )
             );
+
+            // let filterSocial;
+            //
+            // if(social) filterSocial = lists.filter((item) => item.id == social)
+            //
+            // console.log(filterSocial)
+            // const matchesSocial = !social || post?.identification_post?.toLowerCase() === filterSocial?.index.toLowerCase();
+            //
+            // console.log(social)
 
             return matchesWords && matchesCity
         });
@@ -97,7 +107,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     const loadPostsFromRedis = async (i:number, keys:string[]) => {
         let result = [];
-
         try {
             const response = await redisPosts({str: keys[i]});
             if ('data' in response && response.data) {
@@ -112,6 +121,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
     }
 
     const loadMorePostsIfNeeded = async (currentPage:string | number) => {
+
         const postsPerPage = postsCount; // количество постов на страницу 10, 30, 50
         const neededPosts = +currentPage * (postsPerPage + 3); // 2 * (10 + 3) =
         const postsInKey = 300; // количество постов в одном ключе
@@ -124,6 +134,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             if(chosenCategory?.id) {
                 keys = await getKeys(chosenCategory?.id);
             }
+
             const keyIndex = Math.ceil(filteredPosts.length / postsInKey); // 300 / 300 = 1, 900/300 = 3
             // const keyToLoad = keys[keyIndex]; // если будет так 900/300 = 3 то значит ключи 0, 1, 2 использовали 300 + 300 + 300
             // Загрузка новых постов
@@ -147,11 +158,9 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     React.useEffect(() =>  {
         //Функция для Загрузки и Фильтрации Постов:
-
         const abortController = new AbortController();
         const { signal } = abortController;
         const loadAndFilterPosts = async () => {
-            console.log(1)
             let postsToLoad = 300; // начальное количество постов для загрузки
             let allLoadedPosts:any = []; // массив для всех загруженных постов
             let filteredPosts= [];
@@ -160,8 +169,6 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
             // если есть выбранная категория, то получаем ключи из redis
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
-            console.log(2)
-            console.log(keys)
 
             while (allLoadedPosts.length < postsToLoad) {
                 if (signal.aborted) return;
@@ -181,6 +188,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                 filteredPosts = applyFilters(allLoadedPosts); // функция для применения фильтров
 
                 setFilteredPosts(filteredPosts.sort((a:any, b:any) => a.data - b.data))
+
                 if (filteredPosts.length >= postsToLoad) {
                     break;
                 }
@@ -355,22 +363,38 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                             <div>{getFormattedTime(item.post_date_publish)}</div>
                             {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
                             {item.identification_post == 'tg' && <div className={cls.identificatorTg}><TgSvg/></div>}
+                            {item.identification_post == 'FL' && <div className={cls.identificatorFl}><div className={cls.flRu}>FL</div></div>}
+                            {item.identification_post == 'freelancer.ru' && <div className={cls.identificatorFR}><div className={cls.flRu}>FR</div></div>}
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
                                 {!item.signer_id
                                     ? <Link className={cls.link}
-                                        href={`https://vk.com/wall${item.post_owner_id}_${item.post_id}`}
+                                        href={
+                                            item.identification_post == 'vk' ?
+                                                `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:
+                                                item.identification_post == 'tg' ?
+                                                    `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                        item?.id_group : ''
+                                        }
                                         target="_blank">
                                         <div className={cls.rightLinkSvg}>
-                                            {item.photo_100_group && <img className={cls.imageGroup} src={item.photo_100_group} alt=""/>}
+                                            {item?.photo_100_group && <img className={cls.imageGroup} src={item?.photo_100_group} alt=""/>}
                                             <div className={cls.nameGroup}>
                                                 {item.name_group}
                                             </div>
                                         </div>
                                     </Link>
                                     : <Link className={cls.link}
-                                        href={`https://vk.com/id${item.signer_id}`}
+                                        href={
+                                            item.identification_post == 'vk' ?
+                                                `https://vk.com/id${item.signer_id}`:
+                                                item.identification_post == 'tg' ?
+                                                    `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                        item?.id_group : ''
+                                        }
                                         target="_blank">
                                         <div className={cls.rightLinkSvg}>
                                             {item.photo_100_user && <img className={cls.image} src= {item.photo_100_user} alt=""/>}
@@ -395,7 +419,9 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                         item.identification_post == 'vk' ?
                                             `https://vk.com/wall${item?.post_owner_id}_${item?.post_id}`:
                                             item.identification_post == 'tg' ?
-                                                `https://t.me/${item?.id_group}/${item?.post_id}`:''
+                                                `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                    item?.id_group : ''
                                     }
                                     target="_blank"
                                 >
