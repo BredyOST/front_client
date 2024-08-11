@@ -81,8 +81,8 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
             // for(let i  = 0; i <= social.length - 1; i++) {
             //     let number = +social[i]
             //     console.log(number)
-                // if(lists[number]) {
-                // }
+            // if(lists[number]) {
+            // }
             // }
             // !social || post?.identification_post?.toLowerCase() === filterSocial?.index.toLowerCase();
 
