@@ -15,6 +15,12 @@ interface postsBlockProps {
 
 }
 
+const lists = {
+    1: 'vk',
+    2: 'FL',
+    3: 'FR',
+}
+
 const PostsBlock:FC<postsBlockProps> = (props) => {
     const {} = props;
 
@@ -61,17 +67,25 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         post.city_group.toLowerCase().includes(word.toLowerCase())
                     ) :
                     keyCityWords.some((word: string) =>
-                        post.city_user?.toLowerCase().includes(word.toLowerCase())
+                        post.name_group?.toLowerCase().includes(word.toLowerCase())
                     )
             );
 
-            // let filterSocial;
-            //
-            // if(social) filterSocial = lists.filter((item) => item.id == social)
-            //
-            // console.log(filterSocial)
-            // const matchesSocial = !social || post?.identification_post?.toLowerCase() === filterSocial?.index.toLowerCase();
-            //
+            let filterSocial;
+
+            // if(social) filterSocial = lists[social[0]]
+
+            // console.log(lists[social])
+            // const matchesSocial;
+
+            // for(let i  = 0; i <= social.length - 1; i++) {
+            //     let number = +social[i]
+            //     console.log(number)
+                // if(lists[number]) {
+                // }
+            // }
+            // !social || post?.identification_post?.toLowerCase() === filterSocial?.index.toLowerCase();
+
             // console.log(social)
 
             return matchesWords && matchesCity

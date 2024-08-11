@@ -16,9 +16,6 @@ const lists = [
     {id:1, text:'ВКонтакте', index:'vk'},
     {id:2, text:'fl.ru', index:'FL'},
     {id:3, text:'freelance.ru', index:'FR'},
-    // {id:4, text:'Twitter', index:'tw'},
-    // {id:5, text:'Instagram', index:'in'},
-    // {id:6, text:'Телеграмм', index:'tg'},
 ]
 
 const array = lists.map((item) => item.id)
