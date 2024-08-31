@@ -7,10 +7,8 @@ export const metadata = {
     description: 'отзывы',
 };
 
-interface feedBackProps {}
-
-async function getData() {
-    let feedback;
+async function getData(): Promise<any[]> {
+    const feedback = [];
 
     try {
         const feedbackRes = await fetch(
@@ -19,7 +17,7 @@ async function getData() {
         );
         if (feedbackRes.ok) {
             const feedbackArray = await feedbackRes.json();
-            if (feedbackArray.length >= 1) feedback = feedbackArray;
+            if (feedbackArray.length >= 1) feedback.push([...feedbackArray]);
         } else {
             console.error(
                 'feedbackRes feed API request failed with status:',
@@ -29,12 +27,11 @@ async function getData() {
     } catch (err) {
         console.error('save error Redis:', err);
     }
-    return { feedback };
+    return feedback;
 }
 
-async function Feedback(props: feedBackProps) {
-    const {} = props;
-    const { feedback } = await getData();
+async function Feedback() {
+    const feedback = await getData();
 
     const nextImages = feedback?.filter((item: any) =>
         /\b2\.\d/.test(item.originalName),
