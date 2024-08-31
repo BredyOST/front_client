@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import cls from './checkLogin.module.scss';
 
 interface checkLoginProps {
+    checked: boolean;
     classname?: string;
-    checked?: any;
     onChange?: any;
     children?: any;
 }
@@ -14,7 +14,7 @@ export const CheckLogin: FC<checkLoginProps> = (props) => {
 
     const [isChecked, setIsChecked] = React.useState(checked);
 
-    const handleChange = () => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = () => {
         setIsChecked(!isChecked);
         onChange(!isChecked);
     };
