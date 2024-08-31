@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './contacts.module.scss'
-import ConstactUs from "@/app/dashboard/contacts/constactUs/constactUs";
+import ConstactUs from "@/app/components/contactPage/constactUs/constactUs";
 
 export const metadata = {
     title: 'Контакты - клиенты.com',
@@ -20,16 +20,6 @@ const array = [
 ]
 
 function Contacts () {
-
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
 
     return (
         <div className={cls.contacts} >

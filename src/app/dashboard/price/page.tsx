@@ -1,10 +1,10 @@
 import React from 'react';
 import cls from './pricePage.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
-import ListsCategory from "@/app/dashboard/price/listsCategory/listsCategory";
-import Cards from "@/app/dashboard/price/cards/cards";
-import BlockBtnAdd from "@/app/dashboard/price/blockBtnAdd/blockBtnAdd";
-import Link from "next/link";
+import BlockBtnAdd from "@/app/components/pricePage/blockBtnAdd/blockBtnAdd";
+import Cards from "@/app/components/pricePage/cards/cards";
+import ListsCategory from "@/app/components/pricePage/listsCategory/listsCategory";
+
 
 interface pageProps {
 }
@@ -44,6 +44,12 @@ async function getData() {
     return { prices, categories };
 }
 
+const textLists = [
+    {text: 'Вы находитесь в разделе оформления доступа к подписке.'},
+    {text: 'Выберите интересующую вас категорию, тариф и произведите оплату через сертифицированный сервис..'},
+    {text: 'После успешной оплаты вы получите доступ к заявкам и чек о совершенной операции'}
+]
+
 async function PricePage(props:pageProps) {
     const {} = props;
 
@@ -52,7 +58,7 @@ async function PricePage(props:pageProps) {
         categories
     } = await getData();
 
-    const categ = categories.filter((item:any) => item.show)
+    const filteredCategories = categories.filter((item:any) => item.show)
 
     return (
         <div className={classNames(cls.pricePage, {},[] )} >
@@ -61,17 +67,19 @@ async function PricePage(props:pageProps) {
                     <div className={cls.section}>
                         <h1 className={cls.mainTitle}>Тарифы на подписку</h1>
                         <div className={cls.coverLink}>
-                            <div className={cls.text}>Вы находитесь в разделе оформления доступа к подписке.</div>
-                            <div className={cls.text}>Выберите интересующую вас категорию, тариф и произведите оплату через сертифицированный сервис.</div>
-                            <div className={cls.text}>После успешной оплаты вы получите доступ к заявкам и чек о совершенной операции.</div>
-                            {/*<div className={cls.text}>Дополнительно или отдельно можно подписаться на уведомления в телеграмм канале, для этого переходите по ссылке к боту, нажмите для перехода на <Link className={cls.link} href={'https://t.me/com_client_acceess_to_chats_bot'}>“@com_client_acceess_to_chats_bot“</Link>.</div>*/}
-                            {/*<div className={cls.text}>После перехода в чат бота, нажмите кнопку start и следуйте инструкциям для получения информации и ознакомления с тарифами</div>*/}
+                            {textLists?.length >= 1  && textLists.map((item) =>
+                                <div
+                                    key={item?.text}
+                                    className={cls.text}
+                                >
+                                    {item.text}
+                                </div>
+                                
+                            )}
                         </div>
                     </div>
                     <div className={cls.categories}>
-                        <BlockBtnAdd
-                            categories={categ}
-                        />
+                        <BlockBtnAdd/>
                     </div>
                     <div className={cls.prices}>
                         {prices && prices.map((item:any) => (
@@ -85,7 +93,7 @@ async function PricePage(props:pageProps) {
                 </div>
             </div>
             <ListsCategory
-                categories={categ}
+                categories={filteredCategories}
             />
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './feedback.module.scss'
-import Pictures from "@/app/dashboard/feedback/pictures/pictures";
+import Pictures from "@/app/components/feedbackPage/pictures/pictures";
 
 
 export const metadata = {
@@ -8,9 +8,7 @@ export const metadata = {
     description: 'отзывы',
 }
 
-interface feedBackProps {
-
-}
+interface feedBackProps {}
 
 async function getData() {
 
@@ -34,16 +32,6 @@ async function Feedback (props:feedBackProps) {
     const {  } = props;
     const { feedback} = await getData();
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-    // const nextImages = feedback?.filter((item:any) => item.originalName.includes('2.'))
     const nextImages = feedback?.filter((item:any) => /\b2\.\d/.test(item.originalName));
 
     return (

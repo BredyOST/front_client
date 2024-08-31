@@ -14,7 +14,7 @@ import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopu
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import CheckLogin from "@/app/components/features/AuthBy/checbox/checkLogin";
 import Link from "next/link";
-import {Country} from "@/app/dashboard/profile/changePhone/changePhone";
+import {Country} from "@/app/components/profilePage/changePhone/changePhone";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 

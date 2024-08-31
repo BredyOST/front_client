@@ -39,6 +39,7 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
     const {addChosenCategories} = categoriesActions;
     const dispatch = useAppDispatch();
     const [open, setOpen] = React.useState<boolean>(false);
+
     //STATES FROM REDUX
     // все выбранные категории
 
@@ -49,7 +50,6 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
             dispatch(addChosenCategories([ { id: infroForOnclick?.id, text: infroForOnclick?.name }]));
         }
     }
-
 
     return (
         <Link

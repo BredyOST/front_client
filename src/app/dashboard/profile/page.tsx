@@ -1,14 +1,14 @@
 import React, {FC} from 'react';
 import cls from './ProfilePage.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
-import ChangeName from "@/app/dashboard/profile/changeName/changeName";
-import ChangeEmail from "@/app/dashboard/profile/changeEmail/changeEmail";
-import ChangePhone from "@/app/dashboard/profile/changePhone/changePhone";
-import ChangePassword from "@/app/dashboard/profile/changePassword/changePassword";
-import Authorizations from "@/app/dashboard/profile/authorizations/authorizations";
-import BlockCategory from "@/app/dashboard/profile/blockCategory/blockCategory";
+import ChangeName from "@/app/components/profilePage/changeName/changeName";
+import ChangeEmail from "@/app/components/profilePage/changeEmail/changeEmail";
+import ChangePhone from "@/app/components/profilePage/changePhone/changePhone";
+import ChangePassword from "@/app/components/profilePage/changePassword/changePassword";
+import Authorizations from "@/app/components/profilePage/authorizations/authorizations";
+import BlockCategory from "@/app/components/profilePage/blockCategory/blockCategory";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import LogOutBtn from "@/app/dashboard/profile/logOutBtn/logOutBtn";
+import LogOutBtn from "@/app/components/profilePage/logOutBtn/logOutBtn";
 
 export const metadata = {
     title: 'Профиль пользователя - клиенты.com',
@@ -51,7 +51,6 @@ const ProfilePage:FC<pageProps> = (props) => {
                         <ChangePhone/>
                         <ChangeEmail/>
                         <ChangePassword/>
-                        {/*<Authorizations/>*/}
                         <div className={cls.сategoriesCover}>
                             <h3 className={cls.subTitle}>Активные подписки</h3>
                             <BlockCategory/>

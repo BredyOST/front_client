@@ -1,6 +1,6 @@
 'use client';
 import React, { FC} from 'react';
-import cls from './selectRegister.module.scss'
+import cls from './selectCountry.module.scss'
 import {Country} from "@/app/components/profilePage/changePhone/changePhone";
 
 interface selectCountryProps {
@@ -13,11 +13,9 @@ interface selectCountryProps {
     options: Country[];
     classname?:string,
     setInputPhone?:any
-    textFromForms:any,
-    setTextFromForms:any,
 }
 
-const SelectRegister:FC<selectCountryProps> = (props) => {
+const SelectCountry:FC<selectCountryProps> = (props) => {
     const {
         setSelectedCountry,
         options,
@@ -26,8 +24,7 @@ const SelectRegister:FC<selectCountryProps> = (props) => {
         onChange,
         title,
         value,
-        textFromForms,
-        setTextFromForms
+        setInputPhone
     } = props;
 
     //ACTIONS FROM REDUX
@@ -44,7 +41,7 @@ const SelectRegister:FC<selectCountryProps> = (props) => {
         const selectedValue = e.target.value;
         const selectedCountry = options.find((country) => country.value === selectedValue);
         setSelectedCountry(selectedCountry);
-        setTextFromForms({...textFromForms, phoneRegister:  selectedCountry?.value});
+        setInputPhone(selectedCountry?.value);
     }
 
     return (
@@ -63,4 +60,4 @@ const SelectRegister:FC<selectCountryProps> = (props) => {
     );
 };
 
-export default SelectRegister;
+export default SelectCountry;

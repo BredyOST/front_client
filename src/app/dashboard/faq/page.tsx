@@ -1,6 +1,6 @@
 import cls from './faq.module.scss';
 import React from "react";
-import Question from "@/app/dashboard/faq/question/question";
+import Question from "@/app/components/faqPage/question/question";
 import Link from "next/link";
 
 export const metadata = {

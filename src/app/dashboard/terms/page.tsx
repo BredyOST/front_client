@@ -9,17 +9,8 @@ export const metadata = {
 
 function Terms ()  {
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-
     return (
+
         <div className={cls.terms} >
             <div className={'page__container'}>
                 <div className={cls.cover}>

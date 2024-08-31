@@ -8,16 +8,6 @@ export const metadata = {
 
 function Politics (){
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-
     return (
         <div className={cls.page} >
             <div className={'page__container'}>
