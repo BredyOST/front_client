@@ -1,17 +1,16 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './constactUs.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useSendMassageMutation} from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 
-interface constactUsProps {
+interface ConstactUsProps {
     classname?: string;
 }
 
-export const ConstactUs:FC<constactUsProps> = (props) => {
-    const { classname } = props;
+export const ConstactUs = ({classname} : ConstactUsProps) => {
 
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
