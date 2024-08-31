@@ -29,20 +29,17 @@ function Contacts() {
                     <div className={cls.title}>Наши реквизиты</div>
                     <div className={cls.infoPack}>
                         <div className={cls.coverList}>
-                            {array?.length &&
-                                array.map((item) => (
-                                    <div
-                                        className={cls.contactsBlock}
-                                        key={item.id}
-                                    >
-                                        <div className={cls.first}>
-                                            {item.name}
-                                        </div>
-                                        <div className={cls.second}>
-                                            {item.text}
-                                        </div>
+                            {array.map((item) => (
+                                <div
+                                    className={cls.contactsBlock}
+                                    key={item.id}
+                                >
+                                    <div className={cls.first}>{item.name}</div>
+                                    <div className={cls.second}>
+                                        {item.text}
                                     </div>
-                                ))}
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <ConstactUs />
