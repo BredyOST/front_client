@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import React from 'react';
-import {AuthSchema, User} from '../types/authSchema';
+import { AuthSchema, User } from '../types/authSchema';
 
 const initialState: AuthSchema = {
     data: null,
-    isAdmin:false,
-    isMainAdmin:false,
+    isAdmin: false,
+    isMainAdmin: false,
     stateAuth: false,
-
 };
 
 const authSlice = createSlice({
