@@ -1,46 +1,42 @@
 'use client';
-import React, {FC} from 'react';
-import cls from './question.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import ArraySvg from '../../svgs/arrow.svg'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
+import React from 'react';
+import cls from './question.module.scss';
+import { Button } from '@/app/components/shared/ui/Button/Button';
+import ArraySvg from '../../svgs/arrow.svg';
+import {
+    classNames,
+    Mods,
+} from '@/app/components/shared/lib/classNames/className';
+import { FaqAnswer, FaqItem } from '@/app/dashboard/faq/types';
+import { useToggleState } from '@/app/components/faqPage/question/hooks';
 
-interface questionProps {
-    items:any;
+interface QuestionProps {
+    items: FaqItem;
 }
 
-export const Question:FC<questionProps> = (props) => {
-    const {
-        items
-    } = props;
-
-    const [show, setShow] = React.useState<boolean>(false)
+export const Question = ({ items }: QuestionProps) => {
+    const [show, setShow] = React.useState<boolean>(false);
 
     const mod: Mods = {
-        [cls.active]: show
-    }
-    const changeShow = () => {
-        setShow(prevState => !prevState)
-    }
+        [cls.active]: show,
+    };
+    const handleToggleState = useToggleState(setShow);
 
     return (
-
-        <div className={classNames(cls.body, mod,[] )} >
+        <div className={classNames(cls.body, mod, [])}>
             <div className={cls.coverBtn}>
-                <Button
-                    classname={cls.btnOpen}
-                    onClick={changeShow}
-                >
-                    <ArraySvg className={cls.arrowSvg}/>
+                <Button classname={cls.btnOpen} onClick={handleToggleState}>
+                    <ArraySvg className={cls.arrowSvg} />
                     <div className={cls.text}>{items?.question}</div>
                 </Button>
             </div>
             <div className={cls.bodyHide}>
                 {items?.answer?.length >= 1 &&
-                items?.answer?.map((item:any) => (
-                    <div className={cls.elem} key={item.id}>{item?.text}</div>
-                ))
-                }
+                    items?.answer?.map((item: FaqAnswer) => (
+                        <div className={cls.elem} key={item.id}>
+                            {item?.text}
+                        </div>
+                    ))}
             </div>
         </div>
     );
