@@ -1,6 +1,4 @@
-
-
 export interface ICategoriesSchema {
-    categories:any,
-    chosenCategory:any[]
+    categories: any;
+    chosenCategory: any[];
 }
