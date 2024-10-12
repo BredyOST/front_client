@@ -1,6 +1,3 @@
-
-
-
 interface IChosenCategory {
     id?: number;
     name?: string;

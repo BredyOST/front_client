@@ -1,3 +1,3 @@
 export interface StateAuthWindowSchema{
-    clickOnEnter: number,
+    currentPopupNumber: number,
 }

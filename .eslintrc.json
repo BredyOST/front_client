@@ -22,7 +22,7 @@
     "react-hooks/exhaustive-deps": "off", // *******ВКЛЮЧИ ПРИ *********  РАЗРАБОТКЕ Checks effect dependencies  // для react eslint dependency hooks тут лучше error. отвечает за массив зависимостей useEffect, useMemo, useCallback
     "no-param-reassign": "off",// чтобы можно было менять аргументы функции в redux
     "react/react-in-jsx-scope": "off", //узнать что это
-    "react/prop-types": 1, // убрал ошибку ESLint: "classname" is missing in props validation(react/prop-types)
+    "react/prop-types": 1, // убрал ошибку ESLint: "classname" is missing in props validation(react/prop-helpersAuth)
     "react/display-name": "off" // отключить необходимость display name
   }
 }

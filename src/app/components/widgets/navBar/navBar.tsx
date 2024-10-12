@@ -23,7 +23,7 @@ const navBar:FC<navBarProps> = React.memo((props) => {
     return (
         <nav className={classNames(cls.navBar, {},[classname] )} >
             <ul className={cls.list}>
-                {arrayText && arrayText.map((item) => (
+                {arrayText && arrayText.map((item:NavBar) => (
                     <AppLink
                         classname={classnameForLink}
                         href={item.href}

@@ -1,30 +1,19 @@
 import React from 'react';
 import cls from './terms.module.scss'
+import {TERMS_PAGE_TITLE} from "@/app/utils/index.constants";
 
 export const metadata = {
     title: 'Пользовательское соглашение - клиенты.com',
     description: 'Пользовательское соглашение',
 }
 
-
 function Terms ()  {
-
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-
     return (
         <div className={cls.terms} >
             <div className={'page__container'}>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Пользовательское соглашение сайта «клиенты.com»</h1>
+                        <h1 className={cls.mainTitle}>{TERMS_PAGE_TITLE}</h1>
                     </div>
                     <div className={cls.coverMain}>
                         <div className={cls.common}>

@@ -3,16 +3,12 @@ import cls from './logotype.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 
-
-interface logotypeProps {
+interface LogotypeProps {
     classname?: string;
 }
 
+const Logotype = React.memo(({classname}:LogotypeProps) => {
 
-
-const Logotype:FC<logotypeProps> = React.memo((props) => {
-    const { classname } = props;
-    
     return (
         <div className={classNames(cls.logotype, {},[classname] )} >
             <AppLink

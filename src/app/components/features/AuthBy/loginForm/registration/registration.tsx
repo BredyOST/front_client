@@ -1,124 +1,69 @@
 'use client';
-import React, {ChangeEvent, FC} from 'react';
+import React, {FC} from 'react';
 import cls from './registration.module.scss'
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import ShowSvg from "@/app/components/svgs/show.svg";
 import HideSvg from "@/app/components/svgs/hide.svg";
-import {Control, Controller, FieldValues, SubmitHandler, useForm} from "react-hook-form";
+import { Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {useRegisterUserMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
-import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import CheckLogin from "@/app/components/features/AuthBy/checbox/checkLogin";
 import Link from "next/link";
-import {Country} from "@/app/dashboard/profile/changePhone/changePhone";
+import {Country} from "@/app/components/profilePage/changePhone/changePhone";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import {
+    createUserType,
+    ForTextForms,
+    loginForm,
+    passwordHide, textErrors
+} from "@/app/components/features/helpersAuth/helpersRegistration";
+import {TypeForFunc} from "@/app/types/types";
 
 
-interface RegistrationProps {
-    classname?: string;
-}
+interface RegistrationProps {}
 
-type loginForm = {
-    phoneNumberRegistration: string,
-    // mailOrNumberRegistration: string,
-    passwordRegistration: string,
-    passwordRegistrationCheck:string,
-}
-
-interface ForTextForms {
-    phoneRegister:string,
-    // loginRegister: string,
-    passwordRegister: string,
-    passwordRegisterCheck:string
-}
-
-interface passwordHide {
-    register: boolean,
-    registerCheck:boolean,
-    registerShowHide: boolean,
-    registerCheckShowHide:boolean
-}
-
-type createUserType = {
-    phoneNumber:string
-    // email: string
-    password: string
-    passwordCheck: string
-}
-
-const Registration:FC<RegistrationProps> = React.memo((props) => {
-    const {
-        classname,
-    } = props;
+const Registration:FC<RegistrationProps> = React.memo(() => {
     const dispatch = useAppDispatch();
 
-    //RTK
-    // Запрос на регистрацию пользователя
     let [registerIn, {
         data: requestRegister, error: errorRegister, isError: isErrorRegister,  isLoading: loadingRegister,
     }] = useRegisterUserMutation();
 
-    //ACTIONS FROM REDUX
-    // для изменения текущего состояния попапа (от 1 до 3)
-    const { changeStateClickOnEnter } = stateAuthWindowSliceActions;
-    const { closeAllPopups } = statePopupSliceActions;
-    const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
-    const { changeStateLoginFormPopup } = statePopupSliceActions;
+    const { changeStateCurrentPopupNumber } = stateAuthWindowSliceActions;
+    const {addInfoForCommonError} = indicatorsNotifications
+
     const [isChecked, setIsChecked] = React.useState<boolean>(false);
     const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(null);
-    //STATES FROM REDUX
-    // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
-    const { clickOnEnter } = useAppSelector((state) => state.statePopup);
-
-    //USESTATE
-    // для отображения введенных символов в инпуте пароля, login и registration, registerCheck - false значит ничего в поля не введено, loginShowHide, registerShowHide: false - значит пароль скрыт
     const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHide>({
-        register: false, registerCheck:false, registerShowHide: false, registerCheckShowHide: false,
+        enteredRegisterText: false, enteredRegisterCheckText:false, registerBtnShowOrHide: false, registerBtnCheckShowOrHide: false,
     });
-    // для того чтобы делать проверки после введенного логина в графы. Делаем управляемые импуты
     const [textFromForms, setTextFromForms] = React.useState<ForTextForms>({
         phoneRegister:'', passwordRegister: '', passwordRegisterCheck: '',
     });
-    //проверка соответствия паролей в инпутах
-    const [comparePassword, serComparePassword] = React.useState<boolean | ' '>(' ');
-    //USEREF
-    // для получения элемента input при входе (ввод номера)
-    const phoneRegisterRef = React.useRef<HTMLInputElement | null>(null);
-    // для получения элемента input при регистрации (ввод пароля)
+
+    const { currentPopupNumber } = useAppSelector((state) => state.statePopup);
+
+    const [comparePassword, setComparePassword] = React.useState<boolean | ' '>(' ');
+
     const passwordRegisterRef = React.useRef<HTMLInputElement | null>(null);
-    // для получения элемента input при регистрации (ввод пароля)
     const passwordRegisterCheckRef = React.useRef<HTMLInputElement | null>(null);
-    //FUNCTIONS
+
     const onSubmit: SubmitHandler<loginForm> = (data) => {
-        console.log(data)
-        const textError = {
-            message: 'Не совпадают введенные пароли'
-        }
-        const textErrorTwo = {
-            message: 'Не приняты условия политики конфиденциальности'
-        }
-        const textErrorThree= {
-            message: 'Введен некорректный номер телефона'
-        }
-
-
-
         if(data.phoneNumberRegistration.length <= 6) {
-            dispatch(addInfoForCommonError(textErrorThree))
+            dispatch(addInfoForCommonError(textErrors.messageThird))
             return
         }
-        if(!isChecked) dispatch(addInfoForCommonError(textErrorTwo))
-        if(!comparePassword) dispatch(addInfoForCommonError(textError))
-        // отправляем данные на регистрацию пользователя и создаем объект для передачи
+        if(!isChecked) dispatch(addInfoForCommonError(textErrors.messageSecond))
+        if(!comparePassword) dispatch(addInfoForCommonError(textErrors.message))
+
         if(comparePassword && isChecked) {
             const infoForRegistration:createUserType = {
                 phoneNumber:data.phoneNumberRegistration,
-                // email:data.mailOrNumberRegistration,
                 password:data.passwordRegistration,
                 passwordCheck:data.passwordRegistrationCheck,
             }
@@ -126,48 +71,36 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
         }
     };
 
-
     React.useEffect(() => {
         if (requestRegister?.text ==`Регистрация завершена. Осталось подтвердить номер телефона` ) {
-            dispatch(changeStateClickOnEnter(4))
+            dispatch(changeStateCurrentPopupNumber(4))
         }
     },[requestRegister])
 
-
-    //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
     const {register, handleSubmit, setError,control, formState: { errors, isValid },} = useForm<loginForm>({
         mode: 'onChange',
     });
 
-    // для изменения индикатора который меняет type у input на text или password. Показать или скрыть пароль при вводе
-    const showAndHideTextPassword = (name:any) => {
-        setPasswordHideButton({ ...passwordHideButton, registerShowHide: !passwordHideButton.registerShowHide });
-    };
-    const showAndHideTextTwoPassword = (name:any) => {
-        setPasswordHideButton({ ...passwordHideButton, registerCheckShowHide: !passwordHideButton.registerCheckShowHide });
-    };
-
-    // при регистрации
-    const checkTextFormsRegistration = (e: any) => {
-        if (clickOnEnter === 1) {
-            const targetName = e.target.name;
-            const value = e.target.value;
+    const checkTextFormsRegistration:TypeForFunc<React.ChangeEvent<HTMLFormElement>, void> = (e: React.ChangeEvent<HTMLFormElement>) => {
+        if (currentPopupNumber === 1) {
+            const targetName:string = e.target.name;
+            const value:string = e.target.value;
 
             if (targetName === 'passwordRegistration' || targetName === 'passwordRegistrationCheck') {
-                const isPassword = targetName === 'passwordRegistration';
-                const isPasswordCheck = targetName === 'passwordRegistrationCheck';
+                const isPassword:boolean = targetName === 'passwordRegistration';
+                const isPasswordCheck:boolean = targetName === 'passwordRegistrationCheck';
                 if (isPassword) {
                     setTextFromForms({ ...textFromForms, passwordRegister: value });
                     value.length
-                        ?  setPasswordHideButton({ ...passwordHideButton, register: true })
-                        :  setPasswordHideButton({ ...passwordHideButton, register: false });
+                        ?  setPasswordHideButton({ ...passwordHideButton, enteredRegisterText: true })
+                        :  setPasswordHideButton({ ...passwordHideButton, enteredRegisterText: false });
                 }
 
                 if(isPasswordCheck) {
                     setTextFromForms({ ...textFromForms, passwordRegisterCheck: value });
                     value.length
-                        ? setPasswordHideButton({ ...passwordHideButton, registerCheck: true })
-                        : setPasswordHideButton({ ...passwordHideButton, registerCheck: false });
+                        ? setPasswordHideButton({ ...passwordHideButton, enteredRegisterCheckText: true })
+                        : setPasswordHideButton({ ...passwordHideButton, enteredRegisterCheckText: false });
                 }
             }
 
@@ -182,26 +115,28 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
         }
     };
 
-    // провека введенных паролей в инпуты на соответствие
     React.useEffect(() => {
         if(textFromForms.passwordRegister !== textFromForms.passwordRegisterCheck) {
-            serComparePassword(false)
+            setComparePassword(false)
         }
         if(textFromForms.passwordRegister === textFromForms.passwordRegisterCheck) {
-            serComparePassword(true)
+            setComparePassword(true)
         }
     },[textFromForms.passwordRegister, textFromForms.passwordRegisterCheck])
-
-    // возвращаемся на ввод логина и пароля
-    const backToLoginIn = () => {
-        dispatch(changeStateClickOnEnter(0));
+    const showAndHideTextPassword:TypeForFunc<void, void> = () => {
+        setPasswordHideButton({ ...passwordHideButton, registerBtnShowOrHide: !passwordHideButton.registerBtnShowOrHide });
     };
-
-    const handleCheckboxChange = (value:any) => {
+    const showAndHideTextTwoPassword:TypeForFunc<void, void> = () => {
+        setPasswordHideButton({ ...passwordHideButton, registerBtnCheckShowOrHide: !passwordHideButton.registerBtnCheckShowOrHide });
+    };
+    const backToLoginIn:TypeForFunc<void, void> = () => {
+        dispatch(changeStateCurrentPopupNumber(0));
+    };
+    const handleCheckboxChange:TypeForFunc<boolean, void> = (value) => {
         setIsChecked(value);
     };
 
-    if (clickOnEnter != 1 ) {
+    if (currentPopupNumber != 1 ) {
         return null
     }
 
@@ -246,7 +181,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                     <div className={cls.coverPassword}>
                         <Input
                             classForInput={cls.input}
-                            type={passwordHideButton.registerShowHide ? 'text' : 'password'}
+                            type={passwordHideButton.registerBtnShowOrHide ? 'text' : 'password'}
                             placeholder="Введите пароль"
                             classname={cls.inputRelative}
                             defaultValue={textFromForms.passwordRegister}
@@ -267,7 +202,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                             }}
                         >
                             {
-                                passwordHideButton.register
+                                passwordHideButton.enteredRegisterText
                             && (
                                 <Button
                                     type="button"
@@ -276,7 +211,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                                     addNametoFunction={true}
                                     onClick={showAndHideTextPassword}
                                 >
-                                    {!passwordHideButton.registerShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
+                                    {!passwordHideButton.registerBtnShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                 </Button>
                             )
                             }
@@ -286,7 +221,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                         </Input>
                         <Input
                             classForInput={cls.input}
-                            type={passwordHideButton.registerCheckShowHide ? 'text' : 'password'}
+                            type={passwordHideButton.registerBtnCheckShowOrHide ? 'text' : 'password'}
                             placeholder="Повторите пароль"
                             classname={cls.inputRelative}
                             defaultValue={textFromForms.passwordRegisterCheck}
@@ -297,7 +232,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                             }}
                         >
                             {
-                                passwordHideButton.registerCheck
+                                passwordHideButton.enteredRegisterCheckText
                             && (
                                 <Button
                                     type="button"
@@ -306,7 +241,7 @@ const Registration:FC<RegistrationProps> = React.memo((props) => {
                                     classname={cls.hideButton}
                                     onClick={showAndHideTextTwoPassword}
                                 >
-                                    {!passwordHideButton.registerCheckShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
+                                    {!passwordHideButton.registerBtnCheckShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                 </Button>
                             )
                             }

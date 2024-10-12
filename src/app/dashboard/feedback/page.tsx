@@ -1,15 +1,12 @@
 import React from 'react';
 import cls from './feedback.module.scss'
-import Pictures from "@/app/dashboard/feedback/pictures/pictures";
-
+import Pictures from "@/app/components/feedbackPage/pictures/pictures";
+import {FEEDBACK_PAGE_TITLE} from "@/app/utils/index.constants";
+import {PicturesType} from "@/app/types/types";
 
 export const metadata = {
     title: 'Отзывы клиентов - клиенты.com',
     description: 'отзывы',
-}
-
-interface feedBackProps {
-
 }
 
 async function getData() {
@@ -30,28 +27,18 @@ async function getData() {
     return {feedback};
 }
 
-async function Feedback (props:feedBackProps) {
-    const {  } = props;
+async function Feedback () {
+
     const { feedback} = await getData();
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-    // const nextImages = feedback?.filter((item:any) => item.originalName.includes('2.'))
-    const nextImages = feedback?.filter((item:any) => /\b2\.\d/.test(item.originalName));
+    const nextImages:PicturesType[] = feedback?.filter((item:any) => /\b2\.\d/.test(item.originalName));
 
     return (
         <div className={cls.feedback}>
             <div className={'page__container'}>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Отзывы</h1>
+                        <h1 className={cls.mainTitle}>{FEEDBACK_PAGE_TITLE}</h1>
                     </div>
                     <Pictures pictures={nextImages}></Pictures>
                 </div>

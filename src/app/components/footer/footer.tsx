@@ -1,21 +1,11 @@
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './footer.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import Logotype from "@/app/components/header/logotype/logotype";
-import VkSvg from "./../svgs/vk.svg"
-import TelegrammSvg from "./../svgs/telegram.svg"
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-interface footerProps {
-    classname?: string;
-}
 
-const Footer:FC<footerProps> = React.memo((props) => {
-    const {
-        classname
-    } = props;
+const Footer = React.memo(() => {
 
     return (
-        <div className={classNames(cls.footer, {},[classname] )} >
+        <div className={cls.footer} >
             <div className='page__container'>
                 <div className={cls.cover}>
                     <div className={cls.section}>
@@ -24,11 +14,6 @@ const Footer:FC<footerProps> = React.memo((props) => {
                         </div>
                     </div>
                     <div className = {cls.endLinks}>
-                        {/*<div*/}
-                        {/*    className={`${cls.link} ${cls.mail}`}*/}
-                        {/*>*/}
-                        {/*    infoclient.com@gmail.com*/}
-                        {/*</div>*/}
                         <AppLink
                             classname={cls.link}
                             href='/dashboard/contacts'>

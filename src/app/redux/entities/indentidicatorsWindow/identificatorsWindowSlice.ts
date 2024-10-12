@@ -8,7 +8,6 @@ const initialState:IdentificatorsWindowSchema = {
     scrolledHeight: 0,
 }
 
-
 const indicatorsSlice = createSlice({
     name: 'indicatorWindow',
     initialState,

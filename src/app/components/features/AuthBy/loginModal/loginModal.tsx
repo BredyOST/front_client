@@ -14,24 +14,18 @@ interface LoginModalProps {
     classname?: string;
 }
 
-const LoginModal:FC<LoginModalProps> = React.memo((props) => {
-    const { classname } = props;
+const LoginModal = React.memo(({classname}:LoginModalProps) => {
     const dispatch = useAppDispatch();
 
-    // actions from redux
-    // для изменения номера открытого попапа
-    const { changeStateClickOnEnter } = stateAuthWindowSliceActions;
-    // для изменения состояния попапа loginForm
+    const { changeStateCurrentPopupNumber } = stateAuthWindowSliceActions;
+
     const { changeStateLoginFormPopup } = statePopupSliceActions;
 
-    // states from redux
-    // состояние попапа для loginForm
     const {stateLoginFormPopup, stateFreePeriodPopup, categoriesPopup} = useAppSelector((state) => state.loginPopup);
 
-    // функция для изменения состояния попапа loginForm
     const closeLoginFormPopup = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(false));
-        dispatch(changeStateClickOnEnter(0));
+        dispatch(changeStateCurrentPopupNumber(0));
     }, []);
 
     return (

@@ -10,8 +10,6 @@ interface checkBoxProps {
     title?: string,
 }
 
-
-
 const lists = [
     {id:1, text:'ВКонтакте'},
     {id:1, text:'Одноклассники'},
@@ -27,31 +25,21 @@ const CheckBox:FC<checkBoxProps> = (props) => {
         title,
     } = props;
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
     const [isChecked, setIsChecked] = React.useState(false);
-
 
     const mod:Mods = {
         [cls.active]:isChecked
     }
 
-    //USEREF
-
-    //FUNCTIONS
-
     return (
-        <div className={classNames(cls.checkbox, {},[classname] )} >
+        <div className={classNames(cls.checkbox, mod,[classname] )} >
             {title &&
                 <h3 className={cls.title}>
                     {title}
                 </h3>
             }
             <div className={cls.body}>
-                {lists && lists.length && lists .map((item) => (
+                {lists && lists.length && lists.map((item) => (
                     <Button
                         key={item.id}
                         classname={cls.btn}

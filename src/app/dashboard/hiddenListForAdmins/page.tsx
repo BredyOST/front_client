@@ -11,14 +11,9 @@ import Price from "@/app/dashboard/hiddenListForAdmins/price/price";
 import AddChat from "@/app/dashboard/hiddenListForAdmins/addChat/addChat";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 
-// export const metadata = {
-//     robots: 'noindex',
-// }
-
 
 function Admin ()  {
 
-    //TATES FROM REDUX
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
 
     if (!stateAuth && !infoUser?.isAdmin) {

@@ -1,8 +1,7 @@
 import {destroyCookie, parseCookies, setCookie} from 'nookies'
 import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from "@reduxjs/toolkit/query/react";
-import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
+import {authSliceActions} from "@/app/redux/entities/auth/authSlice";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
-// import 'dotenv/config';
 
 interface RefreshResultData {
     sessionToken:string
@@ -16,9 +15,7 @@ const baseQueryWithAuth = fetchBaseQuery({
     baseUrl: `${process.env['NEXT_PUBLIC_API_URL']}`,
     prepareHeaders: async (headers:any) => {
         const cookies = parseCookies()
-
         if (cookies) headers.set('authorization', `Bearer ${cookies._z}`);
-
         const sessionToken = cookies._a;
         if (sessionToken) headers.set('session-token', cookies._a);
 
@@ -40,7 +37,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
     let result = await baseQueryWithAuth(args, api, extraOptions)
 
-    // если приходит ответ, что истекла сессия, значит кто-то вошел в браузер или токен сессии истек и все очищаем (куки, хранилище и уведомляем об этом)
+    // if your session has ended, maybe somebody has entered in other browser with your account, or session token's time is out.
     if (result && result.data && typeof result.data === 'object' && 'text' in result.data && result.data.text=== 'Ваша сессия истекла, выполните повторный вход') {
         api.dispatch(addInfoForCommonRequest({text: result.data.text}))
         destroyCookie(null, "_z", {path:'/'});
@@ -52,18 +49,18 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         api.dispatch(addAuthStatus(false));
         // location.reload()
     }
-    //если при запросе приходит Unauthorized значит токен доступа не действителей и надо его обновить
-    // if (result && result.error && result.error.data && result?.error?.data?.message === 'Unauthorized') {
+    //Unauthorized - token insighnificant, update token.
+
     if (result.error && result.error.data && typeof result.error.data === 'object' && 'message' in result.error.data && typeof result.error.data.message === 'string' && result.error.data.message === 'Unauthorized') {
-        // проверяем куки
+
         const cookies = parseCookies()
-        // делаем запрос на получение новых токенов (доступа и сессии) и передаем рефреш токен для этого
+        // request  to get new tokens (access and session), send refresh token
         const refreshResult = await baseQueryWithAuth(
             { url: `/auth/login/access-token`, method: 'POST', body:{refreshToken:cookies._d} },
             api,
             extraOptions
         ) as {data: RefreshResultData}
-        // и записываем в куки новые токены если пришли новые
+        // save new tokens in cookie
         if (refreshResult && refreshResult.data && refreshResult.data.refreshToken && refreshResult.data.accessToken) {
             const refeshTokenResult = refreshResult as any
 
@@ -76,10 +73,10 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             setCookie(null, '_a', refeshTokenResult.data.sessionToken, {
                 path:'/'
             })
-            // повторяем ранее навправленный запрос
+            // repeat last request
             result = await baseQueryWithAuth(args, api, extraOptions)
         } else {
-            //если токена нет, не валидный то очищаем кукм
+            //if no tokken or invalid, clean cookie
             destroyCookie(null, "_z", {path:'/'});
             destroyCookie(null, "_d", {path:'/'});
             destroyCookie(null, "_a", {path:'/'});
@@ -91,12 +88,12 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
         }
     }
 
-    // если есть ошибка то прокидываем его для уведомления
+    // error = show this in browser
     if (result && result.error && typeof result.error?.data === 'object' && result.error.data && 'message' in result.error.data && result.error.data.message !== 'Unauthorized') {
 
         api.dispatch(addInfoForCommonError({message: `${result.error.data.message}`}))
     }
-    // если есть сообщение то прокидываем его для уведомления
+    // message = show this in browser
     if (result && result.data && typeof result.data === 'object' && 'text' in result.data && result.data.text ) {
         api.dispatch(addInfoForCommonRequest({text: `${result.data.text}`}))
     }
@@ -144,8 +141,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
-        //получить пользователя
         getMe:builder.mutation({
             query:(token) => ({
                 url: '/users/profile',
@@ -201,7 +196,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
         changePasswordInProfile: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/users/update/password',
@@ -251,7 +245,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
         createCategory: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/categories/create',
@@ -306,7 +299,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
         addGroup: builder.mutation<any, any>({
             query: (params) => ({
                 url: `/groups-from-vk/create`,
@@ -334,7 +326,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
         addChat: builder.mutation<any, any>({
             query: (params) => ({
                 url: `/chats-from-telegram/create`,
@@ -362,7 +353,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
 
         createAndCheckAllPosts: builder.mutation<any, any>({
             query: (token) => ({
@@ -402,14 +392,12 @@ export const requestApi = createApi({
                 method:'GET',
             }),
         }),
-
         getNanniesPosts:builder.mutation({
             query:(token) => ({
                 url: '/nannies/all',
                 method:'GET',
             }),
         }),
-
         addNewFile:builder.mutation({
             query:(params) => ({
                 url: '/files',
@@ -439,16 +427,12 @@ export const requestApi = createApi({
                 method:'GET',
             }),
         }),
-
-        // получить авторизацию
         getAuthorizations:builder.mutation({
             query:(token) => ({
                 url: '/authorizations/getMyAuthorizations',
                 method:'GET',
             }),
         }),
-
-        //прайс
         addNewPriceBlock:builder.mutation({
             query:(params) => ({
                 url: '/prices/create',
@@ -469,7 +453,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-        //TEST
         getALLTest:builder.mutation({
             query:(params) => ({
                 url: '/posts/testAllPosts',
@@ -477,7 +460,6 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
         getSortedPostsFromSearchPage:builder.mutation({
             query:(params) => ({
                 url: '/getPostsFromAll/all',
@@ -547,13 +529,11 @@ export const {
     useDeleteFileMutation,
     useDeleteGroupInMainRepositoryMutation,
     useGetLogsMutation,
-    useGetAuthorizationsMutation,
     useAddNewPriceBlockMutation,
     useGetAllPricesMutation,
     useGetFreePeriodMutation,
     useAddChatMutation,
     useGetChatMutation,
-    useActivateFreeNotificationMutation,
     useGetAllKeysRedisMutation,
     useGetPostsRedisMutation,
     useUpdatePriceMutation,
@@ -561,8 +541,6 @@ export const {
     usePaymentMutation,
     useVerifyTgMutation,
     useActivateTgMutation,
-    usePayNotificationsMutation,
-    useGetFreePeriodNotificationMutation,
     useGetPhoneCodeTgMutation,
     useActivateTgProfileMutation,
     useGiveInfoMutation,

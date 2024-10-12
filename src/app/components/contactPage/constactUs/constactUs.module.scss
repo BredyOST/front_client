@@ -1,0 +1,122 @@
+@use "sass:math";
+@use '../../../styles/variable/global';
+@use '../../../styles/variable/globalIndex';
+@use "../../../styles/mixins";
+@use '../../shared/ui/Loader/Loader';
+@use '../../../styles/variable/common';
+
+
+.contactUs{
+  display: flex;
+  justify-content: center;
+  padding-top: mixins.rem(50);
+}
+
+.cover{
+  @extend .secondFontSize;
+  display: flex;
+  justify-content: center;
+  background-color: globalIndex.$Theme_main_header_background_button;
+  padding-top: mixins.rem(50);
+  padding-bottom: mixins.rem(50);
+  padding-left: mixins.rem(50);
+  padding-right: mixins.rem(50);
+  border-radius: mixins.rem(10);
+  color: white;
+  min-width: 80%;
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    flex: 0 1 mixins.rem(600);
+  }
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+  }
+
+  @include mixins.adaptiveValue("padding-left",50,15,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-right",50,15,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-top",50,25,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("padding-bottom",50,25,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.mainTitle{
+  font-weight:  700;
+  padding-bottom: mixins.rem(10);
+  text-align: center;
+}
+
+.coverForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.block{
+
+}
+
+.label{
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+  padding-top: mixins.rem(10);
+}
+
+.inp{
+  @extend .input;
+}
+
+.textArea {
+  font-size: mixins.rem(globalIndex.$Inputs_font_size);
+  flex: 1 1 100%;
+  min-width: 100%;
+  border-radius: mixins.rem(10);
+  padding-top: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-bottom: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-left: mixins.rem(globalIndex.$Inputs_profile_padding);
+  padding-right: mixins.rem(globalIndex.$Inputs_profile_padding_right);
+  outline: 0 solid transparent;
+  transition: border ease 0.3s 0s;
+  position: relative;
+  letter-spacing: mixins.em(0.5);
+  background-color: #ffffff;
+  min-height: mixins.rem(250);
+  font-weight: 400;
+  line-height: math.div(22,16);
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  &::placeholder {
+    color: globalIndex.$Inputs_placeholder;
+    font-weight: globalIndex.$Inputs_placeholder_font_weight;
+    font-size: mixins.rem(18);
+  }
+
+  &:focus {
+    border: 2px solid globalIndex.$Inputs_focus;
+    transition: border ease 0.3s 0s;
+  }
+}
+
+.coverBtn{
+  display: flex;
+  justify-content: center;
+  padding-top: mixins.rem(50)
+}
+
+.button{
+  padding-top: mixins.rem(10);
+  padding-bottom: mixins.rem(10);
+  padding-left: mixins.rem(50);
+  padding-right: mixins.rem(50);
+  background-color: white;
+  border: transparent;
+  @extend .btnThree;
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+  }
+}

@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import {Controller, FieldValues, SubmitHandler, useForm} from "react-hook-form";
+import React from 'react';
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import cls from './accessNumber.module.scss'
@@ -12,91 +12,78 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import PhoneInput from "react-phone-number-input";
 import PhoneSvg from "@/app/components/svgs/phone.svg";
 import EmailSvg from "@/app/components/svgs/email.svg";
+import {accessNumber, loginTextAccess} from "@/app/components/features/helpersAuth/helpersAccess";
+import {
+    ActiveTabIdType,
+    ActiveWindowType,
+    ObjForReqCallType,
+    ReqCallCodeType,
+    TypeForFunc
+} from "@/app/types/types";
+import {IndicatorsLogInAction} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSlice";
 
-
-interface IAccessNumberProps {
-    classname?: string;
-}
-
-export type accessNumber = {
-    phoneNumber:string
-    numberActivation:string,
-}
-
-const loginText: any = [
-    { id: 1, text: 'Звонок' },
-    { id: 2, text: 'Телеграмм' },
-]
-
-
-const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
-    const {} = props;
+const AccessNumber = React.memo(() => {
 
     const dispatch = useAppDispatch();
 
-    //RTK
     const [reqActivateTg, {data:requestActivateTg, error:errorrequestActivateTg, isError: isErrorActivateTg, isLoading: loadingActivateTg,}] = useActivateTgMutation();
     const [reqCallCode, {data:requestCallCode, error:errorrequestCallCode, isError: isErrorCallCode, isLoading: loadingCall}] =  useCallCodeMutation()
     const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
 
-    //ACTIONS FROM REDUX
-    // для изменения текущего состояния попапа (от 1 до 3)
-    const { changeStateClickOnEnter } = stateAuthWindowSliceActions;
+    const { changeStateCurrentPopupNumber } = stateAuthWindowSliceActions;
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
 
-    //USESTATE
-    // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
-    const { clickOnEnter } = useAppSelector((state) => state.statePopup);
-    // что выбрано - email или phone при авторизации
-    // 1 звонок, 2 телега
-    const [activeTab, setActiveTab] = React.useState<number>(1);
-    const [inputNumber, setInputNumber] = React.useState<string>('');
-    const [activeWindow, setActiveWindow] = React.useState<string>('');
+    const { currentPopupNumber } = useAppSelector((state) => state.statePopup);
+
+    const [activeTab, setActiveTab] = React.useState<ActiveTabIdType>(1);
+    const {activeWindow} = useAppSelector(state => state.IndicatorsLogIn)
+    const {changeActiveWindow} = IndicatorsLogInAction
 
     const onSubmit: SubmitHandler<accessNumber> = (data,e) => {
-  
-        // если выбран звонок
+        /**
+         * activeTab == 1 && activeWindow == 1 - запрос вызова
+         * activeTab == 1 && activeWindow == 2 - отправка формы активации
+         * activeTab == 2 && activeWindow == `2` - отправка кода в тг
+         **/
         if(activeTab == 1) {
-            //если нажали на кнопку запроса вызова
             if(activeWindow == `1`) {
-
                 if(data?.phoneNumber?.length <= 6) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательное поле, номер телефона'}))
                     return;
                 } else if (data?.phoneNumber?.length > 7) {
-                    reqCall({
+                    const objForReqCall: ObjForReqCallType = {
                         phone: data?.phoneNumber,
                         indicator: `1`
-                    })
+                    }
+                    reqCall(objForReqCall)
                 }
             }
-            //если нажали на кнопку отправки формы
             if(activeWindow == `2`) {
                 if(data?.phoneNumber?.length <= 6 || data?.numberActivation?.length <= 0) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона и код подтверждения'}))
                     return;
                 }
-                reqCallCode({
+                const objForReqCode: ReqCallCodeType = {
                     phoneNumber: data?.phoneNumber,
                     numberActivation: data?.numberActivation
-                })
+                }
+                reqCallCode(objForReqCode)
             }
         }
-        // второе окно и нажата кнопка номер 2 - отправка формы с кодом
         if(activeTab == 2 && activeWindow == `2`) {
             if(data?.phoneNumber?.length <= 6 || data?.numberActivation?.length <= 0) {
                 dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона и код подтверждения'}))
                 return;
             }
-
             if(data?.numberActivation?.length <= 0 && data?.phoneNumber?.length) {
                 dispatch(addInfoForCommonError({message: 'Вы не ввели код'}))
                 return
             }
-            reqActivateTg({
+            let objForReqCode:ReqCallCodeType = {
                 phoneNumber: data?.phoneNumber,
                 numberActivation: data?.numberActivation
-            })
+            }
+            reqActivateTg(objForReqCode)
         }
     };
     
@@ -106,31 +93,25 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
 
     React.useEffect(() => {
         if (requestActivateTg?.text ==`Телефон успешно подтвержден, можете войти в учетную запись` ) {
-            dispatch(changeStateClickOnEnter(0))
+            dispatch(changeStateCurrentPopupNumber(0))
         }
         if (requestCallCode?.text ==`Телефон успешно подтвержден, можете войти в учетную запись` ) {
-            dispatch(changeStateClickOnEnter(0))
+            dispatch(changeStateCurrentPopupNumber(0))
         }
-
     },[requestActivateTg, requestCallCode, requestCall])
 
-    const backToLoginIn = () => {
-        dispatch(changeStateClickOnEnter(0));
+    const backToLoginIn:TypeForFunc<void, void> = () => {
+        dispatch(changeStateCurrentPopupNumber(0));
     };
 
-    const changeActiveTab = (id: number) => {
+    const changeActiveTab:TypeForFunc<ActiveTabIdType, void> = (id: ActiveTabIdType) => {
         setActiveTab(id)
     }
-
-    const changeInputNumber = (e:any) => {
-        setInputNumber(e.target.value)
-    }
-
-    const changeClickWindow = (num:string) => {
-        setActiveWindow(num)
+    const changeClickWindow:TypeForFunc<ActiveWindowType, void> = (num) => {
+        dispatch(changeActiveWindow(num))
     }
     
-    if (clickOnEnter != 4 ) {
+    if (currentPopupNumber != 4 ) {
         return null
     }
 
@@ -138,7 +119,6 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
         <form
             className={cls.form}
             onSubmit={handleSubmit(onSubmit)}
-            onChange={changeInputNumber}
         >
             <h2
                 className={cls.title}
@@ -147,7 +127,7 @@ const AccessNumber:FC<IAccessNumberProps>= React.memo((props) => {
             </h2>
             <div className={cls.coverBtn}>
                 <div className={cls.coverPhoneAndMail}>
-                    {loginText && loginText.map((item: any) => (
+                    {loginTextAccess && loginTextAccess.map((item: any) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}

@@ -1,21 +1,16 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './checkLogin.module.scss'
-interface checkLoginProps {
-    classname?: string;
-    checked?:any,
-    onChange?:any,
-    children?:any,
+
+interface CheckLoginProps {
+    checked:boolean,
+    onChange:(checked:boolean) => void,
+    children?:React.ReactNode,
 }
 
-export const CheckLogin:FC<checkLoginProps> = (props) => {
-    const {
-        checked,
-        onChange,
-        children
-    } = props;
+export const CheckLogin = ({checked, onChange, children}:CheckLoginProps ) => {
 
-    const [isChecked, setIsChecked] = React.useState(checked);
+    const [isChecked, setIsChecked] = React.useState<boolean>(checked);
 
     const handleChange = () => {
         setIsChecked(!isChecked);

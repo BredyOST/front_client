@@ -10,16 +10,6 @@ interface skeletonSearchPageProps {
 const SkeletonSearchPage:FC<skeletonSearchPageProps> = (props) => {
     const { classname } = props;
     
-    //ACTIONS FROM REDUX
-    
-    //STATES FROM REDUX
-    
-    //USESTATE
-    
-    //USEREF
-    
-    //FUNCTIONS
-    
     return (
         <div className={classNames(cls.skeletonSearchPage, {},[classname] )} >
 

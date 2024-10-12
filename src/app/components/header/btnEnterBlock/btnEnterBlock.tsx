@@ -8,55 +8,30 @@ import Profile from "@/app/components/header/profileList/profileList";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {TypeForFunc} from "@/app/types/types";
 
-interface btnEnterBlockProps {
-    classname?: string;
-}
-
-const BtnEnterBlock:FC<btnEnterBlockProps> = React.memo((props) => {
-    const { classname } = props;
+const BtnEnterBlock = React.memo(() => {
     const dispatch = useAppDispatch();
 
-    //ACTIONS FROM REDUX
-    // для изменения состояния попапа loginForm
     const { changeStateLoginFormPopup } = statePopupSliceActions;
 
-    //STATES FROM REDUX
-    //данные по авторизации
     const {stateAuth} = useAppSelector(state => state.auth)
 
-    //USESTATE
-    // для отображения и скрытия подменю профиля
     const[pointerOnProfile, setPointerOnProfile] = React.useState<boolean>(false)
 
-    //USEREF
-
-    //FUNCTIONS
-    // для отображения и скрытия всплывающего меню на кнопке профиль
-    // отслеживаем когда на кнопке
-    // const mouseOnProfile = React.useCallback(() => {
-    //     setPointerOnProfile(true)
-    // },[]);
-    // отслеживаем когда ушел курсор
-    // const mouseLeftProfile = React.useCallback(() => {
-    //     setPointerOnProfile(false)
-    // },[]);
-    // для открытия попапа
-    const openLoginFormPopup = React.useCallback(() => {
-        console.log('2')
+    const openLoginFormPopup:TypeForFunc<void, void> = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
     }, []);
+    console.log(stateAuth)
 
     return (
         <div
             className={cls.coverProfile}
-            // onPointerLeave={stateAuth ? mouseLeftProfile : undefined}
         >
             {!stateAuth
                 ? <Button
                     classname={cls.buttonLogin}
                     onClick={!stateAuth ? openLoginFormPopup : undefined}
-                    // onPointerEnter={stateAuth ? mouseOnProfile : undefined}
                     type='button'
                     name='login'
                 >

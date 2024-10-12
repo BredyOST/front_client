@@ -1,62 +1,43 @@
 import React from 'react';
-import cls from './contacts.module.scss'
-import ConstactUs from "@/app/dashboard/contacts/constactUs/constactUs";
+import cls from './contacts.module.scss';
+import ContactUs from '@/app/components/contactPage/constactUs/constactUs';
+import {CONTACT_PAGE_TITLE} from "@/app/utils/index.constants";
+import {InfoType} from "@/app/types/types";
+import {Info} from "@/app/dashboard/contacts/constants/contactPageConst";
 
 export const metadata = {
     title: 'Контакты - клиенты.com',
     description: 'Контакты',
-}
-
-
-const array = [
-    {id:1, name:'ИП', text:'Калашникова Елена Валентиновна'},
-    {id:2, name:'ИНН', text:'320303460946'},
-    {id:3, name:'ОГРН', text:'323320000024743'},
-    {id:4, name:'Р/с', text:'40802.810.2.40000440327'},
-    {id:5, name:'Банк', text:'ПАО Сбербанк '},
-    {id:6, name:'БИК', text:'044525225'},
-    {id:7, name:'К/с', text:'30101810400000000225'},
-    {id:8, name:'Email', text:'infoclient.com@gmail.com'},
-]
+};
 
 function Contacts () {
-
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-
     return (
-        <div className={cls.contacts} >
+        <div className={cls.contacts}>
             <div className={'page__container'}>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Контакты</h1>
+                        <h1 className={cls.mainTitle}>{CONTACT_PAGE_TITLE}</h1>
                     </div>
                     <div className={cls.title}>Наши реквизиты</div>
                     <div className={cls.infoPack}>
                         <div className={cls.coverList}>
-                            {array?.length && array.map((item) => (
-                                <div
-                                    className={cls.contactsBlock}
-                                    key={item.id}
-                                >
-                                    <div className={cls.first}>{item.name}</div>
-                                    <div className={cls.second}>{item.text}</div>
-                                </div>
-                            ))}
+                            {Info?.length && 
+                                Info?.map((item:InfoType) => (
+                                    <div
+                                        className={cls.contactsBlock}
+                                        key={item.id}
+                                    >
+                                        <div className={cls.first}>{item?.name ?? 'информация отсутствует'}</div>
+                                        <div className={cls.second}>{item?.text ?? 'информация отсутствует'}</div>
+                                    </div>
+                                ))}
                         </div>
                     </div>
-                    <ConstactUs/>
+                    <ContactUs />
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Contacts;

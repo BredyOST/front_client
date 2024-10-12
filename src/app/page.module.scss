@@ -26,12 +26,6 @@
   @include mixins.adaptiveValue("column-gap",10,5,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
-.coverFeedBack{
-  background-color: #f4f6f6;
-  padding-top: mixins.rem(0);
-
-}
-
 .section{
   display: flex;
   justify-content: flex-start;

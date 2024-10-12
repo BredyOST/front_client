@@ -1,5 +1,6 @@
 import React from 'react';
 import cls from './politics.module.scss'
+import {POLITICS_PAGE_TITLE} from "@/app/utils/index.constants";
 
 export const metadata = {
     title: 'Политика конфиденциальности - клиенты.com',
@@ -8,22 +9,12 @@ export const metadata = {
 
 function Politics (){
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-
     return (
         <div className={cls.page} >
             <div className={'page__container'}>
                 <div className={cls.cover}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Политика конфиденциальности</h1>
+                        <h1 className={cls.mainTitle}>{POLITICS_PAGE_TITLE}</h1>
                     </div>
                     <div className={cls.coverMain}>
                         <div className={cls.common}>

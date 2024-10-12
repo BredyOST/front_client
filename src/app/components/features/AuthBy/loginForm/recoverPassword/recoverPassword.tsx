@@ -5,7 +5,7 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {Control, Controller, FieldValues, SubmitHandler, useForm} from "react-hook-form";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {
     useCallMutation,
     useChangePasswordMutation,
@@ -18,215 +18,158 @@ import EmailSvg from "@/app/components/svgs/email.svg";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import ShowSvg from "@/app/components/svgs/show.svg";
 import HideSvg from "@/app/components/svgs/hide.svg";
-
-interface recoverPasswordProps {
-    classname?: string;
-}
-
-type loginForm = {
-    phoneNumber:string,
-    myEmail:string,
-    password:string,
-    passwordTwo:string,
-    code:string,
-}
-
-interface passwordHide {
-    register: boolean,
-    registerCheck:boolean,
-    registerShowHide: boolean,
-    registerCheckShowHide:boolean
-}
+import {passwordHide} from "@/app/components/features/helpersAuth/helpersRegistration";
+import {IndicatorsLogInAction} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSlice";
+import {
+    ActiveTabIdType, ActiveWindowType, ForTextFormsRecovery, LoginFormRecovery, LoginTextRecovery,
+    ObjForReqCallType,
+    SendNewPasswordTwoType,
+    SendNewPasswordType, TypeForFunc
+} from "@/app/types/types";
+import {loginTextRecovery} from "@/app/constants/constants";
 
 
-interface ForTextForms {
-    passwordRegister: string,
-    passwordRegisterCheck:string
-}
 
-const loginText: any = [
-    { id: 1, text: 'Звонок' },
-    { id: 2, text: 'Телеграмм' },
-]
+export const RecoverPassword = () => {
 
-export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
-    const {
-        classname,
-    } = props;
     const dispatch = useAppDispatch();
 
-    //RTK
-    // восстановление пароля
     let[sendNewPassword, {data:messageNewPassword, error:errorNewPassword, isError: isNewPassword, isLoading: loadingNewPassword}] = useChangePasswordMutation();
     const [reqCall, {data:requestCall, error:errorrequestCall, isError: isErrorCall, isLoading: loadingReqCall}] =  useCallMutation()
     const [reqTgForgetPassword, {data:requestTgForgetPassword, error:errorrequestTgForgetPassword, isError: isErrorTgForgetPassword, isLoading: loadingReqTgForgetPassword}] =  useNumberTgForgetPasswordMutation()
 
-    //ACTIONS FROM REDUX
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
+    const { changeStateCurrentPopupNumber } = stateAuthWindowSliceActions;
 
-    // для изменения текущего состояния попапа (от 1 до 3)
-    const { changeStateClickOnEnter } = stateAuthWindowSliceActions;
-    //STATES FROM REDUX
+    const [activeTab, setActiveTab] = React.useState<ActiveTabIdType>(1);
+    const {activeWindow} = useAppSelector(state => state.IndicatorsLogIn)
+    const {changeActiveWindow} = IndicatorsLogInAction
 
-    // для отображения введенных символов в инпуте пароля, login и registration, registerCheck - false значит ничего в поля не введено, loginShowHide, registerShowHide: false - значит пароль скрыт
     const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHide>({
-        register: false, registerCheck:false, registerShowHide: false, registerCheckShowHide: false,
+        enteredRegisterText: false, enteredRegisterCheckText:false, registerBtnShowOrHide: false, registerBtnCheckShowOrHide: false,
     });
-    //USESTATE
-    // что выбрано - email или phone при авторизации
-    const [activeTab, setActiveTab] = React.useState<number>(1);
-    // 1 это запрос вызова, 2 - это отправка
-    const [activeWindow, setActiveWindow] = React.useState<string>('');
-    // для того чтобы делать проверки после введенного логина в графы. Делаем управляемые импуты
-    const [textFromForms, setTextFromForms] = React.useState<ForTextForms>({
+    const [textFromForms, setTextFromForms] = React.useState<ForTextFormsRecovery>({
         passwordRegister: '', passwordRegisterCheck: '',
     });
-    //USEREF
-    // для получения элемента input при первый
+
     const passwordRegisterRef = React.useRef<HTMLInputElement | null>(null);
-    // для получения элемента input второй
     const passwordRegisterCheckRef = React.useRef<HTMLInputElement | null>(null);
 
+    const { currentPopupNumber } = useAppSelector((state) => state.statePopup);
 
-    // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
-    const { clickOnEnter } = useAppSelector((state) => state.statePopup);
-    // для отображения введенных символов в инпуте пароля, login и registration, registerCheck - false значит ничего в поля не введено, loginShowHide, registerShowHide: false - значит пароль скрыт
-
-    //USEREF
-    
-    //FUNCTIONS
-
-    const onSubmit: SubmitHandler<loginForm> = (data) => {
-
-        // если выбран звонок
-        if(activeTab == 1) {
-            //если нажали на кнопку запроса вызова
-            if(activeWindow == `1`) {
-                if(data?.phoneNumber?.length <= 6) {
+    const onSubmit: SubmitHandler<LoginFormRecovery> = (data:LoginFormRecovery) => {
+        if (activeTab == 1) {
+            if (activeWindow == `1`) {
+                if (data?.phoneNumber?.length <= 6) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательное поле, номер телефона'}))
                     return;
                 } else if (data?.phoneNumber?.length > 7) {
-                    reqCall({
+                    const objForReqCall: ObjForReqCallType = {
                         phone: data?.phoneNumber,
-                        indicator: `2`
-                    })
+                        indicator: `1`
+                    }
+                    reqCall(objForReqCall)
                 }
             }
-
-            if(activeWindow == `2`) {
-                if(data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
+            if (activeWindow == `2`) {
+                if (data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона, пароли и код подтверждения'}))
                     return;
-                } else  {
-                    //восстановление пароля
-                    sendNewPassword({
-                        email:data?.myEmail,
+                } else {
+                    const objSendNewPassword:SendNewPasswordTwoType = {
+                        email: data?.myEmail,
                         phoneNumber: data?.phoneNumber,
                         password: data?.password,
                         passwordTwo: data?.passwordTwo,
-                        code:data?.code,
+                        code: data?.code,
                         indicator: `2`
-                    })
+                    }
+                    sendNewPassword(objSendNewPassword)
                 }
             }
         }
-
-        // если выбран телеграмм
-        if(activeTab == 2) {
-            //если нажали на кнопку запроса вызова
-            if(activeWindow == `1`) {
-                if(data?.phoneNumber?.length <= 6) {
+        if (activeTab == 2) {
+            if (activeWindow == `1`) {
+                if (data?.phoneNumber?.length <= 6) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательное поле, номер телефона'}))
                     return;
                 } else {
-                    reqTgForgetPassword({
-                        phoneNumber: data?.phoneNumber,
+                    const ObjReqTgForgetPassword: ObjForReqCallType = {
+                        phone: data?.phoneNumber,
                         indicator: `1`
-                    })
+                    }
+                    reqTgForgetPassword(ObjReqTgForgetPassword)
                 }
             }
-
             if (activeWindow == `2`) {
-                if(data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
+                if (data?.phoneNumber?.length <= 6 || data?.password.length <= 0 || data?.passwordTwo.length <= 0 || data?.code.length <= 0) {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона, пароли и код подтверждения'}))
                     return;
-                } else  {
-                    //восстановление пароля
-                    sendNewPassword({
+                } else {
+                    const ObjSendNewPassword:SendNewPasswordType = {
                         phoneNumber: data?.phoneNumber,
                         password: data?.password,
                         passwordTwo: data?.passwordTwo,
-                        code:data?.code,
+                        code: data?.code,
                         indicator: `1`
-                    })
+                    }
+                    sendNewPassword(ObjSendNewPassword)
                 }
             }
-
         }
-    };
-    //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
-    const {register, handleSubmit, control, setError, formState: { errors, isValid },} = useForm<loginForm>({
+    }
+
+    const {register, handleSubmit, control, setError, formState: { errors, isValid },} = useForm<LoginFormRecovery>({
         mode: 'onChange',
     });
 
-    // возвращаемся на ввод логина и пароля
-    const backToLoginIn = () => {
-        dispatch(changeStateClickOnEnter(0));
+    const backToLoginIn:TypeForFunc<void, void> = () => {
+        dispatch(changeStateCurrentPopupNumber(0));
     };
 
     React.useEffect(() => {
         if (messageNewPassword?.text ==`Пароль успешно изменен` || messageNewPassword?.text ==`Ожидайте сообщения от официального бота, в течении нескольких минут вам будет направлено сообщение с новым паролем` ) {
-            dispatch(changeStateClickOnEnter(0))
+            dispatch(changeStateCurrentPopupNumber(0))
         }
     },[messageNewPassword])
-
-    // для изменения индикатора который меняет type у input на text или password. Показать или скрыть пароль при вводе
-
-    // для изменения индикатора который меняет type у input на text или password. Показать или скрыть пароль при вводе
-    const showAndHideTextPassword = (name:any) => {
-        setPasswordHideButton({ ...passwordHideButton, registerShowHide: !passwordHideButton.registerShowHide });
+    const showAndHideTextPassword:TypeForFunc<void, void> = () => {
+        setPasswordHideButton({ ...passwordHideButton, registerBtnShowOrHide: !passwordHideButton.registerBtnShowOrHide });
     };
-    const showAndHideTextTwoPassword = (name:any) => {
-        setPasswordHideButton({ ...passwordHideButton, registerCheckShowHide: !passwordHideButton.registerCheckShowHide });
+    const showAndHideTextSecondPassword:TypeForFunc<void, void> = () => {
+        setPasswordHideButton({ ...passwordHideButton, registerBtnCheckShowOrHide: !passwordHideButton.registerBtnCheckShowOrHide });
     };
-    const changeActiveTab = (id: number) => {
+    const changeActiveTab:TypeForFunc<ActiveTabIdType, void> = (id) => {
         setActiveTab(id)
     }
-    const changeClickWindow = (num:string) => {
-        setActiveWindow(num)
+    const changeClickWindow:TypeForFunc<ActiveWindowType,void>= (num)=> {
+        dispatch(changeActiveWindow(num))
     }
 
-
-    // для отображения кнопки показать/скрыть пароль в окне входа в учетную запись
-    const checkTextFormsLogin = (e: any) => {
-        const targetName = e.target.name;
-        const value = e.target.value;
+    const checkTextFormsLogin:TypeForFunc<React.ChangeEvent<HTMLFormElement>, void> = (e:React.ChangeEvent<HTMLFormElement>) => {
+        const targetName:string = e.target.name;
+        const value:string = e.target.value;
 
         if (targetName === 'password' || targetName === 'passwordTwo') {
-            const isPassword = targetName === 'password';
-            const isPasswordCheck = targetName === 'passwordTwo';
+            const isPassword:boolean = targetName === 'password';
+            const isPasswordCheck:boolean = targetName === 'passwordTwo';
             if (isPassword) {
                 setTextFromForms({ ...textFromForms, passwordRegister: value });
                 value.length
-                    ?  setPasswordHideButton({ ...passwordHideButton, register: true })
-                    :  setPasswordHideButton({ ...passwordHideButton, register: false });
+                    ?  setPasswordHideButton({ ...passwordHideButton, enteredRegisterText: true })
+                    :  setPasswordHideButton({ ...passwordHideButton, enteredRegisterText: false });
             }
-
             if(isPasswordCheck) {
                 setTextFromForms({ ...textFromForms, passwordRegisterCheck: value });
                 value.length
-                    ? setPasswordHideButton({ ...passwordHideButton, registerCheck: true })
-                    : setPasswordHideButton({ ...passwordHideButton, registerCheck: false });
+                    ? setPasswordHideButton({ ...passwordHideButton, enteredRegisterCheckText: true })
+                    : setPasswordHideButton({ ...passwordHideButton, enteredRegisterCheckText: false });
             }
         }
     };
 
-
-
-    if (clickOnEnter != 2 ) {
+    if (currentPopupNumber != 2 ) {
         return null
     }
-
 
     return (
         <form
@@ -240,7 +183,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
             </h2>
             <div className={cls.coverBtn}>
                 <div className={cls.coverPhoneAndMail}>
-                    {loginText && loginText.map((item: any) => (
+                    {loginTextRecovery && loginTextRecovery.map((item: LoginTextRecovery) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}
@@ -294,17 +237,6 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         {activeTab == 1 ? "Запрос вызова" : "Запрос кода"}
                     </Button>
                 </div>
-                {/*<h3 className={cls.text}>или email адрес</h3>*/}
-                {/*<Input*/}
-                {/*    type="text"*/}
-                {/*    classForInput={cls.input}*/}
-                {/*    placeholder="Введите Email"*/}
-                {/*    classname={cls.inputRelative}*/}
-                {/*    autofocus*/}
-                {/*    defaultValue=""*/}
-                {/*    register={{ ...(register('myEmail')) }}*/}
-                {/*/>*/}
-
                 <>
                     <Input
                         type="text"
@@ -318,7 +250,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                     <Input
                         classForInput={cls.input}
                         placeholder="Введите новый пароль"
-                        type={passwordHideButton.registerShowHide ? 'text' : 'password'}
+                        type={passwordHideButton.registerBtnShowOrHide ? 'text' : 'password'}
                         classname={cls.inputRelative}
                         forRef={passwordRegisterRef}
                         autofocus
@@ -326,7 +258,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         register={{ ...(register('password')) }}
                     >
                         {
-                            passwordHideButton.register
+                            passwordHideButton.enteredRegisterText
                                 && (
                                     <Button
                                         type="button"
@@ -335,7 +267,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                                         addNametoFunction={true}
                                         onClick={showAndHideTextPassword}
                                     >
-                                        {!passwordHideButton.registerShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
+                                        {!passwordHideButton.registerBtnShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                     </Button>
                                 )
                         }
@@ -343,7 +275,7 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                     <Input
                         classForInput={cls.input}
                         placeholder="Повторите новый пароль"
-                        type={passwordHideButton.registerCheckShowHide ? 'text' : 'password'}
+                        type={passwordHideButton.registerBtnCheckShowOrHide ? 'text' : 'password'}
                         classname={cls.inputRelative}
                         forRef={passwordRegisterCheckRef}
                         autofocus
@@ -351,16 +283,16 @@ export const RecoverPassword:FC<recoverPasswordProps> = (props) => {
                         register={{ ...(register('passwordTwo')) }}
                     >
                         {
-                            passwordHideButton.registerCheck
+                            passwordHideButton.enteredRegisterCheckText
                                 && (
                                     <Button
                                         type="button"
                                         classname={cls.hideButton}
                                         name='textRegistrationPasswordMain'
                                         addNametoFunction={true}
-                                        onClick={showAndHideTextTwoPassword}
+                                        onClick={showAndHideTextSecondPassword}
                                     >
-                                        {!passwordHideButton.registerCheckShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
+                                        {!passwordHideButton.registerBtnCheckShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                     </Button>
                                 )
                         }

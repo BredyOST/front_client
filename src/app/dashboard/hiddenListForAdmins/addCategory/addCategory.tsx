@@ -30,21 +30,12 @@ const AddCategory:FC<addCategoryProps> = (props) => {
     const { classname } = props;
     const cookies = parseCookies();
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //RTK
     const [createCategory, {data: requestCategory, error:errorCategory, isLoading: isLoadingCategory, isError:isErrorCategory}] = useCreateCategoryMutation()
     const [getCategories, {data: requestCategories, error:errorCategories, isLoading: isLoadingCategories, isError:isErrorCategories}] = useGetCategoriesMutation()
 
-    //USESTATE
     const [inputsCategory, setInputsCategory] = React.useState<CategoriesInputs>({id_category: '', name: '', description:'', positiveWords:[], negativeWords:[], salary: ''})
     const [showCategory, setShowCategory] = React.useState<boolean>(false)
 
-    //USEREF
-
-    //FUNCTIONS
     const addIds = (e:ChangeEvent<HTMLInputElement>) => {
         setInputsCategory({...inputsCategory, id_category: e.target.value});
     }

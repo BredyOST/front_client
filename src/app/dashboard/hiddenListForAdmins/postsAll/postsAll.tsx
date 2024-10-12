@@ -23,24 +23,12 @@ const PostsAll:FC<postsAllProps> = (props) => {
     const { classname } = props;
     const cookies = parseCookies();
 
-    //RTK
     const [createAllPosts, {data: requestAllPosts, error:errorAllPosts, isLoading: isLoadingAllPosts, isError:isErrorAllPosts}] = useCreateAndCheckAllPostsMutation()
     const [getAllPosts, {data: requestGetAllPosts, error:errorGetAllPosts, isLoading: isLoadingGetAllPosts, isError:isErrorGetAllPosts}] = useGetAllPostsMutation()
     const [addTutors, {data: requestTutors, error:errorTutors, isLoading: isLoadingTutors, isError:isErrorTutors}] = useStartAddTutorsPostsMutation()
     const [deleteAllPostsMainRepository, {data: requestDeleteMainRepository, error:errorDeleteMainRepositoryTutors, isLoading: isLoadingDeleteMainRepositoryTutors, isError:isErrorDeleteMainRepositoryTutors}] = useDeleteAllPostsFromMainRepositoryMutation()
     const [deleteGroupMainRepository, {data: requestDeleteGroupMainRepository, error:errorDeleteGroupMainRepositoryTutors, isLoading: isLoadingDeleteGroupMainRepositoryTutors, isError:isErrorDeleteGroupMainRepositoryTutors}] = useDeleteGroupInMainRepositoryMutation()
     const [logs, {data: requestLogs, error:errorLogs, isLoading: isLoadingLogs, isError:isErrorLogs}] =     useGetLogsMutation()
-
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-
-    //USEREF
-
-    //FUNCTIONS
-
 
     const startCreateAndCheckAllPosts = () => {
         if(cookies  && cookies._z) {

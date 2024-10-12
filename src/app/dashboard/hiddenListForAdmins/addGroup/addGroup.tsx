@@ -18,20 +18,13 @@ const AddGroup:FC<addGroupProps> = (props) => {
     const { classname } = props;
     const cookies = parseCookies();
 
-    //RTK
     const [getGroups, {data: requestGroups, error:errorGroups, isLoading: isLoadingGroups, isError:isErrorGroups}] = useGetGroupsMutation()
     const [createGroup, {data: requestGroup, error:errorGroup, isLoading: isLoadingGroup, isError:isErrorGroup}] = useAddGroupMutation()
-    //ACTIONS FROM REDUX
-    //STATES FROM REDUX
 
-    //USESTATE
     const [inputId, setInputId] = React.useState<string>('') // для отправки одной группы
     const [inputIdMany, setInputIdMany] = React.useState<string>('') // для отправки множества параметров
     const [showGroup, setShowGroup] = React.useState<boolean>(false)
 
-    //USEREF
-
-    //FUNCTIONS
     const addTextInputId = (e:ChangeEvent<HTMLInputElement>) => {
         setInputId(e.target.value)
     }

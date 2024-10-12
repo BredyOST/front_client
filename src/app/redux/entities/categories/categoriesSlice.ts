@@ -1,9 +1,9 @@
-import {ICategoriesSchema} from "@/app/redux/entities/categories/categoriesSchema";
+import {filteredCategoriesType, ICategoriesSchema, itemType} from "@/app/redux/entities/categories/categoriesSchema";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 const initialState:ICategoriesSchema = {
-    categories: null,
+    categories: [],
     chosenCategory:[],
 }
 
@@ -11,10 +11,10 @@ const categoriesSlice = createSlice({
     name:'categories',
     initialState,
     reducers: {
-        addCategories:(state, action:PayloadAction<any>) => {
+        addCategories:(state, action:PayloadAction<filteredCategoriesType[]>) => {
             state.categories = action.payload;
         },
-        addChosenCategories:(state, action:PayloadAction<any>) => {
+        addChosenCategories:(state, action:PayloadAction<itemType[]>) => {
             state.chosenCategory = action.payload;
         }
     }

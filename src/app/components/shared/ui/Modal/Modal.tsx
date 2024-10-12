@@ -12,7 +12,7 @@ interface ModalProps {
     children?:ReactNode;
     isOpen?: boolean;
     onClose?: () => void;
-    classForContent?: string; // класс для того чтобы управлять окном контента для каждой модалки
+    classForContent?: string;
     lazy?:boolean;
     indicatorForNotCloseWhenStateAuthTrue?:boolean
 }
@@ -30,26 +30,21 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
 
     const dispatch = useAppDispatch();
 
-    // states from redux
     const { stateAuth, data: infoUser, isAdmin, isMainAdmin, } = useAppSelector((state) => state.auth);
     const { categoriesPopup, stateFreePeriodPopup, stateLoginFormPopup, goClosePopups } = useAppSelector((state) => state.loginPopup);
 
-    //actions
     const { closeAllPopups, changeStateCategoriesPopup, changeStateLoginFormPopup, changeStateFreePeriod } = statePopupSliceActions;
 
-    // indicators
-    const [indicatorOpen, setIndicatorOpen] = React.useState<boolean>(false); // дополнительное состояние чтобы плавно появлялась модалка после передачи isOpen: true
-    const [isMounted, setIsMounted] = React.useState<boolean>(false); // для определения когда modal вмонтировано
+    const [indicatorOpen, setIndicatorOpen] = React.useState<boolean>(false);
+    const [isMounted, setIsMounted] = React.useState<boolean>(false);
     const [isClosing, setIsClosing] = React.useState(false);
     const timerRef = React.useRef < ReturnType<typeof setTimeout> | null >(null);
 
-    // mods для добавдения классов
     const mods: Mods = {
         [cls.opened]: indicatorOpen,
         [cls.isClosing]: isClosing,
     };
 
-    // когда выполнен вход то закрываем окно, если true в авторизации
     React.useEffect(() => {
         if (goClosePopups) {
             setIsClosing(true);
@@ -62,15 +57,14 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
                 if (onClose) {
                     onClose();
                 }
-                setIsClosing(false); // после закрытия убрать scale 0.2
+                setIsClosing(false);
                 setIndicatorOpen(false);
-                setIsMounted(false); // чтобы убрать из DOM модальное окно
+                setIsMounted(false);
             }, ANIMATION_DELAY);
         }
     }, [goClosePopups]);
 
 
-    // для открытия попапа
     React.useEffect(() => {
         if (isOpen) {
             setIsMounted(true);
@@ -89,7 +83,6 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
         }
     }, [isOpen]);
 
-    // функция для закрытия попапа
     const closePopup = React.useCallback(() => {
         setIsClosing(true);
         document.documentElement.classList.remove("lock")
@@ -97,13 +90,12 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
             if (onClose) {
                 onClose();
             }
-            setIsClosing(false); // после закрытия убрать scale 0.2
+            setIsClosing(false);
             setIndicatorOpen(false);
-            setIsMounted(false); // чтобы убрать из DOM модальное окно
+            setIsMounted(false);
         }, ANIMATION_DELAY);
     }, [setIsClosing, onClose]);
 
-    // закрываем при нажатии на клавишу escape
     const onKeyDown = React.useCallback((e:KeyboardEvent) => {
         if (e.key === 'Escape') {
             closePopup();
@@ -122,12 +114,10 @@ export const Modal:FC<ModalProps> = React.memo((props) => {
         window.removeEventListener('keydown', onKeyDown);
     }, [isOpen, onKeyDown]);
 
-    // // останавливаем высплытие чтобы попам не закрылся
     const onContentClick = (e:React.MouseEvent) => {
         e.stopPropagation();
     };
 
-    // в этом случае модалку в DOM дерево не монтируем
     if (lazy && !isMounted) {
         return null;
     }

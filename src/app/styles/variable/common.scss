@@ -78,7 +78,6 @@
   @include mixins.adaptiveValue("font-size",14,12,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 }
 
-
 // добавь только padding и адаптив (оранжевая кнопка)
 .btn{
   font-family: globalIndex.$Enter_fontFamily;

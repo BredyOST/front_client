@@ -18,22 +18,11 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
     const { classname } = props;
     const cookies = parseCookies();
 
-
-    //RTK
     const [createFile, {data: requestFile, error:errorrFile, isLoading: isLoadingFile, isError:isErrorFile}] = useAddNewFileMutation()
     const [addFiles, {data: requestAddFiles, error:errorrAddFiles, isLoading: isLoadingAddFiles, isError:isErrorAddFiles}] = useGetFilesMutation()
     const [deleteFile, {data: requestDeleteFile, error:errorrDeleteFile, isLoading: isLoadingDeleteFile, isError:isErrorDeleteFile}] = useDeleteFileMutation()
 
-    //ACTIONS FROM REDUX
-    
-    //STATES FROM REDUX
     const [fileList, setFileList] = React.useState<any>([])
-    
-    //USESTATE
-    
-    //USEREF
-    
-    //FUNCTIONS
 
     const handleFileChange = (e:any) => {
         const file = e.target.files[0];
@@ -57,7 +46,6 @@ const UploadFiles:FC<uploadFilesProps> = (props) => {
             if(cookies  && cookies._z) {
                 addFiles(cookies)
             }
-
         },[]
     )
 

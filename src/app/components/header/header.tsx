@@ -8,64 +8,36 @@ import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import LoginModal from "@/app/components/features/AuthBy/loginModal/loginModal";
 import {useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi";
-import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
+import {authSliceActions} from "@/app/redux/entities/auth/authSlice";
 import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
 import Notification from "@/app/components/shared/notification/notification";
 import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import BtnEnterBlock from "@/app/components/header/btnEnterBlock/btnEnterBlock";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-interface headerProps {
+import {navbarFirst} from "@/app/utils/index.constants";
+import {TypeForFunc} from "@/app/types/types";
+import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
+interface HeaderProps {
     classname?: string;
 }
 
-// что передаем в NavBar
-export type NavBar = {
-    text: string,
-    href:string,
-}
+const Header= React.memo(({classname}: HeaderProps) => {
 
-export const navbarFirst:NavBar[] = [
-    {text: 'Тарифы', href:'/dashboard/price'},
-    {text: 'Вопросы', href:'/dashboard/faq'},
-    {text: 'Отзывы', href:'/dashboard/feedback'},
-    // {text: 'контакты', href:'/dashboard/feedback'},
-]
-
-const Header:FC<headerProps> = React.memo((props) => {
-    const {classname,} = props;
     const dispatch = useAppDispatch();
     const cookies = getThisCookie();
 
-    //RTK
-    // // запрос данных на получение информации пользователя пользователя
     const [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
-    // //получаем имеющиеся категории в базе данных, доступные к подписке
-
-    // STATES FROM REDUX
-    // данные по авторизации
-    // Actions
-    // для сохранения данных о пользователе
     const {addAdminRole, addMainAdminRole, addAuthStatus, addInfoUser,} = authSliceActions;
-    // добавить категории в стейт
     const {stateAuth} = useAppSelector(state => state.auth)
-    // ACTIONS FROM REDUX
     const { changeStateLoginFormPopup } = statePopupSliceActions;
-    //STATE
-    // для отображения и скрытия подменю профиля
     const [showHeader, setShowHeader] = React.useState(true);
-    let lastScrollY = React.useRef(0);
-    //REF
-    // const burgerMenuOpenRef = React.useRef(stateMenuBurgerHeader);
 
-    // Mods для стилей
+    let lastScrollY = React.useRef(0);
+
     const mods:Mods = {
         [cls.hideHeader]: !showHeader
     }
-
-    //FUNCTIONS
-
-    //USEEFFECT
 
     React.useEffect(() => {
         if (cookies && cookies._z) {
@@ -95,7 +67,7 @@ const Header:FC<headerProps> = React.memo((props) => {
     }, []);
 
 
-    const openLoginFormPopup = React.useCallback(() => {
+    const openLoginFormPopup:TypeForFunc<void, void> = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
     }, []);
 

@@ -1,162 +1,96 @@
 'use client';
-import React, {FC} from 'react';
+import React, {ChangeEvent} from 'react';
 import cls from './../loginForm.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import EmailSvg from "@/app/components/svgs/email.svg";
 import PhoneSvg from "@/app/components/svgs/phone.svg";
 import {Input} from "@/app/components/shared/ui/input/Input";
 import ShowSvg from "@/app/components/svgs/show.svg";
-import HideSvg from "@/app/components/svgs/hide.svg";
+import HideSvg from '@/app/components/svgs/hide.svg';
 import {useLoginInMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
-import {Control, Controller, SubmitHandler, useForm} from "react-hook-form";
-import {setThisCookie} from "@/app/components/shared/lib/cookie/cookie";
-import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";;
 import Loader from "@/app/components/shared/ui/Loader/Loader";
-import {redirect} from "next/navigation";
-import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import PhoneInput from "react-phone-number-input";
+import {
+    ForTextFormsType,
+    loginFormType,
+    loginText, loginTextType,
+    passwordHideType
+} from "@/app/components/features/helpersAuth/helpersAuthLogin";
+import {ActiveTabIdType, TypeForFunc} from "@/app/types/types";
+import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
 
-interface LogiInProps {
-}
+const LoginIn = () => {
 
-const loginText: any = [
-    { id: 2, text: 'Телефон' },
-    { id: 1, text: 'Email' },
-]
-
-type loginForm = {
-    mailOrNumberLoginIn: string | number,
-    passwordLoginIn: string,
-}
-
-interface passwordHide {
-    login: boolean,
-    loginShowHide: boolean,
-}
-
-interface ForTextForms {
-    loginIn: string,
-    passwordLogin: string,
-}
-const LogiIn:FC<LogiInProps> = (props) => {
-    const {
-    } = props;
     const dispatch = useAppDispatch();
 
-    //RTK
-    // Запрос на вход
     let [loginEnter, {
         data: requestLogin, error: errorLogin, isError: isErrorLogin, isLoading: loadingLogin,
     }] = useLoginInMutation();
 
-    //ACTIONS FROM REDUX
-    // для изменения текущего состояния попапа (от 1 до 3)
-    const { changeStateClickOnEnter } = stateAuthWindowSliceActions;
-    // для сохранения данных о пользователе
-    const {
-        addMainAdminRole, addAdminRole, addAuthStatus, addInfoUser, LogOutFromProfile,
-    } = authSliceActions;
-    const { changeStateLoginFormPopup, closeAllPopups } = statePopupSliceActions;
-    //STATES FROM REDUX
-    // для определения текущего состояния попапа, окно входа, ргистрация, забыл пароль. при первом открытии открывается окно входа
-    const { clickOnEnter } = useAppSelector((state) => state.statePopup);
-    // что выбрано - email или phone при авторизации
-    const [activeTab, setActiveTab] = React.useState<number>(2);
-    //USESTATE
+    const { changeStateCurrentPopupNumber } = stateAuthWindowSliceActions;
 
-    // для отображения введенных символов в инпуте пароля, login и registration, registerCheck - false значит ничего в поля не введено, loginShowHide, registerShowHide: false - значит пароль скрыт
-    const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHide>({
-        login: false,  loginShowHide: false,
+    const { currentPopupNumber } = useAppSelector((state) => state.statePopup);
+
+    const [activeTab, setActiveTab] = React.useState<ActiveTabIdType>(2);
+    const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHideType>({
+        enteredLoginText: false,  passwordBtnShowOrHide: false,
     });
-    // для того чтобы делать проверки после введенного логина в графы. Делаем управляемые импуты
-    const [textFromForms, setTextFromForms] = React.useState<ForTextForms>({
+    const [textFromForms, setTextFromForms] = React.useState<ForTextFormsType>({
         loginIn: '', passwordLogin: '',
     });
 
-    //USEREF
-    // для получения элемента input при входе (ввод логина)
     const loginRef = React.useRef<HTMLInputElement | null>(null);
-    // для получения элемента input при входе в учетную запись (ввод пароля)
     const passwordLoginRef = React.useRef<HTMLInputElement | null>(null);
 
-    //FUNCTIONS
-
-    const onSubmit: SubmitHandler<loginForm> = (data) => {
-        // вход в учетную запись
+    const onSubmit: SubmitHandler<loginFormType> = (data) => {
+        /**
+         * activeTab === 1 - вход через email
+         * activeTab === 2 - вход через номер телефона
+         **/
         if (activeTab === 1) {
             loginEnter({ email: data.mailOrNumberLoginIn, phoneNumber: 'no date', password: data.passwordLoginIn, });
         }
-        // через номер телефона
         if (activeTab === 2) {
             loginEnter({ email: 'no date', phoneNumber: data.mailOrNumberLoginIn, password: data.passwordLoginIn, });
         }
     }
 
-    //  для отправки запроса с form и регистрации полей инпута, для валидации регистрации. когда поля пустые выдает предупреждение
-    const {register, handleSubmit, setError, control, formState: { errors, isValid },} = useForm<loginForm>({
+    const {register, handleSubmit, setError, control, formState: { errors, isValid },} = useForm<loginFormType>({
         mode: 'onChange',
     });
 
-    const changeActiveTab = (id: number) => {
+    const changeActiveTab:TypeForFunc<ActiveTabIdType, void> = (id: ActiveTabIdType):void => {
         setActiveTab(id)
     }
-
-    // для изменения индикатора который меняет type у input на text или password. Показать или скрыть пароль при вводе
-    const showAndHideTextPassword = (name:string) => {
-        setPasswordHideButton({ ...passwordHideButton, loginShowHide: !passwordHideButton.loginShowHide });
+    const showAndHideTextPassword:TypeForFunc<void, void> = () => {
+        setPasswordHideButton(prevState => ({...prevState, passwordBtnShowOrHide: !passwordHideButton.passwordBtnShowOrHide }));
     };
-
-    // тут меняем на false для того чтобы после смены окна опять индикаторы были в false и не было кнопки открытия с сохранившейся позицией. Сохранялось в общем выбранное в предыдущем окне
-    const changeStateEnterOrRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(changeStateClickOnEnter(1));
-    };
-    const changeStateAccessNumber = () => {
-        dispatch(changeStateClickOnEnter(4));
-    }
-
-    // для отображения кнопки показать/скрыть пароль в окне входа в учетную запись
-    const checkTextFormsLogin = (e: any) => {
+    const checkTextFormsLogin:TypeForFunc<ChangeEvent<HTMLFormElement>, void> = (e:ChangeEvent<HTMLFormElement>) => {
         const targetName = e.target.name;
         const value = e.target.value;
 
-        if (clickOnEnter === 0 && targetName === `passwordLoginIn`) {
+        if (currentPopupNumber === 0 && targetName === `passwordLoginIn`) {
             setTextFromForms({ ...textFromForms, passwordLogin: e.target.value });
-            value.length && !passwordHideButton.login && setPasswordHideButton({ ...passwordHideButton, login: true })
-            !value.length && passwordHideButton.login && setPasswordHideButton({ ...passwordHideButton, login: false })
+            value.length && !passwordHideButton.enteredLoginText && setPasswordHideButton({ ...passwordHideButton, enteredLoginText: true })
+            !value.length && passwordHideButton.enteredLoginText && setPasswordHideButton({ ...passwordHideButton, enteredLoginText: false })
         }
     };
-
-    // меняем на окно забыл логин или пароль
-    const openWindowRecoveryAccess = () => {
-        dispatch(changeStateClickOnEnter(2));
+    const changeStateEnterOrRegister:TypeForFunc<void, void> = () => {
+        dispatch(changeStateCurrentPopupNumber(1));
     };
-    const dontGetMessageActivation= () => {
-        dispatch(changeStateClickOnEnter(4));
+    const changeStateAccessNumber:TypeForFunc<void, void> = () => {
+        dispatch(changeStateCurrentPopupNumber(4));
+    }
+    const openWindowRecoveryAccess:TypeForFunc<void, void> = ()=> {
+        dispatch(changeStateCurrentPopupNumber(2));
     };
 
-    React.useEffect(() => {
-        if (requestLogin && requestLogin.refreshToken) {
-            dispatch(addInfoUser(requestLogin));
-            dispatch(addAdminRole(requestLogin.isAdmin));
-            dispatch(addMainAdminRole(requestLogin.isMainAdmin));
-            dispatch(addAuthStatus(true));
-            setThisCookie('_d', requestLogin.refreshToken)
-            setThisCookie('_z', requestLogin.accessToken)
-            setThisCookie('_a', requestLogin.sessionToken)
-            dispatch(changeStateLoginFormPopup(false));
-            if ((requestLogin?.activatedFreePeriod && requestLogin?.categoriesFreePeriod?.length) || (requestLogin?.categoriesHasBought?.length)) {
-                redirect('/dashboard/search')
-                dispatch(closeAllPopups(true));
-            } else {
-                redirect('/dashboard/price')
-                dispatch(closeAllPopups(true));
-            }
-        }
-    },[requestLogin])
+    useAddInfoAboutUserWithCookie(requestLogin)
 
-    if (clickOnEnter != 0 ) {
+    if (currentPopupNumber != 0 ) {
         return null
     }
 
@@ -174,12 +108,12 @@ const LogiIn:FC<LogiInProps> = (props) => {
             <div className={cls.coverBtn}>
                 <h3 className={cls.titleForBtn}>Выберите способ авторизации</h3>
                 <div className={cls.coverPhoneAndMail}>
-                    {loginText && loginText.map((item: any) => (
+                    {loginText && loginText.map((item: loginTextType) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}
                             indicatorActiveTab={item.id == activeTab}
-                            onClick={() => changeActiveTab(item.id)}
+                            onClick={() => changeActiveTab(item.id as ActiveTabIdType)}
                         >
                             {item.text === 'Телефон' && <PhoneSvg className={cls.phoneSvg} />}
                             {item.text === 'Email' && <EmailSvg className={cls.emailSvg} />}
@@ -228,7 +162,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
                 >
                     <Input
                         classForInput={cls.input}
-                        type={passwordHideButton.loginShowHide ? 'text' : 'password'}
+                        type={passwordHideButton.passwordBtnShowOrHide ? 'text' : 'password'}
                         placeholder="Введите пароль"
                         defaultValue={textFromForms.passwordLogin}
                         classname={cls.inputRelative}
@@ -238,7 +172,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
                         register={{ ...register('passwordLoginIn') }}
                     >
                         {
-                            passwordHideButton.login
+                            passwordHideButton.enteredLoginText
                             && (
                                 <Button
                                     type="button"
@@ -247,7 +181,7 @@ const LogiIn:FC<LogiInProps> = (props) => {
                                     addNametoFunction={true}
                                     onClick={showAndHideTextPassword}
                                 >
-                                    {!passwordHideButton.loginShowHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
+                                    {!passwordHideButton.passwordBtnShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
                                 </Button>
                             )
                         }
@@ -300,4 +234,4 @@ const LogiIn:FC<LogiInProps> = (props) => {
     );
 };
 
-export default LogiIn;
+export default LoginIn;

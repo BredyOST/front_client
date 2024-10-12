@@ -1,37 +1,17 @@
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './profileList.module.scss'
 import {classNames} from "@/app/components/shared/lib/classNames/className";
 import Link from "next/link";
 import {Button} from "@/app/components/shared/ui/Button/Button";
-import {destroyCookie} from "nookies";
-import {authSliceActions} from "@/app/redux/entities/auth/slice/authSlice";
-import {useAppDispatch} from "@/app/redux/hooks/redux";
+import {useLogOutFromProfile} from "@/app/hooks/hooks";
 
-
-interface qProps {
+interface ProfileProps {
     classname?: string;
 }
 
-const Profile:FC<qProps> = React.memo((props) => {
-    const { classname } = props;
+const Profile = React.memo(({classname}:ProfileProps) => {
 
-    const dispatch = useAppDispatch()
-    //actions
-    // для сохранения данных о пользователе
-    const {
-        addAdminRole,addMainAdminRole, addAuthStatus, addInfoUser, LogOutFromProfile,
-    } = authSliceActions;
-
-    const logout = React.useCallback(() => {
-        destroyCookie(null,"_z",{path:'/'})
-        destroyCookie(null,"_d",{path:'/'})
-        destroyCookie(null,"_a",{path:'/'})
-        dispatch(LogOutFromProfile(null));
-        dispatch(addAdminRole(false));
-        dispatch(addMainAdminRole(false));
-        dispatch(addAuthStatus(false));
-        location.reload()
-    },[])
+    const logoutProfile = useLogOutFromProfile()
 
     return (
         <div className={classNames(cls.profile, {},[classname] )} >
@@ -54,7 +34,7 @@ const Profile:FC<qProps> = React.memo((props) => {
             </ul>
             <Button
                 classname={cls.logOutBtn}
-                onClick={logout}
+                onClick={logoutProfile}
             >
                 Выйти
             </Button>

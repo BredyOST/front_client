@@ -1,7 +1,6 @@
 import './styles/index.scss'
 import { Inter } from 'next/font/google'
 import Header from "@/app/components/header/header";
-import {classNames} from "@/app/components/shared/lib/classNames/className";
 import Footer from "@/app/components/footer/footer";
 import React from "react";
 import ReduxProvider from "@/app/redux/provider/reduxProvider";
@@ -45,7 +44,7 @@ export default function RootLayout({
             <html lang="en">
                 <body className={inter.className}>
                     <Header/>
-                    <div className={classNames('wrapper', {}, [])}>
+                    <div className='wrapper'>
                         {children}
                     </div>
                     <Footer/>

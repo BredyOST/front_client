@@ -3,15 +3,15 @@ import {StateAuthWindowSchema} from "@/app/redux/entities/stateAuthWindowSlice/s
 
 
 const initialState: StateAuthWindowSchema = {
-    clickOnEnter: 0,
+    currentPopupNumber: 0,
 };
 
 export const stateAuthWindowSlice = createSlice({
     name: 'Indicators',
     initialState,
     reducers: {
-        changeStateClickOnEnter: (state, action: PayloadAction<number>) => {
-            state.clickOnEnter = action.payload;
+        changeStateCurrentPopupNumber: (state, action: PayloadAction<number>) => {
+            state.currentPopupNumber = action.payload;
         },
     },
 });

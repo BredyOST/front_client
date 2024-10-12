@@ -19,26 +19,16 @@ const Notification:FC<notificationProps> = React.memo((props) => {
 
     const dispatch = useAppDispatch();
 
-    // actions from redux
-    //для индикаторов
     const {addInfoForCommonRequest, addInfoForCommonError} = indicatorsNotifications;
 
-
     const {commonForRequest, commonForError} = useAppSelector(state => state.notifications)
-
 
     const mod:Mods = {
         [cls.commonForRequest]: commonForRequest,
         [cls.commonForError]:  commonForError,
     }
-    const [ indicator, setIndicator] = React.useState<boolean>(false);
+    const [indicator, setIndicator] = React.useState<boolean>(false);
     const timerRef = React.useRef < ReturnType<typeof setTimeout> | null >(null);
-
-
-    React.useEffect(
-        () => {
-        },[timerRef]
-    )
 
     const returnIndicatorFalse = () => {
         timerRef.current =  setTimeout(() => {
@@ -53,11 +43,9 @@ const Notification:FC<notificationProps> = React.memo((props) => {
             if (commonForError) {
                 if (commonForRequest) dispatch(addInfoForCommonRequest(''))
                 if(!indicator) {
-                    // console.log('1')
                     setIndicator(true)
                     returnIndicatorFalse()
                 } else if (indicator) {
-                    // console.log('2')
                     if (timerRef && timerRef.current) {
                         clearTimeout(timerRef.current)
                     }
@@ -87,7 +75,6 @@ const Notification:FC<notificationProps> = React.memo((props) => {
             }
         }, [commonForRequest]
     )
-
 
     const closeNotifications = () => {
         if (commonForRequest) dispatch(addInfoForCommonRequest(''))

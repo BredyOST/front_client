@@ -27,23 +27,13 @@ export const BurgerButton:FC<BurgerButtonProps> = React.memo((props) => {
     const { classname } = props;
     const dispatch = useAppDispatch();
 
-    // const [openedBurger, setOpenedBurger] = React.useState<boolean>(false); // индикатор открытия бургер меню
-
-    //ACTIONS FROM REDUX
     const {changeStateMenuBurger} = stateBurgerMenuSliceActions;
-    //STATES FROM REDUX
 
-    //USESTATE
     const {stateMenuBurgerHeader} = useAppSelector(state => state.stateBurgerMenu)
-    //USEREF
 
-    // мод для того чтобы добавить класс когда меню активно, (отобразить список menu burger)
     const mod:Mods = {
         [cls.activeBurger]: stateMenuBurgerHeader,
     };
-
-    //FUNCTIONS
-    // функция для открытия меню бургер
 
     const closeAndOpenBurger = () => {
         dispatch(changeStateMenuBurger(!stateMenuBurgerHeader))

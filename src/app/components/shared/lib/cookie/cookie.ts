@@ -1,11 +1,9 @@
 import {setCookie, parseCookies, destroyCookie} from 'nookies';
 
 export function setThisCookie(name:string, value:string) {
-
     setCookie(null, name, value, {
         path: '/',
     });
-
 }
 
 export function getThisCookie() {

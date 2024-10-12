@@ -22,22 +22,13 @@ const AddChat:FC<addChatProps> = (props) => {
     const { classname } = props;
     const cookies = parseCookies();
 
-    //RTK
     const [getChats, {data: requestChats, error:errorChats, isLoading: isLoadingChats, isError:isErrorChats}] = useGetChatMutation()
     const [createAddChat, {data: requestAddChat, error:errorAddChat, isLoading: isLoadingAddChat, isError:isErrorAddChat}] = useAddChatMutation()
 
-    //ACTIONS FROM REDUX
-
-    //STATES FROM REDUX
-
-    //USESTATE
-    const [inputName, setInputId] = React.useState<string>('') // для отправки одного чата
-    const [inputNameMany, setInputIdMany] = React.useState<string>('') // для отправки множества параметров
+    const [inputName, setInputId] = React.useState<string>('')
+    const [inputNameMany, setInputIdMany] = React.useState<string>('')
     const [show, setShow] = React.useState<boolean>(false)
 
-    //USEREF
-
-    //FUNCTIONS
     const addTextInputId = (e:ChangeEvent<HTMLInputElement>) => {
         setInputId(e.target.value)
     }

@@ -2,14 +2,14 @@ import { FC, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 interface PortalProps {
-    children: ReactNode; // что перемещаем
-    whereToAddInDom?: HTMLElement; // куда перемещаем
+    children: ReactNode;
+    whereToAddInDom?: HTMLElement;
 }
 
 const Portal: FC<PortalProps> = (props) => {
     const {
         children,
-        whereToAddInDom = document.body, // если не указали то будет body
+        whereToAddInDom = document.body,
     } = props;
 
     return createPortal(children, whereToAddInDom);

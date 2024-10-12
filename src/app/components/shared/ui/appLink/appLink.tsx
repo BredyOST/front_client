@@ -4,7 +4,7 @@ import cls from './appLink.module.scss';
 import Link, {LinkProps} from "next/link";
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
-import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
+import {useAppDispatch} from "@/app/redux/hooks/redux";
 
 interface AppLinkProps extends LinkProps {
     classname?: string;
@@ -23,8 +23,8 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
         classname,
         children,
         href,
-        indicator, // для того чтобы добавить класс active ссылке. индикатор для header
-        indicatorBurger, // индикатор для burger menu
+        indicator,
+        indicatorBurger,
         onPointerEnter,
         onPointerLeave,
         onClick,
@@ -39,8 +39,6 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
     const {addChosenCategories} = categoriesActions;
     const dispatch = useAppDispatch();
     const [open, setOpen] = React.useState<boolean>(false);
-    //STATES FROM REDUX
-    // все выбранные категории
 
     const goToPrice = (infroForOnclick:any) => {
         if (infroForOnclick && infroForOnclick?.id) {
@@ -49,7 +47,6 @@ export const AppLink:FC<AppLinkProps> = React.memo((props) => {
             dispatch(addChosenCategories([ { id: infroForOnclick?.id, text: infroForOnclick?.name }]));
         }
     }
-
 
     return (
         <Link

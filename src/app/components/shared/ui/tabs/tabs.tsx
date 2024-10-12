@@ -11,12 +11,12 @@ interface tsbsProps {
     title?:string;
 }
 
-interface ForCounterItem {
+type forCounterItemType = {
     id: number;
     text: string;
 }
 
-const forCounter:ForCounterItem[] = [
+const forCounter:forCounterItemType[] = [
     {id:1, text:'10'},
     {id:2, text:'30'},
     {id:3, text:'50'},
@@ -27,16 +27,11 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
         classname,
         title,
     } = props;
+
     const dispatch = useAppDispatch();
 
-    //ACTIONS FROM REDUX
     const {addPostsCount} = SearchParamsActions;
-    //STATES FROM REDUX
     const {postsCount} = useAppSelector(state => state.searchParams)
-    //USESTATE
-
-    //USEREF
-
 
     React.useEffect(
         () => {
@@ -50,7 +45,6 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
         },[]
     )
 
-    //FUNCTIONS
     const changeActiveTabs = React.useCallback(
         (text:string) => {
             localStorage.setItem('_tabs_count', `${text}`);
@@ -58,7 +52,6 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
         },[]
     )
 
-    // @ts-ignore
     return (
         <div className={classNames(cls.selectTabs, {},[classname] )} >
             {title &&
@@ -67,7 +60,7 @@ const Tabs:FC<tsbsProps> = React.memo((props) => {
                 </h3>
             }
             <div className={cls.coverBtn}>
-                {forCounter?.length && forCounter.map((item:ForCounterItem)=> (
+                {forCounter?.length && forCounter.map((item:forCounterItemType)=> (
                     <Button
                         key={item.id}
                         onClick={() => changeActiveTabs(item.text)}
