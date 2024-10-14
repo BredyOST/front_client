@@ -1,7 +1,8 @@
+import {LinkVideoType, NavBar, LoginTextRecovery} from "@/app/types/types"
 
-//titles for pages
-import {LinkVideoType, NavBar} from "@/app/types/types";
-
+/**
+ * константы для страниц - заголовки
+ **/
 export const CONTACT_PAGE_TITLE = 'Контакты';
 export const FAQ_PAGE_TITLE= 'Ответы на вопросы';
 export const FEEDBACK_PAGE_TITLE= 'Отзывы';
@@ -12,13 +13,15 @@ export const PROFILE_PAGE_TITLE= 'Профиль пользователя';
 export const SEARCH_PAGE_TITLE= 'Поиск клиентов';
 export const TERMS_PAGE_TITLE= 'Пользовательское соглашение сайта «клиенты.com»';
 
+/**
+ * константы - объекты, массивы,
+ **/
+
 export const navbarFirst:NavBar[] = [
     {text: 'Тарифы', href:'/dashboard/price'},
     {text: 'Вопросы', href:'/dashboard/faq'},
     {text: 'Отзывы', href:'/dashboard/feedback'},
-    // {text: 'контакты', href:'/dashboard/feedback'},
 ]
-
 export const linksVideoFeedBack:LinkVideoType[] = [
     {id:1, link: "https://www.youtube.com//embed/M2WoS2mSEOY",},
     {id:2, link: "https://www.youtube.com//embed/nyoWsqG5QgQ"},
@@ -29,3 +32,11 @@ export const linksVideoFeedBack:LinkVideoType[] = [
 ]
 
 
+
+/**
+ * константа для
+ **/
+export const loginTextRecovery: LoginTextRecovery[] = [
+    { id: 1, text: 'Звонок' },
+    { id: 2, text: 'Телеграмм' },
+]

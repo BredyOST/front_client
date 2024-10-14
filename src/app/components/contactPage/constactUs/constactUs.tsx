@@ -4,7 +4,7 @@ import cls from './constactUs.module.scss';
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {sendMessageRequest} from "@/app/redux/saga/sendMessageFromContact/sagaApi";
+import {sendMessageRequest} from "@/app/redux/saga/sendMessageFromContact/sendMessageFromContactActions";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {useShowMessageAfterRequest} from "@/app/hooks/hooks";
 import {infoForMassage, MessageInfo} from "@/app/types/types";

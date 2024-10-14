@@ -9,10 +9,10 @@ import categoriesReducer from './../entities/categories/categoriesSlice';
 import pricesReducer from './../entities/prices/pricesSlice';
 import burgerMenuReducer from './../entities/stateBurger/stateBurgerSlice';
 import searchParamsReducer from '../entities/searchParams/searchParamsSlice';
-import messageReducer from '../saga/sendMessageFromContact/reducer'
+import messageReducer from '../saga/sendMessageFromContact/sendMessageFromContactReducer'
 import {requestApi} from "@/app/redux/entities/requestApi/requestApi";
 import createSagaMiddleware from 'redux-saga';
-import mySaga from '../saga/sendMessageFromContact/sagaMain';
+import mySaga from '../saga/sendMessageFromContact/sendMessageFromContact';
 import IndicatorsLogInReducer from './../entities/indicatorsLogInWindow/indicatorsLogInSlice'
 
 

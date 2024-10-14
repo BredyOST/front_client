@@ -20,7 +20,7 @@ import {
     passwordHideType
 } from "@/app/components/features/helpersAuth/helpersAuthLogin";
 import {ActiveTabIdType, TypeForFunc} from "@/app/types/types";
-import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
+import {useAddInfoAboutUserWithCookie, useAxios} from "@/app/hooks/hooks";
 
 const LoginIn = () => {
 
@@ -89,6 +89,7 @@ const LoginIn = () => {
     };
 
     useAddInfoAboutUserWithCookie(requestLogin)
+
 
     if (currentPopupNumber != 0 ) {
         return null

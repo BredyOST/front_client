@@ -7,6 +7,7 @@ import {redirect} from "next/navigation";
 import {UserAuthorization} from "@/app/redux/entities/auth/authSchema";
 import {destroyCookie, setCookie} from "nookies";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
+import axios from "axios";
 
 /**
  * хук для изменения состояния
@@ -19,7 +20,6 @@ const useToggleState = (setEvent: Dispatch<SetStateAction<boolean>>) => {
  * хук для добавления информации о пользователе и cookie после авторизации
  **/
 const useAddInfoAboutUserWithCookie = (request:UserAuthorization):void => {
-    console.log(32)
     const dispatch = useAppDispatch();
     const { addMainAdminRole, addAdminRole, addAuthStatus, addInfoUser, LogOutFromProfile } = authSliceActions;
     const { changeStateLoginFormPopup, closeAllPopups } = statePopupSliceActions;
@@ -51,7 +51,6 @@ const useAddInfoAboutUserWithCookie = (request:UserAuthorization):void => {
  * хук для удаления информации о пользователе и очистке cookie после выхода из профиля
  **/
 const useLogOutFromProfile = () => {
-    console.log(34)
     const dispatch = useAppDispatch();
     const { addMainAdminRole, addAdminRole, addAuthStatus, addInfoUser, LogOutFromProfile } = authSliceActions;
 

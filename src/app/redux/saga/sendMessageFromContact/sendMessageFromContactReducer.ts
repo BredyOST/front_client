@@ -1,4 +1,4 @@
-import {SEND_MESSAGE_FAILURE, SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS} from "@/app/redux/saga/sendMessageFromContact/sagaApi";
+import {SEND_MESSAGE_FAILURE, SEND_MESSAGE_REQUEST, SEND_MESSAGE_SUCCESS} from "@/app/redux/saga/sendMessageFromContact/sendMessageFromContactActions";
 
 const initialState = {
     data: null,
@@ -7,7 +7,7 @@ const initialState = {
     isError: false,
 };
 
-export const messageReducer = (state = initialState, action:any) => {
+export const sendMessageFromContactReducer = (state = initialState, action:any) => {
     switch (action.type) {
     case SEND_MESSAGE_REQUEST:
         return { ...state, isLoading: true, isError: false, error: null };
@@ -20,4 +20,4 @@ export const messageReducer = (state = initialState, action:any) => {
     }
 };
 
-export default messageReducer;
+export default sendMessageFromContactReducer;
