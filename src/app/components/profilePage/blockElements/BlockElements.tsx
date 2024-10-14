@@ -3,12 +3,12 @@ import cls from "@/app/components/profilePage/blockCategory/blockCategory.module
 import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
 import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
 import Link from "next/link";
-import {categoriesBoughtType, notificationsType} from "@/app/components/profilePage/blockCategory/blockCategory";
 import {formatDateToRussian} from "@/app/components/shared/lib/formatedFunction/formatedFunction";
 import {User, UserAuthorization} from "@/app/redux/entities/auth/authSchema";
+import {CategoriesBoughtType, NotificationsType} from "@/app/types/pageTypes/profileTypes";
 
 interface IBlockElements {
-    userCategories?: categoriesBoughtType[]
+    userCategories?: CategoriesBoughtType[]
     infoUser: UserAuthorization | null
     indicator: number
 }
@@ -21,7 +21,7 @@ const BlockElements = ({  userCategories, infoUser, indicator}:IBlockElements) =
     return (
 
         <>
-            { userCategories?.length >= 1 && userCategories.map((item:categoriesBoughtType) => (
+            { userCategories?.length >= 1 && userCategories.map((item:CategoriesBoughtType) => (
                 new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
                 <div key={item.id} className={cls.blockCategory}>
                     <div className={cls.blockInfo}>
@@ -43,14 +43,14 @@ const BlockElements = ({  userCategories, infoUser, indicator}:IBlockElements) =
                                 {indicator == 1 &&
                                     <div className={cls.top}>
                                         <h2 className={cls.title}>Уведомления в телеграмме</h2>
-                                        {infoUser && infoUser?.notificationsHasBought?.find((elem:notificationsType) => elem.id == item.id)
+                                        {infoUser && infoUser?.notificationsHasBought?.find((elem:NotificationsType) => elem.id == item.id)
                                             ? <div className={cls.textVerify}>Подключен<VerifySvg className={cls.verifySvg}/></div>
                                             : <div className={cls.textVerify}>Не подключен<NotVerifySvg className={cls.notVerifySvg}/></div>
                                         }
                                     </div>
                                 }
                                 {indicator == 1 &&
-                                    infoUser && !infoUser?.notificationsHasBought?.find((elem:notificationsType) => elem.id == item.id) &&
+                                    infoUser && !infoUser?.notificationsHasBought?.find((elem:NotificationsType) => elem.id == item.id) &&
                                     <div className={cls.btnCover}>
                                         <Link className={cls.btn} href="/dashboard/notifications">Подключить</Link>
                                     </div>
@@ -58,13 +58,13 @@ const BlockElements = ({  userCategories, infoUser, indicator}:IBlockElements) =
                                 {indicator == 2 &&
                                     <div className={cls.top}>
                                         <h2 className={cls.title}>Уведомления в телеграмме</h2>
-                                        {infoUser && infoUser?.notificationsFreePeriod?.find((elem:notificationsType) => elem.id == item.id)
+                                        {infoUser && infoUser?.notificationsFreePeriod?.find((elem:NotificationsType) => elem.id == item.id)
                                             ? <div className={cls.textVerify}>Подключен<VerifySvg className={cls.verifySvg}/></div>
                                             : <div className={cls.textVerify}>Не подключен<NotVerifySvg className={cls.notVerifySvg}/></div>
                                         }
                                     </div>
                                 }
-                                {indicator == 2 && infoUser && !infoUser?.notificationsFreePeriod?.find((elem:notificationsType) => elem.id == item.id) &&
+                                {indicator == 2 && infoUser && !infoUser?.notificationsFreePeriod?.find((elem:NotificationsType) => elem.id == item.id) &&
                                     <div className={cls.btnCover}>
                                         <Link className={cls.btn} href="/dashboard/notifications">Подключить</Link>
                                     </div>
