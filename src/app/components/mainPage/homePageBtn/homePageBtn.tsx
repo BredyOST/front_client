@@ -6,11 +6,8 @@ import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopu
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 
-interface homePageBtnProps {}
+const HomePageBtn = () => {
 
-const HomePageBtn:FC<homePageBtnProps> = (props) => {
-
-    const { } = props;
     const dispatch = useAppDispatch();
 
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
