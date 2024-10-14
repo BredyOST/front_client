@@ -1,5 +1,5 @@
 'use client';
-import React, {ButtonHTMLAttributes, FC, ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import cls from './buttonToBuy.module.scss'
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import {filteredCategoriesType} from "@/app/redux/entities/categories/categoriesSchema";
