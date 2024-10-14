@@ -1,5 +1,5 @@
 'use client';
-import React, {ChangeEvent, FC} from 'react';
+import React from 'react';
 import cls from './changePhone.module.scss'
 import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
 import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
