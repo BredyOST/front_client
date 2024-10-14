@@ -1,7 +1,7 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './searchBlock.module.scss'
-import {Mods} from "@/app/components/shared/lib/classNames/className";
+import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import CancelSvg from "@/app/components/svgs/cancel.svg";
@@ -70,7 +70,7 @@ const SearchBlock= React.memo(() => {
     }
 
     return (
-        <div className={cls.secondCover} >
+        <div className={classNames(cls.secondCover, mod, [])} >
             <div className={cls.header}>
                 <div className={cls.first}>
                     <div className={cls.coverInput}>
