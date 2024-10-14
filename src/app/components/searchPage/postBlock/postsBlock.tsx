@@ -1,5 +1,5 @@
 'use client';
-import React, {FC} from 'react';
+import Reactfrom 'react';
 import cls from './postsBlock.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppSelector} from "@/app/redux/hooks/redux";
@@ -10,42 +10,10 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import Link from "next/link";
 import VkSvg from "../../svgs/vk.svg"
 import TgSvg from "../../svgs/telegram.svg"
+import {AllLoadedPostType} from "@/app/types/pageTypes/searchTypes";
 
-interface postsBlockProps {}
 
-const lists = {
-    1: 'vk',
-    2: 'FL',
-    3: 'FR',
-}
-
-type allLoadedPostType = {
-    city_group:string
-    city_user:string
-    country_group:string
-    country_user:string
-    createdAt:string
-    first_name_user:string
-    id:number
-    id_group:string
-    identification_post:string
-    last_name_user:string
-    name_group:string
-    photo_100_group:string
-    photo_100_user:string
-    post_date_publish:string
-    post_fromId:string
-    post_id:string
-    post_owner_id:string
-    post_text:string
-    post_type:string
-    signer_id:string
-    updateAt:string
-    userName: null | string
-}
-
-const PostsBlock:FC<postsBlockProps> = (props) => {
-    const {} = props;
+const PostsBlock= () => {
 
     let [keysRedis, {
         data: keysRedisRes, error: keysRedisError, isError: isErrorkeysRedis,  isLoading: loadingkeysRedis,
@@ -59,14 +27,14 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
 
     const [expandedPosts, setExpandedPosts] = React.useState<number[]>([]);
     const [page, setPage] = React.useState<number>(1);
-    const [filteredPosts, setFilteredPosts] = React.useState<allLoadedPostType[]>([]);
+    const [filteredPosts, setFilteredPosts] = React.useState<AllLoadedPostType[]>([]);
 
-    const applyFilters =(allLoadedPosts:allLoadedPostType[]) => {
+    const applyFilters =(allLoadedPosts:AllLoadedPostType[]) => {
 
         if ((!keyWords || !keyWords?.length) && (!keyCityWords || !keyCityWords?.length)) {
             return allLoadedPosts;
         }
-        let filtered = allLoadedPosts?.filter((post: allLoadedPostType) => {
+        let filtered = allLoadedPosts?.filter((post: AllLoadedPostType) => {
             const matchesWords = !keyWords.length || keyWords.some((word:string) =>
                 post.post_text.toLowerCase().includes(word.toLowerCase())
             );

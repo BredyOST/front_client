@@ -57,3 +57,9 @@ export const TEXT_ERRORS = {
     messageSecond: 'Не совпадают введенные пароли',
     messageThird: 'Не совпадают введенные пароли',
 }
+
+export const ListsSocial = {
+    1: 'vk',
+    2: 'FL',
+    3: 'FR',
+}
