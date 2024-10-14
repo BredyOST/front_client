@@ -16,11 +16,12 @@ import PhoneInput from "react-phone-number-input";
 import {
     ForTextFormsType,
     loginFormType,
-    loginText, loginTextType,
+    loginTextType,
     passwordHideType
 } from "@/app/components/features/helpersAuth/helpersAuthLogin";
 import {ActiveTabIdType, TypeForFunc} from "@/app/types/types";
-import {useAddInfoAboutUserWithCookie, useAxios} from "@/app/hooks/hooks";
+import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
+import {LOGIN_TEXT_RECOVERY} from "@/app/utils/index.constants";
 
 const LoginIn = () => {
 
@@ -109,7 +110,7 @@ const LoginIn = () => {
             <div className={cls.coverBtn}>
                 <h3 className={cls.titleForBtn}>Выберите способ авторизации</h3>
                 <div className={cls.coverPhoneAndMail}>
-                    {loginText && loginText.map((item: loginTextType) => (
+                    {LOGIN_TEXT_RECOVERY && LOGIN_TEXT_RECOVERY.map((item: loginTextType) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}

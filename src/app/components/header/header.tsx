@@ -15,7 +15,7 @@ import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
 import BtnEnterBlock from "@/app/components/header/btnEnterBlock/btnEnterBlock";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import {navbarFirst} from "@/app/utils/index.constants";
+import {NAVBAR_FIRST} from "@/app/utils/index.constants";
 import {TypeForFunc} from "@/app/types/types";
 import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
 interface HeaderProps {
@@ -82,7 +82,7 @@ const Header= React.memo(({classname}: HeaderProps) => {
                             </div>
                             <NavBar
                                 classnameForLink={cls.navBarFirst}
-                                arrayText={navbarFirst}
+                                arrayText={NAVBAR_FIRST }
                             />
                         </div>
                         <div className={cls.rightSection}>

@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateBurgerMenuSliceActions} from "@/app/redux/entities/stateBurger/stateBurgerSlice";
 import {NavBar, TypeForFunc} from "@/app/types/types";
 import {useLogOutFromProfile} from "@/app/hooks/hooks";
-import {navbarFirst} from "@/app/utils/index.constants";
+import {NAVBAR_FIRST} from "@/app/utils/index.constants";
 interface BurgerMenuProps {
     classname?: string;
     indicatorOpen:boolean;
@@ -45,8 +45,8 @@ export const BurgerMenu = React.memo(({ classname, indicatorOpen, forOnClick,}:B
             </Button>
             <div className={cls.section}>
                 <ul className={cls.coverLinks}>
-                    {navbarFirst && navbarFirst?.length > 0 &&
-                        navbarFirst.map((item:NavBar) => (
+                    {NAVBAR_FIRST  && NAVBAR_FIRST ?.length > 0 &&
+                        NAVBAR_FIRST .map((item:NavBar) => (
                             <AppLink
                                 classname={cls.links}
                                 key={item.text}
