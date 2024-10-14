@@ -7,7 +7,8 @@ import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {sendMessageRequest} from "@/app/redux/saga/sendMessageFromContact/sendMessageFromContactActions";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {useShowMessageAfterRequest} from "@/app/hooks/hooks";
-import {infoForMassage, MessageInfo} from "@/app/types/types";
+import {CONTACT_US_TITLE} from "@/app/utils/index.constants";
+import {infoForMassage, MessageInfo} from "@/app/types/pageTypes/contactTypes";
 
 const ContactUs = () => {
 
@@ -47,7 +48,7 @@ const ContactUs = () => {
             <div className={cls.cover}>
                 <div className={cls.section}>
                     <div className={cls.section}>
-                        <h1 className={cls.mainTitle}>Форма обратной связи</h1>
+                        <h1 className={cls.mainTitle}>{CONTACT_US_TITLE}</h1>
                     </div>
                     <form
                         onSubmit={sendInfoToSupport}

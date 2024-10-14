@@ -1,7 +1,7 @@
 import {LinkVideoType, NavBar, LoginTextRecovery} from "@/app/types/types"
 
 /**
- * константы для страниц - заголовки
+ * константы для основных страниц - заголовки
  **/
 export const CONTACT_PAGE_TITLE = 'Контакты';
 export const FAQ_PAGE_TITLE= 'Ответы на вопросы';
@@ -12,6 +12,12 @@ export const PRICE_PAGE_TITLE= 'Тарифы на подписку';
 export const PROFILE_PAGE_TITLE= 'Профиль пользователя';
 export const SEARCH_PAGE_TITLE= 'Поиск клиентов';
 export const TERMS_PAGE_TITLE= 'Пользовательское соглашение сайта «клиенты.com»';
+
+/**
+ * константы для заголовков в компонентах
+ **/
+export const CONTACT_US_TITLE = 'Форма обратной связи'
+
 
 /**
  * константы - объекты, массивы,
