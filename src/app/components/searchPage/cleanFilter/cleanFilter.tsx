@@ -1,37 +1,39 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './cleanFilter.module.scss'
-import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
+import {useAppDispatch} from "@/app/redux/hooks/redux";
 import {SearchParamsActions} from "@/app/redux/entities/searchParams/searchParamsSlice";
+import {TypeForFunc} from "@/app/types/types";
+import {Button} from "@/app/components/shared/ui/Button/Button";
 
-interface cleanFilterProps {
-}
-
-const СleanFilter:FC<cleanFilterProps> = (props) => {
-
+const СleanFilter= () => {
     const dispatch = useAppDispatch();
 
     const {addKeyCityWords} = SearchParamsActions;
     const {addKeyWords} = SearchParamsActions;
+    const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
-    const cleanFilter = () => {
+    const cleanFilter:TypeForFunc<void, void> = () => {
         dispatch(addKeyCityWords([]));
         dispatch(addKeyWords([]));
-
-        const id = setTimeout(() => {
+        if(timerRef.current) {
+            clearTimeout(timerRef.current)
+            timerRef.current = null
+        }
+        timerRef.current = setTimeout(() => {
             localStorage.setItem('key_words', JSON.stringify([]));
             localStorage.setItem('key_city', JSON.stringify([]));
         }, 0);
-        clearTimeout(id)
     }
+
     
     return (
-        <button
+        <Button
             className={cls.btn}
             onClick={cleanFilter}
         >
             Сбросить фильтры
-        </button>
+        </Button>
     );
 };
 
