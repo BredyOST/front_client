@@ -12,15 +12,16 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import PhoneInput from "react-phone-number-input";
 import PhoneSvg from "@/app/components/svgs/phone.svg";
 import EmailSvg from "@/app/components/svgs/email.svg";
-import {accessNumber, loginTextAccess} from "@/app/components/features/helpersAuth/helpersAccess";
+import {accessNumber} from "@/app/components/features/helpersAuth/helpersAccess";
+import {TypeForFunc} from "@/app/types/types";
+import {IndicatorsLogInAction} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSlice";
 import {
     ActiveTabIdType,
-    ActiveWindowType,
+    ActiveWindowType, LoginTextRecovery,
     ObjForReqCallType,
-    ReqCallCodeType,
-    TypeForFunc
-} from "@/app/types/types";
-import {IndicatorsLogInAction} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSlice";
+    ReqCallCodeType
+} from "@/app/types/pageTypes/authoriedType";
+import {LOGIN_TEXT_RECOVERY} from "@/app/utils/index.constants";
 
 const AccessNumber = React.memo(() => {
 
@@ -127,12 +128,12 @@ const AccessNumber = React.memo(() => {
             </h2>
             <div className={cls.coverBtn}>
                 <div className={cls.coverPhoneAndMail}>
-                    {loginTextAccess && loginTextAccess.map((item: any) => (
+                    {LOGIN_TEXT_RECOVERY && LOGIN_TEXT_RECOVERY.map((item: LoginTextRecovery) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}
                             indicatorActiveTab={item.id == activeTab}
-                            onClick={() => changeActiveTab(item.id)}
+                            onClick={() => changeActiveTab(item.id as ActiveTabIdType)}
                         >
                             {item.text === 'Звонок' && <PhoneSvg className={cls.phoneSvg} />}
                             {item.text === 'Телеграмм'&& <EmailSvg className={cls.emailSvg} />}

@@ -37,6 +37,9 @@ export const LINKS_VIDEO_FEEDBACK:LinkVideoType[] = [
     {id:6, link: "https://www.youtube.com//embed/6s7p4tExCJw"}
 ]
 
+/**
+ * для табов окна авторизации
+ **/
 export const LOGIN_TEXT_RECOVERY: LoginTextRecovery[] = [
     { id: 1, text: 'Звонок' },
     { id: 2, text: 'Телеграмм' },
