@@ -1,11 +1,11 @@
 'use client';
-import React, {FC} from 'react';
+import React, {ReactNode} from 'react';
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useLogOutFromProfile} from "@/app/hooks/hooks";
 
 interface LogOutBtnProps {
-    classname?: any,
-    children:any
+    classname: string,
+    children:ReactNode
 }
 
 export const LogOutBtn = ({   classname, children}:LogOutBtnProps) => {
