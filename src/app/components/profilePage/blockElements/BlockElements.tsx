@@ -9,7 +9,7 @@ import {CategoriesBoughtType, NotificationsType} from "@/app/types/pageTypes/pro
 
 interface IBlockElements {
     userCategories?: CategoriesBoughtType[]
-    infoUser: UserAuthorization | null
+    infoUser: User | null
     indicator: number
 }
 

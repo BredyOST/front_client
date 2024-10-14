@@ -68,6 +68,7 @@ export type UserAuthorization = {
     forChangePhoneNumber: string
     fullName: string
     chatIdTg: string
+    email: string
     userIdTg: string
     isAdmin: boolean
     isMainAdmin: boolean

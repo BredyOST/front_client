@@ -27,3 +27,5 @@ export type UserCategoriesType = {
     purchasePeriod:number
     title:string
 }
+
+export type CodeType = { code: string };

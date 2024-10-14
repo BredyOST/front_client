@@ -1,5 +1,5 @@
 'use client';
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent} from 'react';
 import cls from './changeEmail.module.scss'
 import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
 import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
@@ -8,29 +8,10 @@ import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useChangeEmailMutation, useCodeForEmailMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
+import {TypeForFunc} from "@/app/types/types";
+import {CodeType} from "@/app/types/pageTypes/profileTypes";
 
-interface changeEmailProps {
-    classname?: string;
-}
-
-interface SuccessResponse {
-    data: {
-        text: string;
-    };
-}
-
-interface ErrorResponse {
-    error: {
-        data: {
-            message: string;
-        };
-    };
-}
-
-export type codeType = { code: string };
-
-const ChangeEmail:FC<changeEmailProps> = (props) => {
-    const {  } = props;
+const ChangeEmail = () => {
 
     const [changeRequestCodeEmail, {
         data: requestCodeEmail, error: errorCodeEmail, isError: isErrorCodeEmail,  isLoading: loadingCodeEmail,
@@ -49,10 +30,10 @@ const ChangeEmail:FC<changeEmailProps> = (props) => {
     const emailRegex = /^(?:[a-zA-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 
 
-    const addEmail = (e:any) => {
+    const addEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
         setInputEmail(e.target.value);
+        const isValid:boolean = validateEmail(e.target.value);
 
-        const isValid = validateEmail(e.target.value);
         if (isValid) {
             setValidate(false)
         } else {
@@ -72,20 +53,20 @@ const ChangeEmail:FC<changeEmailProps> = (props) => {
         })
     }
 
-    const addCodeToInput = (e:ChangeEvent<HTMLInputElement>) => {
+    const addCodeToInput:TypeForFunc<ChangeEvent<HTMLInputElement>, void>= (e:ChangeEvent<HTMLInputElement>) => {
         setCodeForNewMail(e.target.value)
     }
 
-    const hideInputVerifyEmail = () => {
+    const hideInputVerifyEmail:TypeForFunc<void, void> = () => {
         setShowInputForCode(false)
     }
 
-    function validateEmail(email:string) {
+    const validateEmail:TypeForFunc<string, boolean> = (email) =>  {
         return emailRegex.test(email);
     }
 
-    const sendCodeVerify = () => {
-        const code:codeType = {code: codeForNewMail};
+    const sendCodeVerify:TypeForFunc<void, void> = () => {
+        const code:CodeType = {code: codeForNewMail};
         changeRequestEmail(code)
     }
 
