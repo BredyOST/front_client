@@ -6,7 +6,7 @@ import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useLogOutFromProfile} from "@/app/hooks/hooks";
 
 interface ProfileProps {
-    classname?: string;
+    classname: string;
 }
 
 const Profile = React.memo(({classname}:ProfileProps) => {

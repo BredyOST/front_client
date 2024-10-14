@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 import cls from './feedBackPeople.module.scss'
 import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
 import {LINKS_VIDEO_FEEDBACK} from "@/app/utils/index.constants";
-import {LinkVideoType} from "@/app/types/types";
+import {LinkVideoType} from "@/app/types/pageTypes/mainPageTypes";
 export const FeedBackPeople = () => {
 
     return (

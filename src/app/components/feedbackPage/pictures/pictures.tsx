@@ -1,14 +1,17 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './pictures.module.scss'
-import {PicturesType, TypeForFunc} from "@/app/types/types";
-import {PicturesProps} from "@/app/types/types";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {TypeForFunc} from "@/app/types/types";
+import {PicturesType} from "@/app/types/pageTypes/feedBackTypes";
+
+export interface PicturesProps {
+    pictures:any
+}
 
 export const Pictures= ({pictures}:PicturesProps) => {
 
     const [expandedImage, setExpandedImage] = React.useState<string | null>(null);
-    const openPictures:TypeForFunc<string, void> = (src: string) => {
+    const openPictures:TypeForFunc<string, void> = (src) => {
         setExpandedImage(src);
     };
 

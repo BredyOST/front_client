@@ -11,9 +11,9 @@ import {NavBar, TypeForFunc} from "@/app/types/types";
 import {useLogOutFromProfile} from "@/app/hooks/hooks";
 import {NAVBAR_FIRST} from "@/app/utils/index.constants";
 interface BurgerMenuProps {
-    classname?: string;
+    classname: string;
     indicatorOpen:boolean;
-    forOnClick?:any
+    forOnClick: () => void
 }
 
 export const BurgerMenu = React.memo(({ classname, indicatorOpen, forOnClick,}:BurgerMenuProps) => {

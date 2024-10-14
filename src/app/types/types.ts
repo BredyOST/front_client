@@ -29,15 +29,7 @@ export type InfoType = {
     text:string
 };
 
-//FEEDBACK_PAGE
-export type PicturesType = {
-    deletedAt: string
-    filename: string
-    id: number
-    mimetype: string
-    originalName: string
-    size: number
-}
+
 
 //PRICE_PAGE
 export type TextListsType = {
@@ -53,11 +45,6 @@ export interface HidePassword {
 
 
 
-//PICTURES
-export interface PicturesProps {
-    pictures:any
-}
-
 
 // что передаем в NavBar
 export type NavBar = {
@@ -65,14 +52,6 @@ export type NavBar = {
     href:string,
 }
 
-
-/**
- * тип для списка ссылок для видео
- **/
-export type LinkVideoType = {
-    id:number,
-    link:string
-}
 
 
 export type CategoriesType = {

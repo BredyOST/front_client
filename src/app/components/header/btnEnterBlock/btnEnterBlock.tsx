@@ -22,7 +22,6 @@ const BtnEnterBlock = React.memo(() => {
     const openLoginFormPopup:TypeForFunc<void, void> = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
     }, []);
-    console.log(stateAuth)
 
     return (
         <div
