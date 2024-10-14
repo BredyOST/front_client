@@ -12,16 +12,16 @@ import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice
 import {Button} from "@/app/components/shared/ui/Button/Button";
 
 import {filteredCategoriesType, itemType} from "@/app/redux/entities/categories/categoriesSchema";
+import {TypeForFunc} from "@/app/types/types";
+import {CategoriesType, CategoryListsUpdate} from "@/app/types/pageTypes/priceTypes";
+import {LIST_CATEGORY_TITLE} from "@/app/utils/index.constants";
 
 
 interface listsCategoryProps {
     categories:filteredCategoriesType[]
 }
 
-const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
-    const {
-        categories
-    } = props;
+const ListsCategory = React.memo(({categories}:listsCategoryProps) => {
 
     const dispatch = useAppDispatch();
 
@@ -37,20 +37,20 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
     }, []);
 
 
-    const addThisToBuy = (item:filteredCategoriesType) => {
-        const categoryHasChosen= chosenCategory.find((element:any) => element.id === item.id);
+    const addThisToBuy:TypeForFunc<filteredCategoriesType, void> = (item:filteredCategoriesType) => {
+        const categoryHasChosen: itemType | undefined = chosenCategory.find((element:itemType) => element.id === item.id);
         if (categoryHasChosen) {
             // if element has chosen, delete this
-            const updatedCategoriesList = chosenCategory.filter((element:any) => element.id !== item.id);
+            const updatedCategoriesList = chosenCategory.filter((element:itemType) => element.id !== item.id);
             dispatch(addChosenCategories(updatedCategoriesList));
         } else {
             // or add this
-            const updatedCategoriesList = { id: item.id, text: item.name, chatNames: item.chatNames };
+            const updatedCategoriesList:itemType = { id: item.id, text: item.name, chatNames: item.chatNames };
             dispatch(addChosenCategories([...chosenCategory, updatedCategoriesList]));
         }
     }
 
-    const closePopups = () => {
+    const closePopups:TypeForFunc<void, void> = () => {
         dispatch(closeAllPopups(true));
     }
 
@@ -67,7 +67,7 @@ const ListsCategory:FC<listsCategoryProps> = React.memo((props) => {
             }
             >
                 <div className={cls.listsCategory} >
-                    <div className={cls.title}>Нажмите на категорию чтобы добавить или убрать</div>
+                    <div className={cls.title}>{LIST_CATEGORY_TITLE}</div>
                     <div className={cls.cover}>
                         {categories && categories.map((item:filteredCategoriesType) => (
                             <div

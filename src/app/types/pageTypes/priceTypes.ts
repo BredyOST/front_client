@@ -46,3 +46,9 @@ export type PaymentObjType = {
     period: string,
     title: string,
 }
+
+export type CategoryListsUpdate = {
+    id: number
+    text: string
+    chatNames: string[]
+}

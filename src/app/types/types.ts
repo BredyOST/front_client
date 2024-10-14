@@ -27,8 +27,6 @@ export type InfoType = {
     text:string
 };
 
-
-
 //PRICE_PAGE
 export type TextListsType = {
     text: string

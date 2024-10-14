@@ -26,7 +26,6 @@ interface CardsProps {
 
 
 const Cards = React.memo(({  item, categories}:CardsProps) => {
-    console.log(item)
     const cookies = getThisCookie();
     const dispatch = useAppDispatch()
 
