@@ -5,17 +5,10 @@ import {Input} from "@/app/components/shared/ui/input/Input";
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import CancelSvg from "@/app/components/svgs/cancel.svg";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import {SearchParamsActions} from "@/app/redux/entities/searchParams/searchParamsSlice";
+import {TypeForFunc} from "@/app/types/types";
 
-interface cityBlockProps {
-    classname?: string;
-}
-
-const CityBlock:FC<cityBlockProps> = (props) => {
-    const {
-        classname,
-    } = props;
+const CityBlock = () => {
 
     const dispatch = useAppDispatch();
 
@@ -27,24 +20,20 @@ const CityBlock:FC<cityBlockProps> = (props) => {
 
     const inputRef = React.useRef<HTMLInputElement>(null);
 
-    const mod: Mods = {
-        [cls.inputActive]: inputKeyWords.length
-    }
-
     React.useEffect(
         () => {
-            const localWords = localStorage.getItem('key_city');
+            const localWords= localStorage.getItem('key_city');
             if (localWords) {
                 dispatch(addKeyCityWords(JSON.parse(localWords)))
             }
         },[]
     )
 
-    const addInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const addInputText:TypeForFunc<React.ChangeEvent<HTMLInputElement>, void> = (e) => {
         setInputKeyWords(e.target.value)
     }
 
-    const addKeyWords = () => {
+    const addKeyWords:TypeForFunc<void, void> = () => {
         if (!inputKeyWords) return;
 
         if (!keyCityWords.includes(inputKeyWords)) {
@@ -57,26 +46,26 @@ const CityBlock:FC<cityBlockProps> = (props) => {
         }
     }
 
-    const deleteKeyWord = (word: string) => {
+    const deleteKeyWord:TypeForFunc<string, void> = (word) => {
         const updatedWords = keyCityWords.filter((item: string) => item !== word);
         dispatch(addKeyCityWords(updatedWords));
         localStorage.setItem('key_city', JSON.stringify(updatedWords));
     }
-    const cleanInput = () => {
-        if(inputRef.current) {
+    const cleanInput:TypeForFunc<void, void> = () => {
+        if(inputRef?.current) {
             inputRef.current.value = '';
         }
         setInputKeyWords('');
     }
 
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyPress:TypeForFunc<React.KeyboardEvent<HTMLInputElement>, void> = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' || e.currentTarget.classList.contains(cls.addBtn)) {
             addKeyWords();
         }
     }
 
     return (
-        <div className={classNames(cls.cityBlock, {},[classname] )} >
+        <div className={cls.cityBlock} >
             <div className={cls.header}>
                 <div className={cls.first}>
                     {/*<label*/}
