@@ -200,7 +200,7 @@ const Cards = React.memo(({  item, categories}:CardsProps) => {
                             </div>
                     }
                     {
-                        (item.title === 'Недельный') &&
+                        (item.title === nameCards.weeks) &&
                         <div className={cls.coverSlider}>
                             <Slider
                                 value={period}
