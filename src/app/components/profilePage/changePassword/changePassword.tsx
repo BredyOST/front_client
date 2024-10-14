@@ -7,17 +7,14 @@ import ShowSvg from "@/app/components/svgs/show.svg";
 import HideSvg from "@/app/components/svgs/hide.svg";
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
-import {HidePassword} from "@/app/dashboard/profile/page";
 import {useChangePasswordInProfileMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {useAppDispatch} from "@/app/redux/hooks/redux";
+import {ChangeRequestPasswordObjType, HidePassword, TextErrorType, TypeForFunc} from "@/app/types/types";
+import {useToggleState} from "@/app/hooks/hooks";
 
-interface changePasswordProps {
-    classname?:string
-}
+const ChangePassword = () => {
 
-const ChangePassword:FC<changePasswordProps> = (props) => {
-    const { classname } = props;
     const dispatch = useAppDispatch();
 
     const [changeRequestPassword, {
@@ -35,50 +32,49 @@ const ChangePassword:FC<changePasswordProps> = (props) => {
         new:false,
         newTwo:false
     });
-    const [checkNewAndCurrentPassword, setCheckNewAndCurrentPassword] = React.useState<boolean | null>(null)
+    const [checkNewAndCurrentPassword, setCheckNewAndCurrentPassword] = React.useState<boolean>(false)
 
     const mod:Mods = {
         [cls.active]: openMenuChangePasswordState
     }
 
-    const openMenuChangePassword = () => {
-        setOpenMenuChangePasswordState(prev => !prev)
-    }
-    const showAndHideCurrentPassword = () => {
+    const openMenuChangePassword = useToggleState(setCheckNewAndCurrentPassword)
+
+    const showAndHideCurrentPassword:TypeForFunc<void, void> = () => {
         setPasswordHideButton({...passwordHideButton, current: !passwordHideButton.current})
     }
-    const showAndHideNewPassword = () => {
+    const showAndHideNewPassword:TypeForFunc<void, void>  = () => {
         setPasswordHideButton({...passwordHideButton, new: !passwordHideButton.new})
     }
-    const showAndHideNewPasswordRepeat = () => {
+    const showAndHideNewPasswordRepeat:TypeForFunc<void, void>  = () => {
         setPasswordHideButton({...passwordHideButton, newTwo: !passwordHideButton.newTwo})
     }
 
-    const addPasswordCurrent = (e:ChangeEvent<HTMLInputElement>) => {
+    const addPasswordCurrent:TypeForFunc<React.ChangeEvent<HTMLInputElement>, void> = (e:React.ChangeEvent<HTMLInputElement>) => {
         setCurrentPassword(e.target.value);
     }
-    const addPasswordNew = (e:ChangeEvent<HTMLInputElement>) => {
+    const addPasswordNew:TypeForFunc<React.ChangeEvent<HTMLInputElement>, void>  = (e:React.ChangeEvent<HTMLInputElement>) => {
         setInputNewPassword(e.target.value);
     }
-    const addPasswordNewRepeat = (e:ChangeEvent<HTMLInputElement>) => {
+    const addPasswordNewRepeat:TypeForFunc<React.ChangeEvent<HTMLInputElement>, void>  = (e:React.ChangeEvent<HTMLInputElement>) => {
         setPasswordNewRepeat(e.target.value);
     }
 
-    const sendNewPassword = () => {
+    const sendNewPassword:TypeForFunc<void, void> = () => {
         if(passwordNewRepeat !== inputNewPassword) {
-            const textError = {
+            const textError:TextErrorType = {
                 message: 'Не совпадают введенные пароли'
             }
-
             dispatch(addInfoForCommonError(textError))
         }
 
         if (checkNewAndCurrentPassword) {
-            changeRequestPassword({
+            const changeRequestPasswordObj:ChangeRequestPasswordObjType = {
                 currentPassword: currentPassword,
                 passwordNew: inputNewPassword,
                 passwordNewTwo: passwordNewRepeat
-            })
+            }
+            changeRequestPassword(changeRequestPasswordObj)
         }
     }
 
@@ -91,13 +87,13 @@ const ChangePassword:FC<changePasswordProps> = (props) => {
                     setCheckNewAndCurrentPassword(true)
                 }
             } else {
-                setCheckNewAndCurrentPassword(null)
+                setCheckNewAndCurrentPassword(false)
             }
 
         },[passwordNewRepeat, inputNewPassword]
     )
     return (
-        <div className={classNames(cls.changePassword, mod,[classname] )} >
+        <div className={classNames(cls.changePassword, mod,[] )} >
             <div className={cls.block}>
                 <div className={cls.blockInfo}>
                     <div className={cls.text}>Пароль</div>

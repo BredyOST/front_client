@@ -71,3 +71,13 @@ export type CategoriesType = {
 export type ChangeNameAndCardType = {
     fullName:string | undefined
 }
+
+export type TextErrorType = {
+    message:string
+}
+
+export type ChangeRequestPasswordObjType = {
+    currentPassword: string | undefined
+    passwordNew:  string | undefined
+    passwordNewTwo:  string | undefined
+}
