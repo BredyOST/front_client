@@ -17,15 +17,15 @@ import {indicatorsNotifications} from "@/app/redux/entities/notifications/notifi
 import {redirect} from "next/navigation";
 import {itemType} from "@/app/redux/entities/categories/categoriesSchema";
 import {CategoriesType, TypeForFunc} from "@/app/types/types";
-
+import {CardPeriod, CardsType, nameCards} from "@/app/types/pageTypes/priceTypes";
 
 interface CardsProps {
-    item:any;
-    categories:any;
+    item:CardsType;
+    categories:CategoriesType[];
 }
 
 
-const Cards:FC<CardsProps> = React.memo(({  item, categories}) => {
+const Cards = React.memo(({  item, categories}:CardsProps) => {
 
     const cookies = getThisCookie();
     const dispatch = useAppDispatch()
@@ -45,17 +45,17 @@ const Cards:FC<CardsProps> = React.memo(({  item, categories}) => {
     const {categoriesPopup} = useAppSelector(state => state.loginPopup)
 
     const [price, setPrice] = React.useState<string | number>('');
-    const [period, setPeriod] = React.useState<string>(item.title == 'Недельный' ? '7': '1');
+    const [period, setPeriod] = React.useState<CardPeriod>(item.title == nameCards.free ? '7': '1');
     const [monthThirdCard, setMonthThirdCard] = React.useState<string>('Месяц');
 
-    const changePeriodInCard:TypeForFunc<string, void> = (value:string) => {
+    const changePeriodInCard:TypeForFunc<CardPeriod, void> = (value) => {
         setPeriod(value)
     }
 
     React.useEffect(
         () => {
             let salary = 0;
-            if (item.title == 'Недельный') {
+            if (item.title == nameCards.weeks) {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:itemType) => {
                     let category = categories?.find((elem:CategoriesType) => elem.id == item.id)
                     const price = Math.round(+category.salary * 2 /30 * +period)
@@ -63,7 +63,7 @@ const Cards:FC<CardsProps> = React.memo(({  item, categories}) => {
                 })
             }
 
-            if (item.title == 'Погрузись в работу') {
+            if (item.title == nameCards.month) {
                 chosenCategory?.length >= 0 && chosenCategory?.map((item:itemType) => {
                     let category = categories?.find((elem:CategoriesType) => elem.id == item.id)
                     const price = +category.salary * +period
@@ -71,19 +71,19 @@ const Cards:FC<CardsProps> = React.memo(({  item, categories}) => {
                 })
             }
 
-            if(item.title == 'Бесплатный') setPeriod(`1`)
+            if(item.title == nameCards.free) setPeriod(`1`)
 
             setPrice(salary)
         },[item, period, chosenCategory]
     )
 
     React.useEffect(() => {
-        if (item.title == 'Погрузись в работу') {
+        if (item.title == nameCards.month) {
             if (+period == 1) setMonthThirdCard('МЕСЯЦ')
             if(+period >= 2 && +period <= 4) setMonthThirdCard('МЕСЯЦА')
             if(+period  >=5 && +period <= 12) setMonthThirdCard('МЕСЯЦЕВ')
         }
-        if (item.title == 'Недельный') {
+        if (item.title == nameCards.weeks) {
             if (+period == 1) setMonthThirdCard('ДЕНЬ')
             if(+period >= 2 && +period <= 4) setMonthThirdCard('ДНЯ')
             if(+period >= 5 && +period <= 20) setMonthThirdCard('ДНЕЙ')
@@ -107,23 +107,19 @@ const Cards:FC<CardsProps> = React.memo(({  item, categories}) => {
     }, [requestPayment])
 
     const payOrTryFreePeriod:TypeForFunc<string,void> = (title:string) => {
-        if(!infoUser?.phoneNumber || !infoUser?.isActivatedPhone) {
-            dispatch(addInfoForCommonError({ message:'С 21.03.2024г требуется подтвержденный номер телефона в профиле. Требуется создать новый аккаунт с использованием номера телефона '} ))
-            return
-        }
         if(!chosenCategory.length) {
             dispatch(changeStateCategoriesPopup(!categoriesPopup))
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
             return
         }
-        if(title == `Бесплатный` && chosenCategory.length > 1) {
+        if(title == nameCards.free && chosenCategory.length > 1) {
             dispatch(addInfoForCommonError({ message:'Выберите одну категорию для бесплатного периода'} ))
             return;
         }
-        if ((title == `Недельный` || title == 'Погрузись в работу') && chosenCategory.length < 1) {
+        if ((title == nameCards.weeks || title == 'Погрузись в работу') && chosenCategory.length < 1) {
             dispatch(addInfoForCommonError({ message:'Вы не выбрали категории'} ))
         }
-        if (title == `Бесплатный` && chosenCategory.length == 1) {
+        if (title == nameCards.free && chosenCategory.length == 1) {
             getFreePeriod(chosenCategory).then((result:any) => {
 
                 if('data' in result && result?.data?.text == `Бесплатный период активирован` && cookies && cookies._z) {
@@ -138,7 +134,7 @@ const Cards:FC<CardsProps> = React.memo(({  item, categories}) => {
                 }
             })
         }
-        if((title == `Недельный` || title == 'Погрузись в работу') && chosenCategory.length >= 1) {
+        if((title == nameCards.weeks || title == nameCards.month) && chosenCategory.length >= 1) {
             payment({
                 categ: chosenCategory,
                 price: price,
