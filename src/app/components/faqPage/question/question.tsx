@@ -4,8 +4,8 @@ import cls from './question.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import ArraySvg from '../../svgs/arrow.svg'
 import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {AnswerType, FaqItem} from "@/app/types/types";
 import {useToggleState} from "@/app/hooks/hooks";
+import {AnswerType, FaqItem} from "@/app/types/pageTypes/faqTypes";
 
 export interface QuestionProps {
     items:FaqItem
