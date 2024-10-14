@@ -4,25 +4,22 @@ import cls from './postsForSearch.module.scss'
 import Link from "next/link";
 import {navbarFirst} from "@/app/components/header/header";
 import PostsBlock from "@/app/components/searchPage/postBlock/postsBlock";
-import {classNames} from "@/app/components/shared/lib/classNames/className";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 
-interface postsForSearchProps {}
 
-const PostsForSearch:FC<postsForSearchProps> = (props) => {
-    const {} = props;
+const PostsForSearch = () => {
 
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
     const [accessFree, setAccessFree] = React.useState<Boolean>(false)
     const [accessPay, setAccessPay] = React.useState<Boolean>(false)
 
-    const currenDate = new Date();
+    const currenDate:Date = new Date();
 
     React.useEffect(() => {
         if (!stateAuth || !infoUser) return;
 
-        let checkFree = false;
-        let checkPay = false;
+        let checkFree:boolean = false;
+        let checkPay:boolean = false;
 
         if (infoUser?.categoriesFreePeriod?.length >= 1 && !infoUser?.endFreePeriod) {
             for (let item of infoUser?.categoriesFreePeriod) {

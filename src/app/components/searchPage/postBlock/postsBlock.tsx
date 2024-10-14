@@ -1,5 +1,4 @@
 'use client';
-import Reactfrom 'react';
 import cls from './postsBlock.module.scss'
 import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useAppSelector} from "@/app/redux/hooks/redux";
@@ -11,6 +10,8 @@ import Link from "next/link";
 import VkSvg from "../../svgs/vk.svg"
 import TgSvg from "../../svgs/telegram.svg"
 import {AllLoadedPostType} from "@/app/types/pageTypes/searchTypes";
+import React from "react";
+import {keysObjType, TypeForFunc, TypeForFuncManyArg, TypeForFuncWitOneArg} from "@/app/types/types";
 
 
 const PostsBlock= () => {
@@ -29,21 +30,20 @@ const PostsBlock= () => {
     const [page, setPage] = React.useState<number>(1);
     const [filteredPosts, setFilteredPosts] = React.useState<AllLoadedPostType[]>([]);
 
-    const applyFilters =(allLoadedPosts:AllLoadedPostType[]) => {
+    const applyFilters:TypeForFuncWitOneArg<AllLoadedPostType[]> = (allLoadedPosts:AllLoadedPostType[]) => {
 
         if ((!keyWords || !keyWords?.length) && (!keyCityWords || !keyCityWords?.length)) {
             return allLoadedPosts;
         }
-        let filtered = allLoadedPosts?.filter((post: AllLoadedPostType) => {
-            const matchesWords = !keyWords.length || keyWords.some((word:string) =>
+        let filtered:AllLoadedPostType[] = allLoadedPosts?.filter((post: AllLoadedPostType) => {
+            const matchesWords:boolean = !keyWords.length || keyWords.some((word:string) =>
                 post.post_text.toLowerCase().includes(word.toLowerCase())
             );
-
             // constants matchesCity = !keyCityWords?.length || (keyCityWords?.some((word:string) =>
             //     post.city_group?.toLowerCase().includes(word.toLowerCase()))) || (keyCityWords?.some((word:string) =>
             //     post.city_user?.toLowerCase().includes(word.toLowerCase())));
 
-            const matchesCity = !keyCityWords.length || (
+            const matchesCity:boolean = !keyCityWords.length || (
                 post.city_group ?
                     keyCityWords.some((word: string) =>
                         post.city_group.toLowerCase().includes(word.toLowerCase())
@@ -52,7 +52,6 @@ const PostsBlock= () => {
                         post.name_group?.toLowerCase().includes(word.toLowerCase())
                     )
             );
-
             // let filterSocial;
             // if(social) filterSocial = lists[social[0]]
             // constants matchesSocial;
@@ -72,19 +71,22 @@ const PostsBlock= () => {
         return filtered;
     }
 
-    const getStartIndexFromKey = (key:string) => {
-        const parts = key.split('-');
-        const index = parseInt(parts[1], 10);
+    const getStartIndexFromKey:TypeForFunc<string, number> = (key:string) => {
+        const parts:string[] = key.split('-');
+        const index:number = parseInt(parts[1], 10);
         return index;
     };
 
-    const getKeys = async (idCat: string | number) => {
+    const getKeys:TypeForFunc<string | number, Promise<string[]>> = async (idCat) => {
         let result:string[] = [];
 
         try {
-            const response = await keysRedis({ id: `${idCat}` });
-            if ('data' in response && response.data.length) {
-                const dataCopy = [...response.data];
+            /**
+             * response - [id:1 - 9000 - 9300, ...]
+             **/
+            const response:keysObjType = await keysRedis({ id: `${idCat}` });
+            if ('data' in response && response.data && response?.data.length) {
+                const dataCopy = [...response?.data];
                 result = dataCopy.sort((a, b) => getStartIndexFromKey(a) - getStartIndexFromKey(b));
             } else {
                 result = [];
@@ -95,8 +97,8 @@ const PostsBlock= () => {
         return result;
     };
 
-    const loadPostsFromRedis = async (i:number, keys:string[]) => {
-        let result:allLoadedPostType[] = [];
+    const loadPostsFromRedis:TypeForFuncManyArg<[number, string[]], Promise<AllLoadedPostType[]>> = async (i, keys) => {
+        let result:AllLoadedPostType[] = [];
 
         try {
             const response = await redisPosts({str: keys[i]});
@@ -111,11 +113,11 @@ const PostsBlock= () => {
         return result;
     }
 
-    const loadMorePostsIfNeeded = async (currentPage:string | number) => {
+    const loadMorePostsIfNeeded:TypeForFunc<string | number, Promise<any>> = async (currentPage) => {
 
-        const postsPerPage = postsCount;
-        const neededPosts = +currentPage * (postsPerPage + 3);
-        const postsInKey = 300;
+        const postsPerPage:number = postsCount;
+        const neededPosts:number = +currentPage * (postsPerPage + 3);
+        const postsInKey:number = 300;
 
         // check, do we need more posts ?
         if (neededPosts >= filteredPosts.length - postsCount) {
@@ -126,12 +128,12 @@ const PostsBlock= () => {
                 keys = await getKeys(chosenCategory?.id);
             }
 
-            const keyIndex = Math.ceil(filteredPosts.length / postsInKey); // 300 / 300 = 1, 900/300 = 3
+            const keyIndex:number = Math.ceil(filteredPosts.length / postsInKey); // 300 / 300 = 1, 900/300 = 3
             // constants keyToLoad = keys[keyIndex]; // if like this 900/300 = 3 , it's we've used 0, 1, 2 key,  300 + 300 + 300
-            const newPosts:allLoadedPostType[] = await loadPostsFromRedis(keyIndex, keys);
+            const newPosts:AllLoadedPostType[] = await loadPostsFromRedis(keyIndex, keys);
             if (newPosts && newPosts.length) {
                 const updatedPosts = [...filteredPosts, ...newPosts];
-                setFilteredPosts(updatedPosts.sort((a:any, b:any) => a.data - b.data))
+                setFilteredPosts(updatedPosts.sort((a:AllLoadedPostType, b:AllLoadedPostType) => new Date(a.post_date_publish).getTime() - new Date(b.post_date_publish).getTime()))
             }
         }
     };
@@ -146,26 +148,26 @@ const PostsBlock= () => {
 
 
     React.useEffect(() =>  {
-        const abortController = new AbortController();
+        const abortController:AbortController = new AbortController();
         const { signal } = abortController;
-        const loadAndFilterPosts = async () => {
-            let postsToLoad = 300; // start count
-            let allLoadedPosts:allLoadedPostType[] = [];
-            let filteredPosts:allLoadedPostType[] = [];
+        const loadAndFilterPosts:TypeForFunc<void, Promise<void>> = async () => {
+            let postsToLoad:300 = 300; // start count
+            let allLoadedPosts:AllLoadedPostType[] = [];
+            let filteredPosts:AllLoadedPostType[] = [];
             let keys:string[] = [];
-            let i = 0;
+            let i:0 = 0;
 
             if (chosenCategory && chosenCategory.id) keys = await getKeys(chosenCategory?.id)
 
             while (allLoadedPosts.length < postsToLoad) {
                 if (signal.aborted) return;
-                let newPosts = await loadPostsFromRedis(i, keys);
+                let newPosts:AllLoadedPostType[] = await loadPostsFromRedis(i, keys);
                 if (!newPosts.length) {
                     break;
                 }
 
                 if (infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod) {
-                    const currentDate = new Date();
+                    const currentDate:Date = new Date();
                     currentDate.setDate(currentDate.getDate() - 3);
                     newPosts = newPosts.filter((item: any) => new Date(item.post_date_publish*1000).getTime() < currentDate.getTime());
                 }
@@ -173,7 +175,7 @@ const PostsBlock= () => {
                 allLoadedPosts = [...allLoadedPosts, ...newPosts];
                 filteredPosts = applyFilters(allLoadedPosts);
 
-                setFilteredPosts(filteredPosts.sort((a:any, b:any) => a.data - b.data))
+                setFilteredPosts(filteredPosts.sort((a:AllLoadedPostType, b:AllLoadedPostType) => new Date(a.post_date_publish).getTime() - new Date(b.post_date_publish).getTime()))
 
                 if (filteredPosts.length >= postsToLoad) {
                     break;
@@ -191,14 +193,14 @@ const PostsBlock= () => {
     }, [keyWords, keyCityWords, social, postsCount, chosenCategory])
 
     // pagination block
-    const pageCount = Math.ceil(filteredPosts?.length / postsCount);
-    const pages = Array.from({ length: pageCount }, (_, i) => i + 1);
-    const startIndex = (page - 1) * postsCount;
-    const endIndex = startIndex + postsCount;
+    const pageCount:number = Math.ceil(filteredPosts?.length / postsCount);
+    const pages:number[] = Array.from({ length: pageCount }, (_, i) => i + 1);
+    const startIndex:number = (page - 1) * postsCount;
+    const endIndex:number = startIndex + postsCount;
 
-    const postsToShow = filteredPosts?.slice(startIndex, endIndex);
+    const postsToShow:AllLoadedPostType[] = filteredPosts?.slice(startIndex, endIndex);
 
-    const toggleText = (postId: number) => {
+    const toggleText:TypeForFunc<number, void> = (postId) => {
         if (expandedPosts.includes(postId)) {
             setExpandedPosts(prevState => prevState.filter(id => id !== postId));
         } else {
@@ -206,8 +208,8 @@ const PostsBlock= () => {
         }
     };
 
-    function getFormattedDate(dateString:any) {
-        const date = new Date(dateString * 1000);
+    const getFormattedDate:TypeForFunc<string, string> = (dateString) => {
+        const date:Date = new Date(+dateString * 1000);
         const today = new Date();
         const yesterday = new Date(today);
         yesterday.setDate(today.getDate() - 1);
@@ -234,18 +236,18 @@ const PostsBlock= () => {
         return `${day} ${months[+month - 1]} ${year} г.`;
     }
 
-    function getFormattedTime(dateString:any) {
-        const date = new Date(dateString * 1000);
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
+    const getFormattedTime:TypeForFunc<string, string> = (dateString) => {
+        const date:Date = new Date(+dateString * 1000);
+        const hours:string= date.getHours().toString().padStart(2, '0');
+        const minutes:string = date.getMinutes().toString().padStart(2, '0');
         return `${hours}:${minutes}`;
     }
 
-    const changePage = (pageNumber:number) => {
+    const changePage:TypeForFunc<number, void> = (pageNumber) => {
         setPage(pageNumber)
     }
 
-    const displayPages = () => {
+    const displayPages:TypeForFunc<void, number[]> = () => {
         if (page <= 4) {
             return pages.slice(0, 5);
         } else if (page > pageCount - 4) {
@@ -255,7 +257,7 @@ const PostsBlock= () => {
         }
     };
 
-    const pagesToDisplay = displayPages();
+    const pagesToDisplay:number[] = displayPages();
 
     return (
         <div className={cls.bodyInfo}>

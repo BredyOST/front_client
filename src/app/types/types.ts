@@ -1,7 +1,13 @@
+import {FetchBaseQueryError} from "@reduxjs/toolkit/dist/query/react";
+import {SerializedError} from "@reduxjs/toolkit";
+
 /**
  * общий тип для функций
  **/
-export type TypeForFunc<T,U> = (arg:T) => U;
+export type TypeForFunc<T,U> = (arg:T) => U
+export type TypeForFuncWitOneArg<T> = (arg:T) => T
+export type TypeForFuncManyArg<T extends any[], U> = (...args: T) => U;
+
 
 /**
  * типы для формы восстановления пароля
@@ -80,4 +86,9 @@ export type ChangeRequestPasswordObjType = {
     currentPassword: string | undefined
     passwordNew:  string | undefined
     passwordNewTwo:  string | undefined
+}
+
+export type keysObjType = {
+    data?: string[];
+    error?: FetchBaseQueryError | SerializedError;
 }
