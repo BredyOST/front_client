@@ -5,11 +5,11 @@ import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
 import Link from "next/link";
 import {categoriesBoughtType, notificationsType} from "@/app/components/profilePage/blockCategory/blockCategory";
 import {formatDateToRussian} from "@/app/components/shared/lib/formatedFunction/formatedFunction";
-import {User} from "@/app/redux/entities/auth/authSchema";
+import {User, UserAuthorization} from "@/app/redux/entities/auth/authSchema";
 
 interface IBlockElements {
     userCategories?: categoriesBoughtType[]
-    infoUser: User | null
+    infoUser: UserAuthorization | null
     indicator: number
 }
 

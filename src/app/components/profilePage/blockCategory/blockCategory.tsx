@@ -1,52 +1,18 @@
 'use client';
-import { FC } from "react";
 import cls from './blockCategory.module.scss'
-import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
-import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
-import Link from "next/link";
 import React from "react";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import BlockElements from "@/app/components/profilePage/blockElements/BlockElements";
 import BlockNotifications from "@/app/components/profilePage/blockNotifications/blockNotifications";
-interface blockCategoryProps {
-    classname?: string;
-}
+import {CategoriesBoughtType, NotificationsType, UserCategoriesType} from "@/app/types/pageTypes/profileTypes";
 
-export type categoriesBoughtType = {
-    category:string
-    id:number
-    price:string
-    purchaseBuyDate:string
-    purchaseEndDate:string
-    purchasePeriod:number
-    title:string
-}
-
-export type notificationsType = {
-    id: number
-    category: string
-    purchaseBuyDate: string
-    purchaseEndDate: string
-    purchasePeriod: number
-    chatList: string
-}
-
-type userCategoriesType = {
-    category:string
-    id:number
-    price:string
-    purchaseBuyDate:string
-    purchaseEndDate:string
-    purchasePeriod:number
-    title:string
-}
-const BlockCategory:FC<blockCategoryProps> = (props) => {
+const BlockCategory = () => {
 
     // constants dispatch = useAppDispatch()
-    const [userCategories, setUserCategories] = React.useState<categoriesBoughtType[]>([])
-    const [userCategoriesFree, setUserCategoriesFree] = React.useState<userCategoriesType[]>([])
-    const [userCategoriesNotifications, setUserCategoriesNotifications] = React.useState<notificationsType[]>([])
-    const [userCategoriesFreeNotifications, setUserCategoriesFreeNotifications] = React.useState<notificationsType[]>([])
+    const [userCategories, setUserCategories] = React.useState<CategoriesBoughtType[]>([])
+    const [userCategoriesFree, setUserCategoriesFree] = React.useState<UserCategoriesType[]>([])
+    const [userCategoriesNotifications, setUserCategoriesNotifications] = React.useState<NotificationsType[]>([])
+    const [userCategoriesFreeNotifications, setUserCategoriesFreeNotifications] = React.useState<NotificationsType[]>([])
 
     // constants [getInfoUser, {data: requestGetMe, error:errorUser, isLoading: isLoadingReqGetUser, isError}] =  useGetMeMutation();
     // constants [
@@ -59,29 +25,6 @@ const BlockCategory:FC<blockCategoryProps> = (props) => {
     // constants {addInfoForCommonError} = indicatorsNotifications;
 
     const {data:infoUser} = useAppSelector(state => state.auth)
-
-    function formatDateToRussian(dateString:string | Date) {
-        const date = new Date(dateString);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const year = date.getFullYear();
-        const weekday = date.getDay();
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-
-        const months = [
-            "января", "февраля", "марта", "апреля",
-            "мая", "июня", "июля", "августа",
-            "сентября", "октября", "ноября", "декабря"
-        ];
-
-        const weekdays = [
-            "вс", "пн", "вт",
-            "ср", "чт", "пт", "сб"
-        ];
-
-        return `${weekdays[weekday]}, ${day} ${months[+month - 1]} ${year} г. ${hours}:${minutes}`;
-    }
 
     React.useEffect(() => {
         if (infoUser && infoUser?.categoriesHasBought?.length >= 1) {
