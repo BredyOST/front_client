@@ -1,21 +1,21 @@
-import React, {FC} from 'react';
-import {notificationsType} from "@/app/components/profilePage/blockCategory/blockCategory";
+import React from 'react';
+
 import cls from "@/app/components/profilePage/blockCategory/blockCategory.module.scss";
 import {formatDateToRussian} from "@/app/components/shared/lib/formatedFunction/formatedFunction";
+import {NotificationsType} from "@/app/types/pageTypes/profileTypes";
 
 interface IBlockNotifications {
-    userNotifications?: notificationsType[]
+    userNotifications?: NotificationsType[]
 }
 
 
-const BlockNotifications:FC<IBlockNotifications> = (props) => {
-    const {userNotifications} = props
+const BlockNotifications = ({userNotifications}:IBlockNotifications) => {
 
     if( userNotifications && userNotifications.length < 1 || !userNotifications) return null
 
     return (
         <>
-            {userNotifications?.length >= 1 && userNotifications.map((item:notificationsType) => (
+            {userNotifications?.length >= 1 && userNotifications.map((item:NotificationsType) => (
                 new Date().getTime() < new Date(item.purchaseEndDate).getTime() &&
                 <div key={item.id} className={cls.blockCategory}>
                     <div className={cls.blockInfo}>
