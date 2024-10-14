@@ -14,12 +14,7 @@ interface IBlockElements {
 }
 
 
-const BlockElements:FC<IBlockElements> = (props) => {
-    const {
-        userCategories,
-        infoUser,
-        indicator
-    } = props
+const BlockElements = ({  userCategories, infoUser, indicator}:IBlockElements) => {
 
     if(userCategories && userCategories.length < 1 || !userCategories || !infoUser) return null
 
