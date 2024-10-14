@@ -13,15 +13,16 @@ import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowS
 import {Controller, SubmitHandler, useForm} from "react-hook-form";;
 import Loader from "@/app/components/shared/ui/Loader/Loader";
 import PhoneInput from "react-phone-number-input";
+import {TypeForFunc} from "@/app/types/types";
+import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
+import {LOGIN_TEXT_ACCESS} from "@/app/utils/index.constants";
 import {
+    AccessTextType,
+    ActiveTabIdType,
     ForTextFormsType,
     loginFormType,
-    loginTextType,
-    passwordHideType
-} from "@/app/components/features/helpersAuth/helpersAuthLogin";
-import {ActiveTabIdType, TypeForFunc} from "@/app/types/types";
-import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
-import {LOGIN_TEXT_RECOVERY} from "@/app/utils/index.constants";
+    PasswordHideType
+} from "@/app/types/pageTypes/authoriedType";
 
 const LoginIn = () => {
 
@@ -36,7 +37,7 @@ const LoginIn = () => {
     const { currentPopupNumber } = useAppSelector((state) => state.statePopup);
 
     const [activeTab, setActiveTab] = React.useState<ActiveTabIdType>(2);
-    const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHideType>({
+    const [passwordHideButton, setPasswordHideButton] = React.useState<PasswordHideType>({
         enteredLoginText: false,  passwordBtnShowOrHide: false,
     });
     const [textFromForms, setTextFromForms] = React.useState<ForTextFormsType>({
@@ -110,7 +111,7 @@ const LoginIn = () => {
             <div className={cls.coverBtn}>
                 <h3 className={cls.titleForBtn}>Выберите способ авторизации</h3>
                 <div className={cls.coverPhoneAndMail}>
-                    {LOGIN_TEXT_RECOVERY && LOGIN_TEXT_RECOVERY.map((item: loginTextType) => (
+                    {LOGIN_TEXT_ACCESS && LOGIN_TEXT_ACCESS.map((item: AccessTextType) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}

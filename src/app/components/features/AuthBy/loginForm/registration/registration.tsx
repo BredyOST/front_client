@@ -16,13 +16,14 @@ import Link from "next/link";
 import {Country} from "@/app/components/profilePage/changePhone/changePhone";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-import {
-    createUserType,
-    ForTextForms,
-    loginForm,
-    passwordHide, textErrors
-} from "@/app/components/features/helpersAuth/helpersRegistration";
 import {TypeForFunc} from "@/app/types/types";
+import {
+    CreateUserType,
+    ForTextFormsRegisterType, loginFormRegistrationType,
+    loginFormType,
+    PasswordRecoverHideType
+} from "@/app/types/pageTypes/authoriedType";
+import {TEXT_ERRORS} from "@/app/utils/index.constants";
 
 
 interface RegistrationProps {}
@@ -39,10 +40,10 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
 
     const [isChecked, setIsChecked] = React.useState<boolean>(false);
     const [selectedCountry, setSelectedCountry] = React.useState<Country | null>(null);
-    const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHide>({
+    const [passwordHideButton, setPasswordHideButton] = React.useState<PasswordRecoverHideType>({
         enteredRegisterText: false, enteredRegisterCheckText:false, registerBtnShowOrHide: false, registerBtnCheckShowOrHide: false,
     });
-    const [textFromForms, setTextFromForms] = React.useState<ForTextForms>({
+    const [textFromForms, setTextFromForms] = React.useState<ForTextFormsRegisterType>({
         phoneRegister:'', passwordRegister: '', passwordRegisterCheck: '',
     });
 
@@ -53,16 +54,16 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
     const passwordRegisterRef = React.useRef<HTMLInputElement | null>(null);
     const passwordRegisterCheckRef = React.useRef<HTMLInputElement | null>(null);
 
-    const onSubmit: SubmitHandler<loginForm> = (data) => {
+    const onSubmit: SubmitHandler<loginFormRegistrationType> = (data) => {
         if(data.phoneNumberRegistration.length <= 6) {
-            dispatch(addInfoForCommonError(textErrors.messageThird))
+            dispatch(addInfoForCommonError(TEXT_ERRORS.messageThird))
             return
         }
-        if(!isChecked) dispatch(addInfoForCommonError(textErrors.messageSecond))
-        if(!comparePassword) dispatch(addInfoForCommonError(textErrors.message))
+        if(!isChecked) dispatch(addInfoForCommonError(TEXT_ERRORS.messageSecond))
+        if(!comparePassword) dispatch(addInfoForCommonError(TEXT_ERRORS.message))
 
         if(comparePassword && isChecked) {
-            const infoForRegistration:createUserType = {
+            const infoForRegistration:CreateUserType = {
                 phoneNumber:data.phoneNumberRegistration,
                 password:data.passwordRegistration,
                 passwordCheck:data.passwordRegistrationCheck,
@@ -77,7 +78,7 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
         }
     },[requestRegister])
 
-    const {register, handleSubmit, setError,control, formState: { errors, isValid },} = useForm<loginForm>({
+    const {register, handleSubmit, setError,control, formState: { errors, isValid },} = useForm<loginFormRegistrationType>({
         mode: 'onChange',
     });
 

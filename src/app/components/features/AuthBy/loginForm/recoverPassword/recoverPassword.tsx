@@ -18,15 +18,15 @@ import EmailSvg from "@/app/components/svgs/email.svg";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import ShowSvg from "@/app/components/svgs/show.svg";
 import HideSvg from "@/app/components/svgs/hide.svg";
-import {passwordHide} from "@/app/components/features/helpersAuth/helpersRegistration";
 import {IndicatorsLogInAction} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSlice";
+import {ForTextFormsRecovery, LoginFormRecovery, TypeForFunc} from "@/app/types/types";
 import {
-    ActiveTabIdType, ActiveWindowType, ForTextFormsRecovery, LoginFormRecovery, LoginTextRecovery,
+    ActiveTabIdType, ActiveWindowType, LoginTextRecovery,
     ObjForReqCallType,
-    SendNewPasswordTwoType,
-    SendNewPasswordType, TypeForFunc
-} from "@/app/types/types";
-import {loginTextRecovery} from "@/app/constants/constants";
+    PasswordRecoverHideType,
+    SendNewPasswordAdditionalType, SendNewPasswordType
+} from "@/app/types/pageTypes/authoriedType";
+import {LOGIN_TEXT_RECOVERY} from "@/app/utils/index.constants";
 
 
 
@@ -45,7 +45,7 @@ export const RecoverPassword = () => {
     const {activeWindow} = useAppSelector(state => state.IndicatorsLogIn)
     const {changeActiveWindow} = IndicatorsLogInAction
 
-    const [passwordHideButton, setPasswordHideButton] = React.useState<passwordHide>({
+    const [passwordHideButton, setPasswordHideButton] = React.useState<PasswordRecoverHideType>({
         enteredRegisterText: false, enteredRegisterCheckText:false, registerBtnShowOrHide: false, registerBtnCheckShowOrHide: false,
     });
     const [textFromForms, setTextFromForms] = React.useState<ForTextFormsRecovery>({
@@ -76,7 +76,7 @@ export const RecoverPassword = () => {
                     dispatch(addInfoForCommonError({message: 'Проверьте обязательные поля, номер телефона, пароли и код подтверждения'}))
                     return;
                 } else {
-                    const objSendNewPassword:SendNewPasswordTwoType = {
+                    const objSendNewPassword:SendNewPasswordAdditionalType = {
                         email: data?.myEmail,
                         phoneNumber: data?.phoneNumber,
                         password: data?.password,
@@ -183,12 +183,12 @@ export const RecoverPassword = () => {
             </h2>
             <div className={cls.coverBtn}>
                 <div className={cls.coverPhoneAndMail}>
-                    {loginTextRecovery && loginTextRecovery.map((item: LoginTextRecovery) => (
+                    {LOGIN_TEXT_RECOVERY && LOGIN_TEXT_RECOVERY.map((item: LoginTextRecovery) => (
                         <Button
                             key={item.id}
                             classname={cls.choose}
                             indicatorActiveTab={item.id == activeTab}
-                            onClick={() => changeActiveTab(item.id)}
+                            onClick={() => changeActiveTab(item.id as ActiveTabIdType)}
                         >
                             {item.text === 'Звонок' && <PhoneSvg className={cls.phoneSvg} />}
                             {item.text === 'Телеграмм'&& <EmailSvg className={cls.emailSvg} />}

@@ -1,4 +1,5 @@
-import {LinkVideoType, NavBar, LoginTextRecovery} from "@/app/types/types"
+import {LinkVideoType, NavBar} from "@/app/types/types"
+import {AccessTextType, LoginTextRecovery} from "@/app/types/pageTypes/authoriedType";
 
 /**
  * константы для основных страниц - заголовки
@@ -44,3 +45,14 @@ export const LOGIN_TEXT_RECOVERY: LoginTextRecovery[] = [
     { id: 1, text: 'Звонок' },
     { id: 2, text: 'Телеграмм' },
 ]
+
+export const LOGIN_TEXT_ACCESS: AccessTextType[] = [
+    { id: 1, text: 'Email' },
+    { id: 2, text: 'Телефон' },
+]
+
+export const TEXT_ERRORS = {
+    message: 'Не совпадают введенные пароли',
+    messageSecond: 'Не совпадают введенные пароли',
+    messageThird: 'Не совпадают введенные пароли',
+}

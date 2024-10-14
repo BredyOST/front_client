@@ -12,16 +12,17 @@ import Loader from "@/app/components/shared/ui/Loader/Loader";
 import PhoneInput from "react-phone-number-input";
 import PhoneSvg from "@/app/components/svgs/phone.svg";
 import EmailSvg from "@/app/components/svgs/email.svg";
-import {accessNumber} from "@/app/components/features/helpersAuth/helpersAccess";
 import {TypeForFunc} from "@/app/types/types";
 import {IndicatorsLogInAction} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSlice";
 import {
+    AccessNumberType,
     ActiveTabIdType,
     ActiveWindowType, LoginTextRecovery,
     ObjForReqCallType,
     ReqCallCodeType
 } from "@/app/types/pageTypes/authoriedType";
 import {LOGIN_TEXT_RECOVERY} from "@/app/utils/index.constants";
+
 
 const AccessNumber = React.memo(() => {
 
@@ -40,7 +41,7 @@ const AccessNumber = React.memo(() => {
     const {activeWindow} = useAppSelector(state => state.IndicatorsLogIn)
     const {changeActiveWindow} = IndicatorsLogInAction
 
-    const onSubmit: SubmitHandler<accessNumber> = (data,e) => {
+    const onSubmit: SubmitHandler<AccessNumberType> = (data,e) => {
         /**
          * activeTab == 1 && activeWindow == 1 - запрос вызова
          * activeTab == 1 && activeWindow == 2 - отправка формы активации
@@ -88,7 +89,7 @@ const AccessNumber = React.memo(() => {
         }
     };
     
-    const {register, handleSubmit, control, setError, formState: { errors, isValid },} = useForm<accessNumber>({
+    const {register, handleSubmit, control, setError, formState: { errors, isValid },} = useForm<AccessNumberType>({
         mode: 'onChange',
     });
 

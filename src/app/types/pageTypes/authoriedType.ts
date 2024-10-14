@@ -28,7 +28,7 @@ export type SendNewPasswordType = {
     indicator: string
 }
 
-export type SendNewPasswordTwoType = SendNewPasswordType & {
+export type SendNewPasswordAdditionalType = SendNewPasswordType & {
     email: string
 }
 
@@ -39,3 +39,64 @@ export type LoginTextRecovery = {
     id:number
     text: string
 }
+
+/**
+ * тип для выбора способа авторизации
+ **/
+export type AccessTextType = {
+    id:number,
+    text: string
+}
+
+export type loginFormType = {
+    mailOrNumberLoginIn: string | number,
+    passwordLoginIn: string,
+}
+
+export type PasswordHideType = {
+    enteredLoginText: boolean,
+    passwordBtnShowOrHide: boolean,
+}
+
+export type ForTextFormsType = {
+    loginIn: string,
+    passwordLogin: string,
+}
+
+export type AccessNumberType = {
+    phoneNumber:string
+    numberActivation:string,
+}
+
+export type loginTextType = {
+    id:number,
+    text:string
+}
+
+
+export type loginFormRegistrationType = {
+    phoneNumberRegistration: string,
+    // mailOrNumberRegistration: string,
+    passwordRegistration: string,
+    passwordRegistrationCheck:string,
+}
+
+export interface ForTextFormsRegisterType{
+    phoneRegister:string,
+    passwordRegister: string,
+    passwordRegisterCheck:string
+}
+
+export type PasswordRecoverHideType = {
+    enteredRegisterText: boolean,
+    enteredRegisterCheckText:boolean,
+    registerBtnShowOrHide: boolean,
+    registerBtnCheckShowOrHide:boolean
+}
+
+export type CreateUserType = {
+    phoneNumber:string
+    password: string
+    passwordCheck: string
+}
+
