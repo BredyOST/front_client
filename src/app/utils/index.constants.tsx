@@ -1,5 +1,6 @@
-import {LinkVideoType, NavBar} from "@/app/types/types"
+import {NavBar} from "@/app/types/types"
 import {AccessTextType, LoginTextRecovery} from "@/app/types/pageTypes/authoriedType";
+import {LinkVideoType} from "@/app/types/pageTypes/mainPageTypes";
 
 /**
  * константы для основных страниц - заголовки

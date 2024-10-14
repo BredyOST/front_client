@@ -1,10 +1,11 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './postsForSearch.module.scss'
 import Link from "next/link";
-import {navbarFirst} from "@/app/components/header/header";
+
 import PostsBlock from "@/app/components/searchPage/postBlock/postsBlock";
 import {useAppSelector} from "@/app/redux/hooks/redux";
+import {NAVBAR_FIRST} from "@/app/utils/index.constants";
 
 
 const PostsForSearch = () => {
@@ -37,11 +38,9 @@ const PostsForSearch = () => {
                 }
             }
         }
-
         setAccessFree(checkFree);
         setAccessPay(checkPay);
     }, [infoUser, stateAuth]);
-
 
     if (!stateAuth) {
         return null
@@ -60,7 +59,7 @@ const PostsForSearch = () => {
                 {infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length == 0) && (infoUser?.categoriesHasBought?.length == 0)) &&
                     <div className={cls.coverBlockNoAccess}>
                         <div className={cls.coverBtn}>
-                            <Link href={navbarFirst[0].href} className={cls.btn}>Посмотреть тарифы</Link>
+                            <Link href={NAVBAR_FIRST[0].href} className={cls.btn}>Посмотреть тарифы</Link>
                         </div>
                     </div>
                 }
