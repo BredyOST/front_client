@@ -6,11 +6,9 @@ import {Button} from "@/app/components/shared/ui/Button/Button";
 import {useChangeNameAndCardMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import Loader from "@/app/components/shared/ui/Loader/Loader";
+import {ChangeNameAndCardType, TypeForFunc} from "@/app/types/types";
 
-interface changeNameProps { }
-
-const ChangeName:FC<changeNameProps> = (props) => {
-    const {  } = props;
+const ChangeName = () => {
 
     const [changeNameAndCard, {
         data: requestChangeNameAndCard, error: errorNameAndCard, isError: isErrorNameAndCard,  isLoading: loadingNameAndCard,
@@ -20,13 +18,12 @@ const ChangeName:FC<changeNameProps> = (props) => {
 
     const [profileName, setProfileName] = React.useState<string>()
 
-    const addName = (e:ChangeEvent<HTMLInputElement>) => {
+    const addName:TypeForFunc<ChangeEvent<HTMLInputElement>,void> = (e:ChangeEvent<HTMLInputElement>) => {
         setProfileName(e.target.value);
     }
-    const sendNewName = () => {
-        changeNameAndCard({
-            fullName: profileName
-        })
+    const sendNewName:TypeForFunc<ChangeEvent<void>,void> = () => {
+        const fullName:ChangeNameAndCardType = {fullName: profileName}
+        changeNameAndCard(fullName)
     }
 
     React.useEffect(

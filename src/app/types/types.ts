@@ -67,3 +67,7 @@ export type CategoriesType = {
     show:boolean
     updateAt:string
 }
+
+export type ChangeNameAndCardType = {
+    fullName:string | undefined
+}
