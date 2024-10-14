@@ -1,12 +1,13 @@
+import {itemType} from "@/app/redux/entities/categories/categoriesSchema";
 
 export type CardsType = {
-    reatedAt: string
+    сreatedAt: string
     description: string
     descriptionNotification: string
     id:number
     identificatorId: string
     period:number
-    title: string
+    title: 'Бесплатный' | 'Недельный' | 'Погрузись в работу'
     updateAt: string
 }
 
@@ -37,4 +38,11 @@ export enum nameCards {
     free = 'Бесплатный',
     weeks = 'Недельный',
     month = 'Погрузись в работу',
+}
+
+export type PaymentObjType = {
+    category: itemType[]
+    price: number | string,
+    period: string,
+    title: string,
 }

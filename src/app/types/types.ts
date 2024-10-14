@@ -50,8 +50,6 @@ export type NavBar = {
     href:string,
 }
 
-
-
 export type CategoriesType = {
     channelActive: boolean
     chatNames: string[]

@@ -1,5 +1,5 @@
 export type itemType = {
-    id: number, text: string
+    id: number, text: string, chatNames: string[]
 }
 
 export type filteredCategoriesType = {

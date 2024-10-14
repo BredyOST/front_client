@@ -17,7 +17,7 @@ import {indicatorsNotifications} from "@/app/redux/entities/notifications/notifi
 import {redirect} from "next/navigation";
 import {itemType} from "@/app/redux/entities/categories/categoriesSchema";
 import {CategoriesType, TypeForFunc} from "@/app/types/types";
-import {CardPeriod, CardsType, nameCards} from "@/app/types/pageTypes/priceTypes";
+import {CardPeriod, CardsType, nameCards, PaymentObjType} from "@/app/types/pageTypes/priceTypes";
 
 interface CardsProps {
     item:CardsType;
@@ -26,7 +26,7 @@ interface CardsProps {
 
 
 const Cards = React.memo(({  item, categories}:CardsProps) => {
-
+    console.log(item)
     const cookies = getThisCookie();
     const dispatch = useAppDispatch()
 
@@ -135,18 +135,36 @@ const Cards = React.memo(({  item, categories}:CardsProps) => {
             })
         }
         if((title == nameCards.weeks || title == nameCards.month) && chosenCategory.length >= 1) {
-            payment({
-                categ: chosenCategory,
+            const objPayment:PaymentObjType = {
+                category: chosenCategory,
                 price: price,
                 period: period,
                 title: title,
-            })
+            }
+            payment(objPayment)
         }
     }
 
     const openLoginFormPopup:TypeForFunc<void, void> = React.useCallback(() => {
         dispatch(changeStateLoginFormPopup(true));
     }, []);
+
+    const chooseNumMin:TypeForFunc<CardsType, '1' | '2' > = (item) => {
+        if(item.title == nameCards.free) {
+            return '2'
+        } else {
+            return '1'
+        }
+    }
+    const chooseNumMax:TypeForFunc<CardsType, '2' | '12' | '30'> = (item) => {
+        if(item.title == nameCards.free) {
+            return '2'
+        } else if(item.title == nameCards.month) {
+            return '12'
+        } else {
+            return '30'
+        }
+    }
 
     return (
         <div className={cls.card} >
@@ -160,20 +178,20 @@ const Cards = React.memo(({  item, categories}:CardsProps) => {
                 <div className={cls.slider}>
                     <div className={cls.coverPeriod}>
                         <div className={cls.coverPeriodMain}>ПЕРИОД</div>
-                        {item.title == 'Бесплатный'
+                        {item.title == nameCards.free
                             ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>ДЕНЬ</div></div> :
-                            item.title == 'Погрузись в работу'
+                            item.title == nameCards.month
                                 ? <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>{monthThirdCard}</div></div> :
                                 <div className={cls.month}><div className={cls.period}>{period}</div><div className={cls.periodText}>{monthThirdCard}</div></div>
                         }
                     </div>
                     {
-                        (item.title === 'Погрузись в работу') &&
+                        (item.title === nameCards.month) &&
                             <div className={cls.coverSlider}>
                                 <Slider
                                     value={period}
-                                    min={item.title == 'Бесплатный' ? '2' : '1'}
-                                    max={item.title == 'Бесплатный' ? '2' : item.title == 'Погрузись в работу' ? '12' : '30'}
+                                    min={chooseNumMin(item)}
+                                    max={chooseNumMax(item)}
                                     classname={cls.forSliderCover}
                                     classnameInput={cls.sliderInput}
                                     onInput={changePeriodInCard}
