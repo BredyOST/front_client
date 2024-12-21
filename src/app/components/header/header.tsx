@@ -1,23 +1,23 @@
 'use client'
 import React, {FC} from 'react';
 import cls from './header.module.scss'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import NavBar from "@/app/components/widgets/navBar/navBar";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import NavBar from "@/ui/navBar/navBar";
 import Logotype from "@/app/components/header/logotype/logotype";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {AppLink} from "@/ui/appLink/appLink";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import LoginModal from "@/app/components/features/AuthBy/loginModal/loginModal";
-import {useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi";
+import LoginModal from "@/features/AuthBy/loginModal/loginModal";
+import {useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {authSliceActions} from "@/app/redux/entities/auth/authSlice";
-import {BurgerButton} from "@/app/components/widgets/BurgerButton/burgerButton";
-import Notification from "@/app/components/shared/notification/notification";
-import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
+import {BurgerButton} from "@/ui/BurgerButton/burgerButton";
+import Notification from "@/widgets/notification/notification";
+import {getThisCookie} from "@/helpers/lib/cookie/cookie";
 import BtnEnterBlock from "@/app/components/header/btnEnterBlock/btnEnterBlock";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {Button} from "@/ui/Button/Button";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import {navbarFirst} from "@/app/utils/index.constants";
-import {TypeForFunc} from "@/app/types/types";
-import {useAddInfoAboutUserWithCookie} from "@/app/hooks/hooks";
+import {navbarFirst} from "@/shared/constants/index.constants";
+import {TypeForFunc} from "@/shared/types/types";
+import {useAddInfoAboutUserWithCookie} from "@/shared/hooks/hooks";
 interface HeaderProps {
     classname?: string;
 }

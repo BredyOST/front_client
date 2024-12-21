@@ -1,8 +1,8 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './postsAll.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {classNames} from "@/helpers/lib/classNames/className";
+import {Button} from "@/ui/Button/Button";
 import {
     useCreateAndCheckAllPostsMutation,
     useCreateCategoryMutation,
@@ -11,9 +11,9 @@ import {
     useGetAllPostsMutation,
     useGetCategoriesMutation, useGetLogsMutation,
     useStartAddTutorsPostsMutation
-} from "@/app/redux/entities/requestApi/requestApi";
+} from "@/app/redux/entities/requestApi/requestApi.test";
 import {parseCookies} from "nookies";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+import Loader from "@/ui/Loader/Loader";
 
 interface postsAllProps {
     classname?: string;

@@ -1,9 +1,9 @@
 import cls from './faq.module.scss';
 import React from "react";
 import Question from "@/app/components/faqPage/question/question";
-import {FAQ_PAGE_TITLE} from "@/app/utils/index.constants";
+import {FAQ_PAGE_TITLE} from "@/shared/constants/index.constants";
 import {FAQ_ITEMS} from "@/app/dashboard/faq/constants/FaqPageConst";
-import {FaqItem} from "@/app/types/types";
+import {FaqItem} from "@/shared/types/types";
 
 export const metadata = {
     title: 'Ответы на вопросы - клиенты.com',

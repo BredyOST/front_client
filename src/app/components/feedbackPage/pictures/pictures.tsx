@@ -1,9 +1,9 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './pictures.module.scss'
-import {PicturesType, TypeForFunc} from "@/app/types/types";
-import {PicturesProps} from "@/app/types/types";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {PicturesType, TypeForFunc} from "@/shared/types/types";
+import {PicturesProps} from "@/shared/types/types";
+import {Button} from "@/ui/Button/Button";
 
 export const Pictures= ({pictures}:PicturesProps) => {
 

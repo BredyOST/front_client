@@ -1,10 +1,9 @@
 @use "sass:math";
-@use './src/app/styles/variable/global.scss';
-@use './src/app/styles/variable/globalIndex.scss';
-@use "./src/app/styles/mixins.scss";
-@use './src/app/components/shared/ui/Loader/Loader.scss';
-@use './src/app/styles/variable/common.scss';
-
+@use '../../../../src/shared/styles/variable/global.scss';
+@use '../../../../src/shared/styles/variable/globalIndex.scss';
+@use "../../../../src/shared/styles/mixins.scss";
+@use '../../../../src/ui/Loader/Loader.scss';
+@use '../../../../src/shared/styles/variable/common.scss';
 
 .searchPage{
   @extend .paddingPages;

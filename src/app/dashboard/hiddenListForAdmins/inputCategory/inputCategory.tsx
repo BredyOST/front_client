@@ -1,10 +1,10 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './inputCategory.module.scss'
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import {useDeleteCategoryMutation, useUpdateCategoryMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
+import {classNames} from "@/helpers/lib/classNames/className";
+import {useDeleteCategoryMutation, useUpdateCategoryMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 
 interface inputCategoryProps {
     classname?: string;

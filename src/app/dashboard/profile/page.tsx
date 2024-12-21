@@ -5,9 +5,9 @@ import ChangeEmail from "@/app/components/profilePage/changeEmail/changeEmail";
 import ChangePhone from "@/app/components/profilePage/changePhone/changePhone";
 import ChangePassword from "@/app/components/profilePage/changePassword/changePassword";
 import BlockCategory from "@/app/components/profilePage/blockCategory/blockCategory";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {AppLink} from "@/ui/appLink/appLink";
 import LogOutBtn from "@/app/components/profilePage/logOutBtn/logOutBtn";
-import {PROFILE_PAGE_TITLE} from "@/app/utils/index.constants";
+import {PROFILE_PAGE_TITLE} from "@/shared/constants/index.constants";
 
 export const metadata = {
     title: 'Профиль пользователя - клиенты.com',

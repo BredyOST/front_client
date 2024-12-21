@@ -1,22 +1,22 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './cards.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import Slider from "@/app/components/shared/ui/slider/slider";
+import {Button} from "@/ui/Button/Button";
+import Slider from "@/ui/slider/slider";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useGetFreePeriodMutation,
     useGetMeMutation,
     usePaymentMutation,
-} from "@/app/redux/entities/requestApi/requestApi";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+} from "@/app/redux/entities/requestApi/requestApi.test";
+import Loader from "@/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {authSliceActions} from "@/app/redux/entities/auth/authSlice";
-import {getThisCookie} from "@/app/components/shared/lib/cookie/cookie";
+import {getThisCookie} from "@/helpers/lib/cookie/cookie";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {redirect} from "next/navigation";
 import {itemType} from "@/app/redux/entities/categories/categoriesSchema";
-import {CategoriesType, TypeForFunc} from "@/app/types/types";
+import {CategoriesType, TypeForFunc} from "@/shared/types/types";
 
 
 interface CardsProps {

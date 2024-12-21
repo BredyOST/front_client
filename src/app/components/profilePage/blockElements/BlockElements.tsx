@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import cls from "@/app/components/profilePage/blockCategory/blockCategory.module.scss";
-import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
-import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
+import VerifySvg from "@/assets/svgs/checkmarkc.svg";
+import NotVerifySvg from "@/assets/svgs/notVefify.svg";
 import Link from "next/link";
 import {categoriesBoughtType, notificationsType} from "@/app/components/profilePage/blockCategory/blockCategory";
-import {formatDateToRussian} from "@/app/components/shared/lib/formatedFunction/formatedFunction";
+import {formatDateToRussian} from "@/helpers/lib/formatedFunction/formatedFunction";
 import {User} from "@/app/redux/entities/auth/authSchema";
 
 interface IBlockElements {

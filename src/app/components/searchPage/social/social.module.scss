@@ -1,9 +1,9 @@
 @use "sass:math";
-@use '../../../styles/variable/global';
-@use '../../../styles/variable/globalIndex';
-@use "../../../styles/mixins";
-@use '../../shared/ui/Loader/Loader';
-@use '../../../styles/variable/common';
+@use '../../../../shared/styles/variable/global';
+@use '../../../../shared/styles/variable/globalIndex';
+@use "../../../../shared/styles/mixins";
+@use '../../../../ui/Loader/Loader';
+@use '../../../../shared/styles/variable/common';
 
 .social {
   @media(max-width: mixins.em(global.$mobile)) {

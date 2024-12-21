@@ -1,0 +1,49 @@
+@use "sass:math";
+@use './../../../shared/styles/variable/global.scss';
+@use './../../../shared/styles/variable/globalIndex.scss';
+@use "./../../../shared/styles/mixins.scss";
+@use './../../../ui/Loader/Loader.scss';
+@use './../../../shared/styles/variable/common.scss';
+
+.check{
+  display: flex;
+  font-size: mixins.rem(14);
+  cursor: pointer;
+}
+
+.check {
+  width: mixins.rem(24); /* Увеличиваем ширину квадрата */
+  height: mixins.rem(24); /* Увеличиваем высоту квадрата */
+}
+
+.checkCover{
+
+}
+
+.checkCustom {
+  width: mixins.rem(20);; /* Увеличиваем ширину квадрата */
+  height: mixins.rem(20);; /* Увеличиваем высоту квадрата */
+  //border: 2px solid #555;
+  border-radius: mixins.rem(4);;
+  position: relative;
+}
+
+.checkCustom::after {
+  content: '';
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  background-color: #555;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.check:checked + .check-custom::after {
+  display: block;
+}
+
+.textInside{
+}

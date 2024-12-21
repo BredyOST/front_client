@@ -1,13 +1,13 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './inputChange.module.scss'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import {Button} from "@/ui/Button/Button";
 import {
     useAddGroupMutation,
     useDeleteGroupMutation,
     useGetGroupsMutation, useUpdateGroupMutation
-} from "@/app/redux/entities/requestApi/requestApi";
+} from "@/app/redux/entities/requestApi/requestApi.test";
 
 interface inputChangeProps {
     classname?: string;

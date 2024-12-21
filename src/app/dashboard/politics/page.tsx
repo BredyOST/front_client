@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './politics.module.scss'
-import {POLITICS_PAGE_TITLE} from "@/app/utils/index.constants";
+import {POLITICS_PAGE_TITLE} from "@/shared/constants/index.constants";
 
 export const metadata = {
     title: 'Политика конфиденциальности - клиенты.com',

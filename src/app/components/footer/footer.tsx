@@ -1,6 +1,6 @@
 import React from 'react';
 import cls from './footer.module.scss'
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {AppLink} from "@/ui/appLink/appLink";
 
 const Footer = React.memo(() => {
 

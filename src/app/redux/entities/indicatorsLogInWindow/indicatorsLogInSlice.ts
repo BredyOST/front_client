@@ -1,6 +1,6 @@
 import {IndicatorsLogInSchema} from "@/app/redux/entities/indicatorsLogInWindow/indicatorsLogInSchema";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ActiveWindowType} from "@/app/types/types";
+import {ActiveWindowType} from "@/shared/types/types";
 
 const initialState: IndicatorsLogInSchema = {
     activeWindow: ''

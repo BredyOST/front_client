@@ -1,4 +1,4 @@
-import {InfoType} from "@/app/types/types";
+import {InfoType} from "@/shared/types/types";
 
 export const Info:InfoType[] = [
     {id:1, name:'ИП', text:'Калашникова Елена Валентиновна'},

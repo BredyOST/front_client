@@ -1,14 +1,14 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './btnEnterBlock.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import LogInSvg from "@/app/components/svgs/login.svg";
-import ProfileSvg from "@/app/components/svgs/profile.svg";
+import {Button} from "@/ui/Button/Button";
+import LogInSvg from "@/assets/svgs/login.svg";
+import ProfileSvg from "@/assets/svgs/profile.svg";
 import Profile from "@/app/components/header/profileList/profileList";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {TypeForFunc} from "@/app/types/types";
+import {AppLink} from "@/ui/appLink/appLink";
+import {TypeForFunc} from "@/shared/types/types";
 
 const BtnEnterBlock = React.memo(() => {
     const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
 import React from 'react';
 import cls from './profileList.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {classNames} from "@/helpers/lib/classNames/className";
 import Link from "next/link";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {useLogOutFromProfile} from "@/app/hooks/hooks";
+import {Button} from "@/ui/Button/Button";
+import {useLogOutFromProfile} from "@/shared/hooks/hooks";
 
 interface ProfileProps {
     classname?: string;

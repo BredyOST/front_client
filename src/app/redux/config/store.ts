@@ -10,7 +10,7 @@ import pricesReducer from './../entities/prices/pricesSlice';
 import burgerMenuReducer from './../entities/stateBurger/stateBurgerSlice';
 import searchParamsReducer from '../entities/searchParams/searchParamsSlice';
 import messageReducer from '../saga/sendMessageFromContact/reducer'
-import {requestApi} from "@/app/redux/entities/requestApi/requestApi";
+import {requestApi} from "@/app/redux/entities/requestApi/requestApi.test";
 import createSagaMiddleware from 'redux-saga';
 import mySaga from '../saga/sendMessageFromContact/sagaMain';
 import IndicatorsLogInReducer from './../entities/indicatorsLogInWindow/indicatorsLogInSlice'

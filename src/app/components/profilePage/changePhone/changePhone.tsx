@@ -1,18 +1,18 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './changePhone.module.scss'
-import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
-import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import VerifySvg from "@/assets/svgs/checkmarkc.svg";
+import NotVerifySvg from "@/assets/svgs/notVefify.svg";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useActivateTgProfileMutation,
     useChangePhoneMutation, useGetPhoneCodeTgMutation, useGiveInfoMutation,
     useVerifyTgMutation
-} from "@/app/redux/entities/requestApi/requestApi";
+} from "@/app/redux/entities/requestApi/requestApi.test";
 import {parseCookies} from "nookies";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+import Loader from "@/ui/Loader/Loader";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import 'react-phone-number-input/style.css'
 

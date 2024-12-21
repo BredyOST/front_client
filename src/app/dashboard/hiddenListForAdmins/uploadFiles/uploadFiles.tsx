@@ -2,11 +2,11 @@
 import {
     useAddNewFileMutation, useDeleteFileMutation,
     useGetFilesMutation,
-} from "@/app/redux/entities/requestApi/requestApi";
+} from "@/app/redux/entities/requestApi/requestApi.test";
 import React, {FC} from 'react';
 import cls from './uploadFiles.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {classNames} from "@/helpers/lib/classNames/className";
+import {Button} from "@/ui/Button/Button";
 import {parseCookies} from "nookies";
 
 interface uploadFilesProps {

@@ -1,7 +1,7 @@
 'use client';
 import React, {FC} from 'react';
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {useLogOutFromProfile} from "@/app/hooks/hooks";
+import {Button} from "@/ui/Button/Button";
+import {useLogOutFromProfile} from "@/shared/hooks/hooks";
 
 interface LogOutBtnProps {
     classname?: any,

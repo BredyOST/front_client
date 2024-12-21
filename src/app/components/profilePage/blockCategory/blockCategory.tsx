@@ -1,8 +1,8 @@
 'use client';
 import { FC } from "react";
 import cls from './blockCategory.module.scss'
-import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
-import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
+import VerifySvg from "@/assets/svgs/checkmarkc.svg";
+import NotVerifySvg from "@/assets/svgs/notVefify.svg";
 import Link from "next/link";
 import React from "react";
 import {useAppSelector} from "@/app/redux/hooks/redux";

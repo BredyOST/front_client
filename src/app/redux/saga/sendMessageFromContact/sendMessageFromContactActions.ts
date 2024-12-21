@@ -1,5 +1,5 @@
 import {all, call, put, takeLatest} from 'redux-saga/effects';
-import {requestApi} from "@/app/redux/entities/requestApi/requestApi"; // Экшены для обработки
+import {requestApi} from "@/app/redux/entities/requestApi/requestApi.test"; // Экшены для обработки
 
 // Action types
 export const SEND_MESSAGE_REQUEST = 'SEND_MESSAGE_REQUEST';

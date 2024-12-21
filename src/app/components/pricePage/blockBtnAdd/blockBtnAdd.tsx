@@ -1,13 +1,13 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './blockBtnAdd.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {Button} from "@/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import CloseSvg from "@/app/components/svgs/close.svg";
+import CloseSvg from "@/assets/svgs/close.svg";
 import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
 import {itemType} from "@/app/redux/entities/categories/categoriesSchema";
-import {TypeForFunc} from "@/app/types/types";
+import {TypeForFunc} from "@/shared/types/types";
 
 interface blockBtnAddProps {}
 

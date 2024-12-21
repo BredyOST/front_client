@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import cls from './adminPage.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {classNames} from "@/helpers/lib/classNames/className";
 import AddGroup from "@/app/dashboard/hiddenListForAdmins/addGroup/addGroup";
 import AddCategory from "@/app/dashboard/hiddenListForAdmins/addCategory/addCategory";
 import PostsAll from "@/app/dashboard/hiddenListForAdmins/postsAll/postsAll";

@@ -2,14 +2,14 @@
 import React, {FC, Suspense} from 'react';
 import cls from './listsCategory.module.scss'
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import Modal from "@/app/components/shared/ui/Modal/Modal";
+import Modal from "@/ui/Modal/Modal";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
-import AddSvg from '../../svgs/add.svg';
-import ChosenSvg from '../../svgs/chosen.svg';
+import Loader from "@/ui/Loader/Loader";
+import AddSvg from '@/assets/svgs/add.svg';
+import ChosenSvg from '@/assets/svgs/chosen.svg';
 import ButtonToBuy from "@/app/components/pricePage/buttonToBuy/buttonToBuy";
 import {categoriesActions} from "@/app/redux/entities/categories/categoriesSlice";
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {Button} from "@/ui/Button/Button";
 
 import {filteredCategoriesType, itemType} from "@/app/redux/entities/categories/categoriesSchema";
 

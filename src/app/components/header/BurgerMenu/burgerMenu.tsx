@@ -1,15 +1,15 @@
 'use client';
 import React from 'react';
 import cls from './burgerMenu.module.scss'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import ArrowSVG from '../../svgs/arrow-right.svg'
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import {AppLink} from "@/ui/appLink/appLink";
+import ArrowSVG from '@/assets/svgs/arrow-right.svg'
+import {Button} from "@/ui/Button/Button";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateBurgerMenuSliceActions} from "@/app/redux/entities/stateBurger/stateBurgerSlice";
-import {NavBar, TypeForFunc} from "@/app/types/types";
-import {useLogOutFromProfile} from "@/app/hooks/hooks";
-import {navbarFirst} from "@/app/utils/index.constants";
+import {NavBar, TypeForFunc} from "@/shared/types/types";
+import {useLogOutFromProfile} from "@/shared/hooks/hooks";
+import {navbarFirst} from "@/shared/constants/index.constants";
 interface BurgerMenuProps {
     classname?: string;
     indicatorOpen:boolean;

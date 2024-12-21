@@ -1,11 +1,11 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './cityBlock.module.scss'
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import CancelSvg from "@/app/components/svgs/cancel.svg";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
+import CancelSvg from "@/assets/svgs/cancel.svg";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
 import {SearchParamsActions} from "@/app/redux/entities/searchParams/searchParamsSlice";
 
 interface cityBlockProps {

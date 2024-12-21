@@ -1,9 +1,9 @@
 'use client'
 import React, {FC} from 'react';
 import cls from './feedBackPeople.module.scss'
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
-import {FEEDBACK_PAGE_TITLE, linksVideoFeedBack} from "@/app/utils/index.constants";
-import {LinkVideoType} from "@/app/types/types";
+import {AppLink} from "@/ui/appLink/appLink";
+import {FEEDBACK_PAGE_TITLE, linksVideoFeedBack} from "@/shared/constants/index.constants";
+import {LinkVideoType} from "@/shared/types/types";
 export const FeedBackPeople = () => {
 
     return (

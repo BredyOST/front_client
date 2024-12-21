@@ -1,13 +1,13 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './changeEmail.module.scss'
-import VerifySvg from "@/app/components/svgs/checkmarkc.svg";
-import NotVerifySvg from "@/app/components/svgs/notVefify.svg";
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {useChangeEmailMutation, useCodeForEmailMutation} from "@/app/redux/entities/requestApi/requestApi";
+import VerifySvg from "@/assets/svgs/checkmarkc.svg";
+import NotVerifySvg from "@/assets/svgs/notVefify.svg";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
+import {useChangeEmailMutation, useCodeForEmailMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {useAppSelector} from "@/app/redux/hooks/redux";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+import Loader from "@/ui/Loader/Loader";
 
 interface changeEmailProps {
     classname?: string;

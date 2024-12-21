@@ -1,12 +1,12 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './addGroup.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+import {classNames} from "@/helpers/lib/classNames/className";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
+import Loader from "@/ui/Loader/Loader";
 import {parseCookies} from "nookies";
-import {useAddGroupMutation, useGetGroupsMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {useAddGroupMutation, useGetGroupsMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {InputChange} from "@/app/dashboard/hiddenListForAdmins/inputChange/inputChange";
 
 interface addGroupProps {

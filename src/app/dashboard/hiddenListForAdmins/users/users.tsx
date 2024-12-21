@@ -1,8 +1,8 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './users.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {Button} from "@/ui/Button/Button";
+import {classNames} from "@/helpers/lib/classNames/className";
 
 interface usersProps {
     classname?: string;

@@ -1,0 +1,60 @@
+@use "sass:math";
+@use './../../shared/styles/variable/global';
+@use './../../shared/styles/variable/globalIndex';
+@use "./../../shared/styles/mixins.scss";
+@use './../../ui/Loader/Loader';
+@use './../../shared/styles/variable/common';
+
+
+.Select{
+}
+.label{
+  @extend .forNames;
+}
+
+.coverSelect{
+  //box-shadow: mixins.rem(0) mixins.rem(0) mixins.rem(10) rgba(0, 0, 0, 0.25);
+  border-radius: mixins.rem(5);
+  display: flex;
+  position: relative;
+  @media(min-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+  }
+}
+
+.coverCurrent{
+  flex: 1 1 auto;
+  min-width: 100%;
+  display: flex;
+  cursor: pointer;
+  min-height: mixins.rem(30);
+  border-radius: mixins.rem(5);
+  padding-left: mixins.rem(10);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+}
+
+.arrow{
+  width: mixins.rem(25);
+  height: mixins.rem(25);
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+  transform-origin:center;
+  transition: transform ease 0.3s 0s;
+  font-size: mixins.rem(16);
+  .active & {
+    transform: rotate(90deg) translate(-50%,0%);
+    transition: transform ease 0.3s 0s;
+  }
+}
+
+.option{
+  @extend .forNames;
+  opacity: 0.5;
+  display: flex;
+  @include mixins.adaptiveValue("font-size",16,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+}
+

@@ -1,14 +1,13 @@
 import React from 'react';
 import cls from './searchPage.module.scss'
-import { classNames } from "@/app/components/shared/lib/classNames/className";
-import { Select } from "@/app/components/shared/ui/Select/Select";
-import Tabs from "@/app/components/shared/ui/tabs/tabs";
+import { classNames } from "@/helpers/lib/classNames/className";
+import { Select } from "@/ui/Select/Select";
+import Tabs from "@/ui/tabs/tabs";
 import SearchBlock from "@/app/components/searchPage/searchBlock/searchBlock";
-import Social from "@/app/components/searchPage/social/social";
 import CityBlock from "@/app/components/searchPage/cityBlock/cityBlock";
 import PostsForSearch from "@/app/components/searchPage/postsForSearch/postsForSearch";
 import СleanFilter from "@/app/components/searchPage/cleanFilter/cleanFilter";
-import {SEARCH_PAGE_TITLE} from "@/app/utils/index.constants";
+import {SEARCH_PAGE_TITLE} from "@/shared/constants/index.constants";
 
 export const metadata = {
     title: 'Поиск клиентов - клиенты.com',

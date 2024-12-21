@@ -1,7 +1,7 @@
 
 import cls from '@/app/dashboard/faq/faq.module.scss';
 import React from 'react';
-import {FaqItem} from '@/app/types/types';
+import {FaqItem} from '@/shared/types/types';
 import Link from 'next/link';
 
 export const FAQ_ITEMS:FaqItem[] = [

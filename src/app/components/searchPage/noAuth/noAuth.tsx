@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import cls from './noAuth.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {classNames} from "@/helpers/lib/classNames/className";
 import Link from "next/link";
 
 

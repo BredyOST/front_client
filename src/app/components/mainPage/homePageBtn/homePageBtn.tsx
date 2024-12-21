@@ -1,10 +1,10 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './homePageBtn.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {Button} from "@/ui/Button/Button";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {AppLink} from "@/ui/appLink/appLink";
 
 interface homePageBtnProps {}
 

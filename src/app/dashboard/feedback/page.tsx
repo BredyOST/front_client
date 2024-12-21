@@ -1,8 +1,8 @@
 import React from 'react';
 import cls from './feedback.module.scss'
 import Pictures from "@/app/components/feedbackPage/pictures/pictures";
-import {FEEDBACK_PAGE_TITLE} from "@/app/utils/index.constants";
-import {PicturesType} from "@/app/types/types";
+import {FEEDBACK_PAGE_TITLE} from "@/shared/constants/index.constants";
+import {PicturesType} from "@/shared/types/types";
 
 export const metadata = {
     title: 'Отзывы клиентов - клиенты.com',

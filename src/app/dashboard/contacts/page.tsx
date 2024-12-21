@@ -1,8 +1,8 @@
 import React from 'react';
 import cls from './contacts.module.scss';
 import ContactUs from '@/app/components/contactPage/constactUs/constactUs';
-import {CONTACT_PAGE_TITLE} from "@/app/utils/index.constants";
-import {InfoType} from "@/app/types/types";
+import {CONTACT_PAGE_TITLE} from "@/shared/constants/index.constants";
+import {InfoType} from "@/shared/types/types";
 import {Info} from "@/app/dashboard/contacts/constants/contactPageConst";
 
 export const metadata = {

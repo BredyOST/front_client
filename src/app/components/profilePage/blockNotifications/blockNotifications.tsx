@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {notificationsType} from "@/app/components/profilePage/blockCategory/blockCategory";
 import cls from "@/app/components/profilePage/blockCategory/blockCategory.module.scss";
-import {formatDateToRussian} from "@/app/components/shared/lib/formatedFunction/formatedFunction";
+import {formatDateToRussian} from "@/helpers/lib/formatedFunction/formatedFunction";
 
 interface IBlockNotifications {
     userNotifications?: notificationsType[]

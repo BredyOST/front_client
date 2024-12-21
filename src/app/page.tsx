@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from './page.module.scss'
-import LineSvg from "../app/components/svgs/line.svg";
-import VectorSvg from "../app/components/svgs/vector.svg";
+import LineSvg from "@/assets/svgs/line.svg";
+import VectorSvg from "@/assets/svgs/vector.svg";
 import FeedBackPeople from "@/app/components/mainPage/feedBackPeople/feedBackPeople";
 import HomePageBtn from "@/app/components/mainPage/homePageBtn/homePageBtn";
 

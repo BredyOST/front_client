@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import cls from './logotype.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {classNames} from "@/helpers/lib/classNames/className";
+import {AppLink} from "@/ui/appLink/appLink";
 
 interface LogotypeProps {
     classname?: string;

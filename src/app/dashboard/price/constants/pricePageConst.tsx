@@ -1,4 +1,4 @@
-import {TextListsType} from "@/app/types/types";
+import {TextListsType} from "@/shared/types/types";
 
 
 export const textLists:TextListsType[] = [

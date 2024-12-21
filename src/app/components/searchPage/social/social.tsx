@@ -1,10 +1,10 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './social.module.scss'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import CheckmarkSvg from '../../svgs/checkmarkc.svg'
-import ArrowSvg from "@/app/components/svgs/arrow-right.svg";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import {Button} from "@/ui/Button/Button";
+import CheckmarkSvg from '@/assets/svgs/checkmarkc.svg'
+import ArrowSvg from "@/assets/svgs/arrow-right.svg";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {SearchParamsActions} from "@/app/redux/entities/searchParams/searchParamsSlice";
 interface socialProps {

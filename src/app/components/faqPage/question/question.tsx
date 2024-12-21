@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
 import cls from './question.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import ArraySvg from '../../svgs/arrow.svg'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {AnswerType, FaqItem} from "@/app/types/types";
-import {useToggleState} from "@/app/hooks/hooks";
+import {Button} from "@/ui/Button/Button";
+import ArraySvg from '@/assets/svgs/arrow.svg'
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import {AnswerType, FaqItem} from "@/shared/types/types";
+import {useToggleState} from "@/shared/hooks/hooks";
 
 export interface QuestionProps {
     items:FaqItem

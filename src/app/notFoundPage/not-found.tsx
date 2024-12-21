@@ -1,7 +1,7 @@
 import cls from './notFoundPage.module.scss';
-import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {classNames} from "@/helpers/lib/classNames/className";
 import {FC} from "react";
-import {AppLink} from "@/app/components/shared/ui/appLink/appLink";
+import {AppLink} from "@/ui/appLink/appLink";
 
 interface NotFoundPageProps {
     classname?: string;

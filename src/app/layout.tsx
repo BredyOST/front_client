@@ -1,4 +1,4 @@
-import './styles/index.scss'
+import '@/shared/styles/index.scss'
 import { Inter } from 'next/font/google'
 import Header from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";

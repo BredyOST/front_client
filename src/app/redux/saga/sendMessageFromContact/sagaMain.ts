@@ -1,6 +1,6 @@
 import {all, call, put, takeLatest} from 'redux-saga/effects';
 import {SEND_MESSAGE_REQUEST, sendMessageFailure, sendMessageSuccess} from "@/app/redux/saga/sendMessageFromContact/sagaApi";
-import {requestApi} from "@/app/redux/entities/requestApi/requestApi";
+import {requestApi} from "@/app/redux/entities/requestApi/requestApi.test";
 import axios from "axios";
 import {parseCookies} from "nookies";
 

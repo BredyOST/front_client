@@ -1,0 +1,168 @@
+@use "sass:math";
+@use './../../../../shared/styles/variable/global';
+@use './../../../../shared/styles/variable/globalIndex';
+@use "./../../../../shared/styles/mixins";
+@use './../../../../shared/styles/variable/common.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(15);
+}
+
+.title {
+  @extend .popupTitle;
+  position: relative;
+  text-align: center;
+}
+
+.input {
+  @extend .inputPopupLogin;
+}
+
+
+
+.btnCoverTwo {
+  display: flex;
+  justify-content: center;
+  column-gap: mixins.rem(20);
+  row-gap: mixins.rem(10);
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+  }
+}
+.coverInp{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(3);
+}
+
+.inputsForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+  position: relative;
+}
+
+.btnEnter {
+  @extend .btnGradient;
+  font-weight: 600;
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+
+}
+
+.back{
+  @extend .btnBack;
+  font-weight: 600;
+  padding-left: mixins.rem(27);
+  padding-right: mixins.rem(27);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+  @include mixins.adaptiveValue("font-size",globalIndex.$Enter_fontSize_AdaptiveStart,14,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex: 1 1 auto;
+    min-width: 100%;
+  }
+}
+
+.btnGet{
+  @extend .btnLogin;
+  display: inline-flex;
+  max-width: mixins.rem(200);
+  padding-left: mixins.rem(18);
+  padding-right: mixins.rem(18);
+  padding-bottom: mixins.rem(11);
+  padding-top: mixins.rem(11);
+}
+
+.linkBot{
+  color: #3d76c7;
+  font-weight: 800;
+
+  @media (any-hover: hover) {
+     &:hover {
+       color: #a966a1;
+        transition: background-color ease 0.3s 0s;
+     }
+   }
+}
+
+.text{
+  @extend .popupSubTitle;
+  max-width: mixins.rem(460);
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(2);
+  text-align: left;
+
+  span {
+    font-weight: 800;
+  }
+}
+
+.coverCallBtn{
+  display: flex;
+  justify-content: center;
+  //display: flex;
+  //flex: 1 1 auto;
+  //justify-content: flex-end;
+  //align-items: center;
+}
+
+.coverBtn{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  row-gap: mixins.rem(7);
+  flex-direction: column;
+}
+
+.titleForBtn{
+  font-family: globalIndex.$Title_font_family;
+  font-size: mixins.rem(16);
+  text-align: left;
+  line-height: math.div(25,16);
+  font-weight: 400;
+}
+
+.coverPhoneAndMail{
+  display: flex;
+  column-gap: mixins.rem(5);
+  justify-content: center;
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    //flex-direction: column;
+    //row-gap: mixins.rem(7);
+  }
+}
+
+.choose{
+  @extend .btnLogin;
+  flex: 0 1 mixins.rem(180);
+}
+
+.emailSvg {
+  max-width: mixins.rem(30);
+  max-height: mixins.rem(30);
+  flex: 0 0  mixins.rem(30);
+  fill: #000000;
+  text-align: center;
+}
+
+.phoneSvg{
+  max-width: mixins.rem(30);
+  max-height: mixins.rem(30);
+  flex: 0 0 mixins.rem(30);
+  fill: #000000;
+  text-align: center;
+}

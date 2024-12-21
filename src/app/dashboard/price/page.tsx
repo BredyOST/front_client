@@ -1,14 +1,14 @@
 import React from 'react';
 import cls from './pricePage.module.scss'
-import {classNames} from "@/app/components/shared/lib/classNames/className";
+import {classNames} from "@/helpers/lib/classNames/className";
 import BlockBtnAdd from "@/app/components/pricePage/blockBtnAdd/blockBtnAdd";
 import Cards from "@/app/components/pricePage/cards/cards";
 import ListsCategory from "@/app/components/pricePage/listsCategory/listsCategory";
 import {filteredCategoriesType} from "@/app/redux/entities/categories/categoriesSchema";
 import {pricesType} from "@/app/redux/entities/prices/pricesSchema";
-import {PRICE_PAGE_TITLE} from "@/app/utils/index.constants";
+import {PRICE_PAGE_TITLE} from "@/shared/constants/index.constants";
 import {textLists} from "@/app/dashboard/price/constants/pricePageConst";
-import {TextListsType} from "@/app/types/types";
+import {TextListsType} from "@/shared/types/types";
 
 export const metadata = {
     title: 'Описание тарифов - клиенты.com',

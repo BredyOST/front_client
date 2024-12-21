@@ -1,14 +1,14 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './changePassword.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {Input} from "@/app/components/shared/ui/input/Input";
-import ShowSvg from "@/app/components/svgs/show.svg";
-import HideSvg from "@/app/components/svgs/hide.svg";
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+import {Button} from "@/ui/Button/Button";
+import {Input} from "@/ui/input/Input";
+import ShowSvg from "@/assets/svgs/show.svg";
+import HideSvg from "@/assets/svgs/hide.svg";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import Loader from "@/ui/Loader/Loader";
 import {HidePassword} from "@/app/dashboard/profile/page";
-import {useChangePasswordInProfileMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {useChangePasswordInProfileMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {useAppDispatch} from "@/app/redux/hooks/redux";
 

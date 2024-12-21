@@ -1,15 +1,15 @@
 'use client';
 import React, {FC} from 'react';
 import cls from './postsBlock.module.scss'
-import {Button} from "@/app/components/shared/ui/Button/Button";
+import {Button} from "@/ui/Button/Button";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import {
     useGetAllKeysRedisMutation, useGetPostsRedisMutation,
-} from "@/app/redux/entities/requestApi/requestApi";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+} from "@/app/redux/entities/requestApi/requestApi.test";
+import Loader from "@/ui/Loader/Loader";
 import Link from "next/link";
-import VkSvg from "../../svgs/vk.svg"
-import TgSvg from "../../svgs/telegram.svg"
+import VkSvg from "@/assets/svgs/vk.svg"
+import TgSvg from "@/assets/svgs/telegram.svg"
 
 interface postsBlockProps {}
 
@@ -148,7 +148,7 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
         const postsPerPage = postsCount;
         const neededPosts = +currentPage * (postsPerPage + 3);
         const postsInKey = 300;
-
+        console.log(postsCount)
         // check, do we need more posts ?
         if (neededPosts >= filteredPosts.length - postsCount) {
             if(filteredPosts.length < postsInKey) return

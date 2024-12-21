@@ -1,11 +1,11 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './changeName.module.scss'
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import {useChangeNameAndCardMutation} from "@/app/redux/entities/requestApi/requestApi";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
+import {useChangeNameAndCardMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {useAppSelector} from "@/app/redux/hooks/redux";
-import Loader from "@/app/components/shared/ui/Loader/Loader";
+import Loader from "@/ui/Loader/Loader";
 
 interface changeNameProps { }
 

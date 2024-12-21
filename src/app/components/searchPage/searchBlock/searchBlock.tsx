@@ -1,10 +1,10 @@
 'use client';
 import React, {ChangeEvent, FC} from 'react';
 import cls from './searchBlock.module.scss'
-import {classNames, Mods} from "@/app/components/shared/lib/classNames/className";
-import {Input} from "@/app/components/shared/ui/input/Input";
-import {Button} from "@/app/components/shared/ui/Button/Button";
-import CancelSvg from "@/app/components/svgs/cancel.svg";
+import {classNames, Mods} from "@/helpers/lib/classNames/className";
+import {Input} from "@/ui/input/Input";
+import {Button} from "@/ui/Button/Button";
+import CancelSvg from "@/assets/svgs/cancel.svg";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {SearchParamsActions} from "@/app/redux/entities/searchParams/searchParamsSlice";
 
