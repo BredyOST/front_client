@@ -5,12 +5,7 @@ import VectorSvg from "@/assets/svgs/vector.svg";
 import FeedBackPeople from "@/app/components/mainPage/feedBackPeople/feedBackPeople";
 import HomePageBtn from "@/app/components/mainPage/homePageBtn/homePageBtn";
 
-
-interface pageProps {}
-
-async function Home( props:pageProps ) {
-
-    const {} = props;
+async function Home(  ) {
 
     return (
         <div className={cls.page}>
