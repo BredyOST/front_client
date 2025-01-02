@@ -357,17 +357,17 @@ const PostsBlock = () => {
                             </div>
                             <div className={cls.blockText}>
                                 {infoUser?.access?.[`${chosenCategory?.id}`].find((element: number) => element === item?.post_id)
-                                ?
+                                    ?
                                     <Link className={cls.linkText}
-                                          href={
-                                              item.identification_post == 'vk' ?
-                                                  `https://vk.com/wall${item?.post_owner_id}_${item?.post_id}`:
-                                                  item.identification_post == 'tg' ?
-                                                      `https://t.me/${item?.id_group}/${item?.post_id}`:
-                                                      item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
-                                                          item?.id_group : ''
-                                          }
-                                          target="_blank"
+                                        href={
+                                            item.identification_post == 'vk' ?
+                                                `https://vk.com/wall${item?.post_owner_id}_${item?.post_id}`:
+                                                item.identification_post == 'tg' ?
+                                                    `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                        item?.id_group : ''
+                                        }
+                                        target="_blank"
                                     >
                                         {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
                                             ? item?.post_text

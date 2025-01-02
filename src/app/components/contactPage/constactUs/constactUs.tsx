@@ -27,7 +27,9 @@ const ContactUs = () => {
         (state) => state.message,
     );
 
-    let [ sendMessage, {data: requestsSendToSupport, error: errorSendToSupport, isError: isErrorSendToSupport, isLoading: loadingSendToSupport,}] = useSendMassageMutation();
+    let [ sendMessage, {
+        data: requestsSendToSupport, error: errorSendToSupport, isError: isErrorSendToSupport, isLoading: loadingSendToSupport,
+    }] = useSendMassageMutation();
 
     const sendInfoToSupport = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
