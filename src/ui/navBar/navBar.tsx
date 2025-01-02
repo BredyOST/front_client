@@ -2,8 +2,7 @@ import React, {FC} from 'react';
 import cls from './navBar.module.scss'
 import {classNames} from "@/helpers/lib/classNames/className";
 import {AppLink} from "@/ui/appLink/appLink";
-import {NavBar} from "@/app/components/header/header";
-
+import {NavBar} from "@/shared/types/types";
 
 
 interface navBarProps {

@@ -9,7 +9,7 @@ import {User} from "@/app/redux/entities/auth/authSchema";
 
 interface IBlockElements {
     userCategories?: categoriesBoughtType[]
-    infoUser: User | null
+    infoUser: any | null
     indicator: number
 }
 

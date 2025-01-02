@@ -2,10 +2,9 @@
 import React, {FC} from 'react';
 import cls from './postsForSearch.module.scss'
 import Link from "next/link";
-import {navbarFirst} from "@/app/components/header/header";
 import PostsBlock from "@/app/components/searchPage/postBlock/postsBlock";
-import {classNames} from "@/helpers/lib/classNames/className";
 import {useAppSelector} from "@/app/redux/hooks/redux";
+import {navbarFirst} from "@/shared/constants/index.constants";
 
 interface postsForSearchProps {}
 

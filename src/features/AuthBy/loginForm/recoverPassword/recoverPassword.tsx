@@ -28,8 +28,6 @@ import {
 } from "@/shared/types/types";
 import {loginTextRecovery} from "@/shared/constants/constants";
 
-
-
 export const RecoverPassword = () => {
 
     const dispatch = useAppDispatch();
@@ -188,7 +186,7 @@ export const RecoverPassword = () => {
                             key={item.id}
                             classname={cls.choose}
                             indicatorActiveTab={item.id == activeTab}
-                            onClick={() => changeActiveTab(item.id)}
+                            onClick={() => changeActiveTab(item?.id)}
                         >
                             {item.text === 'Звонок' && <PhoneSvg className={cls.phoneSvg} />}
                             {item.text === 'Телеграмм'&& <EmailSvg className={cls.emailSvg} />}

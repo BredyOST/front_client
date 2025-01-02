@@ -7,10 +7,10 @@ import ShowSvg from "@/assets/svgs/show.svg";
 import HideSvg from "@/assets/svgs/hide.svg";
 import {classNames, Mods} from "@/helpers/lib/classNames/className";
 import Loader from "@/ui/Loader/Loader";
-import {HidePassword} from "@/app/dashboard/profile/page";
 import {useChangePasswordInProfileMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {useAppDispatch} from "@/app/redux/hooks/redux";
+import {HidePassword} from "@/shared/types/types";
 
 interface changePasswordProps {
     classname?:string

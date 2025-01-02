@@ -1,9 +1,8 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './pictures.module.scss'
 import {PicturesType, TypeForFunc} from "@/shared/types/types";
 import {PicturesProps} from "@/shared/types/types";
-import {Button} from "@/ui/Button/Button";
 
 export const Pictures= ({pictures}:PicturesProps) => {
 
@@ -12,7 +11,7 @@ export const Pictures= ({pictures}:PicturesProps) => {
         setExpandedImage(src);
     };
 
-    const closePictures:TypeForFunc<void, void> = () => {
+    const closePictures = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         setExpandedImage(null);
     };
 

@@ -68,7 +68,7 @@ export type ForTextFormsRecovery = {
 }
 
 export type LoginTextRecovery = {
-    id:number
+    id:ActiveTabIdType
     text: string
 }
 

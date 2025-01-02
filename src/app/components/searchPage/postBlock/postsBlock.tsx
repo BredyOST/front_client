@@ -357,8 +357,7 @@ const PostsBlock = () => {
                             </div>
                             <div className={cls.blockText}>
                                 {infoUser?.access?.[`${chosenCategory?.id}`].find((element: number) => element === item?.post_id)
-                                    ?
-                                    <Link className={cls.linkText}
+                                    ? <Link className={cls.linkText}
                                         href={
                                             item.identification_post == 'vk' ?
                                                 `https://vk.com/wall${item?.post_owner_id}_${item?.post_id}`:
