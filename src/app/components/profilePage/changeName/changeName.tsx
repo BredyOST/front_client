@@ -1,5 +1,5 @@
 'use client';
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent} from 'react';
 import cls from './changeName.module.scss'
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
@@ -7,10 +7,8 @@ import {useChangeNameAndCardMutation} from "@/app/redux/entities/requestApi/requ
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import Loader from "@/ui/Loader/Loader";
 
-interface changeNameProps { }
 
-const ChangeName:FC<changeNameProps> = (props) => {
-    const {  } = props;
+const ChangeName = () => {
 
     const [changeNameAndCard, {
         data: requestChangeNameAndCard, error: errorNameAndCard, isError: isErrorNameAndCard,  isLoading: loadingNameAndCard,

@@ -36,8 +36,10 @@ export type User = {
     forChangePhoneNumber: string
     fullName: string
     chatIdTg: string
+    access: AccessPosts
     userIdTg: string
     isAdmin: boolean
+    wallet: number
     isMainAdmin: boolean
     isActivatedEmail: boolean
     isActivatedPhone: boolean
@@ -69,12 +71,15 @@ export type UserAuthorization = {
     fullName: string
     chatIdTg: string
     userIdTg: string
+    email:string
     isAdmin: boolean
     isMainAdmin: boolean
     isActivatedEmail: boolean
     isActivatedPhone: boolean
     activatedFreePeriod: boolean
     endFreePeriod: boolean
+    wallet:number
+    access: AccessPosts
     activatedFreePeriodNotification: boolean
     endFreePeriodNotification: boolean
     ip: string
@@ -92,6 +97,10 @@ export type UserAuthorization = {
     sessionToken:string,
     refreshToken: string,
     accessToken: string
+}
+
+export interface AccessPosts {
+    [key: string]: number[];
 }
 
 export interface AuthSchema {

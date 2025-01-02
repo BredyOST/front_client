@@ -10,7 +10,7 @@ import HideSvg from '@/assets/svgs/hide.svg';
 import {useLoginInMutation} from "@/app/redux/entities/requestApi/requestApi.test";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
-import {Controller, SubmitHandler, useForm} from "react-hook-form";;
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import Loader from "@/ui/Loader/Loader";
 import PhoneInput from "react-phone-number-input";
 import {

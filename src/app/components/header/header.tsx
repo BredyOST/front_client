@@ -17,7 +17,7 @@ import {Button} from "@/ui/Button/Button";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {navbarFirst} from "@/shared/constants/index.constants";
 import {TypeForFunc} from "@/shared/types/types";
-import {useAddInfoAboutUserWithCookie} from "@/shared/hooks/hooks";
+
 interface HeaderProps {
     classname?: string;
 }

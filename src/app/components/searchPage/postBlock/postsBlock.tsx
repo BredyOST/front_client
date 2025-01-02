@@ -1,5 +1,5 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './postsBlock.module.scss'
 import {Button} from "@/ui/Button/Button";
 import {useAppSelector} from "@/app/redux/hooks/redux";
@@ -44,8 +44,7 @@ type allLoadedPostType = {
     userName: null | string
 }
 
-const PostsBlock:FC<postsBlockProps> = (props) => {
-    const {} = props;
+const PostsBlock = () => {
 
     let [keysRedis, {
         data: keysRedisRes, error: keysRedisError, isError: isErrorkeysRedis,  isLoading: loadingkeysRedis,
@@ -309,68 +308,82 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
-                                {!item.signer_id
-                                    ? <Link className={cls.link}
-                                        href={
-                                            item.identification_post == 'vk' ?
-                                                `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:
-                                                item.identification_post == 'tg' ?
-                                                    `https://t.me/${item?.id_group}/${item?.post_id}`:
-                                                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
-                                                        item?.id_group : ''
-                                        }
-                                        target="_blank">
-                                        <div className={cls.rightLinkSvg}>
-                                            {item?.photo_100_group && <img className={cls.imageGroup} src={item?.photo_100_group} alt=""/>}
-                                            <div className={cls.nameGroup}>
-                                                {item.name_group}
+                                {infoUser?.access?.[`${chosenCategory?.id}`].find((element: number) => element === item?.post_id)
+                                    ? !item.signer_id
+                                        ? <Link className={cls.link}
+                                            href={
+                                                item.identification_post == 'vk' ?
+                                                    `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:
+                                                    item.identification_post == 'tg' ?
+                                                        `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                        item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                            item?.id_group : ''
+                                            }
+                                            target="_blank">
+                                            <div className={cls.rightLinkSvg}>
+                                                {item?.photo_100_group && <img className={cls.imageGroup} src={item?.photo_100_group} alt=""/>}
+                                                <div className={cls.nameGroup}>
+                                                    {item.name_group}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
-                                    : <Link className={cls.link}
-                                        href={
-                                            item.identification_post == 'vk' ?
-                                                `https://vk.com/id${item.signer_id}`:
-                                                item.identification_post == 'tg' ?
-                                                    `https://t.me/${item?.id_group}/${item?.post_id}`:
-                                                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
-                                                        item?.id_group : ''
-                                        }
-                                        target="_blank">
-                                        <div className={cls.rightLinkSvg}>
-                                            {item.photo_100_user && <img className={cls.image} src= {item.photo_100_user} alt=""/>}
-                                            <div className={cls.nameGroup}>
-                                                {item.first_name_user || item.last_name_user &&
-                                                    <div className={cls.nameBlock}>
-                                                        <div>
-                                                            {item.first_name_user}
-                                                        </div>
-                                                        <div>
-                                                            {item.last_name_user}
-                                                        </div>
-                                                    </div>}
+                                        </Link>
+                                        : <Link className={cls.link}
+                                            href={
+                                                item.identification_post == 'vk' ?
+                                                    `https://vk.com/id${item.signer_id}`:
+                                                    item.identification_post == 'tg' ?
+                                                        `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                        item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                            item?.id_group : ''
+                                            }
+                                            target="_blank">
+                                            <div className={cls.rightLinkSvg}>
+                                                {item.photo_100_user && <img className={cls.image} src={item.photo_100_user} alt=""/>}
+                                                <div className={cls.nameGroup}>
+                                                    {item.first_name_user || item.last_name_user &&
+                                                        <div className={cls.nameBlock}>
+                                                            <div>
+                                                                {item.first_name_user}
+                                                            </div>
+                                                            <div>
+                                                                {item.last_name_user}
+                                                            </div>
+                                                        </div>}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Link>
+                                        </Link>
+                                    : <Button className={cls.notPaidMessage}>Купить</Button>
                                 }
                             </div>
                             <div className={cls.blockText}>
-                                <Link className={cls.linkText}
-                                    href={
-                                        item.identification_post == 'vk' ?
-                                            `https://vk.com/wall${item?.post_owner_id}_${item?.post_id}`:
-                                            item.identification_post == 'tg' ?
-                                                `https://t.me/${item?.id_group}/${item?.post_id}`:
-                                                item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
-                                                    item?.id_group : ''
-                                    }
-                                    target="_blank"
-                                >
-                                    {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
-                                        ? item?.post_text
-                                        : `${item.post_text?.slice(0, 350)}...`
-                                    }
-                                </Link>
+                                {infoUser?.access?.[`${chosenCategory?.id}`].find((element: number) => element === item?.post_id)
+                                ?
+                                    <Link className={cls.linkText}
+                                          href={
+                                              item.identification_post == 'vk' ?
+                                                  `https://vk.com/wall${item?.post_owner_id}_${item?.post_id}`:
+                                                  item.identification_post == 'tg' ?
+                                                      `https://t.me/${item?.id_group}/${item?.post_id}`:
+                                                      item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
+                                                          item?.id_group : ''
+                                          }
+                                          target="_blank"
+                                    >
+                                        {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
+                                            ? item?.post_text
+                                            : `${item.post_text?.slice(0, 350)}...`
+                                        }
+                                    </Link>
+                                    :
+                                    <div className={cls.linkText}
+                                    >
+                                        {expandedPosts.includes(item?.id) || item?.post_text?.length <= 350
+                                            ? item?.post_text
+                                            : `${item.post_text?.slice(0, 350)}...`
+                                        }
+                                    </div>
+                                }
+
                                 {item?.post_text?.length > 350 &&
                                     <div className={cls.coverBtnShow}>
                                         <Button classname={cls.showTextBtn}
@@ -397,6 +410,9 @@ const PostsBlock:FC<postsBlockProps> = (props) => {
                                 </div>
                             }
                         </div>
+                        {/*<div className={cls.coverPostBlock}>*/}
+
+                        {/*</div>*/}
                     </div>
                 ))
             }

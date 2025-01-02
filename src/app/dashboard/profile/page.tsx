@@ -8,6 +8,7 @@ import BlockCategory from "@/app/components/profilePage/blockCategory/blockCateg
 import {AppLink} from "@/ui/appLink/appLink";
 import LogOutBtn from "@/app/components/profilePage/logOutBtn/logOutBtn";
 import {PROFILE_PAGE_TITLE} from "@/shared/constants/index.constants";
+import BlockActiveMoney from "@/app/components/profilePage/blockActiveMoney/blockActiveMoney";
 
 export const metadata = {
     title: 'Профиль пользователя - клиенты.com',
@@ -39,6 +40,7 @@ const ProfilePage = () => {
                         <ChangeName/>
                         <ChangePhone/>
                         <ChangeEmail/>
+                        <BlockActiveMoney/>
                         <ChangePassword/>
                         <div className={cls.categoriesCover}>
                             <h3 className={cls.subTitle}>Активные подписки</h3>
