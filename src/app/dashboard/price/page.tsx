@@ -51,7 +51,6 @@ async function getData() {
 async function PricePage() {
 
     const {prices, categories} = await getData();
-
     const filteredCategories:filteredCategoriesType[] = categories?.filter((item:filteredCategoriesType) => item?.show)
 
     return (
