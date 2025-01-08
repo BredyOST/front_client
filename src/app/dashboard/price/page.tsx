@@ -94,8 +94,6 @@ async function PricePage() {
     // );
 
 
-
-
     return (
         <div className={classNames(cls.pricePage, {},[] )} >
             <div className='page__container'>

@@ -23,6 +23,7 @@ import {
     passwordHide, textErrors
 } from "@/features/helpersAuth/helpersRegistration";
 import {TypeForFunc} from "@/shared/types/types";
+import {useParams, useRouter} from "next/navigation";
 
 
 interface RegistrationProps {}
@@ -46,6 +47,8 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
         phoneRegister:'', passwordRegister: '', passwordRegisterCheck: '',
     });
 
+    const params = new URLSearchParams(window.location.search);
+
     const { currentPopupNumber } = useAppSelector((state) => state.statePopup);
 
     const [comparePassword, setComparePassword] = React.useState<boolean | ' '>(' ');
@@ -61,11 +64,14 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
         if(!isChecked) dispatch(addInfoForCommonError(textErrors.messageSecond))
         if(!comparePassword) dispatch(addInfoForCommonError(textErrors.message))
 
+        const partnerId = params.get('partnerId');
+
         if(comparePassword && isChecked) {
             const infoForRegistration:createUserType = {
                 phoneNumber:data.phoneNumberRegistration,
                 password:data.passwordRegistration,
                 passwordCheck:data.passwordRegistrationCheck,
+                refId: partnerId ? partnerId : null,
             }
             registerIn(infoForRegistration)
         }

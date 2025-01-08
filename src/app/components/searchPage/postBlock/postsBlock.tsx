@@ -11,6 +11,7 @@ import VkSvg from "@/assets/svgs/vk.svg"
 import TgSvg from "@/assets/svgs/telegram.svg"
 import {useRouter} from "next/navigation";
 import {Button} from "@/ui/Button/Button";
+import {filteredCategoriesType} from "@/app/redux/entities/categories/categoriesSchema";
 
 interface postsBlockProps {}
 
@@ -44,8 +45,11 @@ type allLoadedPostType = {
     updateAt:string
     userName: null | string
 }
+export interface IPostsBlock {
+    categories?:filteredCategoriesType[],
+}
 
-const PostsBlock = () => {
+const PostsBlock = ({categories}:IPostsBlock) => {
 
     let [keysRedis, {
         data: keysRedisRes, error: keysRedisError, isError: isErrorkeysRedis,  isLoading: loadingkeysRedis,
@@ -292,9 +296,6 @@ const PostsBlock = () => {
 
     const pagesToDisplay = displayPages();
 
-
-    const router = useRouter();
-
     const openLink = async (item:any) => {
 
         let link = null
@@ -346,7 +347,7 @@ const PostsBlock = () => {
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
-                                <Button onClick={() => openLink(item)} classname={cls.notPaidMessage}>Открыть</Button>
+                                <Button onClick={() => openLink(item)} classname={cls.notPaidMessage}>Открыть ( 35 р )</Button>
                                 {/*? !item.signer_id*/}
                                 {/*    ? <Link className={cls.link}*/}
                                 {/*        href={*/}
@@ -418,7 +419,6 @@ const PostsBlock = () => {
                                         }
                                     </div>
                                 }
-
                                 {item?.post_text?.length > 350 &&
                                     <div className={cls.coverBtnShow}>
                                         <Button classname={cls.showTextBtn}
@@ -445,9 +445,6 @@ const PostsBlock = () => {
                                 </div>
                             }
                         </div>
-                        {/*<div className={cls.coverPostBlock}>*/}
-
-                        {/*</div>*/}
                     </div>
                 ))
             }

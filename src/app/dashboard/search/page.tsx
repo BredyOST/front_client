@@ -71,7 +71,7 @@ async function SearchPage() {
                                 <СleanFilter/>
                             </div>
                         </div>
-                        <PostsForSearch/>
+                        <PostsForSearch categories={categories}/>
                     </div>
                 </div>
             </div>

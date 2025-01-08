@@ -23,6 +23,7 @@ export type createUserType = {
     phoneNumber:string
     password: string
     passwordCheck: string
+    refId: null | string
 }
 
 export const textErrors = {

@@ -16,7 +16,7 @@ export const SEARCH_PAGE_TITLE= 'Поиск клиентов';
 export const TERMS_PAGE_TITLE= 'Пользовательское соглашение сайта «клиенты.com»';
 
 export const navbarFirst:NavBar[] = [
-    {text: 'Тарифы', href:'/dashboard/price'},
+    {text: 'Кошелек', href:'/dashboard/price'},
     {text: 'Вопросы', href:'/dashboard/faq'},
     {text: 'Отзывы', href:'/dashboard/feedback'},
     // {text: 'контакты', href:'/dashboard/feedback'},

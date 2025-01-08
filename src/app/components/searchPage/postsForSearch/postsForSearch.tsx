@@ -1,13 +1,15 @@
 'use client';
-import React, {FC} from 'react';
+import React from 'react';
 import cls from './postsForSearch.module.scss'
-import Link from "next/link";
 import PostsBlock from "@/app/components/searchPage/postBlock/postsBlock";
 import {useAppSelector} from "@/app/redux/hooks/redux";
-import {navbarFirst} from "@/shared/constants/index.constants";
+import {filteredCategoriesType} from "@/app/redux/entities/categories/categoriesSchema";
 
+export interface IPostsForSearch {
+    categories?:filteredCategoriesType[],
+}
 
-const PostsForSearch = () => {
+const PostsForSearch = ({categories}:IPostsForSearch) => {
 
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
     const [accessFree, setAccessFree] = React.useState<Boolean>(false)
@@ -47,26 +49,27 @@ const PostsForSearch = () => {
         return null
     }
 
-    if (!accessFree && !accessPay) {
-        return  <div className={cls.active}>Активные подписки отсутствуют.
-            <Link className={cls.linkGo} href={'/dashboard/price'}> Оформить подписку</Link>
-            <Link className={cls.linkGo} href={'/dashboard/profile'}> Перейти в профиль</Link>
-        </div>
-    }
+    // if (!accessFree && !accessPay) {
+    //     return  <div className={cls.active}>Активные подписки отсутствуют.
+    //         <Link className={cls.linkGo} href={'/dashboard/price'}> Оформить подписку</Link>
+    //         <Link className={cls.linkGo} href={'/dashboard/profile'}> Перейти в профиль</Link>
+    //     </div>
+    // }
   
     return (
         <div className={cls.postsForSearch} >
             <div className={cls.looking}>
-                {infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length == 0) && (infoUser?.categoriesHasBought?.length == 0)) &&
-                    <div className={cls.coverBlockNoAccess}>
-                        <div className={cls.coverBtn}>
-                            <Link href={navbarFirst[0].href} className={cls.btn}>Посмотреть тарифы</Link>
-                        </div>
-                    </div>
-                }
-                {infoUser && stateAuth && (accessPay || accessFree) && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) || (infoUser?.categoriesHasBought?.length >= 1)) ?
-                    <PostsBlock/> : ''
-                }
+                {/*{infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length == 0) && (infoUser?.categoriesHasBought?.length == 0)) &&*/}
+                {/*    <div className={cls.coverBlockNoAccess}>*/}
+                {/*        <div className={cls.coverBtn}>*/}
+                {/*            <Link href={navbarFirst[0].href} className={cls.btn}>Посмотреть тарифы</Link>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*}*/}
+                {/*{infoUser && stateAuth && (accessPay || accessFree) && ((infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) || (infoUser?.categoriesHasBought?.length >= 1)) ?*/}
+                {/*    <PostsBlock/> : ''*/}
+                {/*}*/}
+                <PostsBlock categories={categories}/>
             </div>
         </div>
     );

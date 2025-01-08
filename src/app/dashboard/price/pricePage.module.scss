@@ -23,8 +23,8 @@
 
 .mainTitle{
   @extend .forMainTitle;
-  padding-bottom: mixins.rem(70);
-  @include mixins.adaptiveValue("padding-bottom",70,30,3,global.$tablet,global.$mobile);
+  padding-bottom: mixins.rem(50);
+  @include mixins.adaptiveValue("padding-bottom",60,30,3,global.$tablet,global.$mobile);
 }
 
 .coverLink{
@@ -32,7 +32,7 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  row-gap: mixins.rem(7);
+  //row-gap: mixins.rem(7);
 }
 
 .link {

@@ -130,7 +130,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
 
         }
     }, [categories, infoUser]);
-
+    console.log(categories);
     return (
         <div className={classNames(cls.Select, {}, [classname])}>
             { title &&
@@ -144,26 +144,35 @@ export const Select:FC<SelectProps> = React.memo((props) => {
                     value={chosenCategory?.name}
                     onChange ={(e:any) => selectOption(e)}
                 >
-                    {infoUser && !infoUser.endFreePeriod && infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length > 0 && infoUser?.categoriesFreePeriod?.map((item:categoriesBoughtType, index:number) => (
-                        currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime() &&
+                    {categories?.filter((item:filteredCategoriesType) => item.show)?.map((item:filteredCategoriesType, index:number) => (
                         <option
                             className={cls.option}
                             key={index}
-                            value={item.category}
+                            value={item.name}
                         >
-                            {item.category}
+                            {item.name}
                         </option>
                     ))}
-                    {infoUser && infoUser?.categoriesHasBought?.length > 0 && infoUser?.categoriesHasBought?.map((item:categoriesBoughtType, index:number) => (
-                        currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime() &&
-                        <option
-                            className={cls.option}
-                            key={index}
-                            value={item.category}
-                        >
-                            {item.category}
-                        </option>
-                    ))}
+                    {/*{infoUser && !infoUser.endFreePeriod && infoUser?.activatedFreePeriod && infoUser?.categoriesFreePeriod?.length > 0 && infoUser?.categoriesFreePeriod?.map((item:categoriesBoughtType, index:number) => (*/}
+                    {/*    currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime() &&*/}
+                    {/*    <option*/}
+                    {/*        className={cls.option}*/}
+                    {/*        key={index}*/}
+                    {/*        value={item.category}*/}
+                    {/*    >*/}
+                    {/*        {item.category}*/}
+                    {/*    </option>*/}
+                    {/*))}*/}
+                    {/*{infoUser && infoUser?.categoriesHasBought?.length > 0 && infoUser?.categoriesHasBought?.map((item:categoriesBoughtType, index:number) => (*/}
+                    {/*    currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime() &&*/}
+                    {/*    <option*/}
+                    {/*        className={cls.option}*/}
+                    {/*        key={index}*/}
+                    {/*        value={item.category}*/}
+                    {/*    >*/}
+                    {/*        {item.category}*/}
+                    {/*    </option>*/}
+                    {/*))}*/}
                 </select>
                 <ArrowSvg
                     className={cls.arrow}

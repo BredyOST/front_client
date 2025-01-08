@@ -112,18 +112,18 @@ $main_font_weight: 400; // жирность
 
 // для текста на 30px
 $second_font_family: "Montserrat"; // шрифт
-$second_font_size: 26; // размер
-$second_font_size_adaptive: 26; // размер адаптив
-$second_font_line-height: math.div(35,26); // межстрочный интервал
+$second_font_size: 20; // размер
+$second_font_size_adaptive: 20; // размер адаптив
+$second_font_line-height: math.div(35,20); // межстрочный интервал
 $second_font_weight: 400; // жирность
 $second_fontLetterSpacing: -0.35; //  Letter Spacing
 
 
 // для заголовков вначале страниц
 $Title_font_family: "Montserrat"; // шрифт
-$Title_font_size: 72; // размер
-$Title_font_size_adaptive: 72;// размер адаптив
-$Title_font_line-height: math.div(72,72); // межстрочный интервал
+$Title_font_size: 60; // размер
+$Title_font_size_adaptive: 60;// размер адаптив
+$Title_font_line-height: math.div(75,60); // межстрочный интервал
 $Title_font_weight: 700; // жирность
 $Title_color: rgb(0, 0, 0); // цвет текста
 $Title_fontLetterSpacing: -0.2; //  Letter Spacin

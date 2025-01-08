@@ -31,7 +31,6 @@ const BlockAddMoneyToWallet = () => {
 
             result = await addRequestToGetMoney({ price: value });
 
-
             if (result && result.data?.url) {
                 console.log(result.data?.url);
                 router.push(result.data?.url);
