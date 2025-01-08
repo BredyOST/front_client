@@ -9,6 +9,8 @@ import {pricesType} from "@/app/redux/entities/prices/pricesSchema";
 import {PRICE_PAGE_TITLE} from "@/shared/constants/index.constants";
 import {textLists} from "@/app/dashboard/price/constants/pricePageConst";
 import {TextListsType} from "@/shared/types/types";
+import {Input} from "@/ui/input/Input";
+import BlockAddMoneyToWallet from "@/app/components/pricePage/blockAddMoneyToWallet/blockAddMoneyToWallet";
 
 export const metadata = {
     title: 'Описание тарифов - клиенты.com',
@@ -53,6 +55,47 @@ async function PricePage() {
     const {prices, categories} = await getData();
     const filteredCategories:filteredCategoriesType[] = categories?.filter((item:filteredCategoriesType) => item?.show)
 
+    // return (
+    //     <div className={classNames(cls.pricePage, {},[] )} >
+    //         <div className='page__container'>
+    //             <div className={cls.cover}>
+    //                 <div className={cls.section}>
+    //                     <h1 className={cls.mainTitle}>{PRICE_PAGE_TITLE}</h1>
+    //                     <div className={cls.coverLink}>
+    //                         {textLists?.length >= 1  && textLists?.map((item:TextListsType) =>
+    //                             <div
+    //                                 key={item?.text}
+    //                                 className={cls.text}
+    //                             >
+    //                                 {item.text}
+    //                             </div>
+    //
+    //                         )}
+    //                     </div>
+    //                 </div>
+    //                 <div className={cls.categories}>
+    //                     <BlockBtnAdd/>
+    //                 </div>
+    //                 <div className={cls.prices}>
+    //                     {prices && prices.map((item:pricesType) => (
+    //                         <Cards
+    //                             item = {item}
+    //                             key={item.id}
+    //                             categories={categories}
+    //                         />
+    //                     ))}
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         <ListsCategory
+    //             categories={filteredCategories}
+    //         />
+    //     </div>
+    // );
+
+
+
+
     return (
         <div className={classNames(cls.pricePage, {},[] )} >
             <div className='page__container'>
@@ -67,22 +110,23 @@ async function PricePage() {
                                 >
                                     {item.text}
                                 </div>
-                                
+
                             )}
                         </div>
                     </div>
                     <div className={cls.categories}>
-                        <BlockBtnAdd/>
+                        {/*<BlockBtnAdd/>*/}
+                        <BlockAddMoneyToWallet/>
                     </div>
-                    <div className={cls.prices}>
-                        {prices && prices.map((item:pricesType) => (
-                            <Cards
-                                item = {item}
-                                key={item.id}
-                                categories={categories}
-                            />
-                        ))}
-                    </div>
+                    {/*<div className={cls.prices}>*/}
+                    {/*    {prices && prices.map((item:pricesType) => (*/}
+                    {/*        <Cards*/}
+                    {/*            item = {item}*/}
+                    {/*            key={item.id}*/}
+                    {/*            categories={categories}*/}
+                    {/*        />*/}
+                    {/*    ))}*/}
+                    {/*</div>*/}
                 </div>
             </div>
             <ListsCategory

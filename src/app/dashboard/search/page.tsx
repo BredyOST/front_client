@@ -8,6 +8,8 @@ import CityBlock from "@/app/components/searchPage/cityBlock/cityBlock";
 import PostsForSearch from "@/app/components/searchPage/postsForSearch/postsForSearch";
 import СleanFilter from "@/app/components/searchPage/cleanFilter/cleanFilter";
 import {SEARCH_PAGE_TITLE} from "@/shared/constants/index.constants";
+import {useAppSelector} from "@/app/redux/hooks/redux";
+import BlockWallet from "@/app/components/searchPage/blockWallet/blockWallet";
 
 export const metadata = {
     title: 'Поиск клиентов - клиенты.com',
@@ -34,7 +36,6 @@ async function getData() {
 }
 
 async function SearchPage() {
-
     const { categories } = await getData();
 
     return (
@@ -57,6 +58,7 @@ async function SearchPage() {
                                 classname={cls.tabs}
                                 title="Количество постов"
                             />
+                            <BlockWallet/>
                         </div>
                         <div className={cls.searchWords}>
                             <div className={cls.chooseFilter}>

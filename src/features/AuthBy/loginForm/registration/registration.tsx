@@ -7,7 +7,7 @@ import ShowSvg from "@/assets/svgs/show.svg";
 import HideSvg from "@/assets/svgs/hide.svg";
 import { Controller, SubmitHandler, useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
-import {useRegisterUserMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useRegisterUserMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import Loader from "@/ui/Loader/Loader";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";

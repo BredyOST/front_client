@@ -2,7 +2,7 @@ import {AuthSchema} from "@/app/redux/entities/auth/authSchema";
 import {StatePopupLoginSchema} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSliceSchema";
 import {StateAuthWindowSchema} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSchema";
 import {IdentificatorsWindowSchema} from "@/app/redux/entities/indentidicatorsWindow/identificatorsWindowSchema";
-import {requestApi} from '../entities/requestApi/requestApi.test'
+import {requestApi} from '../entities/requestApi/requestApi'
 import {NotificationsSchema} from "@/app/redux/entities/notifications/notificationsSchema";
 import {ICategoriesSchema} from "@/app/redux/entities/categories/categoriesSchema";
 import {IPriceSchema} from "@/app/redux/entities/prices/pricesSchema";

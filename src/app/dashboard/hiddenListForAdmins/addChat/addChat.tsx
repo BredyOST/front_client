@@ -10,7 +10,7 @@ import {
     useAddChatMutation,
     useAddGroupMutation, useGetChatMutation,
     useGetGroupsMutation
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import InputChange from "@/app/dashboard/hiddenListForAdmins/inputChange/inputChange";
 
 

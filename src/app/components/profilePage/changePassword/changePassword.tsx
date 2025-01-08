@@ -7,7 +7,7 @@ import ShowSvg from "@/assets/svgs/show.svg";
 import HideSvg from "@/assets/svgs/hide.svg";
 import {classNames, Mods} from "@/helpers/lib/classNames/className";
 import Loader from "@/ui/Loader/Loader";
-import {useChangePasswordInProfileMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useChangePasswordInProfileMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import {useAppDispatch} from "@/app/redux/hooks/redux";
 import {HidePassword} from "@/shared/types/types";

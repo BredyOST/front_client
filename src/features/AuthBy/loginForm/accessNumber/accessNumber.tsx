@@ -6,7 +6,7 @@ import cls from './accessNumber.module.scss'
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
 import Link from "next/link";
-import {useActivateTgMutation, useCallCodeMutation, useCallMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useActivateTgMutation, useCallCodeMutation, useCallMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";
 import Loader from "@/ui/Loader/Loader";
 import PhoneInput from "react-phone-number-input";

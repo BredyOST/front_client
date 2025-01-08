@@ -20,6 +20,7 @@ const BtnEnterBlock = React.memo(() => {
     const[pointerOnProfile, setPointerOnProfile] = React.useState<boolean>(false)
 
     const openLoginFormPopup:TypeForFunc<void, void> = React.useCallback(() => {
+        console.log(1)
         dispatch(changeStateLoginFormPopup(true));
     }, []);
     console.log(stateAuth)

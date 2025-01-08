@@ -7,7 +7,7 @@ import PhoneSvg from "@/assets/svgs/phone.svg";
 import {Input} from "@/ui/input/Input";
 import ShowSvg from "@/assets/svgs/show.svg";
 import HideSvg from '@/assets/svgs/hide.svg';
-import {useLoginInMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useLoginInMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";

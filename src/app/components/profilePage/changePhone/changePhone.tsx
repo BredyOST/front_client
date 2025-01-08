@@ -10,7 +10,7 @@ import {
     useActivateTgProfileMutation,
     useChangePhoneMutation, useGetPhoneCodeTgMutation, useGiveInfoMutation,
     useVerifyTgMutation
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import {parseCookies} from "nookies";
 import Loader from "@/ui/Loader/Loader";
 import {indicatorsNotifications} from "@/app/redux/entities/notifications/notificationsSlice";

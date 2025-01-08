@@ -2,7 +2,7 @@
 import {
     useAddNewFileMutation, useDeleteFileMutation,
     useGetFilesMutation,
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import React, {FC} from 'react';
 import cls from './uploadFiles.module.scss'
 import {classNames} from "@/helpers/lib/classNames/className";

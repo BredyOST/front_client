@@ -35,8 +35,8 @@
 .coverBtn{
   display: flex;
   align-items: center;
+  column-gap: mixins.rem(10);
 }
-
 
 .btn {
   background-color: transparent;
@@ -51,7 +51,6 @@
   padding-right: mixins.rem(18);
   @include mixins.adaptiveValue("padding-left",18,16,3,900,770);
   @include mixins.adaptiveValue("padding-right",18,16,3,900,770);
-
   @include mixins.adaptiveValue("padding-left",18,12,3,420,320);
   @include mixins.adaptiveValue("padding-right",18,12,3,420,320);
 }

@@ -11,7 +11,7 @@ import {
     useGetAllPostsMutation,
     useGetCategoriesMutation, useGetLogsMutation,
     useStartAddTutorsPostsMutation
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import {parseCookies} from "nookies";
 import Loader from "@/ui/Loader/Loader";
 

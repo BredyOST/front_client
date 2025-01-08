@@ -7,7 +7,10 @@ export const FAQ_PAGE_TITLE= 'Ответы на вопросы';
 export const FEEDBACK_PAGE_TITLE= 'Отзывы';
 
 export const POLITICS_PAGE_TITLE= 'Политика конфиденциальности';
-export const PRICE_PAGE_TITLE= 'Тарифы на подписку';
+
+// export const PRICE_PAGE_TITLE= 'Тарифы на подписку';
+export const PRICE_PAGE_TITLE= 'Пополнение кошелька';
+
 export const PROFILE_PAGE_TITLE= 'Профиль пользователя';
 export const SEARCH_PAGE_TITLE= 'Поиск клиентов';
 export const TERMS_PAGE_TITLE= 'Пользовательское соглашение сайта «клиенты.com»';

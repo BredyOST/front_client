@@ -7,7 +7,7 @@ import {
     useAddGroupMutation,
     useDeleteGroupMutation,
     useGetGroupsMutation, useUpdateGroupMutation
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 
 interface inputChangeProps {
     classname?: string;

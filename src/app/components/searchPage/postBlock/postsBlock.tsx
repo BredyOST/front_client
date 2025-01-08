@@ -1,15 +1,16 @@
 'use client';
 import React from 'react';
 import cls from './postsBlock.module.scss'
-import {Button} from "@/ui/Button/Button";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import {
-    useGetAllKeysRedisMutation, useGetPostsRedisMutation,
-} from "@/app/redux/entities/requestApi/requestApi.test";
+    useGetAllKeysRedisMutation, useGetPostsRedisMutation, useOpenLinkMutation,
+} from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/ui/Loader/Loader";
 import Link from "next/link";
 import VkSvg from "@/assets/svgs/vk.svg"
 import TgSvg from "@/assets/svgs/telegram.svg"
+import {useRouter} from "next/navigation";
+import {Button} from "@/ui/Button/Button";
 
 interface postsBlockProps {}
 
@@ -52,6 +53,9 @@ const PostsBlock = () => {
     let [redisPosts, {
         data: redisPostsRes, error: redisPostsError, isError: isErrorRedisPosts,  isLoading: loadingRedisPosts,
     }] = useGetPostsRedisMutation()
+    let [openThisLink, {
+        data: linkRes, error: linkResError, isError: isErrorLinkRes,  isLoading: loadingLinkRes,
+    }] = useOpenLinkMutation()
 
     const {chosenCategory, keyWords, keyCityWords, postsCount, social} = useAppSelector(state => state.searchParams)
     const {data:infoUser} = useAppSelector(state => state.auth)
@@ -59,6 +63,7 @@ const PostsBlock = () => {
     const [expandedPosts, setExpandedPosts] = React.useState<number[]>([]);
     const [page, setPage] = React.useState<number>(1);
     const [filteredPosts, setFilteredPosts] = React.useState<allLoadedPostType[]>([]);
+    const [changedBalance, setChangedBalance] = React.useState<boolean>(false);
 
     const applyFilters =(allLoadedPosts:allLoadedPostType[]) => {
 
@@ -147,7 +152,6 @@ const PostsBlock = () => {
         const postsPerPage = postsCount;
         const neededPosts = +currentPage * (postsPerPage + 3);
         const postsInKey = 300;
-        console.log(postsCount)
         // check, do we need more posts ?
         if (neededPosts >= filteredPosts.length - postsCount) {
             if(filteredPosts.length < postsInKey) return
@@ -288,11 +292,45 @@ const PostsBlock = () => {
 
     const pagesToDisplay = displayPages();
 
+
+    const router = useRouter();
+
+    const openLink = async (item:any) => {
+
+        let link = null
+
+        if(!item.signer_id) {
+            if( item.identification_post == 'vk') {
+                link =  `https://vk.com/wall${item.post_owner_id}_${item.post_id}`
+            } else if (item.identification_post == 'tg'){
+                link = `https://t.me/${item?.id_group}/${item?.post_id}`
+            } else if (item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ){
+                link = item?.id_group
+            }
+        } else if(item.signer_id) {
+            if( item.identification_post == 'vk') {
+                link = `https://vk.com/id${item.signer_id}`
+            } else if (item.identification_post == 'tg'){
+                link = `https://t.me/${item?.id_group}/${item?.post_id}`
+            } else if (item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ){
+                link = item?.id_group
+            }
+        }
+
+        let result:any = await openThisLink({salary: 35})
+        if(result?.data?.text == 'средства успешно списаны') {
+            setChangedBalance(true)
+            window.open(link, '_blank');
+        }
+    }
+
     return (
         <div className={cls.bodyInfo}>
-            {infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod &&
-            <div className={cls.textAttent}>В бесплатном тарифе доступны заявки старше 3 суток с текущей даты</div>
+            {
+                infoUser && infoUser?.categoriesFreePeriod?.length > 0 && !infoUser?.endFreePeriod &&
+                <div className={cls.textAttent}>В бесплатном тарифе доступны заявки старше 3 суток с текущей даты</div>
             }
+            {changedBalance && <div className={cls.attentionBalance}>Обновите страницу для отображения актуального баланса</div>}
             {postsToShow && postsToShow?.length > 0 &&
                 postsToShow.map((item: any) => (
                     <div
@@ -308,55 +346,53 @@ const PostsBlock = () => {
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
-                                {infoUser?.access?.[`${chosenCategory?.id}`].find((element: number) => element === item?.post_id)
-                                    ? !item.signer_id
-                                        ? <Link className={cls.link}
-                                            href={
-                                                item.identification_post == 'vk' ?
-                                                    `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:
-                                                    item.identification_post == 'tg' ?
-                                                        `https://t.me/${item?.id_group}/${item?.post_id}`:
-                                                        item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
-                                                            item?.id_group : ''
-                                            }
-                                            target="_blank">
-                                            <div className={cls.rightLinkSvg}>
-                                                {item?.photo_100_group && <img className={cls.imageGroup} src={item?.photo_100_group} alt=""/>}
-                                                <div className={cls.nameGroup}>
-                                                    {item.name_group}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                        : <Link className={cls.link}
-                                            href={
-                                                item.identification_post == 'vk' ?
-                                                    `https://vk.com/id${item.signer_id}`:
-                                                    item.identification_post == 'tg' ?
-                                                        `https://t.me/${item?.id_group}/${item?.post_id}`:
-                                                        item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?
-                                                            item?.id_group : ''
-                                            }
-                                            target="_blank">
-                                            <div className={cls.rightLinkSvg}>
-                                                {item.photo_100_user && <img className={cls.image} src={item.photo_100_user} alt=""/>}
-                                                <div className={cls.nameGroup}>
-                                                    {item.first_name_user || item.last_name_user &&
-                                                        <div className={cls.nameBlock}>
-                                                            <div>
-                                                                {item.first_name_user}
-                                                            </div>
-                                                            <div>
-                                                                {item.last_name_user}
-                                                            </div>
-                                                        </div>}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    : <Button className={cls.notPaidMessage}>Купить</Button>
-                                }
+                                <Button onClick={() => openLink(item)} classname={cls.notPaidMessage}>Открыть</Button>
+                                {/*? !item.signer_id*/}
+                                {/*    ? <Link className={cls.link}*/}
+                                {/*        href={*/}
+                                {/*            item.identification_post == 'vk' ?*/}
+                                {/*                `https://vk.com/wall${item.post_owner_id}_${item.post_id}`:*/}
+                                {/*                item.identification_post == 'tg' ?*/}
+                                {/*                    `https://t.me/${item?.id_group}/${item?.post_id}`:*/}
+                                {/*                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?*/}
+                                {/*                        item?.id_group : ''*/}
+                                {/*        }*/}
+                                {/*        target="_blank">*/}
+                                {/*        <div className={cls.rightLinkSvg}>*/}
+                                {/*            {item?.photo_100_group && <img className={cls.imageGroup} src={item?.photo_100_group} alt=""/>}*/}
+                                {/*            <div className={cls.nameGroup}>*/}
+                                {/*                {item.name_group}*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*    </Link>*/}
+                                {/*    : <Link className={cls.link}*/}
+                                {/*        href={*/}
+                                {/*            item.identification_post == 'vk' ?*/}
+                                {/*                `https://vk.com/id${item.signer_id}`:*/}
+                                {/*                item.identification_post == 'tg' ?*/}
+                                {/*                    `https://t.me/${item?.id_group}/${item?.post_id}`:*/}
+                                {/*                    item.identification_post == 'FL' || item.identification_post == 'freelancer.ru' ?*/}
+                                {/*                        item?.id_group : ''*/}
+                                {/*        }*/}
+                                {/*        target="_blank">*/}
+                                {/*        <div className={cls.rightLinkSvg}>*/}
+                                {/*            {item.photo_100_user && <img className={cls.image} src={item.photo_100_user} alt=""/>}*/}
+                                {/*            <div className={cls.nameGroup}>*/}
+                                {/*                {item.first_name_user || item.last_name_user &&*/}
+                                {/*                    <div className={cls.nameBlock}>*/}
+                                {/*                        <div>*/}
+                                {/*                            {item.first_name_user}*/}
+                                {/*                        </div>*/}
+                                {/*                        <div>*/}
+                                {/*                            {item.last_name_user}*/}
+                                {/*                        </div>*/}
+                                {/*                    </div>}*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*    </Link>*/}
                             </div>
                             <div className={cls.blockText}>
-                                {infoUser?.access?.[`${chosenCategory?.id}`].find((element: number) => element === item?.post_id)
+                                {infoUser?.access?.[`${chosenCategory?.id}`]?.find((element: number) => element === item?.post_id)
                                     ? <Link className={cls.linkText}
                                         href={
                                             item.identification_post == 'vk' ?

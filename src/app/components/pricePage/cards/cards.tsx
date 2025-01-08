@@ -8,7 +8,7 @@ import {
     useGetFreePeriodMutation,
     useGetMeMutation,
     usePaymentMutation,
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/ui/Loader/Loader";
 import {statePopupSliceActions} from "@/app/redux/entities/popups/stateLoginPopupSlice/stateLoginPopupSlice";
 import {authSliceActions} from "@/app/redux/entities/auth/authSlice";

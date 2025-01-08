@@ -8,7 +8,7 @@ import Loader from "@/ui/Loader/Loader";
 import {
     useCreateCategoryMutation,
     useGetCategoriesMutation,
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import {parseCookies} from "nookies";
 import InputCategory from "@/app/dashboard/hiddenListForAdmins/inputCategory/inputCategory";
 

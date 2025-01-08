@@ -285,6 +285,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
+        addPayment: builder.mutation<any, any>({
+            query: (params) => ({
+                url: '/categories/addPayment',
+                method: 'POST',
+                body: params,
+            }),
+        }),
         getFreePeriod: builder.mutation<any, any>({
             query: (params) => ({
                 url: '/categories/freePeriod',
@@ -495,7 +502,13 @@ export const requestApi = createApi({
                 body: params,
             }),
         }),
-
+        openLink: builder.mutation({
+            query: (params) => ({
+                url: '/users/open/link',
+                method: 'POST',
+                body: params,
+            }),
+        })
     }),
 });
 
@@ -543,5 +556,7 @@ export const {
     useGetPhoneCodeTgMutation,
     useActivateTgProfileMutation,
     useGiveInfoMutation,
-    useNumberTgForgetPasswordMutation
+    useNumberTgForgetPasswordMutation,
+    useAddPaymentMutation,
+    useOpenLinkMutation
 } = requestApi;

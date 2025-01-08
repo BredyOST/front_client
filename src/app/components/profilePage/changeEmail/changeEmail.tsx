@@ -5,7 +5,7 @@ import VerifySvg from "@/assets/svgs/checkmarkc.svg";
 import NotVerifySvg from "@/assets/svgs/notVefify.svg";
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
-import {useChangeEmailMutation, useCodeForEmailMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useChangeEmailMutation, useCodeForEmailMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import Loader from "@/ui/Loader/Loader";
 

@@ -7,7 +7,7 @@ import Logotype from "@/app/components/header/logotype/logotype";
 import {AppLink} from "@/ui/appLink/appLink";
 import {useAppDispatch, useAppSelector} from "@/app/redux/hooks/redux";
 import LoginModal from "@/features/AuthBy/loginModal/loginModal";
-import {useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useGetMeMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {authSliceActions} from "@/app/redux/entities/auth/authSlice";
 import {BurgerButton} from "@/ui/BurgerButton/burgerButton";
 import Notification from "@/widgets/notification/notification";
@@ -43,6 +43,7 @@ const Header= React.memo(({classname}: HeaderProps) => {
         if (cookies && cookies._z) {
             getInfoUser(cookies).then((result) => {
                 if (result && 'data' in result && result.data) {
+                    console.log(result)
                     dispatch(addInfoUser(result.data));
                     dispatch(addMainAdminRole(result.data.isMainAdmin));
                     dispatch(addAdminRole(result.data.isAdmin));

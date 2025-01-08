@@ -1,0 +1,26 @@
+@use "sass:math";
+@use '../../../../shared/styles/variable/global';
+@use '../../../../shared/styles/variable/globalIndex';
+@use "../../../../shared/styles/mixins";
+@use "../../../../shared/styles/variable/common";
+
+
+.wrapper {
+  align-items: center;
+  justify-content: center;
+  column-gap: mixins.rem(10);
+  display: inline-flex;
+  color: #000000;
+  border: mixins.rem(1) solid #0e0e0e;
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  padding-right: mixins.rem(10);
+  padding-left: mixins.rem(10);
+  border-radius: mixins.rem(10);
+  font-family: globalIndex.$Title_font_family;
+  line-height: globalIndex.$Search_font_line-height;
+  font-weight: globalIndex.$Search_font_weight;
+  @include mixins.adaptiveValue("font-size",14,12,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  max-width: mixins.rem(250);
+  background-color: #7ecfaa;
+}

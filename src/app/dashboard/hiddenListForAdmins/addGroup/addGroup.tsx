@@ -6,7 +6,7 @@ import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
 import Loader from "@/ui/Loader/Loader";
 import {parseCookies} from "nookies";
-import {useAddGroupMutation, useGetGroupsMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useAddGroupMutation, useGetGroupsMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {InputChange} from "@/app/dashboard/hiddenListForAdmins/inputChange/inputChange";
 
 interface addGroupProps {

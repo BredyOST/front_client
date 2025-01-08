@@ -3,7 +3,7 @@ import React, {ChangeEvent} from 'react';
 import cls from './changeName.module.scss'
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
-import {useChangeNameAndCardMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useChangeNameAndCardMutation} from "@/app/redux/entities/requestApi/requestApi";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import Loader from "@/ui/Loader/Loader";
 
@@ -15,7 +15,6 @@ const ChangeName = () => {
     }] = useChangeNameAndCardMutation()
 
     const {data:infoUser} = useAppSelector(state => state.auth)
-
     const [profileName, setProfileName] = React.useState<string>()
 
     const addName = (e:ChangeEvent<HTMLInputElement>) => {

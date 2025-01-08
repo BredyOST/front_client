@@ -6,10 +6,8 @@ import PostsBlock from "@/app/components/searchPage/postBlock/postsBlock";
 import {useAppSelector} from "@/app/redux/hooks/redux";
 import {navbarFirst} from "@/shared/constants/index.constants";
 
-interface postsForSearchProps {}
 
-const PostsForSearch:FC<postsForSearchProps> = (props) => {
-    const {} = props;
+const PostsForSearch = () => {
 
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
     const [accessFree, setAccessFree] = React.useState<Boolean>(false)

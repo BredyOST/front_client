@@ -10,7 +10,7 @@ import {
     useCallMutation,
     useChangePasswordMutation,
     useNumberTgForgetPasswordMutation
-} from "@/app/redux/entities/requestApi/requestApi.test";
+} from "@/app/redux/entities/requestApi/requestApi";
 import {stateAuthWindowSliceActions} from "@/app/redux/entities/stateAuthWindowSlice/stateAuthWindowSlice";
 import PhoneInput from "react-phone-number-input";
 import PhoneSvg from "@/assets/svgs/phone.svg";

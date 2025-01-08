@@ -6,7 +6,7 @@ import Loader from '@/ui/Loader/Loader';
 import {useAppSelector } from '@/app/redux/hooks/redux';
 import { useShowMessageAfterRequest } from '@/shared/hooks/hooks';
 import { infoForMassage, MessageForContactUs } from '@/shared/types/types';
-import { useSendMassageMutation } from '@/app/redux/entities/requestApi/requestApi.test';
+import { useSendMassageMutation } from '@/app/redux/entities/requestApi/requestApi';
 
 const ContactUs = () => {
     const [message, setMessage] = React.useState<MessageForContactUs>({

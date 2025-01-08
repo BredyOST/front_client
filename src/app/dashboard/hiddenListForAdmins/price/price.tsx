@@ -4,7 +4,7 @@ import cls from './price.module.scss'
 import {classNames} from "@/helpers/lib/classNames/className";
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
-import {useAddNewPriceBlockMutation, useGetAllPricesMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useAddNewPriceBlockMutation, useGetAllPricesMutation} from "@/app/redux/entities/requestApi/requestApi";
 import Loader from "@/ui/Loader/Loader";
 import {parseCookies} from "nookies";
 import InputPrice from "@/app/dashboard/hiddenListForAdmins/inputPrice/inputPrice";

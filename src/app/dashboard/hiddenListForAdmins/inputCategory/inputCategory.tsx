@@ -4,7 +4,7 @@ import cls from './inputCategory.module.scss'
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
 import {classNames} from "@/helpers/lib/classNames/className";
-import {useDeleteCategoryMutation, useUpdateCategoryMutation} from "@/app/redux/entities/requestApi/requestApi.test";
+import {useDeleteCategoryMutation, useUpdateCategoryMutation} from "@/app/redux/entities/requestApi/requestApi";
 
 interface inputCategoryProps {
     classname?: string;
