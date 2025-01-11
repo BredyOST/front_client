@@ -75,6 +75,7 @@ const PostsBlock = ({categories}:IPostsBlock) => {
     const [filteredPosts, setFilteredPosts] = React.useState<allLoadedPostType[]>([]);
     const [changedBalance, setChangedBalance] = React.useState<boolean>(false);
     const [price, setPrice] = React.useState<number>(25)
+    const refBlock = React.useRef<HTMLDivElement>(null);
 
     const applyFilters =(allLoadedPosts:allLoadedPostType[]) => {
 
@@ -338,6 +339,12 @@ const PostsBlock = ({categories}:IPostsBlock) => {
         setPrice(category?.salary || 25)
     },[chosenCategory])
 
+
+    const handleCopy = (event: React.ClipboardEvent<HTMLDivElement>) => {
+        event.preventDefault();
+    };
+
+
     return (
         <div className={cls.bodyInfo}>
             {
@@ -348,15 +355,16 @@ const PostsBlock = ({categories}:IPostsBlock) => {
             {postsToShow && postsToShow?.length > 0 &&
                 postsToShow.map((item: any) => (
                     <div
+                        onCopy={handleCopy}
                         key={item.id}
                         className={cls.rows}>
                         <div className={cls.mainBlock}>
                             <div>{getFormattedDate(item.post_date_publish)}</div>
                             <div>{getFormattedTime(item.post_date_publish)}</div>
-                            {item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}
-                            {item.identification_post == 'tg' && <div className={cls.identificatorTg}><TgSvg/></div>}
-                            {item.identification_post == 'FL' && <div className={cls.identificatorFl}><div className={cls.flRu}>FL</div></div>}
-                            {item.identification_post == 'freelancer.ru' && <div className={cls.identificatorFR}><div className={cls.flRu}>FR</div></div>}
+                            {/*{item.identification_post == 'vk' && <div className={cls.identificator}><VkSvg/></div>}*/}
+                            {/*{item.identification_post == 'tg' && <div className={cls.identificatorTg}><TgSvg/></div>}*/}
+                            {/*{item.identification_post == 'FL' && <div className={cls.identificatorFl}><div className={cls.flRu}>FL</div></div>}*/}
+                            {/*{item.identification_post == 'freelancer.ru' && <div className={cls.identificatorFR}><div className={cls.flRu}>FR</div></div>}*/}
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
