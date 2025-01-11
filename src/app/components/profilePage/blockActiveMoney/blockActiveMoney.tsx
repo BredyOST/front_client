@@ -6,6 +6,7 @@ import {useAddPaymentMutation} from "@/app/redux/entities/requestApi/requestApi"
 import {Button} from "@/ui/Button/Button";
 import {Input} from "@/ui/input/Input";
 import {redirect, useRouter} from "next/navigation";
+import Link from "next/link";
 
 const BlockActiveMoney = () => {
 
@@ -35,20 +36,7 @@ const BlockActiveMoney = () => {
                 <div className={cls.text}>Кошелек</div>
             </div>
             <div className={cls.coverBtn}>
-                <div>{infoUser?.wallet ?? 0} р</div>
-                <Input
-                    classForInput={cls.input}
-                    classname={cls.inputRelative}
-                    placeholder='введите сумму пополнения'
-                    value={value}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
-                />
-                <Button
-                    type='submit'
-                    classname={cls.btn}
-                    onClick={addMoney}
-                >
-                    Пополнить</Button>
+                <Link className={cls.btn} href="/dashboard/price">пополнить</Link>
             </div>
         </div>
     );

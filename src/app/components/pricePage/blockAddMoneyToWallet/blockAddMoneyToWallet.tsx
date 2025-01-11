@@ -19,17 +19,16 @@ const BlockAddMoneyToWallet = () => {
     const {stateAuth} = useAppSelector(state => state.auth)
     const { changeStateLoginFormPopup } = statePopupSliceActions;
 
-
     const addMoney = async () => {
-        let result:any = null;
-        try {
-            // if(+value < 500) {
-            //     result = await addRequestToGetMoney({ price: 500 });
-            // } else {
-            //     result = await addRequestToGetMoney({ price: value });
-            // }
 
-            result = await addRequestToGetMoney({ price: value });
+        let result:any = null;
+
+        try {
+            if(+value < 500) {
+                result = await addRequestToGetMoney({ price: 500 });
+            } else {
+                result = await addRequestToGetMoney({ price: value });
+            }
 
             if (result && result.data?.url) {
                 console.log(result.data?.url);

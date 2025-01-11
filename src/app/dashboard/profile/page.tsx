@@ -9,6 +9,7 @@ import {AppLink} from "@/ui/appLink/appLink";
 import LogOutBtn from "@/app/components/profilePage/logOutBtn/logOutBtn";
 import {PROFILE_PAGE_TITLE} from "@/shared/constants/index.constants";
 import BlockActiveMoney from "@/app/components/profilePage/blockActiveMoney/blockActiveMoney";
+import RefLink from "@/app/components/profilePage/refLink/refLink";
 
 export const metadata = {
     title: 'Профиль пользователя - клиенты.com',
@@ -40,12 +41,13 @@ const ProfilePage = () => {
                         <ChangeName/>
                         <ChangePhone/>
                         <ChangeEmail/>
-                        <BlockActiveMoney/>
                         <ChangePassword/>
-                        <div className={cls.categoriesCover}>
-                            <h3 className={cls.subTitle}>Активные подписки</h3>
-                            <BlockCategory/>
-                        </div>
+                        <BlockActiveMoney/>
+                        <RefLink/>
+                        {/*<div className={cls.categoriesCover}>*/}
+                        {/*    <h3 className={cls.subTitle}>Активные подписки</h3>*/}
+                        {/*    <BlockCategory/>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

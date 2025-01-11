@@ -1,5 +1,5 @@
 'use client';
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import cls from './registration.module.scss'
 import {Input} from "@/ui/input/Input";
 import {Button} from "@/ui/Button/Button";
@@ -23,13 +23,13 @@ import {
     passwordHide, textErrors
 } from "@/features/helpersAuth/helpersRegistration";
 import {TypeForFunc} from "@/shared/types/types";
-import {useParams, useRouter} from "next/navigation";
-
 
 interface RegistrationProps {}
 
 const Registration:FC<RegistrationProps> = React.memo(() => {
     const dispatch = useAppDispatch();
+
+    const [partnerId, setPartnerId] = useState<string | null>(null);
 
     let [registerIn, {
         data: requestRegister, error: errorRegister, isError: isErrorRegister,  isLoading: loadingRegister,
@@ -157,6 +157,7 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
             >
                 Регистрация учетной записи
             </h2>
+            <p> {params.get('partnerId') && <div className={cls.refTitile}>Вы регистриуретесь по реферальной программе</div>}</p>
             <div className={cls.inputsForm}>
                 <div className={cls.inputsForm}>
                     <div>
@@ -169,7 +170,7 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
                             name="phoneNumberRegistration"
                             control={control}
                             defaultValue=""
-                            render={({ field }: { field: any}) => (
+                            render={({field}: { field: any }) => (
                                 <PhoneInput
                                     className={cls.input}
                                     international
@@ -209,20 +210,22 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
                         >
                             {
                                 passwordHideButton.enteredRegisterText
-                            && (
-                                <Button
-                                    type="button"
-                                    classname={cls.hideButton}
-                                    name='textRegistrationPasswordMain'
-                                    addNametoFunction={true}
-                                    onClick={showAndHideTextPassword}
-                                >
-                                    {!passwordHideButton.registerBtnShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
-                                </Button>
-                            )
+                                && (
+                                    <Button
+                                        type="button"
+                                        classname={cls.hideButton}
+                                        name='textRegistrationPasswordMain'
+                                        addNametoFunction={true}
+                                        onClick={showAndHideTextPassword}
+                                    >
+                                        {!passwordHideButton.registerBtnShowOrHide ? <ShowSvg className={cls.showSvg}/> :
+                                            <HideSvg className={cls.hideSvg}/>}
+                                    </Button>
+                                )
                             }
                             <div className={cls.error}>
-                                {errors.passwordRegistration && errors.passwordRegistration.type === 'minLength' && <div>{errors.passwordRegistration.message}</div>}
+                                {errors.passwordRegistration && errors.passwordRegistration.type === 'minLength' &&
+                                    <div>{errors.passwordRegistration.message}</div>}
                             </div>
                         </Input>
                         <Input
@@ -239,17 +242,18 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
                         >
                             {
                                 passwordHideButton.enteredRegisterCheckText
-                            && (
-                                <Button
-                                    type="button"
-                                    name='textRegistrationPassword'
-                                    addNametoFunction={true}
-                                    classname={cls.hideButton}
-                                    onClick={showAndHideTextTwoPassword}
-                                >
-                                    {!passwordHideButton.registerBtnCheckShowOrHide ? <ShowSvg className={cls.showSvg} /> : <HideSvg className={cls.hideSvg} />}
-                                </Button>
-                            )
+                                && (
+                                    <Button
+                                        type="button"
+                                        name='textRegistrationPassword'
+                                        addNametoFunction={true}
+                                        classname={cls.hideButton}
+                                        onClick={showAndHideTextTwoPassword}
+                                    >
+                                        {!passwordHideButton.registerBtnCheckShowOrHide ?
+                                            <ShowSvg className={cls.showSvg}/> : <HideSvg className={cls.hideSvg}/>}
+                                    </Button>
+                                )
                             }
                             <div className={cls.error}>
                                 {comparePassword === false && <div>Пароли не совпадают</div>}
@@ -262,7 +266,8 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
                             onChange={handleCheckboxChange}
                         />
                         <div className={cls.textInside}>
-                            я соглашаюсь с <Link className={cls.linkAcess} href={'/dashboard/politics'} target={'_blank'}>политикой конфидициальности</Link>
+                            я соглашаюсь с <Link className={cls.linkAcess} href={'/dashboard/politics'}
+                                                 target={'_blank'}>политикой конфидициальности</Link>
                         </div>
                     </div>
                 </div>

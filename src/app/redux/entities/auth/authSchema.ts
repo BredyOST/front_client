@@ -65,6 +65,7 @@ export type User = {
 }
 
 export type UserAuthorization = {
+    id:number
     forChangeEmail: string
     phoneNumber: string
     forChangePhoneNumber: string
@@ -79,10 +80,12 @@ export type UserAuthorization = {
     activatedFreePeriod: boolean
     endFreePeriod: boolean
     wallet:number
+    walletRef: number
     access: AccessPosts
     activatedFreePeriodNotification: boolean
     endFreePeriodNotification: boolean
-    ip: string
+    ip: string,
+    childrenRefId: number[]
     lastVisit: null | Date
     activationTgNumber: string
     activationCodeForChangePassword: string

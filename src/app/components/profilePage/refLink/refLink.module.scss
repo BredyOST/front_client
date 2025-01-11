@@ -1,0 +1,150 @@
+@use "sass:math";
+@use '../../../../shared/styles/variable/global';
+@use '../../../../shared/styles/variable/globalIndex';
+@use "../../../../shared/styles/mixins";
+@use "../../../../shared/styles/variable/common";
+
+
+.block {
+  @extend .blockMain;
+}
+
+.blockInfo{
+  @extend .blockInfoMain;
+}
+.textTwo{
+  color: #b46145;
+  font-size: mixins.rem(16);
+  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,14,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  line-height: math.div(22,16)
+}
+
+.text{
+  color: #b46145;
+  font-size: mixins.rem(globalIndex.$main_font_size);
+  font-weight: 600;
+  line-height: globalIndex.$main_font_line-height;
+  @include mixins.adaptiveValue("font-size",globalIndex.$main_font_size,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end)
+}
+
+.textVerify{
+  display: flex;
+  align-items: flex-end;
+  font-size: mixins.rem(14);
+  line-height: math.div(20,14);
+  column-gap: mixins.rem(5);
+  white-space: nowrap;
+}
+
+
+.linkCover{
+  @extend .linkCoverMain;
+  position: relative;
+}
+
+.inputAdd {
+  display: flex;
+  align-items: center;
+}
+
+.input{
+  @extend .input;
+}
+
+.inputRelative{
+  @extend .inputRelativeMain;
+}
+
+.coverBtn{
+  display: flex;
+  align-items: center;
+  @extend .linkCoverMain;
+}
+
+.btn {
+  @extend .btn;
+  @extend .widthAndPaddingBtn;
+  white-space: nowrap;
+
+  @media(min-width: mixins.em(global.$mobile)) {
+    padding-left: mixins.rem(15);
+    padding-right: mixins.rem(15);
+    padding-bottom: mixins.rem(5);
+    padding-top: mixins.rem(5);
+  }
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    min-width: 100%;
+
+  }
+  @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,1250,1050);
+}
+
+.coverNumBtn{
+  padding-top: mixins.rem(5);
+  padding-bottom: mixins.rem(5);
+  display: flex;
+  column-gap: mixins.rem(10);
+  align-items: center;
+  min-height: mixins.rem(55);
+
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+    row-gap: mixins.rem(10);
+  }
+}
+
+.linkCoverCodes{
+  display: flex;
+  flex-direction: column;
+  row-gap: mixins.rem(10);
+}
+
+.linkCoverCode{
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: start;
+  row-gap: mixins.rem(5);
+  column-gap: mixins.rem(10);
+  @media(max-width: mixins.em(global.$mobile)) {
+    flex-direction: column;
+    row-gap: mixins.rem(10);
+  }
+}
+
+.notVerifySvg{
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  border-radius: 50%;
+}
+
+.verifySvg{
+  width: mixins.rem(20);
+  height: mixins.rem(20);
+  fill: #79b93e;
+  border-radius: 50%;
+}
+
+.headerCover{
+  display: flex;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.textThree{
+  font-size: mixins.rem(16);
+  line-height: math.div(22,16);
+}
+
+.error {
+  @extend .error;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(mixins.rem(10), 100%);
+}

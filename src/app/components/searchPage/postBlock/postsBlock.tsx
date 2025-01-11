@@ -49,6 +49,12 @@ export interface IPostsBlock {
     categories?:filteredCategoriesType[],
 }
 
+
+export const price = {
+
+}
+
+
 const PostsBlock = ({categories}:IPostsBlock) => {
 
     let [keysRedis, {
@@ -68,6 +74,7 @@ const PostsBlock = ({categories}:IPostsBlock) => {
     const [page, setPage] = React.useState<number>(1);
     const [filteredPosts, setFilteredPosts] = React.useState<allLoadedPostType[]>([]);
     const [changedBalance, setChangedBalance] = React.useState<boolean>(false);
+    const [price, setPrice] = React.useState<number>(25)
 
     const applyFilters =(allLoadedPosts:allLoadedPostType[]) => {
 
@@ -325,6 +332,12 @@ const PostsBlock = ({categories}:IPostsBlock) => {
         }
     }
 
+
+    React.useEffect(() => {
+        const category = categories?.find((item) => item.id == chosenCategory?.id)
+        setPrice(category?.salary || 25)
+    },[chosenCategory])
+
     return (
         <div className={cls.bodyInfo}>
             {
@@ -347,7 +360,7 @@ const PostsBlock = ({categories}:IPostsBlock) => {
                         </div>
                         <div className={cls.secondBlock}>
                             <div className={cls.blockUser}>
-                                <Button onClick={() => openLink(item)} classname={cls.notPaidMessage}>Открыть ( 35 р )</Button>
+                                <Button onClick={() => openLink(item)} classname={cls.notPaidMessage}>Открыть ( {price} р )</Button>
                                 {/*? !item.signer_id*/}
                                 {/*    ? <Link className={cls.link}*/}
                                 {/*        href={*/}

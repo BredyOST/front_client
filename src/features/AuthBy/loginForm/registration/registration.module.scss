@@ -10,6 +10,12 @@
   row-gap: mixins.rem(25);
 }
 
+.refTitile {
+  font-size: mixins.rem(14);
+  color: #2ba296;
+  font-weight: 600;
+}
+
 .title {
   @extend .popupTitle;
   position: relative;

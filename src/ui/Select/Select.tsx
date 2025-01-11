@@ -57,80 +57,26 @@ export const Select:FC<SelectProps> = React.memo((props) => {
     };
 
     React.useEffect(() => {
+
         if (!categories || !infoUser) return;
-        if (infoUser && stateAuth && ((!infoUser?.activatedFreePeriod && !infoUser?.categoriesFreePeriod?.[0]) && (!infoUser?.categoriesHasBought?.[0]))) {
-            return
-        }
         const local = localStorage.getItem('_sel_category');
 
-        let savedCategory:objSelectType | null = null
-        let checkAccess:categoriesBoughtType | null = null
-        let checkAccessBuy:categoriesBoughtType | null = null
-
         if (local !== null) {
-            savedCategory = JSON.parse(local);
-        }
-
-        if (savedCategory && savedCategory?.id) {
-            const findCategoriesFree = infoUser?.categoriesFreePeriod?.find((item:categoriesBoughtType) => item?.id == savedCategory?.id);
-            const findCategoriesBuy = infoUser?.categoriesHasBought?.find((item:categoriesBoughtType) => item?.id == savedCategory?.id);
-
-            if (currenDate && !infoUser?.endFreePeriod && findCategoriesFree?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategoriesFree?.purchaseEndDate).getTime())) {
-                checkAccessBuy = findCategoriesFree;
-            }
-            if (currenDate && findCategoriesBuy?.purchaseEndDate && (currenDate?.getTime() <= new Date(findCategoriesBuy?.purchaseEndDate).getTime())) {
-                checkAccessBuy = findCategoriesBuy;
-            }
-            if (checkAccess || checkAccessBuy) {
-                dispatch(addCategoryChosen(savedCategory))
-            }
+            const savedCategory:objSelectType = JSON.parse(local);
+            dispatch(addCategoryChosen(savedCategory))
         } else {
-            if (infoUser && infoUser?.activatedFreePeriod && !infoUser.endFreePeriod && infoUser?.categoriesFreePeriod?.length >= 1) {
-
-                for (let item of infoUser?.categoriesFreePeriod) {
-                    if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                        let selectedCategory = null
-                        if(categories && categories?.length > 1) {
-                            selectedCategory =  categories?.find((elem:filteredCategoriesType) => elem?.id == item.id);
-                        }
-                        if (selectedCategory) {
-                            const obj:objSelectType = {
-                                id: selectedCategory?.id,
-                                name: selectedCategory?.name,
-                                positive: selectedCategory?.positiveWords,
-                                negative: selectedCategory?.negativeWords,
-                            };
-                            localStorage.setItem('_sel_category', JSON.stringify(obj));
-                            dispatch(addCategoryChosen(obj));
-                            break;
-                        }
-                    }
-                }
-            } else if (infoUser && infoUser?.categoriesHasBought?.length >= 1) {
-                for (let item of infoUser?.categoriesHasBought) {
-                    if (currenDate.getTime() <= new Date(item?.purchaseEndDate).getTime()) {
-                        let selectedCategory = null
-                        if(categories && categories?.length > 1) {
-                            selectedCategory = categories?.find((elem:filteredCategoriesType) => elem?.id == item.id);
-                        }
-                        if (selectedCategory) {
-                            const obj = {
-                                id: selectedCategory?.id,
-                                name: selectedCategory?.name,
-                                positive: selectedCategory?.positiveWords,
-                                negative: selectedCategory?.negativeWords,
-                            };
-                            localStorage.setItem('_sel_category', JSON.stringify(obj));
-                            dispatch(addCategoryChosen(obj));
-                            break;
-                        }
-                    }
-                }
-            }
-
+            const selectedCategory =  categories?.[0]
+            const obj:objSelectType = {
+                id: selectedCategory?.id,
+                name: selectedCategory?.name,
+                positive: selectedCategory?.positiveWords,
+                negative: selectedCategory?.negativeWords,
+            };
+            localStorage.setItem('_sel_category', JSON.stringify(obj));
+            dispatch(addCategoryChosen(obj));
         }
     }, [categories, infoUser]);
-    console.log(categories);
+
     return (
         <div className={classNames(cls.Select, {}, [classname])}>
             { title &&
