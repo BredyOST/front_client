@@ -218,8 +218,8 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
                                         addNametoFunction={true}
                                         onClick={showAndHideTextPassword}
                                     >
-                                        {!passwordHideButton.registerBtnShowOrHide ? <ShowSvg className={cls.showSvg}/> :
-                                            <HideSvg className={cls.hideSvg}/>}
+                                        {!passwordHideButton.registerBtnShowOrHide ? <ShowSvg className={cls.showSvg}/>
+                                            : <HideSvg className={cls.hideSvg}/>}
                                     </Button>
                                 )
                             }
@@ -267,7 +267,7 @@ const Registration:FC<RegistrationProps> = React.memo(() => {
                         />
                         <div className={cls.textInside}>
                             я соглашаюсь с <Link className={cls.linkAcess} href={'/dashboard/politics'}
-                                                 target={'_blank'}>политикой конфидициальности</Link>
+                                target={'_blank'}>политикой конфидициальности</Link>
                         </div>
                     </div>
                 </div>
