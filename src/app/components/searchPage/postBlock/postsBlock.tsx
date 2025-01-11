@@ -325,7 +325,7 @@ const PostsBlock = ({categories}:IPostsBlock) => {
             }
         }
 
-        let result:any = await openThisLink({salary: 35})
+        let result:any = await openThisLink({salary: 25})
         if(result?.data?.text == 'средства успешно списаны') {
             setChangedBalance(true)
             window.open(link, '_blank');
