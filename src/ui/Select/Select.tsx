@@ -29,6 +29,7 @@ export const Select:FC<SelectProps> = React.memo((props) => {
         title,
         categories,
     } = props;
+
     const dispatch = useAppDispatch();
 
     const {stateAuth, data:infoUser} = useAppSelector(state => state.auth)
@@ -65,15 +66,18 @@ export const Select:FC<SelectProps> = React.memo((props) => {
             const savedCategory:objSelectType = JSON.parse(local);
             dispatch(addCategoryChosen(savedCategory))
         } else {
-            const selectedCategory =  categories?.[0]
-            const obj:objSelectType = {
-                id: selectedCategory?.id,
-                name: selectedCategory?.name,
-                positive: selectedCategory?.positiveWords,
-                negative: selectedCategory?.negativeWords,
-            };
-            localStorage.setItem('_sel_category', JSON.stringify(obj));
-            dispatch(addCategoryChosen(obj));
+
+            const selectedCategory =  categories?.find(item => item.id == 1)
+            if(selectedCategory) {
+                const obj:objSelectType = {
+                    id: selectedCategory?.id,
+                    name: selectedCategory?.name,
+                    positive: selectedCategory?.positiveWords,
+                    negative: selectedCategory?.negativeWords,
+                };
+                localStorage.setItem('_sel_category', JSON.stringify(obj));
+                dispatch(addCategoryChosen(obj));
+            }
         }
     }, [categories, infoUser]);
 
