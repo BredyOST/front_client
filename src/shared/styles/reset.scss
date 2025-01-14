@@ -39,7 +39,8 @@ a:active {
 html,
 body {
   height: 100%;
-
+  //background: rgb(220,217,249);
+  //background: linear-gradient(297deg, rgba(220,217,249,1) 15%, rgba(252,247,228,1) 79%);
   // min-width: $minWidth + px;
 }
 
@@ -49,12 +50,11 @@ body {
   font-family:  globalIndex.$main_font_family;
   font-size:  mixins.rem(globalIndex.$main_font_size);
   font-weight: globalIndex.$main_font_weight;
-
   // text-rendering: optimizeLegibility;
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: globalIndex.$Theme_main_background;
+  //background-color: globalIndex.$Theme_main_background;
 }
 
 input,

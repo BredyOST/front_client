@@ -26,10 +26,12 @@
 
 .cover{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   row-gap: mixins.rem(15);
+  text-align: left;
+
   column-gap: mixins.rem(70);
-  align-items: center;
   @include mixins.adaptiveValue("column-gap",70,30,3,1200,1100);
 
   @media(max-width: mixins.rem(991)) {

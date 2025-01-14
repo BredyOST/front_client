@@ -20,9 +20,9 @@ $Theme_main_color_logo: rgb(124 167 196); // цвет логотипа
 // NavBar (тарифы, вопросы, отзывы)
 $NavBar_fontFamily: "GothamProRegular"; // шрифт
 $NavBar_Color: 000000; // шрифт
-$NavBar_fontSize: 20; // размер шрифта
-$NavBar_fontSize_AdaptiveStart: 20; // размер шрифта
-$NavBar_fontLine: math.div(24,20); // line-height
+$NavBar_fontSize: 16; // размер шрифта
+$NavBar_fontSize_AdaptiveStart: 16; // размер шрифта
+$NavBar_fontLine: math.div(20,16); // line-height
 $NavBar_fontWeight: 400; //  font-weight
 $NavBar_fontLetterSpacing: -0.2; //  Letter Spacing
 $Theme_main_navBar_color_Hover: rgb(176 66 66); // basic color hover
@@ -98,23 +98,23 @@ $Inputs_profile_padding: 10;
 $Inputs_profile_padding_right: 30;
 
 //Основые отступы внутри страниц
-$padding_top_pages: 180; // отступ внутри страницы
-$padding_top_pages_adaptive: 180; // отступ внутри страницы
+$padding_top_pages: 130; // отступ внутри страницы
+$padding_top_pages_adaptive: 130; // отступ внутри страницы
 $padding_bottom_pages: 60; // отступ внутри страницы
 $padding_bottom_pages_adaptive: 60; // отступ внутри страницы
 
 // для основного текста
 $main_font_family: "Montserrat"; // шрифт
-$main_font_size: 18; // размер
-$main_font_size_adaptive: 18; // размер адаптив
-$main_font_line-height: math.div(24,18); // межстрочный интервал
+$main_font_size: 16; // размер
+$main_font_size_adaptive: 16; // размер адаптив
+$main_font_line-height: math.div(20,16); // межстрочный интервал
 $main_font_weight: 400; // жирность
 
 // для текста на 30px
 $second_font_family: "Montserrat"; // шрифт
-$second_font_size: 20; // размер
-$second_font_size_adaptive: 20; // размер адаптив
-$second_font_line-height: math.div(35,20); // межстрочный интервал
+$second_font_size: 18; // размер
+$second_font_size_adaptive: 18; // размер адаптив
+$second_font_line-height: math.div(25,18); // межстрочный интервал
 $second_font_weight: 400; // жирность
 $second_fontLetterSpacing: -0.35; //  Letter Spacing
 

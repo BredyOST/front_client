@@ -59,14 +59,14 @@
   color: #000;
   font-family: globalIndex.$SubTitle_font_family;
   font-weight: globalIndex.$SubTitle_font_weight;
-  font-size: mixins.rem(globalIndex.$SubTitle_font_size);
+  font-size: mixins.rem(globalIndex.$PopupSub_font_size);
   letter-spacing: mixins.em(globalIndex.$SubTitle_letter-spacing);
   display: flex;
   flex: 1 1 auto;
 
   line-height: math.div(24, 18);
   text-align: left;
-  @include mixins.adaptiveValue("font-size",globalIndex.$SubTitle_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
+  @include mixins.adaptiveValue("font-size",globalIndex.$PopupSub_font_size_adaptive,16,3,globalIndex.$PageHome_adaptive_start,globalIndex.$PageHome_adaptive_end);
 
 }
 
@@ -75,10 +75,10 @@
     opacity: 0;
     height: 0;
     font-weight: 400;
-    font-size: mixins.rem(18);
-    line-height: math.div(25, 18);
+    font-size: mixins.rem(14);
+    line-height: math.div(22, 14);
     visibility: hidden;
-    @include mixins.adaptiveValue("font-size",18,14,3,1400,globalIndex.$Header_adaptive_end);
+    @include mixins.adaptiveValue("font-size",14,14,3,1400,globalIndex.$Header_adaptive_end);
 
   .active &{
     visibility: visible;

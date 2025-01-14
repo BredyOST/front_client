@@ -43,10 +43,10 @@
   display: flex;
   justify-content: space-between;
   flex: 1 1 auto;
-  column-gap: mixins.rem(50);
+  column-gap: mixins.rem(10);
 
-  @include mixins.adaptiveValue("column-gap",50,10,3,globalIndex.$Header_adaptive_start,770);
-  @include mixins.adaptiveValue("column-gap",10,3,3,400,320);
+  //@include mixins.adaptiveValue("column-gap",50,10,3,globalIndex.$Header_adaptive_start,770);
+  //@include mixins.adaptiveValue("column-gap",10,3,3,400,320);
 }
 
 .leftSection{
@@ -146,18 +146,18 @@
   line-height: globalIndex.$NavBar_fontLine;
   font-weight: globalIndex.$NavBar_fontWeight;
   letter-spacing: mixins.em(globalIndex.$NavBar_fontLetterSpacing);
-  padding-top: mixins.rem(42);
-  padding-bottom: mixins.rem(42);
-  padding-left: mixins.rem(40);
-  padding-right: mixins.rem(40);
+  padding-top: mixins.rem(30);
+  padding-bottom: mixins.rem(30);
+  padding-left: mixins.rem(35);
+  padding-right: mixins.rem(35);
   transition: color ease 0.3s 0s, background-color ease 2s 0s;
   border-radius: mixins.rem(0);
 
   @include mixins.adaptiveValue("font-size",globalIndex.$NavBar_fontSize_AdaptiveStart,16,3,globalIndex.$Header_adaptive_start,globalIndex.$Header_adaptive_end);
-  @include mixins.adaptiveValue("padding-left",40,15,3,1200,850);
-  @include mixins.adaptiveValue("padding-right",40,15,3,1200,850);
-  @include mixins.adaptiveValue("padding-top",42,30,3,1200,992);
-  @include mixins.adaptiveValue("padding-bottom",42,30,3,1200,992);
+  @include mixins.adaptiveValue("padding-left",35,15,3,1200,850);
+  @include mixins.adaptiveValue("padding-right",35,15,3,1200,850);
+  @include mixins.adaptiveValue("padding-top",30,30,3,1200,992);
+  @include mixins.adaptiveValue("padding-bottom",30,30,3,1200,992);
 
   @media (any-hover: hover) {
      &:hover {
@@ -171,6 +171,9 @@
 
   @media(max-width: mixins.em(global.$mobile)) {
    display: none;
+  }
+  @media(min-width: mixins.em(global.$mobile)) {
+    font-weight: 600;
   }
 }
 

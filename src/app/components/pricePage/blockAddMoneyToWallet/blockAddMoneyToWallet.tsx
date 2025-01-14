@@ -15,8 +15,8 @@ const BlockAddMoneyToWallet = () => {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const [addRequestToGetMoney, {data, isError, isLoading }] = useAddPaymentMutation()
-    const [value, setValue] = React.useState<string>('0')
-    const {stateAuth} = useAppSelector(state => state.auth)
+    const [value, setValue] = React.useState<string>('500')
+    const {stateAuth, data: infoUser} = useAppSelector(state => state.auth)
     const { changeStateLoginFormPopup } = statePopupSliceActions;
 
     const addMoney = async () => {
@@ -46,6 +46,8 @@ const BlockAddMoneyToWallet = () => {
 
     return (
         <div className={cls.coverCategories}>
+            {stateAuth && <div className={cls.coverLink}>На ваше балансе {infoUser?.wallet} р.</div>}
+            {!stateAuth && <div className={cls.coverLink}>Для просмотра баланса и пополнения необходимо авторизоваться.</div>}
             <div className={cls.coverButtonCategories}>
                 <Input
                     classForInput={cls.input}
@@ -61,7 +63,7 @@ const BlockAddMoneyToWallet = () => {
                         onClick={addMoney}
                     >Пополнить баланс
                     </Button>
-                    :   <Button
+                    : <Button
                         classname={cls.btn}
                         onClick={openLoginFormPopup}
                     >
@@ -69,7 +71,7 @@ const BlockAddMoneyToWallet = () => {
                     </Button>
                 }
             </div>
-            { isLoading
+            {isLoading
                 && (
                     <Loader
                         classname="color-dark"

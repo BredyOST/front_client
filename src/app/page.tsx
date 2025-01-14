@@ -23,8 +23,14 @@ async function Home(  ) {
                     <div className={cls.coverMain}>
                         <div className={cls.sectionText}>
                             <div className={cls.firstBlock}>
-                                <div className={cls.textInfo}>Общайтесь с клиентами напрямую без комиссий. Более <span>2000</span> заявок в день.</div>
-                                <div className={cls.textInfo}>Попробуйте бесплатный доступ на <span>1 день</span>, и оцените все возможности сервиса.</div>
+                                <div className={cls.textInfo}>Общайтесь с клиентами напрямую без комиссий.
+                                    Более <span>2000</span> заявок в день.
+                                </div>
+                                <div className={cls.textInfo}>Получите 100 р после регистрации и оцените все возможности
+                                    сервиса.
+                                </div>
+                                <div className={cls.textInfo}> Действует реферальная система - получай 10% с оплат ваших рефералов.
+                                </div>
                             </div>
                             <div className={cls.btnBlock}>
                                 <HomePageBtn/>

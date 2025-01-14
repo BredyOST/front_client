@@ -99,7 +99,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex: 0 1 mixins.rem(840);
-
+  row-gap: mixins.rem(10);
   @include mixins.adaptiveValue("row-gap",40,30,3,global.$tablet,globalIndex.$PageHome_adaptive_end);
 
   @media(max-width: mixins.em(global.$tablet)) {
@@ -116,7 +116,7 @@
 .firstBlock{
   display: flex;
   flex-direction: column;
-  row-gap: mixins.rem(25);
+  row-gap: mixins.rem(20);
 
   @include mixins.adaptiveValue("row-gap",25,15,3,global.$mobile,globalIndex.$Header_adaptive_end);
 }

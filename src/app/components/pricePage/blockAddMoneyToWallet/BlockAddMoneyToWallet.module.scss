@@ -6,9 +6,6 @@
 
 
 .coverCategories {
-  padding-top: mixins.rem(15);
-  padding-left: mixins.rem(5);
-  padding-right: mixins.rem(5);
   border-radius: mixins.rem(15) mixins.rem(0) mixins.rem(15) mixins.rem(0);
   row-gap: mixins.rem(15);
   display: flex;
@@ -21,4 +18,12 @@
   justify-content: center;
   max-width: mixins.rem(300);
   row-gap: mixins.rem(30);
+}
+
+.coverLink {
+  @extend .secondFontSize;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  //row-gap: mixins.rem(7);
 }

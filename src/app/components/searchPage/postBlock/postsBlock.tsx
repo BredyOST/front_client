@@ -326,11 +326,27 @@ const PostsBlock = ({categories}:IPostsBlock) => {
             }
         }
 
-        let result:any = await openThisLink({salary: price || 25})
-        if(result?.data?.text == 'средства успешно списаны') {
-            setChangedBalance(true)
-            window.open(link, '_blank');
+        // Создаём предварительно ссылку
+        const newWindow = window.open('', '_blank');
+
+        let result: any = await openThisLink({ salary: price || 25 });
+
+        if (result?.data?.text === 'средства успешно списаны') {
+            setChangedBalance(true);
+            if (newWindow) {
+                newWindow.location.href = link;
+            }
+        } else {
+            if (newWindow) {
+                newWindow.close(); // Закрываем предварительно созданное окно, если запрос неудачный
+            }
         }
+
+        // let result:any = await openThisLink({salary: price || 25})
+        // if(result?.data?.text == 'средства успешно списаны') {
+        //     setChangedBalance(true)
+        //     window.open(link, '_blank');
+        // }
     }
 
 
