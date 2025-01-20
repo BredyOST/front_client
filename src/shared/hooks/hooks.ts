@@ -34,7 +34,7 @@ const useAddInfoAboutUserWithCookie = (request:UserAuthorization):void => {
             setThisCookie('_a', request.sessionToken);
             dispatch(changeStateLoginFormPopup(false));
 
-            if ((request.activatedFreePeriod && request.categoriesFreePeriod.length) || (request.categoriesHasBought.length)) {
+            if (request.wallet > 25) {
                 redirect('/dashboard/search');
                 dispatch(closeAllPopups(true));
             } else {
