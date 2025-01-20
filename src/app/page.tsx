@@ -29,7 +29,7 @@ async function Home(  ) {
                                 <div className={cls.textInfo}>Получите 100 р после регистрации и оцените все возможности
                                     сервиса.
                                 </div>
-                                <div className={cls.textInfo}> Действует реферальная система - получай 10% с оплат ваших рефералов.
+                                <div className={cls.textInfo}> Действует реферальная система - получай 20% с оплат ваших рефералов.
                                 </div>
                             </div>
                             <div className={cls.btnBlock}>
@@ -42,7 +42,7 @@ async function Home(  ) {
                                     <div className={cls.item_video}>
                                         <iframe
                                             className={cls.frame}
-                                            src="https://www.youtube.com/embed/gMzs7QeXQiE"
+                                            src="https://www.youtube.com/embed/7wroO4XjqbQ"
                                             allowFullScreen
                                             title="YouTube Video"
                                         ></iframe>

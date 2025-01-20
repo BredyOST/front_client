@@ -40,7 +40,14 @@ async function Feedback () {
                     <div className={cls.section}>
                         <h1 className={cls.mainTitle}>{FEEDBACK_PAGE_TITLE}</h1>
                     </div>
-                    <Pictures pictures={nextImages}></Pictures>
+                    <div className={cls.cover_feedBack}>
+                        <h3>Анна</h3>
+                        <div>почта: 7284wm@mail.ru</div>
+                        <div>vk: vk/133rdas.com</div>
+                        <div>tg: @mouse_fle</div>
+                        <div>Крутой сайт, пользуюсь регулярно и вское разное такое что там и тут и очень все хорошо</div>
+                    </div>
+                    {/*<Pictures pictures={nextImages}></Pictures>*/}
                 </div>
             </div>
         </div>

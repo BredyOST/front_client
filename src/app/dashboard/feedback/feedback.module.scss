@@ -25,3 +25,14 @@
   padding-bottom: mixins.rem(50);
   @include mixins.adaptiveValue("padding-bottom",60,30,3,global.$tablet,global.$mobile);
 }
+
+
+.cover_feedBack {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f1f1;
+  border-radius: mixins.rem(10);
+  padding: mixins.rem(10);
+  row-gap: mixins.rem(10);
+  max-width: mixins.rem(420);
+}
