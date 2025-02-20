@@ -26,7 +26,7 @@ async function Home(  ) {
                                 <div className={cls.textInfo}>Общайтесь с клиентами напрямую без комиссий.
                                     Более <span>2000</span> заявок в день.
                                 </div>
-                                <div className={cls.textInfo}>Получите 100 р после регистрации и оцените все возможности
+                                <div className={cls.textInfo}>Получите 300 р после регистрации и оцените все возможности
                                     сервиса.
                                 </div>
                                 <div className={cls.textInfo}> Действует реферальная система - получай 20% с оплат ваших рефералов.
